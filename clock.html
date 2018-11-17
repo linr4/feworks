@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock</title>
+
+    <style>
+
+        #clock {
+            width: 600px;
+            height: 600px;
+            margin: 20px auto;
+            background: url("images/clock.jpg") no-repeat;
+            /* 用子绝父相的方法定位指针到表盘中心 */
+            position: relative;
+        }
+
+        #hour, #minute, #second {
+            width: 30px;
+            height: 100%;
+
+            position: absolute;
+            top: 0;
+            left: 50%;
+            margin-left: -15px;
+        }
+
+        #hour {
+            background: url("images/hour.png") no-repeat;
+        }
+
+        #minute {
+            background: url("images/minute.png") no-repeat;
+        }
+
+        #second {
+            background: url("images/second.png") no-repeat;
+        }
+
+
+        .desc {
+            width: 540px;
+            border: 1px solid #CCCCCC;
+
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            font-family: 微软雅黑;
+        }
+
+        .desc ul {
+            list-style: none;
+            padding: 0 10px 0 10px;
+        }
+
+        .desc ul li {
+
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- 画出表盘和3个指针 -->
+    <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+    </div>
+    <div class="desc">
+
+        <ul>
+            <li><h3>编写思路和步骤：</h3></li>
+            <li><h4>结构： </h4>用1个大div作表盘，嵌套3个小div作指针，均在css中设置背景图片实现；</li>
+            <li><h4>呈现： </h4>表盘div通过设置margin居中，并设置相对定位属性；指针设置绝对定位属性，移到表盘中间；</li>
+            <li><h4>行为： </h4>通过setInterval方法，定时设置指针的CSS3属性transform: rotate()使其旋转特定角度；</li>
+            <li><h4>逻辑： </h4>通过Date()对象获取当前时间，通过相应方法分解出毫秒、秒、分、时，作为指针旋转角度的基准值；</li>
+            <li><h4>注意点： </h4>指针旋转角度是线性的，如：8:00至8:59期间，时针从刻度8逐渐旋转至9，而非总是指向8，从8开始的增量等于相应已过的分钟数，计算旋转角度时需要加上；分针、秒针同理，需要加上 <b>下一级单位</b> 的增量。</li>
+
+        </ul>
+    </div>
+
+<script>
+
+    window.onload = function () {
+
+        // 1. 获取需要的标签
+        var hour = document.getElementById('hour');
+        var minute = document.getElementById('minute');
+        var second = document.getElementById('second');
+
+        // 2. 开启定时器
+        var timeId = window.setInterval(function () {
+
+            // 2.1 获取当前时间；
+            // 时针的值要加上分钟数的原因：如在8点钟时，时针是在8点到9点之间移动、而非总是指在8点的刻度上，要加上分钟数以体现相应的位移；分针秒针同理；
+            var date = new Date();
+            var ms = date.getMilliseconds();
+            var s = date.getSeconds() + ms / 1000;
+            var m = date.getMinutes() + s / 60;
+            var h = date.getHours() % 12 + m / 60;  // 获取的小时是24进制，需要除12取余数以转换成12进制；
+
+            // 2.2 让指针转起来
+            hour.style.transform = 'rotate(' + h * 30 + 'deg)';     // 时针1小时转30度
+            minute.style.transform = 'rotate(' + m * 6 + 'deg)';    // 分针1分钟转6度
+            second.style.transform = 'rotate(' + s * 6 + 'deg)';    // 秒针1秒钟转6度
+
+        }, 500);
+
+
+    }
+
+</script>
+
+</body>
+</html>
