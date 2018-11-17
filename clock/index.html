@@ -6,11 +6,17 @@
 
     <style>
 
+        .wrapper {
+
+        }
+
         #clock {
+            border: 1px solid #000;
             width: 600px;
             height: 600px;
-            margin: 20px auto;
+            margin: 20px;
             background: url("images/clock.jpg") no-repeat;
+
             /* 用子绝父相的方法定位指针到表盘中心 */
             position: relative;
         }
@@ -39,24 +45,25 @@
 
 
         .desc {
-            width: 540px;
-            border: 1px solid #CCCCCC;
-
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 14px;
+            margin: 20px;
             font-family: 微软雅黑;
         }
 
-        .desc ul {
+        .desc dl {
             list-style: none;
-            padding: 0 10px 0 10px;
         }
 
-        .desc ul li {
-
+        .desc dl dt {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .desc dl dd {
+            font-size: 14px;
             margin-top: 10px;
+        }
+
+        .desc dl dd span {
+            font-weight: bold;
         }
 
     </style>
@@ -64,6 +71,8 @@
 <body>
 
 <!-- 画出表盘和3个指针 -->
+
+<div class="wrapper">
     <div id="clock">
         <div id="hour"></div>
         <div id="minute"></div>
@@ -71,16 +80,17 @@
     </div>
     <div class="desc">
 
-        <ul>
-            <li><h3>编写思路和步骤：</h3></li>
-            <li><h4>结构： </h4>用1个大div作表盘，嵌套3个小div作指针，均在css中设置背景图片实现；</li>
-            <li><h4>呈现： </h4>表盘div通过设置margin居中，并设置相对定位属性；指针设置绝对定位属性，移到表盘中间；</li>
-            <li><h4>行为： </h4>通过setInterval方法，定时设置指针的CSS3属性transform: rotate()使其旋转特定角度；</li>
-            <li><h4>逻辑： </h4>通过Date()对象获取当前时间，通过相应方法分解出毫秒、秒、分、时，作为指针旋转角度的基准值；</li>
-            <li><h4>注意点： </h4>指针旋转角度是线性的，如：8:00至8:59期间，时针从刻度8逐渐旋转至9，而非总是指向8，从8开始的增量等于相应已过的分钟数，计算旋转角度时需要加上；分针、秒针同理，需要加上 <b>下一级单位</b> 的增量。</li>
+        <dl>
+            <dt>编写思路和步骤：</dt>
+            <dd><span>结构：</span>用1个大div作表盘，嵌套3个小div作指针，均在css中设置背景图片实现；</dd>
+            <dd><span>呈现：</span>表盘div通过设置margin居中，并设置相对定位属性；指针设置绝对定位属性，移到表盘中间；</dd>
+            <dd><span>行为：</span>通过setInterval方法，定时设置指针的CSS3属性transform: rotate()使其旋转特定角度；</dd>
+            <dd><span>逻辑：</span>通过Date()对象获取当前时间，通过相应方法分解出毫秒、秒、分、时，作为指针旋转角度的基准值；</dd>
+            <dd><span>注意点：</span>指针旋转角度是线性的，如：8:00至8:59期间，时针从刻度8逐渐旋转至9，而非总是指向8，从8开始的增量等于相应已过的分钟数，计算旋转角度时需要加上；分针、秒针同理，需要加上 <span>下一级时间单位</span> 的增量。</dd>
 
-        </ul>
+        </dl>
     </div>
+</div>
 
 <script>
 
