@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS event object</title>
+    <style>
+        #box {
+            width: 20px;
+            height: 100px;
+            background-color: red;
+        }
+
+        #box1 {
+            position: fixed;
+            top: 50px;
+            left: 500px;
+            width: 500px;
+            height: 200px;
+            background-color: skyblue;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+
+<!--<button id="btn">click me</button>-->
+
+<div id="box1"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+<div id="box"></div>
+
+<script>
+    var box = document.getElementById('box');
+    var box1 = document.getElementById('box1');
+/*    var btn = document.getElementById('btn');
+
+    btn.onclick = function (ev) {
+        console.log(ev);
+    }
+
+    btn.addEventListener('mouseover', function (ev) {
+        console.log(ev);
+    })*/
+
+    /*document.addEventListener('click', function (event) {
+    // console.log(event.type);
+        console.log(event.target);
+    })
+
+    box.addEventListener('click', function (event) {
+        console.log(event.target);
+    })*/
+
+    document.addEventListener('mousemove', function (event) {
+        box1.innerHTML = "clientX = " + event.clientX + "<br>" + "clientY = " + event.clientY + "<p>" +
+                         "pageX = " + event.pageX + "<br>" + "pageY = " + event.pageY + "<p>" +
+                         "screenX = " + event.screenX + "<br>" + "screenY = " + event.screenY + "<p>" +
+                         "event.x" + event.x + "event.y" + event.y;
+
+        console.log(event);
+    })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOM - location</title>
+</head>
+<body>
+<div id="box"></div>
+<button id="btn">click me</button>
+
+<script>
+
+    window.onload = function () {
+        var box = document.getElementById('box');
+        var btn = document.getElementById('btn');
+        
+        box.innerText = window.location;
+        btn.addEventListener('click', function () {
+            window.location = 'http://www.itlike.com';
+            window.location.href = 'http://www.itlike.com';
+            window.location.assign('http://www.itlike.com');
+        })
+    }
+</script>
+</body>
+</html>

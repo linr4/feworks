@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天猫弹性导航条 练习 - 第4遍</title>
+    <style>
+        body, ul, li, span {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: pink;
+        }
+
+        #nav {
+            width: 900px;
+            height: 63px;
+            margin: 100px auto;
+            border-radius: 10px;
+            background: white url("images/doubleEleven.png") no-repeat right center;
+
+            position: relative;
+        }
+
+        #logo {
+            width: 88px;
+            height: 63px;
+            background: url("images/tMall.png") no-repeat;
+
+            position: absolute;
+        }
+
+        ul {
+            list-style: none;
+            position: relative;
+        }
+
+        ul li {
+            width: 88px;
+            height: 63px;
+            line-height: 70px;
+            text-align: center;
+            cursor: pointer;
+            float: left;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav id="nav">
+    <span id="logo"></span>
+    <ul>
+        <li>双11狂欢</li>
+        <li>服装会场</li>
+        <li>数码家电</li>
+        <li>家具建材</li>
+        <li>母婴童装</li>
+        <li>手机会场</li>
+        <li>美妆会场</li>
+        <li>进口会场</li>
+        <li>飞猪旅行</li>
+    </ul>
+</nav>
+
+<script>
+
+    window.addEventListener('load', function () {
+        // get IDs needed:
+        var nav = document.getElementById('nav');
+        var logo = nav.children[0];
+        var ul = nav.children[1];
+        var allLis = ul.children;
+
+        // define variables:
+        var logoDefaultPosX = 0;
+        var logoMoveToPosX = 0;
+        var logoMoveStep = 0;
+
+        // listen all LIs' mouse events (enter, out & click):
+        for (var i = 0; i < allLis.length; i ++) {
+            var li = allLis[i];
+
+            li.addEventListener('mouseenter', function () {
+                logoMoveToPosX = this.offsetLeft;   // when mouse enters to a li, move logo to the li's position;
+            });
+
+            li.addEventListener('mouseout', function () {
+                logoMoveToPosX = logoDefaultPosX;   // when mouse leaves a li, move logo to its default position;
+            });
+
+            li.addEventListener('click', function () {
+                logoDefaultPosX = this.offsetLeft;  // when click on a li, reset logo's default position to current li's position;
+            });
+        }
+
+        // use setInterval() to move logo responsively according to mouse events;
+        setInterval(function () {
+            logoMoveStep += (logoMoveToPosX - logoMoveStep) * 0.2;
+            logo.style.left = logoMoveStep + 'px';
+        },10);
+
+    })
+
+</script>
+</body>
+</html>

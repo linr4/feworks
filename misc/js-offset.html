@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>offset properties</title>
+</head>
+<body>
+
+    <div id="grandfather" style="position: absolute;">
+        <div id="father" >
+            <div id="child">
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var child = document.getElementById('child');
+            console.log(child.offsetParent);
+            console.log(child.parentNode);
+        }
+    </script>
+</body>
+</html>
