@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜练习 - 第2遍</title>
+
+    <style>
+
+        body, img, div, span {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .container {
+            width: 960px;
+            height: 600px;
+
+            position: relative;
+
+            margin: 100px auto;
+        }
+
+        #divImgMid {
+            width: 350px;
+            height: 350px;
+            border-bottom: 1px solid #cccccc;
+            padding: 5px;
+
+            position: relative;
+
+        }
+
+        #divImgMid #spanMask {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(255,255,0,.3);
+            display: none;
+            cursor: move;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #divImgBig {
+            width: 600px;
+            height: 600px;
+            display: none;
+
+            position: absolute;
+            top: 0;
+            left: 350px;
+
+            overflow: hidden;
+        }
+
+        #imgBig {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #divImgList {
+            width: 350px;
+            text-align: center;
+        }
+
+        #divImgList img {
+            margin: 20px;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div id="divImgMid">
+        <img id="imgMid" src="images/pic001.jpg" alt="showCase">
+        <span id="spanMask"></span>
+    </div>
+    <div id="divImgBig">
+        <img id="imgBig" src="images/pic01.jpg" alt="" >
+    </div>
+    <div id="divImgList">
+        <img src="images/pic0001.jpg" alt="">
+        <img src="images/pic0002.jpg" alt="">
+        <img src="images/pic0003.jpg" alt="">
+    </div>
+
+</div>
+
+
+<script>
+
+    window.addEventListener('load', function () {
+
+        var divImgMid = document.getElementById('divImgMid');
+        var imgMid = document.getElementById('imgMid');
+        var imgBig = document.getElementById('imgBig');
+        var spanMask = document.getElementById('spanMask');
+        var divImgBig = document.getElementById('divImgBig');
+        var divImgList = document.getElementById('divImgList');
+        var imgS1 = document.getElementById('imgS1');
+        var imgS2 = document.getElementById('imgS2');
+        var imgS3 = document.getElementById('imgS3');
+
+        // 鼠标进入中图，显示遮罩和大图；
+        divImgMid.onmouseover = function () {
+          spanMask.style.display = 'block';
+          divImgBig.style.display = 'block';
+        };
+
+        // 鼠标离开中图，隐藏遮罩和大图；
+        divImgMid.onmouseout = function () {
+            spanMask.style.display = 'none';
+            divImgBig.style.display = 'none';
+        };
+
+        // 鼠标在中图移动时，计算遮罩中心点相对于父元素的位置，使遮罩跟随鼠标移动；
+        // 遮罩中心点相对位置 = 鼠标pageX位置 - 元素offsetLeft（需要考虑祖先元素是否有定位，若有、则以祖先元素offsetLeft为准）；
+
+        divImgMid.onmousemove = function (evMouseMove) {
+            var maskPosX = evMouseMove.pageX - this.parentNode.offsetLeft - spanMask.offsetWidth/2;
+            var maskPosY = evMouseMove.pageY - this.parentNode.offsetTop - spanMask.offsetHeight/2;
+
+            // 设置移动边界值
+            if (maskPosX <=0 ) {    // 水平最小值 = 0
+                maskPosX = 0;
+            } else if (maskPosX >= divImgMid.offsetWidth - spanMask.offsetWidth) {  // 水平最大值 = 中图宽度 - 遮罩宽度
+                maskPosX = divImgMid.offsetWidth - spanMask.offsetWidth;
+            }
+
+            if (maskPosY <=0 ) {    // 垂直最小值 = 0
+                maskPosY = 0;
+            } else if (maskPosY >= divImgMid.offsetHeight - spanMask.offsetHeight) {  // 垂直最大值 = 中图宽度 - 遮罩宽度
+                maskPosY = divImgMid.offsetHeight - spanMask.offsetHeight;
+            }
+
+            // 遮罩随鼠标移动
+            spanMask.style.left = maskPosX + 'px';
+            spanMask.style.top = maskPosY + 'px';
+
+            // 大图随中图移动、放大镜效果
+            var imgBig = document.getElementById('imgBig');
+            var imgBigPosX = (imgBig.offsetWidth / divImgMid.offsetWidth) * maskPosX;   // 水平方向跟随移动的比例和步长
+            var imgBigPosY = (imgBig.offsetHeight / divImgMid.offsetHeight) * maskPosY; // 垂直方向跟随移动的比例和步长
+
+            imgBig.style.top = - imgBigPosY + 'px';
+            imgBig.style.left = - imgBigPosX + 'px';
+
+        };
+
+        // 监听小图鼠标事件，实现切换图片；
+        for (var i = 0; i < divImgList.children.length; i++) {
+            var curImg = divImgList.children[i];        // for是同步执行，mouseover是异步执行，每次执行到mouseover时i都是最大值，需要用id来保存各个mouseover的i值；
+            curImg.id = i + 1;
+
+            curImg.onmouseover = function () {
+                imgMid.src = 'images/pic00' + this.id + '.jpg';
+                imgBig.src = 'images/pic0' + this.id + '.jpg';
+            }
+        }
+
+    })
+
+</script>
+</body>
+</html>
