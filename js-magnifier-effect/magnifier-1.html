@@ -160,9 +160,10 @@
         };
 
 
+        // 监听小图列表，根据鼠标移动来切换中图和大图；
         for (var i = 0; i < box_scroll.children.length; i++) {
             var img = box_scroll.children[i];
-            img.id = i;
+            img.id = i; // for 是同步执行，而mouseover是异步执行；因此 执行到mouseover中的语句时，i 变量始终为for执行完后的最大值，需要中间变量来保存；
 
             img.onmouseover = function () {
                 box_normal.children[0].src = 'images/pic00' + (parseInt(this.id) + 1) + '.jpg';
