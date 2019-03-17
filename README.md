@@ -1,6 +1,7 @@
-# Web前端学习 - 练习案例
-
-## JavaScript
+---
+# Web 开发 - 前端学习总结与案例练习
+---
+### JavaScript
 - [时钟](./01-js-clock/)
 - [BOM 操作](./02-js-bom-ops/)
 - [随机点名](./03-js-take-roll/)
