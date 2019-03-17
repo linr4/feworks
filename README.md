@@ -1,7 +1,7 @@
 # Web前端学习 - 练习案例
 
 ## JavaScript
-### 1. [时钟](https://linr4.github.io/feworks/01-js-clock/index.html)
+### 1. [时钟](./01-js-clock/index.html)
 ### 2. BOM 操作
 ### 3. 随机点名
 ### 4. CSS 类操作
