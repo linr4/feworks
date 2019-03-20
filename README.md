@@ -1,4 +1,5 @@
 
-# webdev-learning-notes
+# Project 600
 Web development learning notes and case study
-### Day 1: 3/20/2019
+
+### 3/20/2019 - Day 1
