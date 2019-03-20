@@ -1,0 +1,10 @@
+node_modules
+build
+npm-debug.log
+.DS_Store
+tmp
+.idea*
+.deploy*
+public
+*.log
+Thumbs.db
