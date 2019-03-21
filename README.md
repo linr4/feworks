@@ -16,6 +16,10 @@ Web development learning notes and case study
 
 
 
+20190321 - Day 2
+
+* 整理学习编程常见的3种错误的姿势：[Top 3 Mistakes You Need to Avoid...](20190321-top3mistakes-learning-js) (+1h30m = 3h of 600)
+
 20190320 - Day 1
 
 * 整理 Github repo 和 [关于如何学习 Web 开发](20190320-how-to-learn-webdev.md) 的笔记 (1h30m of 600)
