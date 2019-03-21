@@ -18,7 +18,7 @@ Web development learning notes and case study
 
 20190321 - Day 2
 
-* 整理学习编程常见的3种错误的姿势：[Top 3 Mistakes You Need to Avoid...](20190321-top3mistakes-learning-js) (+1h30m = 3h of 600)
+* 整理学习编程常见的3种错误的姿势：[Top 3 Mistakes You Need to Avoid...](20190321-top3mistakes-learning-js.md) (+1h30m = 3h of 600)
 
 20190320 - Day 1
 
