@@ -10,7 +10,7 @@
 
    > Stop when you get stuck and figure it out at first.
 
-3. Avoid the hard part, like avoid learning the plain JavaScript; we know we should eat healthy and go to the gym, but not many actually do it, because it's hard.
+3. Avoid the hard part, say avoid learning the plain JavaScript; like we know we should eat healthy and go to the gym, but not many actually do it, just because it's hard.
 
    > Embrace what you don't know, embrace failure, don't be afraid of failing.
 
