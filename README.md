@@ -14,7 +14,9 @@ Web development learning notes and case study
 
 ---
 
+20190322 - Day 3
 
+* 学习使用 VS Code，安装试用[常用插件](20190322-vscode-tz-portfolio-etc/vscode-extensions.pdf) (+1h30m = 4.5h of 600)
 
 20190321 - Day 2
 
