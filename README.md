@@ -16,7 +16,7 @@ Web development learning notes and case study
 
 20190323 - Day 4
 
-* 学习 Git/GitHub 基础知识以及 Alfred/Spectacle 等 [常用工具](20190323-git-github-etc/git-cheatsheet.pdf) (+2h = 6.5h of 600)
+* 学习使用 Git/GitHub 基础知识以及 Alfred/Spectacle/Hyper 等 [常用工具](20190323-git-github-etc/git-cheatsheet.pdf) (+2h = 6.5h of 600)
 
 20190322 - Day 3
 
