@@ -14,9 +14,13 @@ Web development learning notes and case study
 
 ---
 
+20190324 - Day 5
+
+* 复习 HTML 部分[基础知识](20190324-html/html.md) (+1.5h = 6h of 600)
+
 20190323 - Day 4
 
-* 学习使用 Git/GitHub 基础知识以及 Alfred/Spectacle/Hyper 等 [常用工具](20190323-git-github-etc/git-cheatsheet.pdf) (+2h = 6.5h of 600)
+* 学习使用 Git/GitHub 基础知识以及[常用工具](20190323-git-github-etc/git-cheatsheet.pdf) (+2h = 6.5h of 600)
 
 20190322 - Day 3
 
@@ -24,7 +28,7 @@ Web development learning notes and case study
 
 20190321 - Day 2
 
-* 学习和整理学习编程常见的3种错误：[Top 3 Mistakes You Need to Avoid...](20190321-top3mistakes-learning-js.md) (+1h30m = 3h of 600)
+* 学习和整理学习编程常见问题：[Top 3 Mistakes You Need to Avoid...](20190321-top3mistakes-learning-js.md) (+1h30m = 3h of 600)
 
 20190320 - Day 1
 
