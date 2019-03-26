@@ -14,13 +14,17 @@ Web development learning notes and case study
 
 ---
 
+20190326 - Day 7
+
+* 复习 HTML 部分的[基础知识](20190324-html/html.md)（列表标签） (+1h = 8.5h of 600)
+
 20190325 - Day 6
 
-- 复习HTML 部分[基础知识](20190324-html/html.md)（h, hr, a, img, base 等标签） (+1.5h = 7.5h of 600)
+- 复习 HTML 部分的[基础知识](20190324-html/html.md)（h, hr, a, img, base 等标签） (+1.5h = 7.5h of 600)
 
 20190324 - Day 5
 
-* 复习 HTML 部分[基础知识](20190324-html/html.md) (+1.5h = 6h of 600)
+* 复习 HTML 部分的[基础知识](20190324-html/html.md) (+1.5h = 6h of 600)
 
 20190323 - Day 4
 
