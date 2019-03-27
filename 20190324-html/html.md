@@ -216,3 +216,67 @@
     - dt 可以没有对应的 dd，也可对应多个 dd，但推荐 dt / dd 要一对一使用；
 
     - dt / dd 下可以添加其它标签以丰富内容，但 dl 下只包含 dt 和 dd ；
+
+
+
+#### 表格标签
+
+- 作用：给数据添加表格语义；清晰展现大量数据；
+
+- 表格的组成：
+
+  - 表格存储的数据较复杂，对其组成元素做分类，以利于管理和细化语义；
+    - 标题 caption
+    - 表头 thead
+    - 表体 tbody
+    - 表尾 tfoot，表格的附加信息
+
+- 完整格式：
+
+  ```html
+  <table border="1">
+      <caption> table caption </caption> <!-- 可无 -->
+      <thead> <!-- 可省略，浏览器自动加 -->
+          <tr>
+              <th> cell header </th> <!-- 可无 -->
+          </tr>
+      </thead>
+      <tbody> <!-- 可省略，浏览器自动加 -->
+      	<tr>	<!-- row / 行 -->
+          	<td> data / 列 </td>
+      	</tr>
+      </tbody>
+  	<tfoot> <!-- 可无 -->
+          <tr>
+              <td> data </td>
+          </tr>
+      </tfoot>
+  </table>
+  ```
+
+- table 的属性（开发中均通过CSS调整，不在 table 标签属性中设置）：
+
+  - 边框 border：默认 = 0，没有展示出来；
+  - 宽高 width / height：
+    - 仅 table / td 使用；
+    - thead / tfoot 不继承 table 的 height 属性，需单独设置；
+  - 对齐：
+    - 水平对齐 align： table / tr / td 均可使用；优先级 td > tr > table；
+    - 垂直对齐 valign ： 仅 tr / td 使用；
+  - 边距（内/外）：
+    - 仅 table 使用；
+    - 外边距 cellspacing：默认 =2px，单元格之间的距离；
+    - 内边距 cellpadding：默认 =1px，文字与单元格的距离；
+  - 细线表格：
+    - table 和 tr 设置不同的 bgcolor；
+    - table 设置 cellspacing="1px"；
+  - 表格标题： caption
+    - 紧跟着 table 标签来写；
+    - 自动相对于表格居中；
+  - 单元格标题： th
+    - 与 td 平级；
+    - 自动加粗、居中；
+  - 单元格合并：
+    - 在 td 上添加属性：水平方向 colspan，垂直方向 rowspan；
+    - 合并后每一行/每一列的单元格总数需要保持一致；
+    - 向后、向下合并；
