@@ -287,3 +287,37 @@
     - 合并后每一行、每一列的单元格总数需保持一致；
     - 向后、向下合并；
 
+---
+
+
+
+#### 表单标签
+
+- 格式：
+
+	```html
+	<form>
+    	<表单元素>
+	</form>
+	```
+* 常见表单标签
+
+  * input
+
+    ```html
+    <input type="text" value="文本框">
+    <input type="passowrd" value="密码框">
+    
+    <input type="radio" name="单选框"> 1  // 默认不互斥，一组单选框要设置相同的 name 才会互斥；
+    <input type="radio" name="单选框" checked="checked"> 2  // checked 默认选中；
+    <input type="radio" name="单选框" checked> 3  
+    	// 属性与值一样时，可省略值，XHTML 则不可省，因此推荐在开发中不要省；
+    	// 一组radio多个checked时，最后一个生效；
+    
+    <input type="checkbox" name="多选框"> 1
+    <input type="checkbox" name="多选框" checked="checked"> 2
+    ```
+
+    
+
+    
