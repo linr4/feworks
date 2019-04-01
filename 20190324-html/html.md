@@ -302,7 +302,7 @@
 	```
 * 常见表单标签
 
-  * input - 文本框、密码框、单选框、多选框；
+  * `<input>`- 文本框、密码框、单选框、多选框；
 
     ```html
     <input type="text" value="文本框">
@@ -314,11 +314,11 @@
     	// 属性与值一样时，可省略值，XHTML 则不可省，因此推荐在开发中不要省；
     	// 一组 radio 多个 checked 时，最后一个生效；
     
-    <input type="checkbox" name="多选框"> 1
+    <input type="checkbox" name="多选框"> 1	// 同一组多选框的 name 也需一致；
     <input type="checkbox" name="多选框" checked="checked"> 2
     ```
 
-  * input - 按钮（普通按钮、图片按钮、重置、提交、隐藏）；
+  * `<input>` - 按钮（普通按钮、图片按钮、重置、提交、隐藏）；
 
     ```html
     <form action="">
@@ -336,7 +336,7 @@
     </form>
     ```
 
-  * label 标签：将输入框和标题文字绑定，点击文字时，输入框也能获得焦点；
+  * `<label>`  - 将输入框和标题文字绑定，点击文字时，输入框也能获得焦点；
 
     ```html
     <form action="">      
@@ -352,7 +352,7 @@
 
       
 
-  * datalist 标签：给文本框添加待选项；HTML5 新标签，目前浏览器还未普遍支持；
+  * `<datalist>`  - 给文本框添加待选项；HTML5 新标签，目前浏览器还未普遍支持；
 
     ```html
     Enter your car type: <input type="text" list="cars">
@@ -362,6 +362,44 @@
         <option> BMW </option>
         <option> Audi </option>
     </datalist>
+    ```
+
+  * `<input>` - H5 新增类型；
+
+    * `<input type="x">` 
+
+    * x = email, url, number, range, search, color,
+
+    * Date pickers (date, month, week, time, datetime, datetime-local)
+
+      
+
+  * `<select>` - 下拉列表；
+
+    ```html
+    <select>
+        <optgroup label="Shenzhen">
+            <option> Luohu </option>
+            <option> Futian </option>
+            <option selected="select"> Longgang </option>
+        </optgroup>
+        
+    </select>
+    ```
+
+  * `<textarea>` - 多行文本框；
+
+    ```html
+    <textarea cols="10" rows="3">
+        <!-- 行/列虽已指定，但仍可无限输入文本 -->
+    </textarea>
+    ```
+
+    ```css
+    textarea {
+        resize: none;
+        /* 控制文本框是否可拉伸 */
+    }
     ```
 
     

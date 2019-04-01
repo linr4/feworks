@@ -17,7 +17,7 @@ Web development learning notes and case study
 20190401 - Day 13
 
 * 看 Tenzin 的 JavaScript 基础知识视频，关于 [Scope / Objects / Arrays](20190401-JavaScript-Scope.md) (+1h = 14.5h of 600)；
-* 复习 HTML 部分的[基础知识](20190324-html/html.md)（表单标签） (+1h = 15.5h of 600)
+* 复习 HTML 部分的[基础知识](20190324-html/html.md)（表单标签）并写代码做练习； (+2h = 16.5h of 600)
 
 20190331 - Day 12
 
