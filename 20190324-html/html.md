@@ -302,7 +302,7 @@
 	```
 * 常见表单标签
 
-  * input
+  * input - 文本框、密码框、单选框、多选框；
 
     ```html
     <input type="text" value="文本框">
@@ -312,12 +312,56 @@
     <input type="radio" name="单选框" checked="checked"> 2  // checked 默认选中；
     <input type="radio" name="单选框" checked> 3  
     	// 属性与值一样时，可省略值，XHTML 则不可省，因此推荐在开发中不要省；
-    	// 一组radio多个checked时，最后一个生效；
+    	// 一组 radio 多个 checked 时，最后一个生效；
     
     <input type="checkbox" name="多选框"> 1
     <input type="checkbox" name="多选框" checked="checked"> 2
     ```
 
+  * input - 按钮（普通按钮、图片按钮、重置、提交、隐藏）；
+
+    ```html
+    <form action="">
+        <input type="button" value="这是按钮" onclick="altert(1)">	// 普通按钮
+        <input type="image" src="btn.jpg">	// 图片形式的按钮
+        <input type="reset">	// 清空表单数据，有默认标题 “重置”，或通过 value 自定义标题
+        <input type="sbumit">	// 提交表单数据，有默认标题 “提交”，或通过 value 自定义标题
+        	// 提交需两个条件：
+        	// 1) 提交到哪个服务器？ 在 <form action="http://baidu.com"> 指明 action 属性； 
+        	// 2) 哪些数据要提交？ 在 <input name="myName"> 标签指明 name 属性；
+        	// 输出格式 ——>  https://baidu.com?myName=xxx&pswd=123
+        
+        <input type="hidden" name="hiddenInfo" value="asdfadf">	
+        	// 隐藏域，不会出现在界面上，用于收集用户数据；   
+    </form>
+    ```
+
+  * label 标签：将输入框和标题文字绑定，点击文字时，输入框也能获得焦点；
+
+    ```html
+    <form action="">      
+      <label for="user"> 用户：</label> <input type="text" id="user"><br>
+      <label for="pswd"> 密码：</label> <input type="password" id="pswd">
+          
+      <!-- 或者用 label 把 input 包起来 -->
+          
+      <label> 用户：<input type="text"> </label> <br>
+      <label> 密码：<input type="password"> </label>
+    </form>
+    ```
+
+      
+
+  * datalist 标签：给文本框添加待选项；HTML5 新标签，目前浏览器还未普遍支持；
+
+    ```html
+    Enter your car type: <input type="text" list="cars">
     
+    <datalist id="cars">
+        <option> Mercedes </option>
+        <option> BMW </option>
+        <option> Audi </option>
+    </datalist>
+    ```
 
     

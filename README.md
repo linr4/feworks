@@ -14,6 +14,11 @@ Web development learning notes and case study
 
 ---
 
+20190401 - Day 13
+
+* 看 Tenzin 的 JavaScript 基础知识视频，关于 [Scope / Objects / Arrays](20190401-JavaScript-Scope.md) (+1h = 14.5h of 600)；
+* 复习 HTML 部分的[基础知识](20190324-html/html.md)（表单标签） (+1h = 15.5h of 600)
+
 20190331 - Day 12
 
 * 看 Tenzin 的 JavaScript 基础知识视频，初心是想复习 JS 的同时可以练听力，但感觉他的语速和节奏都有点慢，基础知识于我目前的水平也过于简单；(+1h = 13.5h of 600)
@@ -22,7 +27,7 @@ Web development learning notes and case study
 
 * 复习 HTML 部分的[基础知识](20190324-html/html.md)（表单标签） (+1h = 12.5h of 600)
 
-* 对自己目前的学习方法做出反思：我已经有基础、不能再以零基础初学者的方式事无巨细的 review 每个知识点，而是快速复习、查漏补缺、重点突破，以提高学习收益率（犹如投资一般，需要考虑成本、收益和风险）。
+* 对自己目前的学习方法做出反思：已经有基础、无需再以零基础的方式去 review 每个知识点，而是要快速复习、查漏补缺、重点突破未掌握的知识点，以提高学习收益率；学习新技能犹如金融投资，需考虑成本 [时间&精力]、收益 [知识技能掌握程度] 和风险 [职业转换进程]。
 
 20190329 - Day 10
 
