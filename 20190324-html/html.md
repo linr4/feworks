@@ -170,16 +170,16 @@
 - 格式：
 
   ```html
-  <a href="#tagId1"> text </a>
+  <a href="#anchor1"> text </a>
   ……
-  <h2 id="tagId1"> </h2>
+  <h2 id="anchor1"> </h2>
   ```
 
 - 滚动无动画效果；
 
 - 亦可跳转到其它页面的指导标签位置：
 
-  `<a href="page2.html#tagId2">`
+  `<a href="page2.html#anchor2">`
 
 
 
@@ -308,14 +308,20 @@
     <input type="text" value="文本框">
     <input type="passowrd" value="密码框">
     
-    <input type="radio" name="单选框"> 1  // 默认不互斥，一组单选框要设置相同的 name 才会互斥；
-    <input type="radio" name="单选框" checked="checked"> 2  // checked 默认选中；
-    <input type="radio" name="单选框" checked> 3  
-    	// 属性与值一样时，可省略值，XHTML 则不可省，因此推荐在开发中不要省；
-    	// 一组 radio 多个 checked 时，最后一个生效；
+    <input type="radio" name="gender" value="male"> male
+    <input type="radio" name="gender" value="female" checked="checked"> female 
+    <input type="radio" name="gender" value="secret" checked> secret
     
-    <input type="checkbox" name="多选框"> 1	// 同一组多选框的 name 也需一致；
-    <input type="checkbox" name="多选框" checked="checked"> 2
+    <input type="checkbox" name="hobby" value="swimming"> swimming
+    <input type="checkbox" name="hobby" checked="checked" value="bb"> body-building
+    
+    <!--
+    * 一组单选框要设置相同的 name 才会互斥；
+    * checked 表示默认选中；一组 radio 多个 checked 时，最后一个生效；
+    * 同一组多选框的 name 也需一致，目的是表单提交数据时才知道提交的是什么；
+    * 属性与值一样时（如：checked="checked"），可省略值，但 XHTML 不可省，因此推荐不要省；
+    * 非文本框的 value 要指定，否则单/多选框的 value 会等于 "on"，不知所云；
+    -->
     ```
 
   * `<input>` - 按钮（普通按钮、图片按钮、重置、提交、隐藏）；
@@ -327,8 +333,8 @@
         <input type="reset">	// 清空表单数据，有默认标题 “重置”，或通过 value 自定义标题
         <input type="sbumit">	// 提交表单数据，有默认标题 “提交”，或通过 value 自定义标题
         	// 提交需两个条件：
-        	// 1) 提交到哪个服务器？ 在 <form action="http://baidu.com"> 指明 action 属性； 
-        	// 2) 哪些数据要提交？ 在 <input name="myName"> 标签指明 name 属性；
+        	// 1) 提交到哪个服务器？ 在 <form action="http://baidu.com"> 指明 action 的值； 
+        	// 2) 哪些数据要提交？ 在 <input name="myName"> 标签要指明 name 属性的值；
         	// 输出格式 ——>  https://baidu.com?myName=xxx&pswd=123
         
         <input type="hidden" name="hiddenInfo" value="asdfadf">	
@@ -403,3 +409,41 @@
     ```
 
     
+
+---
+
+
+
+#### `<video>` 标签
+
+* 格式：
+
+  ```html
+  <video src="video.webm"> </video>
+  
+  <!-- 常用属性：
+      src: 
+      autoplay: 
+      controls: 
+      poster: 
+      loop: 
+      preload: 预加载，与 autoplay 互斥
+      muted:
+      width:
+      height:   -->
+  ```
+
+* 第二种格式：
+
+  ```html
+  <video>
+      <source src="video.webm" type="video/webm"> </source>
+  	<source src="video.ogg" type="video/ogg"> </source>
+  	<source src="video.mp4" type="video/mp4"> </source>
+  </video>
+  
+  <!-- 意义：适配不同浏览器所支持的不同视频格式 -->
+  ```
+
+  
+

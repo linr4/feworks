@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单练习 - 2</title>
+</head>
+<body>
+
+<form action="http://www.baidu.com">
+    <fieldset>
+        <legend>注册信息</legend>
+        <p>
+            <label for="account">账号：</label>
+            <input type="text" id="account" name="account">
+        </p>
+        <p>
+            <label for="password">密码：</label>
+            <input type="password" id="password" name="password">
+        </p>
+        <p>
+            <span>性别：</span>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">男</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">女</label>
+            <input type="radio" id="secret" name="gender" value="secret" checked="checked">
+            <label for="secret">保密</label>
+        </p>
+        <p>
+            <span>爱好：</span>
+            <input type="checkbox" id="football" name="hobby" value="football">
+            <label for="football">足球</label>
+            <input type="checkbox" id="basketball" name="hobby" value="basketball">
+            <label for="basketball">篮球</label>
+            <input type="checkbox" id="pingpong" name="hobby" value="pingpong" checked>
+            <label for="pingpong">乒乓球</label>
+        </p>
+        <p>
+            <span>简介：</span>
+            <textarea name="profile" id="profile" cols="30" rows="10"></textarea>
+        </p>
+        <p>
+            <span>生日：</span>
+            <input type="date" name="birthday">
+        </p>
+        <p>
+            <span>邮箱：</span>
+            <input type="email" name="email">
+        </p>
+        <p>
+            <span>电话：</span>
+            <input type="number" name="number">
+        </p>
+        <p>
+            <input type="submit" value="注册">
+            <input type="reset" value="清空">
+        </p>
+    </fieldset>
+</form>
+
+</body>
+</html>
