@@ -1,4 +1,10 @@
-#### HTML
+### 20190324 - HTML
+
+---
+
+
+
+#### HTML Basic Concepts
 
 * 定义：HyperText Markup Language，超文本标记语言；
 
@@ -45,9 +51,14 @@
 
 ---
 
+
+
 #### `<h>` 系列标签，以及 `<p>` 和 `<hr>` 标签
 
+
+
 * `<h1> </h1>` ：header，定义文本的“标题”语义；
+
   * 仅用于添加语义，非用于修改样式；
   * 范围h1~ h6，超过6无效；
   * 包裹的内容独占一行；
@@ -436,14 +447,78 @@
 * 第二种格式：
 
   ```html
-  <video>
+  <video autoplay="autoplay" controls="controls">
       <source src="video.webm" type="video/webm"> </source>
   	<source src="video.ogg" type="video/ogg"> </source>
   	<source src="video.mp4" type="video/mp4"> </source>
   </video>
   
-  <!-- 意义：适配不同浏览器所支持的不同视频格式 -->
+  <!-- 
+  意义：适配不同浏览器所支持的不同视频格式；
+  条件：浏览器需支持HTML5；老浏览器可通过 html5media 框架实现对该标签的支持
+  -->
   ```
 
   
 
+#### `<audio>` 标签
+
+* 与 `<video>` 几乎一样，除了没有 width/height/poster 三个属性；
+
+
+
+#### `<details> <summary>` 详情与概要标签
+
+```html
+<details>
+    <summary> 概要信息 </summary>
+    详情信息
+</details>
+
+<!-- 详情默认折叠，以节省空间 -->
+```
+
+
+
+#### `<marquee>` 跑马灯标签
+
+```html
+<marquee 
+         direction="right/left/up/down" 滚动方向
+         scrollamount="1~100" 滚动速度
+         loop="1" 滚动次数
+         hehavior="slide/alternate" 滚动类型
+         > 
+    文字内容 / 图片
+</marquee>
+```
+
+
+
+#### 被废弃的标签
+
+* HTML 标签的作用应该只是添加语义，早期部分用于修饰样式的标签现已废弃：
+
+```html
+<br> 
+<hr> 
+<font> </font>
+<b> bold == strong </b>			<!-- 替代语义标签： <strong> 定义强调重要性的文字 -->
+<u> underline == ins </u>	  	<!-- 替代语义标签： <ins> 定义插入的文字 -->
+<i> italic == em </i> 			<!-- 替代语义标签： <em> 定义强调的文字 -->
+<s> strikethrough == del </s>   <!-- 替代语义标签： <del> 定义被删除的文字 -->
+
+<!-- 通常不用 <b> <u> <i> <s> 来直接修饰样式，而是作为 CSS 钩子使用 -->
+```
+
+
+
+#### 字符实体
+
+* HTML 中多个空格、回车、Tab 会被当作一个空格处理；
+* 有些字符（如标签的尖括号）被保留，不会直接显示；
+* 若要显示，则需通过特殊字符串 —— 字符实体；
+  * `&nbsp;` 空格
+  * `&gt;` 大于号，`&lt;` 小于号
+  * `&copy;` 版权符号
+  * 其它字符实体 [参考](http://www.w3school.com.cn/html/html_entities.asp)；

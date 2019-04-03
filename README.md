@@ -14,6 +14,14 @@ Web development learning notes and case study
 
 ---
 
+20190403 - Day 15
+
+* 复习 HTML 部分的[基础知识](20190324-html/html.md)，详情概要标签、废弃标签、字符实体等；(+1h = 16.5 of 600)
+
+20190402 - Day 14
+
+* 复习 HTML 部分的[基础知识](20190324-html/html.md)，做表单练习；学习 `<video>` `<audio>` 标签； (+1h = 15.5 of 600)
+
 20190401 - Day 13
 
 * 看 Tenzin 的 JavaScript 基础知识视频，关于 [Scope / Objects / Arrays](20190401-JavaScript-Scope.md) (+1h = 14.5h of 600)；
