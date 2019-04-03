@@ -16,16 +16,16 @@ Web development learning notes and case study
 
 20190403 - Day 15
 
-* 复习 HTML 部分的[基础知识](20190324-html/html.md)，详情概要标签、废弃标签、字符实体等；(+1h = 16.5 of 600)
+* 复习 HTML 部分的[基础知识](20190324-html-20190403/20190324-html-basic.md)，详情概要标签、废弃标签、字符实体等；(+1h = 16.5 of 600)
 
 20190402 - Day 14
 
-* 复习 HTML 部分的[基础知识](20190324-html/html.md)，做表单练习；学习 `<video>` `<audio>` 标签； (+1h = 15.5 of 600)
+* 复习 HTML 部分的[基础知识](20190324-html-20190403/20190324-html-basic.md)，做表单练习；学习 `<video>` `<audio>` 标签； (+1h = 15.5 of 600)
 
 20190401 - Day 13
 
 * 看 Tenzin 的 JavaScript 基础知识视频，关于 [Scope / Objects / Arrays](20190401-JavaScript-Scope.md) (+1h = 14.5h of 600)；
-* 复习 HTML 部分的[基础知识](20190324-html/html.md)（表单标签）并写代码做练习； (+2h = 16.5h of 600)
+* 复习 HTML 部分的[基础知识](20190324-html-20190403/20190324-html-basic.md)（表单标签）并写代码做练习； (+2h = 16.5h of 600)
 
 20190331 - Day 12
 
@@ -33,33 +33,33 @@ Web development learning notes and case study
 
 20190330 - Day 11
 
-* 复习 HTML 部分的[基础知识](20190324-html/html.md)（表单标签） (+1h = 12.5h of 600)
+* 复习 HTML 部分的[基础知识](20190324-html-20190403/20190324-html-basic.md)（表单标签） (+1h = 12.5h of 600)
 
 * 对自己目前的学习方法做出反思：已经有基础、无需再以零基础的方式去 review 每个知识点，而是要快速复习、查漏补缺、重点突破未掌握的知识点，以提高学习收益率；学习新技能犹如金融投资，需考虑成本 [时间&精力]、收益 [知识技能掌握程度] 和风险 [职业转换进程]。
 
 20190329 - Day 10
 
-* 做表格标签的 [colspan/rowspan 练习](20190324-html/03-table-span4.html) (+1h = 11.5h of 600)
+* 做表格标签的 [colspan/rowspan 练习](20190324-html-20190403/03-table-span4.html) (+1h = 11.5h of 600)
 
 20190328 - Day 9
 
-* 做表格标签的[练习](20190324-html/03-tables.html) (+.5h = 10.5h of 600)
+* 做表格标签的[练习](20190324-html-20190403/03-tables.html) (+.5h = 10.5h of 600)
 
 20190327 - Day 8
 
-* 复习 HTML 部分的[基础知识](20190324-html/html.md)（表格标签） (+1.5h = 10h of 600)
+* 复习 HTML 部分的[基础知识](20190324-html-20190403/20190324-html-basic.md)（表格标签） (+1.5h = 10h of 600)
 
 20190326 - Day 7
 
-* 复习 HTML 部分的[基础知识](20190324-html/html.md)（列表标签） (+1h = 8.5h of 600)
+* 复习 HTML 部分的[基础知识](20190324-html-20190403/20190324-html-basic.md)（列表标签） (+1h = 8.5h of 600)
 
 20190325 - Day 6
 
-- 复习 HTML 部分的[基础知识](20190324-html/html.md)（h, hr, a, img, base 等标签） (+1.5h = 7.5h of 600)
+- 复习 HTML 部分的[基础知识](20190324-html-20190403/20190324-html-basic.md)（h, hr, a, img, base 等标签） (+1.5h = 7.5h of 600)
 
 20190324 - Day 5
 
-* 复习 HTML 部分的[基础知识](20190324-html/html.md) (+1.5h = 6h of 600)
+* 复习 HTML 部分的[基础知识](20190324-html-20190403/20190324-html-basic.md) (+1.5h = 6h of 600)
 
 20190323 - Day 4
 
