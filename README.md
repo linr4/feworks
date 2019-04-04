@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ---
 
+20190404 - Day 16
+
+* 复习之前做的 CSS 学习笔记，先概览了一遍，确定主要复习布局方式（浮动、定位）和 CSS 3 的转换、过渡、动画部分；看 Tenzin 关于算法的课程，了解[Cheatsheet 网站](http://htmlCheatsheet.com/js) ；(+1.5h = 18 of 600)
+
 20190403 - Day 15
 
 * 复习 HTML 部分的[基础知识](20190324-html-20190403/20190324-html-basic.md)，详情概要标签、废弃标签、字符实体等；(+1h = 16.5 of 600)
