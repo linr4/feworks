@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>for-of loop</title>
+</head>
+<body>
+
+<script>
+
+    /*  let vowels = 'aeiouAEIOU';
+        for (let elm of vowels) {  // for...of 返回属性值
+            console.log(elm);
+        }
+        for (let idx in vowels) {   // for...in 返回属性名
+            console.log(idx);
+        }
+    */
+
+    /*
+        from MDN JavaScript Guide:
+    ​	  `for...in` iterates over property names,
+    ​	  `for...of` iterates over property values:
+     */
+
+    let vowels = 'aeiouAEIOU';
+    let words = 'SomE rAndom words';
+
+    // 方式一：用一般的 for 循环来遍历和对比字符串：
+    function countVowels(str) {
+        let counter = 0;
+        for (let i = 0; i < str.length; i++) {
+            if (vowels.includes(str[i]))
+                counter++;
+        }
+        return counter;
+    }
+
+    // 方式二：用 for...of 循环来遍历和对比字符串：
+    function anotherCountVowels(str){
+        let counter = 0;
+        for (let chr of str) {
+            if (vowels.includes(chr)) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    console.log(countVowels(words));
+    console.log(anotherCountVowels(words));
+
+    // 结论：若不需要获取每个字符的索引，则没必要用 for(i) ，用 for...of 直接获取每个字符的值即可；
+
+</script>
+</body>
+</html>
