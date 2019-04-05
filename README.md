@@ -14,6 +14,13 @@ Web development learning notes and case study
 
 ---
 
+20190405 - Day 17
+
+* 学习 Tenzin 的 JS 课：(+1.5h = 19.5 of 600)
+  * 关于 JS built-in methods 的学习方法：JS 方法（函数）繁多，一开始有大概印象即可，用到再查，不必死记，后续用多了自然能熟记于心；
+
+  * 实现统计元音字母个数的函数，[用 for...of 简化代码](20190405-algorithmic-challenges/20190405-algo.md)；
+
 20190404 - Day 16
 
 * 复习之前做的 CSS 学习笔记，先概览了一遍，确定主要复习布局方式（浮动、定位）和 CSS 3 的转换、过渡、动画部分；看 Tenzin 关于算法的课程，了解[Cheatsheet 网站](http://htmlCheatsheet.com/js) ；(+1.5h = 18 of 600)
