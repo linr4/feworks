@@ -14,6 +14,11 @@ Web development learning notes and case study
 
 ---
 
+20190406 - Day 18
+
+* 学习 Tenzin 的 JS 课：(+2h = 21.5 of 600)
+  * 关于几个常见数学/逻辑题的解题思路：[求反、奇偶判断、取字符串中间值](20190406/20190406-notes.md)；
+
 20190405 - Day 17
 
 * 学习 Tenzin 的 JS 课：(+1.5h = 19.5 of 600)

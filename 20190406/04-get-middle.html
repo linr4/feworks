@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>get middle</title>
+  </head>
+  <body>
+    <script>
+      function getMiddle(str) {
+        let strLen = str.length;
+        if (strLen % 2 === 0) {
+          // return str.slice(strLen / 2 - 1, strLen / 2 + 1);  // or just use brakets to extract the chars
+          return str[strLen / 2 - 1] + str[strLen / 2];
+        }
+        return str[(strLen - 1) / 2];
+      }
+      
+      console.log(getMiddle("test"));
+      console.log(getMiddle("extraoAdinary"));
+      console.log(getMiddle("Middle"));
+      console.log(getMiddle("abCde"));
+    </script>
+  </body>
+</html>

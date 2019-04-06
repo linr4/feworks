@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Count Vowel</title>
+  </head>
+  <body>
+    <script>
+      const vowels = "aeiouAEIOU";
+      function countVowels(words) {
+        let arr = [];
+        for (let i = 0; i < words.length; i++) {
+          if (vowels.includes(words[i])) {
+            arr.push(words[i]);
+          }
+        }
+        return arr;
+      }
+
+      function countVowels2(words) {
+        let arr = [];
+        for (let elm of words) {
+          if (vowels.includes(elm)) {
+            arr.push(elm);
+          }
+        }
+        return arr;
+      }
+
+      console.log(countVowels("this is just a random sentence."));
+      console.log(countVowels2("this is just a random sentence."));
+    </script>
+  </body>
+</html>
