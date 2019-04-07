@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Jaden Case - Capitalize each word in a sentence</title>
+    <style>
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Lucida Console';
+      }
+      .box {
+        width: 500px;
+        height: 300px;
+        margin: 200px auto;
+        padding: 10px;
+        border: 1px dashed gray;
+      }
+
+      .inputBox {
+        width: 480px;
+        height: 26px;
+        margin: 10px;
+      }
+      .showBox {
+        width: 490px;
+        height: 200px;
+        border: 1px solid red;
+        overflow: hidden;
+      }
+
+    
+
+    </style>
+  </head>
+  <body>
+    <div class="box">
+        <label for="inputBox"
+          >Please input a sentence and press Enter when done:
+        </label> <br>
+        <input type="text" id="inputBox" class="inputBox">
+        <div id="showBox"></div>
+    </div>
+
+    <script>
+      window.onload = function() {
+        let oInputBox = document.getElementById('inputBox');
+        let oShowBox = document.getElementById('showBox');
+
+        function capitalize(word) {
+          return word[0].toUpperCase() + word.slice(1).toLowerCase();
+        }
+
+        function toJadenCase(str) {
+          let result = [];
+          let words = str.split(" ");
+          for (let word of words) {
+            result.push(capitalize(word));
+          }
+          return result.join(" ");
+        }
+
+        oInputBox.onkeyup = function (ev) {
+          if (ev.keyCode == 13) {
+            oShowBox.innerText = toJadenCase(oInputBox.value);
+          } else {
+            oShowBox.innerText = oInputBox.value;
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

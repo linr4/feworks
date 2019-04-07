@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jaden Case</title>
+</head>
+<body>
+  
+  <script>
+
+    // Jaden Smith is the son of Will smith, the American movie star; 
+    // He is used to capitalizing every words when he tweets.
+
+    function capitalize(word) {
+      return word[0].toUpperCase() + word.slice(1).toLowerCase(); // convert the 1st letter of a word to uppercase, and  the rest lowercase
+    }
+
+    function toJadenCase(str) {   // to capitalize the first letter of each word in a given string
+      let words = str.split(' ');   // convert the string to an array, so that we'll be able to capitalize the words one by one
+      let result = [];
+      for (word of words) {   // go through each word
+        result.push(capitalize(word));  // capitalize the 1st letter of each word and push it to a temp array
+      }
+      return result.join(" ");  // convert the temp array to a string and return it
+    }
+
+    console.log(toJadenCase("How can mirrors be real if our eyes aren't real"))
+
+  </script>
+</body>
+</html>
