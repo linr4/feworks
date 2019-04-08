@@ -62,6 +62,7 @@ console.log(accum('abcdefg'));
 
 
 
-#### Random thought
+#### Random thoughts
 
-* 今天没有用 VS Code 或 WebStrorm 的 auto complete 功能，而是用 Notepad++ 手写全部代码，以便使自己熟悉和掌握代码的每个细节，把 gitMiddle(), toJadenCase(), mumbling() 三个练习敲了有二十几遍，虽然慢一点，但感觉有收获 —— 特别是对 html 文件的结构，一天下来敲了十几二十遍，已经很熟悉了；以后也要尽量按这个方法刻意练习，我的首要目的不是快、而是学有所成；正所谓：欲速不达、慢以致远。
+* 今天没有用 VS Code 或 WebStrorm 的 auto complete 功能，而是用 Notepad++ 手写全部代码，以便使自己熟悉和掌握代码的每个细节，把 gitMiddle(), toJadenCase(), mumbling() 三个练习敲了有二十几遍，虽然慢一点，但感觉有收获 —— 特别是对 html 文件的结构，一天下来敲了二十遍，现在已经很熟悉了；以后也要尽量按这个方法刻意练习，我的首要目的不是快、而是学有所成；正所谓：欲速不达、慢以致远。
+
