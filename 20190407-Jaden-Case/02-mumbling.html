@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mumbling</title>
+</head>
+<body>
+  <script>
+    function funky(letter, rep) {
+      let result = '';
+      for (i = 0; i < rep; i++) {
+        result += i > 0 ? letter.toLowerCase() : letter.toUpperCase(); // 等价于下一个语句
+        // if (i == 0) {result = letter.toUpperCase()} else {result = result + letter.toLowerCase()};
+      }
+      return result;
+    }
+
+    function accum(str) {
+      let letters = str.split('');
+      let result = [];
+      let counter = 1;
+      for (let letter of letters) {
+        result.push(funky(letter, counter));
+        counter++;
+      }
+      return result.join('-');
+    }
+
+    console.log(accum('Raymond'));
+  </script>
+</body>
+</html>

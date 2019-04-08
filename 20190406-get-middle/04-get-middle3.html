@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>get middle 3</title>
+</head>
+
+<body>
+
+	<script>
+		window.onload = function () {
+			function getMiddle (str) {
+				let len = str.length;
+				if (len % 2 == 0) {		// 先判断偶数
+					return str[len / 2 - 1] + str[len / 2];
+				}
+				return str[(len - 1) / 2];
+			}
+			
+			console.log(getMiddle('123'));
+			console.log(getMiddle('1234'));
+			console.log(getMiddle('12345'));
+			console.log(getMiddle('123456'));
+			
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Jaden Case 9</title>
+</head>
+<body>
+	<script>
+		window.addEventListener ('load', ()=>{
+			function capitalize (word) {
+				if (word.trim() != '') {
+					return word[0].toUpperCase() + word.slice(1).toLowerCase();
+				}
+			}
+			
+			function toJadenCase (str) {
+				let words = str.split(' ');
+				let result = [];
+				for (word of words) {
+					result.push(capitalize(word));
+				}
+				return result.join(' ');
+			}
+			
+			console.log(toJadenCase('  HOW MIRRORS can be real if our eyes ARE\'T REAL?'))
+		})
+	</script>
+</body>
+</html>

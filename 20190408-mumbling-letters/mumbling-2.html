@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>mumbling - accumulating letters of a word</title>
+</head>
+<body>
+	<script>
+		function repeatLetter (letter, repeatTimes) {
+			let res = '';
+			for (let i = 0; i < repeatTimes; i++) {
+				res = res + (i == 0 ? letter.toUpperCase() : letter.toLowerCase());
+			}
+			return res;	// 这里的 res 变量如果也写成 result 的话，会和 accum() 的 result 变量冲突
+		}
+		
+		function accum (word) {
+			let letters = word.split('');
+			let result = [];
+			for (let i = 1; i <= letters.length; i++) {	// 把 i 同时当做重复次数的计数器，必须从 1 开始
+				result.push(repeatLetter(letters[i-1], i));	// letters 索引从 0 开始
+			}
+			return result.join('-');	// 用 for(i) 比用 for...of 在确定索引值的逻辑上有点绕
+		}
+		
+		console.log(accum('abcdefg'));
+	</script>
+</body>
+</html>

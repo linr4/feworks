@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Jaden Case 4</title>
+</head>
+
+<body>
+
+<script>
+	window.onload = function () {
+	
+		function capitalize (word) {
+			return word[0].toUpperCase() + word.slice(1).toLowerCase();
+		}
+		
+		function toJadenCase (str) {
+			let words = str.split(' ');
+			let result = [];
+			for (word of words) {
+				result.push(capitalize(word));
+			}
+			return result.join(' ');
+ 		}
+		
+		console.log(toJadenCase("how CAN miRRORS be REal if our EYES aren't REAl?"));
+	}
+</script>
+</body>
+</html>

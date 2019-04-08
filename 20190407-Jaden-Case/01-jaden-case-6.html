@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title> Jaden Case 6</title>
+</head>
+
+<body>
+
+	<script>
+		window.onload = function () {
+			function capitalize (word) {
+				for (letter of word) {
+					if (/^[A-Za-z]+$/.test(letter)) {	
+					// 句子首个字符是空格的话，会导致toUpper/LowerCase()报错，需要过滤掉
+					// 但这个正则表达式会导致单词 ARE'T 及其后面的词无法解析，所以正则需要完善或改用其他方法
+						return word[0].toUpperCase() + word.slice(1).toLowerCase();
+					}
+					
+				}
+			}
+			
+			function toJadenCase (str) {
+				let words = str.split(' ');
+				let res = [];
+				for (let word of words) {
+					res.push(capitalize(word));
+				}
+				return res.join(' ');
+			}
+			
+			
+			console.log(toJadenCase(' HOW MIRRORS CAN BE REAL IF OUR EYES ARE\'T REAL?'));
+		}
+	</script>
+</body>
+</html>

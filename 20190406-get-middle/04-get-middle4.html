@@ -1,0 +1,28 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>get middle 4</title>
+</head>
+
+<body>
+
+	<script>
+		window.onload = function () {
+			function getMiddle (str) {
+				let len = str.length;
+				if (len % 2 == 0) {
+					return str[len / 2 - 1] + str[len / 2];
+				}
+				return str[(len - 1) / 2];
+			}
+			
+			console.log(getMiddle('12'));
+			console.log(getMiddle('123'));
+			console.log(getMiddle('1234'));
+			console.log(getMiddle('12345'));
+			console.log(getMiddle('123456'));
+		}
+	</script>
+</body>
+</html>

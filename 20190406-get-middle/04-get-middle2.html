@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Get Middle</title>
+</head>
+<body>
+
+<!-- 
+
+今天看到李笑来的文章，提到他在初学编程时，刻意练习手写代码，我觉得是个很好的练习方法；
+随即尝试在 notpad++ 里手写全部代码、而不用 vscode/webstorm 的自动补全，并且多次练习，以加强自己对所有代码细节的熟悉和掌握程度；
+ 
+https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.2.B.deliberate-practicing.ipynb
+ 
+-->
+
+	<script>
+		/* 取字符串的中间字符；
+		   字符个数为奇数，如“abcde”，则返回“c”；
+		   字符个数为偶数，如“abcd”，则返回“bc”；
+		*/
+		window.onload = function () {
+			function getMiddle (str) {
+				let len = str.length;
+				if (len % 2 != 0) {	// 取余运算，判断字符个数的奇偶，余数非零则为奇数
+					return str[(len - 1) / 2];	// 用索引值取到中间一个字符
+				}
+				return str[len / 2 - 1] + str[len / 2];	// 取居中的两个字符；此处逻辑上是上面 if 的 else 部分，实际上不用写else一样的效果
+			}
+			
+			console.log('1: ' + getMiddle('1'));
+			console.log('12: ' + getMiddle('12'));
+			console.log('123: ' + getMiddle('123'));
+			console.log('1234: ' + getMiddle('1234'));
+			console.log('12345: ' + getMiddle('12345'));
+			console.log('123456: ' + getMiddle('123456'));
+		}
+	</script>
+</body>
+</html>

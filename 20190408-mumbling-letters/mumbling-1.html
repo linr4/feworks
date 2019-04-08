@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Mumbling</title>
+</head>
+<body>
+	<script>
+		function repeatLetter (letter, repeatTimes) {
+			let result = '';
+			for (let i = 0; i < repeatTimes; i++) {
+				if (i == 0) {
+					result = letter.toUpperCase();
+				} else {
+					result = result + letter.toLowerCase();
+				}
+				
+				// result += i == 0 ? letter.toUpperCase() : letter.toLowerCase(); // 等价于上面的语句
+			}
+			return result;
+		}
+		
+		function accum (word) {
+			let letters = word.split('');
+			let result = [];
+			let counter = 1;
+			for (letter of letters) {
+				result.push(repeatLetter(letter, counter)); // 第一个字母大写并重复 1 次，第二个 2 次...
+				counter++;
+			}
+			return result.join('-');
+		}
+		
+		console.log(accum('abcdefg'));	// A-Bb-Ccc-Dddd-Eeeee-Ffffff-Ggggggg
+		console.log(accum('Raymond'));	// R-Aa-Yyy-Mmmm-Ooooo-Nnnnnn-Ddddddd
+		
+	</script>
+</body>
+</html>

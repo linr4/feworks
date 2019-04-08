@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>mumbling - accumulate letters in a word</title>
+</head>
+<body>
+
+	<script>
+		function repeatLetter (letter, repeatTimes) {
+			let res = '';
+			for (let i = 0; i < repeatTimes; i++) {
+				res += i == 0 ? letter.toUpperCase() : letter.toLowerCase();
+			}
+			return res;
+		}
+		
+		function accum (word) {
+			let letters = word.split(''),
+			    result = [],
+			    counter = 1;
+			for (let letter of letters) {
+				result.push(repeatLetter(letter, counter));
+				counter ++;
+			}
+			return result.join('-');
+		}
+		
+		console.log(accum('abcdefg'));	// A-Bb-Ccc-Dddd-Eeeee-Ffffff-Ggggggg
+		
+	</script>
+</body>
+</html>
