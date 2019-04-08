@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ---
 
+20190408 - Day 20
+
+* 练习前两天所学的 JS 案例：[getMiddle, mumbling & JadenCase](20190408-mumbling-letters/mumbling-accum-letters.md)；(+3.5h = 28.5 of 600)
+
 20190407 - Day 19
 
 * 学习 Tenzin 的 JS 课：(+3.5h = 25 of 600)
