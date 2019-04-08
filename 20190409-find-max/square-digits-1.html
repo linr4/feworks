@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title> Square every digit</title>
+</head>
+<body>
+	<script>
+	'use strict'
+		function squareDigits(nums) {
+			let numsStr = nums.toString(),
+			    result = '';
+				
+			for (let digit of numsStr) {
+				result += Math.pow(Number(digit), 2);
+			}
+			return Number(result);
+		}
+		
+		console.log(squareDigits(888));	// 646464
+	
+	</script>
+</body>
+</html>

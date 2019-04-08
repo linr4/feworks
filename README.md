@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ---
 
+20190409 - Day 21
+
+* 学习 JS 案例：[Find max 与 Square digits](20190409-find-max/20190409-max-squre.md)；(+2h = 30.5h of 600)
+
 20190408 - Day 20
 
 * 练习前两天所学的 JS 案例：[getMiddle, mumbling & JadenCase](20190408-mumbling-letters/mumbling-accum-letters.md)；(+3.5h = 28.5 of 600)

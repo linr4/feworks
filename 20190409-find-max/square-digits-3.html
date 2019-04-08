@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>square digits</title>
+</head>
+
+<body>
+	<script>
+		'use strict'	// 使用严格模式，变量需先显式定义才能使用
+		function squareDigits(num) {
+			let numStr = num.toString();	// 将传入的数值转成字符串，方便取出每个数字做处理
+			let result = '';
+			for (let digit of numStr) {		// 遍历每个数字、单独做处理
+				result += Math.pow(Number(digit), 2);	// 将数字转成 Number 类型并做平方运算，结果与字符类型的 result 变量相加、自动转回字符类型；
+			}
+			return Number(result);	// 返回结果时再转回数值类型
+		}
+		
+		console.log(squareDigits('818'));	// 64164
+	</script>
+</body>
+</html>

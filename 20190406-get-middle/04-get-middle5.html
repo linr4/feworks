@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>get Middle</title>
+</head>
+<body>
+	<script>
+		function getMiddle(word) {
+			let len = word.length;
+			if (len % 2 === 0) {	// length of the word is even
+				return word[len / 2 - 1] + word[len / 2];
+			}
+			return word[(len - 1) / 2]
+		}
+		
+		console.log(getMiddle('1'));
+		console.log(getMiddle('12'));
+		console.log(getMiddle('123'));
+		console.log(getMiddle('1234'));
+		console.log(getMiddle('12345'));
+		console.log(getMiddle('123456'));
+		console.log(getMiddle('sponteneous'));
+	</script>
+</body>
+</html>
