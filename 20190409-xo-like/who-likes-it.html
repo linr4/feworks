@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title> who likes it </title>
+</head>
+<body>
+
+<script>
+	'use strict'
+	let names0 = [],
+		names1 = ['David'],
+	    names2 = ['David','John'],
+	    names3 = ['David','John','Alice'],
+	    names4 = ['David','John','Alice','Don'],
+	    names5 = ['David','John','Alice','Don','Carl'],
+	    names6 = ['David','John','Alice','Don','Carl','Pheobe'];
+		
+	function likes (names) {
+		switch (names.length) {
+			case 0: return `no one likes this`;
+				break;	// 'break' can be ommitted here as there's 'return' before it
+			case 1: return `${names[0]} likes this`;
+			case 2: return `${names[0]} and ${names[1]} like this`;
+			case 3: return `${names[0]}, ${names[1]} and ${names[2]} like this`;
+		}
+		
+		if (names.length > 3) {
+			return `${names[0]}, ${names[1]} and ${names.length - 2} others like this`;
+		}
+	}
+	
+	console.log(likes(names0));
+	console.log(likes(names1));
+	console.log(likes(names2));
+	console.log(likes(names3));
+	console.log(likes(names4));
+	console.log(likes(names5));
+	console.log(likes(names6));
+	
+</script>	
+</body>
+</html>

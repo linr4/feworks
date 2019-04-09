@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title> who likes it </title>
+</head>
+<body>
+
+<script>
+'use strict'
+	function likes (names) {
+		switch (names.length) {
+			case 0: return `no one like this.`;
+			case 1: return `${names[0]} likes this.`;
+			case 2: return `${names[0]} and ${names[1]} like this.`;
+			case 3: return `${names[0]}, ${names[1]} and ${names[2]} like this.`;
+		}
+		if (names.length > 3) {
+			return `${names[0]}, ${names[1]} and ${names.length - 2} others like this.`;
+		}
+	}
+	
+	console.log(likes([]));
+	console.log(likes(['Joe']));
+	console.log(likes(['Joe','Kim']));
+	console.log(likes(['Joe','Kim','Willy']));
+	console.log(likes(['Joe','Kim','Willy','Beth']));
+	console.log(likes(['Joe','Kim','Willy','Beth','Tom']));
+	
+</script>	
+</body>
+</html>

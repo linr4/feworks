@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Exes and Ohs</title>
+</head>
+
+<body>
+	<pre>
+	Check to see if a string has the same amount of 'X's and 'O's. 
+	The method must return a boolean and be case insensitive. 
+	The string can contain any char.
+	
+	Examples input/output:
+	
+	XO("ooxx") => true
+	XO("xooxx") => false
+	XO("ooxXm") => true
+	XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true
+	XO("zzoo") => false
+	</pre>
+	
+	<script>
+		'use strict'
+		
+		function XO (str) {
+			let [xCount, oCount] = [0, 0];
+			
+			for (let chr of str) {	// go through the string to count 'x' and 'o' characters.
+				chr = chr.toLowerCase();
+				if (chr === 'x') xCount++;	// 此处只有一个语句，可以省去 { }
+				if (chr === 'o') oCount++;	// 此处没有用 else，效果一样
+			}
+			
+			// 以下 if 判断刻意不用 else，因 return 之后的代码不会执行，与 else 的效果一样
+			
+			if (xCount === oCount) {	// if the amount of 'x's and 'o's is the same, including both are 0, => true
+				return true;
+			}
+			return false;	// the amount is not the same => false
+			
+			// 以上判断和返回可精简为：
+			// return xCount === oCount;
+		}
+		
+		console.log(XO("ooxx"));
+		console.log(XO("xooxx"));
+		console.log(XO("ooxXm"));
+		console.log(XO("zpzpzpp"));
+		console.log(XO("zzoo"));
+		
+	</script>
+</body>
+
+</html>

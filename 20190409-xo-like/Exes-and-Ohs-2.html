@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title> X's and O's </title>
+<head>
+<body>
+
+	<script>
+	'use strict'
+	function XO(str) {
+		let [xCount, oCount] = [0, 0];
+		for (let chr of str) {
+			chr = chr.toLowerCase();
+			if (chr === 'x') {xCount++};
+			if (chr === 'o') {oCount++};
+		}
+		return xCount === oCount;
+	} 
+	console.log(XO("ooxx"));
+	console.log(XO("xooxx"));
+	console.log(XO("ooxXm"));
+	console.log(XO("zpzpzpp"));
+	console.log(XO("zzoo"));
+	</script>
+</body>
+</html>
