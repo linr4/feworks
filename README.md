@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190410 - Day 22
+
+* 复习 JavaScript [基础知识](20190410-js-basics.md)；(+2h = 32.5 of 600)
+
 ###### 20190409 - Day 21
 
 * 学习 JS 案例：[Find max 与 Square digits](20190409-find-max/20190409-max-squre.md)；(+2h = 30.5 of 600)
