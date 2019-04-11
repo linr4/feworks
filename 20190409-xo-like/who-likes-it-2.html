@@ -20,12 +20,19 @@
 		}
 	}
 	
-	console.log(likes([]));
-	console.log(likes(['Joe']));
-	console.log(likes(['Joe','Kim']));
-	console.log(likes(['Joe','Kim','Willy']));
-	console.log(likes(['Joe','Kim','Willy','Beth']));
-	console.log(likes(['Joe','Kim','Willy','Beth','Tom']));
+	console.log(likes([]));	// no one like this.
+	console.log(likes(['Joe'])); // Joe likes this.
+	console.log(likes(['Joe','Kim'])); // Joe and Kim like this.
+	console.log(likes(['Joe','Kim','Willy'])); // Joe, Kim and Willy like this.
+	console.log(likes(['Joe','Kim','Willy','Beth'])); // Joe, Kim and 2 others like this.
+	console.log(likes(['Joe','Kim','Willy','Beth','Tom'])); // Joe, Kim and 3 others like this.
+	
+	// no one like this.
+	// Joe likes this.
+	// Joe and Kim like this.
+	// Joe, Kim and Willy like this.
+	// Joe, Kim and 2 others like this.
+	// Joe, Kim and 3 others like this.
 	
 </script>	
 </body>

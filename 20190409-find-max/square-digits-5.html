@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Square Digits</title>
+</head>
+<body>
+  
+  <script>
+    'use strict'
+    function squreDigits (nums) {
+      let numsStr = String(nums);
+      let result = '';
+      for (let digit of numsStr) {
+        result += String(Math.pow(Number(digit), 2));
+      }
+      return Number(result);
+    }
+    
+    console.log(squreDigits(456));
+  </script>
+</body>
+</html>
