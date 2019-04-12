@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <title>Adding, removing and toggling CSS classes with JavaScript</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .enlarge-font {
+      font-size: 30px;
+    }
+    
+    p {
+      color: skyblue;
+    
+    }
+  
+  </style>
+</head>
+<body>
+  
+  <button> add style </button>
+  <button> remove style </button>
+  <button> toggle style </button>
+  <button> another toggling </button>
+  <p> Adding, removing and toggling CSS classes with JavaScript.</p>
+  
+  <script src="app.js"></script>
+  <script>
+    'use strict'
+    let paraEl = document.querySelector('p');
+    let btnEl = document.querySelectorAll('button');
+    
+    btnEl[0].onclick = function () {
+      paraEl.classList.add('enlarge-font');
+    };
+    
+    btnEl[1].onclick = function () {
+      paraEl.classList.remove('enlarge-font');
+    }
+    
+    btnEl[2].onclick = function () {
+      paraEl.classList.toggle('enlarge-font');
+    }
+    
+    btnEl[3].onclick = function () {
+      if (String(paraEl.getAttribute('class')).includes('enlarge-font')) {
+        // paraEl.classList.remove('enlarge-font');
+        paraEl.setAttribute('class', '');
+      } else {
+        // paraEl.classList.add('enlarge-font');
+        paraEl.setAttribute('class', 'enlarge-font');
+      }
+    }
+    
+    
+  </script>
+</body>
+</html>

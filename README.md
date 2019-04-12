@@ -14,6 +14,14 @@ Web development learning notes and case study
 
 ---
 
+###### 20190412 - Day 24
+
+* 复习 JavaScript 基础知识 - [DOM & BOM](20190411/bom-dom.md) (+3h = 38 of 600)
+
+###### 20190411 - Day 23
+
+* 复习 JavaScript 基础知识 - [DOM & BOM](20190411/bom-dom.md) (+2.5h = 35 of 600)
+
 ###### 20190410 - Day 22
 
 * 复习 JavaScript [基础知识](20190410-js-basics.md)；(+2h = 32.5 of 600)
