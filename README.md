@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190414 - Day 25
+
+* 复习 JavaScript 基础知识 - [Operators and Control Flow](20190410-js-basics.md) (+4.5h = 42.5 of 600)
+
 ###### 20190412 - Day 24
 
 * 复习 JavaScript 基础知识 - [DOM & BOM](20190411/bom-dom.md) (+3h = 38 of 600)
