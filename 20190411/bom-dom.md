@@ -27,7 +27,7 @@
   
   // Access multiple elements: 
   
-  // 注意 getElements... 是复数，返回的是 array-like 集合 html collection；
+  // 注意 getElements... 是复数，返回的是 类似数组的集合 html collection
   document.getElementsByClassName('chore'); 	// returns html collection
   document.getElementsByTagName('li'); 	// returns html collection
   
@@ -43,7 +43,7 @@
 * Everything in Document is Node
 
 * **Element** is a specific type of **Node**
-* 如 `<p> paragrah </p>` 这个**元素**由 p 标签（标签**节点**）和 内容 “paragraph” （文本**节点**）组成；
+* 如 `<p> paragrah </p>` 这个**元素**由 `<p>` 标签（元素**节点**）和 内容 “paragraph” （文本**节点**）组成；
 
 
 
@@ -82,17 +82,17 @@
 
 **undefined**: a variable has been declared but not been defined, namely not been assigned a value.
 
-**null**: assigned a specific non-exist value, *null*, to a variable, which later on will make it avoid from a lot of errors; if we just leave it *undefined*, it will have more chances to catch errors. In many cases, null is safer than undefined.
+**null**: assigned a specific non-exist value, *null*, to a variable, which later on will make it avoid from a lot of errors; if we just leave it *undefined*, it will have more chances to catch errors. In many cases, *null* is safer than *undefined*.
 
-我的理解：把不确定的 undefined 指定为确定的 null，限定变量的值，减少意外情况。
+我的理解：把不确定的 *undefined* 指定为确定的 *null*，限定变量的值，减少意外情况。
 
  
 
 ### Changing JavaScript Attributes
 
-* **Get attribute**: `bodyEl.getAttribute('onload');`  attribute can be"onload", "id", etc. 
+* **Get attribute**: `bodyEl.getAttribute('attr');`  attribute can be"onload", "id", etc. 
 
-* **Set attribute**: `bodyEl.setAttribute('id', 'gsr, newgsr, alsogsr');` 会覆盖现有的属性，若是添加、要把现有的属性也写上去；
+* **Set attribute**: `bodyEl.setAttribute('attr', 'value1, value2, value3');` 会覆盖现有的属性，若是添加、要把现有的属性值也写上去；
 * Another way to change CSS classes [ *vs. elm.classList* ]: 
   * `el.setAttribute('class', 'newClassName, anotherClassName');`
 * **Remove attribute**: `elm.removeAttribute('class');`
@@ -146,7 +146,7 @@ Since the **`<html>` element (`document.documentElement`)** doesn't have a paren
 
 #### childNodes vs. children
 
-* 用 `childNodes` 会把 html 文档中 换行、空格 也列到 nodeList 中，如下的 text 节点；影响准确获取 element nodes；
+* 用 `childNodes` 会把 html 文档中 换行、空格 也列到 nodeList 中，如下的 text 节点；会影响准确获取 element nodes；
 
 ```
 NodeList(9) [text, li.todo__item, text, li.todo__item, text, li.todo__item, text, li.todo__item, text]

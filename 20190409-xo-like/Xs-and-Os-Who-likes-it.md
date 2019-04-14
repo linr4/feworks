@@ -3,13 +3,17 @@
 #### 题目：
 
 > Check to see if a string has the same amount of X's and O's. The method must return a Boolean and be case insensitive. The string can contain any char.
->
+
 > Examples input/output:
->
-> XO("ooxx") => true
-> XO("xooxx") => false
-> XO("ooxXm") => true
-> XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true
+
+> XO("ooxx") => true；
+ 
+> XO("xooxx") => false;
+ 
+> XO("ooxXm") => true;
+ 
+> XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true;
+
 > XO("zzoo") => false
 
 ​    简言之，统计字符串中的 “X” 和 “O” 个数，相等则为 True、不等则为 False
