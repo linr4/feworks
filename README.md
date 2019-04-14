@@ -89,7 +89,7 @@ Web development learning notes and case study
 
 ###### 20190328 - Day 9
 
-* 做表格标签的[练习](20190324-html-20190403/03-tables.html) (+.5h = 10.5h of 600)
+* 做表格标签的[练习](20190324-html-20190403/) (+.5h = 10.5h of 600)
 
 ###### 20190327 - Day 8
 

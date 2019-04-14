@@ -222,7 +222,6 @@
       <dl>
           <dt> title </dt>
           <dd> description </dd>
-          <dl> list item </dl>
       </dl>
       ```
 
