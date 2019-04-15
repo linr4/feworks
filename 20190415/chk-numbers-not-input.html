@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <title>check which numbers have not been input by user</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script>
+    let str = prompt('please input three numbers at between 0 and 9: ');
+    let num = [];
+    for (let i = 0; i <= 9; i++) {
+        if (!str.includes(i)) {
+          num.push(i);
+        }
+    }
+    console.log(num);
+  </script>
+</body>
+</html>
