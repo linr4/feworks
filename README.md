@@ -14,9 +14,13 @@ Web development learning notes and case study
 
 ---
 
+###### 20190416 - Day 27
+
+* 复习 JavaScript 基础知识 - [函数基础](20190410-js-basics.md#) (+3h = 52 of 600)
+
 ###### 20190415 - Day 26
 
-* 复习 JavaScript 基础知识 - [for loop & array](20190410-js-basics.md) (+3h = 46.5 of 600)
+* 复习 JavaScript 基础知识 - [for loop & array](20190410-js-basics.md#) (+5.5h = 49 of 600)
 
 ###### 20190414 - Day 25
 
