@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190417 - Day 28
+
+* 复习 JavaScript OOP - [prototype chain](20190417-oop-prototype/20190417-js-oop.md) (+3h = 55 of 600)
+
 ###### 20190416 - Day 27
 
 * 复习 JavaScript 基础知识 - [函数基础](20190410-js-basics.md#) (+3h = 52 of 600)
