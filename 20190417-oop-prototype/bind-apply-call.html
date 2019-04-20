@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<!-- bind, apply, call -->
+
+<html>
+<script>
+  function test(a, b) {
+    console.log(this, a, b);
+  }
+  
+  test(11, 22); // 默认情况下，该函数 this 指向 window
+  
+  let obj = {name:'new obj'};
+  let fn1 = test.bind(obj, 111, 222); // 将 test() 函数绑定到 obj 对象上，并传入 a, b 两个参数
+  
+  fn1(); // 调用对象变成了 obj;
+  
+</script>
+</html>

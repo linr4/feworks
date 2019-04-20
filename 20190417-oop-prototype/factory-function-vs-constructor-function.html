@@ -1,0 +1,65 @@
+<!-- 
+
+构造函数在本质上是工厂函数的简化版，
+即：简化了 初始化一个新对象（let ojb = new Object()）和返回该新对象（return obj）的步骤，由JS内部自动解析；
+但再实例化构造函数时（相当于其它语言的创建类的实例），需要用到 new 操作符，工厂函数实例化时就不需要；
+
+ -->
+ 
+  <script>
+  // Factory function
+
+  function Vehicle1 (brand, model, mfgDate) {
+    let vehicle = new Object();
+    vehicle.brand = brand;
+    vehicle.model = model;
+    vehicle.mfgDate = mfgDate;
+    vehicle.drive = function () {
+      console.log(`Your ${vehicle.brand} ${vehicle.model} has been on service since ${vehicle.mfgDate}`);
+    }
+    
+    return vehicle;
+  }
+  
+  let car1 = Vehicle1('Toyota', 'EZ', '201403');
+  
+  console.log(car1);
+  console.log(car1.drive());
+
+  
+  // Constructor function for the same example
+  
+  function Vehicle0 (brand, model, mfgDate) {
+    this.brand = brand;
+    this.model = model;
+    this.mfgDate = mfgDate;
+    this.drive = function () {
+      console.log(`Your ${this.brand} ${this.model} has been on service since ${this.mfgDate}`);
+    }
+  }
+  
+  let car0 = new Vehicle0('Geely', 'EC715RV', 201007);
+  
+  console.log(car0);
+  console.log(car0.drive());
+  console.log(car0.brand, car0.model, car0.mfgDate);
+  
+  
+  
+  // Vehicle0 构造函数经过JS自动解析之后，转换为工厂函数的代码类似如下（这里用that指代this，直接用this会与JS关键字冲突）
+  function Vehicle2 (brand, model, mfgDate) {
+    let that = new Object();  // 将 this 设置为指向调用者的指针（对象）
+    that.brand = brand; // 
+    that.model = model;
+    that.mfgDate = mfgDate;
+    that.drive = function () {
+      console.log(`Your ${that.brand} ${that.model} has been on service since ${that.mfgDate}`);
+    }
+    return that; // 返回 this
+  }
+  
+  let car2 = new Vehicle2('Link&Co', '05', 202002);
+  console.log(car2.brand, car2.model, car2.mfgDate);
+  console.log(car2.drive());
+  
+  </script>

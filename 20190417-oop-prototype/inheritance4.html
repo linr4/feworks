@@ -1,0 +1,31 @@
+<script>
+  function Person(name = 'John', age = 20) {
+    this.name = name;
+    this.age = age;
+  }
+  Person.prototype.say = function () {
+    console.log('Hello');
+  }
+  
+  function Student(myName, myAge, myScore = 100) {
+    Person.call(this, myName, myAge); 
+    this.score = myScore;
+    this.intro = function () {
+      console.log('I am a student.');
+    }
+  }
+  
+Student.prototype = new Person(); // !!!!!!!!!!!
+Student.prototype.constructor = Student;
+  
+  let stu1 = new Student('Ray', 41, 98);
+  
+  console.log(`
+    my name: ${stu1.name}, 
+    my age: ${stu1.age}, 
+    my score: ${stu1.score}, 
+    `);
+  stu1.say();
+  stu1.intro();
+  
+</script>

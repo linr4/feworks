@@ -1,0 +1,37 @@
+<script>
+// ES6 class
+
+class Person {
+  constructor (cName, cAge) { // 构造方法
+    this.cName = cName; 
+    this.cAge = cAge;
+    this.cFn = function() {
+      console.log('eating');
+    }
+  }
+  myName = 'Joe';  // 实例属性
+  myAge = 23;
+  myFn () { // 实例方法
+    console.log(this.myName, this.myAge);
+    console.log(this.cName, this.cAge);
+  }
+  
+  static stName = 'stName'; // 静态属性
+  static stAge = 'stAge';
+  static stFn = function() { // 静态方法
+    console.log('sleeping');
+  }
+}
+
+let p1 = new Person('Coco', 22);
+
+console.log(p1.cName, p1.cAge);
+console.log(p1.myName, p1.myAge);
+console.log(p1.stName, p1.stAge); // 静态属性在外部访问不到
+
+p1.cFn();
+p1.myFn();
+p1.stFn();  // 静态属性在外部访问不到
+
+
+</script>
