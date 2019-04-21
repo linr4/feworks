@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190421 - Day 31
+
+* 复习 JavaScript OOP - [原型链、属性/方法的类别](20190417-oop-prototype/20190417-js-oop.md) (+5h = 64 of 600)
+
 ###### 20190420 - Day 30
 
 * 学习 JavaScript OOP - [继承、类、ES6 类](20190417-oop-prototype/20190417-js-oop.md) (+3.5h = 59 of 600)
