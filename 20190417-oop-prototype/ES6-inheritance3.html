@@ -1,0 +1,58 @@
+<script>
+
+// Pre-ES6 Inheritance
+/*
+function Person(myName, myAge) {
+  this.myName = myName; // JS 的某个原型上已经存在 name 属性，这里的参数/属性再用 name 会有冲突
+  this.myAge = myAge;
+}
+
+Person.prototype.hi = function() {
+  console.log('Hi Person, ', this.myName, this.myAge);
+}
+
+function Student(myName, myAge, myScore) {
+  Person.apply(this, [myName, myAge]);
+  this.myScore = myScore;
+}
+
+Student.prototype = new Person();
+Student.prototype.constructor = Student;
+Student.prototype.hello = function () {
+  console.log('Hello Student, ', this.myName, this.myAge, this.myScore);
+}
+
+let stu = new Student('I am a student, ', 'I am 18 years old,', 'my score is 100.');
+console.log(stu);
+stu.hi();
+stu.hello();
+*/
+
+// ES6 Inheritance
+
+class Person {
+  constructor(myName, myAge) {
+    this.myName = myName;
+    this.myAge = myAge;
+  }
+  hi() { // 相当于 hi = function () {}，写在这里的方法会放在原型对象中
+    console.log('Hi from Person, ', this.myName, this.myAge);
+  }
+}
+
+class Student extends Person {
+  constructor(myName, myAge, myScore) {
+    super(myName, myAge); // 相当于 Person.call(this, myName, myAge);
+    this.myScore = myScore;
+  }
+  hello() {
+    console.log('Hello from Student, ', this.myName, this.myAge, this.myScore);
+  }
+}
+
+let stu = new Student('ES6', 5, 100);
+console.log(stu);
+stu.hi();
+stu.hello();
+
+</script>

@@ -1,0 +1,65 @@
+<DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<script>
+
+// ES5 写法
+/*
+function Person(myName, myAge) {
+  this.name = myName;
+  this.age = myAge;
+  this.hi = function() {
+    console.log('Hi', this.name, this.age);
+  }
+}
+
+Person.prototype.hello = function() {
+  console.log('Hello', this.name, this.age);
+}
+
+Person.staticMethod = function() {
+  console.log('static method: ', this.name, this.age);
+}
+
+let p1 = new Person('ES5', 20);
+console.log(p1);
+p1.hi();
+p1.hello();
+Person.staticMethod(); // 静态方法 static method:  Person undefined
+*/
+
+
+// ES6 写法
+class Person {
+  constructor(myName, myAge) {
+    this.name = myName;     // 公有属性
+    this.age = myAge;
+    this.hi = function () { // 公有方法
+      console.log('Hi, ', this.name, this.age);
+    }
+  }
+    
+    hello() { // 原型/实例 方法
+      console.log('Hello, ', this.name, this.age);
+    }
+    
+    // static staticMethod = function() { // 或简写如下
+    static staticMethod() {
+      console.log('static method: ', this.name, this.age);
+    }
+  }
+
+
+let p1 = new Person('ES6', 5);
+console.log(p1);
+p1.hi();
+p1.hello();
+Person.staticMethod(); // 静态方法 static method:  Person undefined
+  
+
+</script>
+</body>
+</html>

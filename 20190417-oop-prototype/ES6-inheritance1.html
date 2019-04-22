@@ -1,0 +1,28 @@
+<script>
+
+class Person {
+  constructor (myName, myAge) {
+    this.myName = myName;
+    this.myAge = myAge;
+  }
+  hi () {
+    console.log('Hi, ', this.myName, this.myAge, this.myScore);
+  }
+}
+
+class Student extends Person {
+  constructor (myName, myAge, myScore) {
+    super(myName, myAge); // 相当于 Person.call(this, myName, myAge)
+    this.myScore = myScore;
+  }
+  showInfo () {
+    console.log('show info:', this.myName, this.myAge, this.myScore)
+  }
+}
+
+let stu = new Student('Ray', 25, 100);
+console.log(stu);
+stu.hi();
+stu.showInfo();
+
+</script>

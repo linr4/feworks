@@ -1,0 +1,56 @@
+<script>
+// PRE-ES6 INHERITANCE
+
+function Person(myName, myAge) {
+  this.myName = myName;
+  this.myAge = myAge;
+}
+
+Person.prototype.hi = function() {
+  console.log('Hi from Person, ', this.myName, this.myAge);
+}
+
+function Student(myName, myAge, myScore) {
+  Person.call(this, myName, myAge);
+  this.myScore = myScore;
+}
+
+Student.prototype = new Person();
+Student.prototype.constructor = Student;
+Student.prototype.hello = function() {
+  console.log('Hello from Student, ', this.myName, this.myAge, this.myScore);
+}
+
+let stu = new Student('Pre-ES6', 20, 90);
+console.log(stu);
+stu.hi();
+stu.hello();
+
+/* ES6 INHERITANCE:
+
+class Person {
+  constructor(myName, myAge) {
+    this.myName = myName;
+    this.myAge = myAge;
+  }
+  hi() {
+    console.log('Hi from Person, ', this.myName, this.myAge);
+  }
+}
+
+class Student extends Person {
+  constructor(myName, myAge, myScore) {
+    super(myName, myAge); // equivalent to : Person.apply(this, [myName, myAge]);
+    this.myScore = myScore;
+  }
+  hello() {
+    console.log('Hello from Student, ', this.myName, this.myAge, this.myScore);
+  }
+}
+
+let stu = new Student('Magatron', 10000, 99);
+console.log(stu);
+stu.hi();
+stu.hello();
+*/
+</script>

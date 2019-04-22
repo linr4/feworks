@@ -6,7 +6,7 @@
       console.log('Hello!');
     } */
   }
-  Person.prototype.say = function () {  // Student 无法继承到这个动态设置的方法: bind-apply-call2.html:31 Uncaught TypeError: stu1.say is not a function
+  Person.prototype.say = function () {  
     console.log('Hello');
   }
   
@@ -18,8 +18,8 @@
     }
   }
   
-//  Student.prototype = new Person();
-//  Student.prototype.constructor = Student;
+  Student.prototype = new Person();
+  Student.prototype.constructor = Student;
   
   let stu1 = new Student('Ray', 41, 98);
   

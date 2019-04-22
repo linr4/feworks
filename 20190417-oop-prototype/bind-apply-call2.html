@@ -1,0 +1,26 @@
+<!-- 
+
+测试改变 this 指向的三种方法：
+
+bind(this指向的新对象, 形参1, 形参2, ...)，返回修改了 this 之后的新对象
+call(this指向的新对象, 形参1, 形参2, ...)，直接执行修改了 this 之后的新对象
+call(this指向的新对象, [形参1, 形参2, ...])，直接执行修改了 this 之后的新对象
+
+ -->
+
+<script>
+
+let obj = {
+  name: 'new-obj'
+}
+
+function test(arg) {
+  console.log(arg, this);
+}
+
+test('invoked by running test()');                        // this -> window
+(test.bind(obj, 'invoked by running (test.bind())()'))(); // this -> obj
+test.call(obj, 'invoked by running test.call()');         // this -> obj
+test.apply(obj, ['invoked by running test.apply()']);     // this -> obj
+
+</script>

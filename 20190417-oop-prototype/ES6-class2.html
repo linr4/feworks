@@ -1,0 +1,50 @@
+<DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<script>
+
+class Person {
+  constructor(myName, myAge) {
+    this.name = myName;
+    this.age = myAge;
+    
+    // ES6 标准写法：实例属性和方法要写在 contructor() 里面
+    this._name = '实例属性';  
+    this._age = 18;
+    this._say = function() {
+      console.log('实例方法', this._name, this._age);
+    }
+  }
+  
+  // 如下实例属性的定义方法非 ES6 标准写法，部分浏览器不支持
+  // 标准做法是在 constructor() 中添加
+  
+  /*
+  _name = '实例属性';
+  _age = 18;
+  _say = function() {
+    console.log('实例方法', this._name, this._age);
+  }
+  */
+  
+  /**************************************************************/
+  
+  // 如下静态属性的定义方法非 ES6 标准写法，部分浏览器不支持
+  // static staticVar = '静态属性';
+  // 标准写法是在 class clsName {} 之后以 clsName.staticVar = xx; 的方式定义
+  
+  // 如下为 ES6 定义静态方法的标准写法
+  // static staticMethod = function () { // 可以简写如下：
+  static staticMethod() { 
+    console.log('静态方法');
+  }
+}
+
+Person.staticVar = '静态属性';  // ES6 静态方法的标准写法
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!-- ES5 继承的终极方案 
+
+- 在子类的构造函数中通过 call 调用父类的构造函数，使得形参可以通过 call 传递到父类构造函数中；
+- 把子类的原型对象指向父类的一个实例对象，使得父类原型对象不被污染、原型链不被破坏；
+
+-->
+
+<script>
+
+function Human(myName, gender, age) { // 父类构造函数
+  this.myName = myName; // 公有属性
+  this.gender = gender;
+  this.age = age;
+}
+
+Human.prototype.greeting = function() { // 公共的方法放在原型下面，已优化资源分配
+  console.log('Hello, world.');
+}
+
+function Person(myName, gender, age, ethnic) {
+  //Human.call(this, myName, gender, age);
+  //Human.apply(this, [myName, gender, age]);
+  (Human.bind(this, myName, gender, age))();
+  this.ethnic = ethnic;
+  this.intro = function() {
+    console.log(`我叫${this.myName}，我是${this.gender}，今年${this.age}岁，${this.ethnic}。`)
+  }
+  
+}
+
+Person.prototype = new Human();
+Person.prototype.constructor = Person;
+// Person.prototype.intro = function() { 
+//    console.log(this); // ehtnic 没有传到这里，需要看一下什么原因
+//    console.log(`我叫${this.myName}，我是${this.gender}，今年${this.age}岁，${Person.ethnic}。`)
+// }
+
+
+let ming = new Person('小明', '男生', 18, '汉族');
+ming.greeting();
+ming.intro();
+
+</script>
+
