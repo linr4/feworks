@@ -1,0 +1,44 @@
+<!-- 
+Real Deep Copy - to some extend 
+not able to deep copy Functions/Methods
+-->
+<script>
+
+let p1 = {
+  name: 'Adam',
+  age: 25,
+  gender: 'male',
+  spouse: 'Eva',
+  parents: {
+    father: 'Jesus',
+    mother: 'Maria'
+  },
+  children: [
+    { name: 'David',
+      age: 10,
+      gender: 'boy'
+    },
+    { name: 'Betty',
+      age: 8,
+      gender: 'girl'
+    }],
+  greet: function () {console.log('Hello, I am ' + this.name)}
+}
+
+function deepCopy(o) {
+  let r = new o.constructor;  // 基于传入的对象的类型，创建同类型的空对象，将作为函数返回值
+  for (let k in o) {          // 遍历传入的对象
+    if (o[k] instanceof Object) { // 如果当前属性也是一个对象
+      r[k] = deepCopy(o[k]);      // 递归调用此函数，进入下一层做拷贝
+    } else {
+      r[k] = o[k];  // 如果当前属性是基本数据类型，直接赋值给拷贝目标对象相应的属性
+    }
+  }
+  return r;
+}
+
+let p2 = deepCopy(p1);
+
+console.log(p2);
+
+</script>

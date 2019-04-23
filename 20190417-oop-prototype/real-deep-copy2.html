@@ -1,0 +1,49 @@
+<!-- 
+Real Deep Copy - to some extend 
+not able to deep copy Functions/Methods
+-->
+<script>
+
+let p1 = {
+  name: 'Adam',
+  age: 25,
+  gender: 'male',
+  spouse: 'Eva',
+  parents: {
+    father: 'Jesus',
+    mother: 'Maria'
+  },
+  children: [
+    { name: 'David',
+      age: 10,
+      gender: 'boy'
+    },
+    { name: 'Betty',
+      age: 8,
+      gender: 'girl'
+    }
+  ],
+  hello: function () {console.log('Hello, I am ' + this.name)}
+}
+
+let p2 = {};
+
+deepCopy(p2, p1);
+
+p2.parents.father = 'Chris'; // deepCopy works, it's diff from p1.parents.father
+console.log(p1, p2); // almost the same, except the expected p2.hello() becomes an anonymous function
+p1.hello(); // Hello, I am Adam
+p2.hello(); // no any outputs
+
+function deepCopy (tgt, src) {
+  for (let k in src) {
+    if (src[k] instanceof Object) {    // 是引用类型
+      tgt[k] = new src[k].constructor; // 基于源对象的构造器创建同类型空对象
+      deepCopy(tgt[k], src[k]);        // 递归做子对象的深拷贝
+    } else { 
+      tgt[k] = src[k];                 // 是基本类型，直接赋值
+    }
+  }
+}
+
+</script>

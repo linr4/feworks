@@ -1,0 +1,48 @@
+<script>
+// itterating an array
+
+let arr = [11,22,33,44,55];
+
+// 1. use lagacy for loop
+for (let i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
+}
+console.log('');
+
+// 2. use for...in loop --- not recommended for itterating an array, it's for itterating an object
+for (let k in arr){
+  console.log(arr[k]);
+}
+console.log('');
+
+function Person() {
+  this.name = 'R';
+  this.gender = 'male';
+  this.age = 25
+}
+
+let p = new Person();
+console.log(p);
+
+/*
+Person {name: "R", gender: "male", age: 25}
+age: 25
+gender: "male"
+name: "R"
+*/
+
+
+// 3. use for...of loop
+for (let item of arr) {
+  console.log(item);
+}
+console.log('');
+
+// 4. forEach() method
+// arr.forEach(function (currentValue, currentIndex, currentArray) {})
+arr.forEach(function (v, i, a) {
+  console.log(i, v, a);
+});
+
+
+</script>

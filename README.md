@@ -14,6 +14,11 @@ Web development learning notes and case study
 
 ---
 
+###### 20190423 - Day 33
+
+* 
+* 学习 JavaScript OOP - [对象的深拷贝](20190417-oop-prototype/20190417-js-oop.md) (+4h = 70 of 600)
+
 ###### 20190422 - Day 32
 
 * 学习 JavaScript OOP - [ES6继承，对象相关的操作](20190417-oop-prototype/20190417-js-oop.md) (+2h = 66 of 600)

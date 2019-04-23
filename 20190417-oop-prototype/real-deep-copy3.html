@@ -1,0 +1,46 @@
+<!-- 
+Real Deep Copy - to some extend 
+not able to deep copy Functions/Methods
+-->
+<script>
+
+let p1 = {
+  name: 'Adam',
+  age: 25,
+  gender: 'male',
+  spouse: 'Eva',
+  parents: {
+    father: 'Jesus',
+    mother: 'Maria'
+  },
+  children: [
+    { name: 'David',
+      age: 10,
+      gender: 'boy'
+    },
+    { name: 'Betty',
+      age: 8,
+      gender: 'girl'
+    }
+  ]
+}
+
+function deepCopy(src) {
+  let res = {};
+  for (let x in src) {
+    if (src[x] instanceof Object) {     // type of src[x] is an object, needs to copy deep in
+      res[x] = new src[x].constructor;  // create an empty res[x] object with the same type as src[x]
+      res[x] = deepCopy(src[x]);         // call deepCopy() recursively to archive deep copy
+    } else {
+      res[x] = src[x];    // type of src[x] is a primitive, assign it directly to tgt[x]
+    }
+  }
+  return res;
+}
+
+let p2 = deepCopy(p1)
+p2.children[0]['name'] = 'AARON';
+console.log(p1, p2);
+
+
+</script>

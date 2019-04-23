@@ -1,0 +1,34 @@
+<!-- Real Deep Copy - but not that real actually -->
+<script>
+class Person {
+  constructor() {
+    this.name = 'Iris';
+    this.age = 25;
+    this.gender = 'female';
+    this.parents = {
+      father: 'Jaden',
+      mother: 'Kate'
+    }
+    this.tongues = ['English', 'Scotish'];
+  }
+}
+
+let p1 = new Person();
+let p2 = new Object();
+
+deepCopy(p2, p1);
+console.log(p1);
+console.log(p2);
+
+function deepCopy(tgt, src) {
+  for (let key in src) {
+    if (!(src[key] instanceof Object)) {   // it is a primitive
+      tgt[key] = src[key];
+    } else {                               // it is an Object
+        let subObj = new src[key].constructor; // create a empty obj of the same type of src[key]
+        tgt[key] = subObj;
+        deepCopy(subObj, src[key]);
+    }
+  }
+}
+</script>

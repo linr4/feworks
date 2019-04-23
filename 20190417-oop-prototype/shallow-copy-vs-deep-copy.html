@@ -1,0 +1,50 @@
+<!-- Shallow Copy vs. Deep Copy -->
+
+<script>
+class Person {
+  constructor(pName = 'Adam', pAge = 18, pGender = 'male') {
+    this.pName = pName;
+    this.pAge = pAge;
+    this.pGender = pGender;
+  }
+}
+
+let p1 = new Person();
+
+let p2 = p1;      // Shallow Copy
+console.log(p2);  // Person {pName: "Adam", pAge: 18, pGender: "male"}
+
+p2.pName = 'Eva'; // p1.pName will be changed to 'Eva' as well
+[p2.pAge, p2.pGender] = [16, 'female']; // same happens here
+console.log(p1, p2) // Person {pName: "Eva", pAge: 16, pGender: "male"} Person {pName: "Eva", pAge: 16, pGender: "male"}
+
+// Deep Copy 1
+
+let p3 = new Object();
+p3.pName = p1.pName;
+p3.pAge = p1.pAge;
+p3.pGender = p1.pGender;
+console.log(p3);  // {pName: "Eva", pAge: 16, pGender: "male"}
+
+[p3.pName, p3.pAge, p3.pGender] = ['Seph', 99, 'male'];
+console.log(p1, p3);  // Person {pName: "Eva", pAge: 16, pGender: "male"} {pName: "Seph", pAge: 99, pGender: "male"}
+
+// Deep Copy 2
+
+let p4 = {};
+for (let key in p1) {
+  p4[key] = p1[key]
+}
+console.log(p4); // {pName: "Eva", pAge: 16, pGender: "female"}
+[p4.pName, p4.pAge, p4.pGender] = ['Liz', 18, 'female'];
+console.log(p1, p4);  // Person {pName: "Eva", pAge: 16, pGender: "female"} {pName: "Liz", pAge: 18, pGender: "female"}
+
+// Deep Copy 3 (recommended)
+
+let p5 = {};
+Object.assign(p5, p1);
+console.log(p5); // {pName: "Eva", pAge: 16, pGender: "female"}
+[p5.pName, p5.pAge, p5.pGender] = ['Liam', 60, 'male'];
+console.log(p1, p5);  // Person {pName: "Eva", pAge: 16, pGender: "female"} {pName: "Liam", pAge: 60, pGender: "male"}
+
+</script>
