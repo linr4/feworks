@@ -16,7 +16,7 @@ Web development learning notes and case study
 
 ###### 20190423 - Day 33
 
-* 
+* 学习 [数组高级 API](./20190423) - 数组遍历的方法 (+1.5h = 71.5 of 600)
 * 学习 JavaScript OOP - [对象的深拷贝](20190417-oop-prototype/20190417-js-oop.md) (+4h = 70 of 600)
 
 ###### 20190422 - Day 32
