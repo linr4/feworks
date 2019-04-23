@@ -71,13 +71,13 @@
   `forEach()` 方法的实现原理：
 
   	1. 在 `forEach(fn)` 方法内部，以 `for` 循环执行 n 次 `fn()` 回调函数，n 等于数组长度；
-   	2. 每次执行 `fn()` 时，将当次的元素、索引和数组对象，作为 3 个形参传递给 `fn()` 函数；
-   	3. 在 `fn()` 函数内部即可经由形参获取到当次循环的元素、索引和调用该方法的数组对象；
+   	2. 每次执行 `fn()` 时，将当次的元素值、索引值和数组对象，作为三个形参传递给 `fn()` 回调函数；
+   	3. 如此，在 `fn()` 函数内部，即可经由形参获取到当次循环的元素值、索引值和调用该方法的数组对象，并引用这些形参做相应处理（如下例子中，做 console.log 输出当次三个形参的值）；
 
   ```js
   Array.prototype.myForEach = function (fn) {
     for (let index = 0; index < this.length; index ++) {
-    	fn(this[index], index, this);
+    	fn(this[index], index, this);	// this 为 forEach() 的调用者，即 arr 数组实例
     }
   }
   
