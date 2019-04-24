@@ -282,3 +282,87 @@ Array.prototype.myMap = function (fn) {
 }
 ```
 
+
+
+
+
+### 删除数组元素
+
+* 用数组方法 splice()
+
+  * The **splice()** method changes the contents of an array by removing or replacing existing elements and/or adding new elements [in place](https://en.wikipedia.org/wiki/In-place_algorithm).
+
+  * Syntax
+  
+    `array.splice(start[, deleteCount[, item1[, item2[, ...]]]])`
+  
+    * Return Value
+  
+      An array containing the deleted elements. If only one element is removed, an array of one element is returned. If no elements are removed, an empty array is returned.
+
+* 用删除对象的关键字 delete arr[x]
+
+  ---
+
+* 删除数组元素的同时做遍历
+  * 方法一：用 splice() 从后往前删除元素
+  * 方法二：用 delete 关键字逐个删除元素
+  * 两者区别：
+    * splice() 会删除元素和对应的 array slot，数组长度会随之实时改变；
+    * delete 只清除元素、保留 array slot，数组长度不变；
+
+  ```js
+  let arr = [11,22,33,44,55];
+  
+  console.log(arr);  // [11, 22, 33, 44, 55]
+  
+  
+  // 方式一：不可行
+  for (let i = 0; i < arr.length; i++) {
+    arr.splice(i, 1);  // 从索引 i 开始，删除一个元素
+  }
+  console.log(arr);  // [22, 44]
+  // 并没有达到预期结果，原因是 splice() 每次操作之后会改变数组长度，影响到循环次数
+  
+  
+  
+  // 方式二：不可行
+  let len = arr.length; // 让循环次数不因数组长度变化而改变
+  for (let i = 0; i < len; i++ ) {
+    arr.splice(i, 1);
+  }
+  console.log(arr);  // [22, 44]
+  
+  
+  /*  仍然没有达到预期结果，原因是 splice() 每次删除一个元素之后，后面的元素会前移、索引值会变化
+  i   arr.splice(i, 1)
+  0   [22, 33, 44, 55] //删除索引 0 的元素 11，之后元素前移，索引 1 的元素变为 33
+  1   [22, 44, 55]     //删除索引 1 的元素 33，之后元素前移，索引 2 的元素变为 55
+  2   [22, 44]         //删除索引 2 的元素 55，之后元素前移，索引 1 的元素变为 44 且为最后一个元素
+  3   [22, 44]         // 此时不存在索引为 3 的元素了
+  */
+  
+  
+  // 方式三：可行（用 splice 从后往前删除元素）
+  for (let i = arr.length - 1; i >= 0; i--) {
+    arr.splice(i, 1); // 始终删除的都是最后一个元素，不受数组长度变化和元素前移的影响
+  }
+  console.log(arr); // [], this time it works.
+  
+  
+  // 方式四：可行（用 delete 关键字）
+  for (let i = 0; i < arr.length; i++) {
+    delete arr[i];
+  }
+  console.log(arr); // [empty × 5]
+  // it works but slightly different from splice(),
+  // the elements were cleared but array slots are still there.
+  // splice() removes array slots as well.
+  ```
+
+  
+
+### 数组排序
+
+* Array.sort(fn)
+  * 回调函数不传参数，默认按升序
