@@ -16,7 +16,7 @@ Web development learning notes and case study
 
 ###### 20190424 - Day 34
 
-* 学习 [数组高级 API](./20190423) - 数组的 filter/map 方法 (+1.5h = 73 of 600)
+* 学习 [数组高级 API](./20190423) - 数组的 filter/map 等方法 (+1.5h = 73 of 600)
 
 ###### 20190423 - Day 33
 
