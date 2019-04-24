@@ -1,0 +1,22 @@
+<DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title> my forEach()</title>
+</head>
+<body>
+
+<script>
+  Array.prototype.myForEach = function (fn) {
+    for (let index = 0; index < this.length; index++) {
+      fn(this[index], index, this); // fn(currentValue, currentIndex, currentArray)
+    }
+  }
+
+let arr = [11,22,33,44,55];
+arr.myForEach(function (v, i, a){
+  console.log(v, i, a);
+});
+</script>
+</body>
+</html>

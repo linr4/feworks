@@ -1,0 +1,41 @@
+<script>
+
+let arr1 = [11,22,33,44,55,66];
+let idx1 = arr1.indexOf(33);      // 2
+let idx2 = arr1.lastIndexOf(44);  // 3
+let res = arr1.includes(22);      // true
+console.log(idx1, idx2, res);
+
+
+let arr = ['aa','bb','cc','dd','ee'];
+let idx = arr.findIndex(function(element, index, array){
+    console.log(element, index, array); // 只输出到 cc
+    if(currentValue === 'cc'){
+    	return true; // return true; 之后就跳出回调函数
+    }
+})
+console.log(idx);   // 2
+
+let elm = arr.find(function(element, index, array){
+    console.log(element, index, array); // 只输出到 dd
+    if(currentValue === 'dd'){
+      return true; // return true; 之后就跳出回调函数
+    };
+})
+console.log(elm);   // dd
+
+// MDN 的例子
+var array1 = [5, 12, 8, 130, 44];
+function isLargeNumber(element) {
+  return element > 13; // 不一定非得 return true; 只要条件满足即可
+}
+console.log(array1.findIndex(isLargeNumber)); // expected output: 3
+
+
+var array2 = [5, 12, 8, 130, 44];
+var found = array2.find(function(element) {
+  return element > 10;
+});
+console.log(found); // expected output: 12
+
+</script>

@@ -1,0 +1,21 @@
+<script>
+let arr = [11,22,33,44,55];
+
+let newArr = arr.filter(function (elm, idx, arr) {
+  // console.log(elm, idx, arr);
+  return (elm % 2 === 0);
+});
+
+// 返回一个由满足条件的元素组成的新数组
+console.log(newArr);  // [22, 44]
+
+let newArr2 = arr.map(function (elm, idx, arr) {
+  // console.log(elm, idx, arr);
+  if (elm % 2 === 0) {
+    return elm;
+  };
+});
+
+// 返回新数组、长度与原数组一致，满足条件的元素保持原状，不满足的为 undefined
+console.log(newArr2);  // [undefined, 22, undefined, 44, undefined]
+</script>

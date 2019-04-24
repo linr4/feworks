@@ -1,6 +1,6 @@
 # JavaScript 数组的高级 API 
 
-### 数组遍历
+### 数组的遍历
 
 * 通常的遍历方法：
 
@@ -99,3 +99,186 @@
   
 
   
+
+### 数组的查找
+
+* `indexOf()` ：从左往右查找，找到返回索引，找不到返回 -1；
+
+* `lastIndexOf()` ： 从右往左查找，找到返回索引，找不到返回 -1；
+
+* `includes()`：从左往右查找，找到返回 true，找不到返回 false；
+
+  ```js
+  let arr = [11,22,33,44,55,66];
+  let idx1 = arr.indexOf(33); // 2
+  let idx2 = arr.lastIndexOf(44); //3
+  let res = arr.includes(22); // true
+  ```
+
+* `findIndex` ：定制版的 `indexOf`，使用回调函数，找到返回索引、找不到返回 -1；
+
+  ​	[**Syntax:**](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex>)    `arr.findIndex(callback(element[, index[, array]])[, thisArg])`
+
+* `find` ：类似 `findIndex`  ，但 `find` 返回找到的元素，找不到就返回 undefined；
+
+  ```js
+  let arr = ['aa','bb','cc','dd','ee'];
+  let idx = arr.findIndex(function(element, index, array){
+      console.log(element, index, array); // 只输出到 cc
+      if(currentValue === 'cc'){
+      	return true; // return true; 之后就跳出回调函数
+      }});
+  console.log(idx);   // 2
+  
+  let elm = arr.find(function(element, index, array){
+      console.log(element, index, array); // 只输出到 dd
+      if(currentValue === 'dd'){
+        return true; // return true; 之后就跳出回调函数
+      }});
+  console.log(elm);   // dd
+  
+  // MDN 的例子
+  var array1 = [5, 12, 8, 130, 44];
+function isLargeNumber(element) {
+    return element > 13; // 不一定非得 return true; 只要条件满足即可
+}
+  console.log(array1.findIndex(isLargeNumber)); // expected output: 3
+  
+  var array2 = [5, 12, 8, 130, 44];
+  var found = array2.find(function(element) {
+    return element > 10;
+  });
+  console.log(found); // expected output: 12
+  ```
+  
+* `findIndex()` 和 `find()` 的实现：
+
+  与 `forEach()` 很类似，比 `forEach()` 多一层判断条件是否满足的逻辑，并返回满足条件的索引或元素；
+
+  ```js
+  Array.prototype.myFindIndex = function (fn) {
+    for (let idx = 0; idx < this.length; idx ++) {
+      if(fn(this[idx], idx, this)) {  // fn(elm, idx, arr);
+        return idx;
+      }
+    }
+  }
+  
+  Array.prototype.myFind = function (fn) {
+    for (let idx = 0; idx < this.length; idx ++) {
+      if(fn(this[idx], idx, this)) {
+        return this[idx];
+      }
+    }
+  }
+  ```
+
+  
+
+   
+
+### 数组的过滤和映射
+
+* 过滤 `arr.filter()`，返回一个由满足条件的元素组成的新数组；
+
+  > The `filter()` method creates a new array with all elements that pass the test implemented by the provided function.
+  >
+  > ##### [Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Syntax)
+  >
+  > ```js
+  > var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])
+  > ```
+  >
+  > ##### [Return value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Return_value)
+  >
+  > A new array with the elements that pass the test. If no elements pass the test, an empty array will be returned.
+
+  
+
+* 映射 `arr.map()`，返回新数组、长度与原数组一致，满足条件的元素保持原状，不满足的为 undefined；
+
+  > The `map()` method creates a new array with the results of calling a provided function on every element in the calling array.
+  >
+  > ##### [Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Syntax)
+  >
+  > ```js
+  > var new_array = arr.map(function callback(currentValue[, index[, array]]) {
+  >  // Return element for new_array
+  > }[, thisArg])
+  > ```
+  >
+  > ##### [Return value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Return_value)
+  >
+  > A new array with each element being the result of the callback function.
+
+
+
+
+
+  ```js
+  let arr = [11,22,33,44,55];
+  
+  let newArr = arr.filter(function (elm, idx, arr) {
+    // console.log(elm, idx, arr);
+    return (elm % 2 === 0);
+  });
+  
+  // 返回一个由满足条件的元素组成的新数组
+  console.log(newArr);  // [22, 44]
+  
+  let newArr2 = arr.map(function (elm, idx, arr) {
+    // console.log(elm, idx, arr);
+    if (elm % 2 === 0) {
+      return elm;
+    };
+  });
+  
+  // 返回新数组、长度与原数组一致，满足条件的元素保持原状，不满足的为 undefined
+  console.log(newArr2);  // [undefined, 22, undefined, 44, undefined]
+  ```
+
+  
+
+* MDN 的例子：
+
+  ```js
+  // filter:
+  var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+  const result = words.filter(word => word.length > 6);
+  console.log(result);
+  // expected output: Array ["exuberant", "destruction", "present"]
+  
+  
+  // map:
+  var array1 = [1, 4, 9, 16];
+  // pass a function to map
+  const map1 = array1.map(x => x * 2);
+  console.log(map1);
+  // expected output: Array [2, 8, 18, 32]
+  ```
+
+  
+
+* 自己实现 filter 和 map：
+
+```js
+Array.prototype.myFilter = function (fn) {
+  let result = [];
+  for (let idx = 0; idx < this.length; idx ++) {
+     // fn(currentElement, currentIndex, currentArray)
+    if (fn(this[idx], idx, this)) {	// 如果回调函数执行结果为真
+      result.push(this[idx]);	// 把当前元素添加到新数组
+    }
+  }
+  return result; // 完成后返回由满足条件的元素组成的新数组
+}
+
+Array.prototype.myMap = function (fn) {
+  let result = new Array(this.length);	// 创建一个与数组调用者的长度一致的空数组
+  for (let idx = 0; idx < this.length; idx ++) {
+    result[idx] = fn(this[idx], idx, this); // 把新数组中当前索引的元素赋值为回调函数的返回结果
+  }
+  return result;
+}
+```
+
