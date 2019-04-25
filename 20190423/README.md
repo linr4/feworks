@@ -364,5 +364,97 @@ Array.prototype.myMap = function (fn) {
 
 ### 数组排序
 
-* Array.sort(fn)
-  * 回调函数不传参数，默认按升序
+* Array.sort(fn)，回调函数若不传参数，默认按升序；
+
+```js
+let arr1 = ['c', 'a', 'b'],
+    arr2 = [3, 4, 2, 5, 1],
+    arr3 = ['1234', '21', '54321', '123', '6'],
+    arr4 = [
+        {aname: 'Arron', age: 18},
+        {aname: 'Carl', age: 28},
+        {aname: 'Bob', age: 21},
+        {aname: 'Tom', age: 17}
+    ];
+
+// sort() 做遍历比较相邻两个元素的大小，并根据回调函数返回值确定排序方式
+// sort() 不带参数时，自动以数组元素的字符 unicode 做升序排序
+
+arr1.sort();
+console.log(arr1);  // (3) ["a", "b", "c"]
+
+/*
+  如果 compareFunction(a, b) < 0 ， a 会排到 b 的前面 （降序）；
+  如果 compareFunction(a, b) = 0 ， a 和 b 的位置不变；
+  如果 compareFunction(a, b) > 0 ， b 会排到 a 的前面 （升序）。
+*/
+
+console.log(arr1.sort(function (a, b) {   // ["c", "b", "a"]
+    if (a > b) {
+        return -1;  // 降序
+    } else if (a < b) {
+        return 1;
+    } else {
+        return 0;
+    }
+}));
+
+console.log(arr2.sort());   // 升序 [1, 2, 3, 4, 5]
+console.log(arr2.sort(function (a, b) { // 降序 [5, 4, 3, 2, 1]
+    if (a > b) {
+        return -1;
+    } else if (a < b) {
+        return 1;
+    } else {
+        return 0;
+    }
+});
+
+/*
+ 若数组元素为 Number 类型，if 表达式可以简化为：
+ 	升序 return a - b;
+ 	降序 return b - a; 
+*/
+console.log(arr2.sort(function (a, b) {  // [1, 2, 3, 4, 5]
+    return a - b;
+})); 
+
+console.log(arr2.sort(function (a, b) {  // [5, 4, 3, 2, 1]
+    return b - a;
+}));
+
+
+// 按字符串长度升序排序
+console.log(arr3.sort(function (str1, str2) { // ["6", "21", "123", "1234", "54321"]
+    return str1.length - str2.length;
+}));
+
+// 按字符串 unicode 排序
+console.log(arr3.sort()); // ["123", "1234", "21", "54321", "6"]
+
+// 按对象中的 age 升序排序
+console.log(arr4.sort(function (obj1, obj2) { 
+    return obj1.age - obj2.age;
+}));
+/* (4) [{…}, {…}, {…}, {…}]
+    0: {name: "Tom", age: 17}
+    1: {name: "Arron", age: 18}
+    2: {name: "Bob", age: 21}
+    3: {name: "Carl", age: 28} */
+
+// 按对象中 name 的字母升序排序
+console.log(arr4.sort(function (obj1, obj2) { 
+    return Number(obj1.aname > obj2.aname) -1;
+});    
+            
+/* 字符串之间做比计较，不会转为数值，而是从左到右逐个比较字符的 unicode，直到条件不满足为止；
+   比较结果为 true or false，需要用 Number() 转为数值；
+   转换之后的值为 1 或 0，需要减 1，当结果为 false 时，返回值为 -1，以便实现元素调换位置；
+   
+ (4) [{…}, {…}, {…}, {…}]
+  0: {aname: "Arron", age: 18}
+  1: {aname: "Bob", age: 21}
+  2: {aname: "Carl", age: 28}
+  3: {aname: "Tom", age: 17}  */
+```
+
