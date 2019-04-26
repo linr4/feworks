@@ -270,3 +270,44 @@ oImg.alt = ""; // 通过修改为空值，清除属性值
   
   
 
+#### 元素内容操作
+
+* 获取元素内容（innerHTML / innerText / textContent）
+
+  * innerHTML 获取内容包含标签，innerText / textContent 不包含标签；
+  * innerHTML / textContent 获取内容不会去除空格，innerText 会去掉空格；
+
+* 设置元素内容
+
+  * 三种方式设置元素内容，都会覆盖原内容；
+  * innerHTML 设置内容的文本中若包含标签，会先转换成标签；
+  * innerText / textContent 会把标签当文本显示、不做转换；
+  * innerText / textContent 两者功能相近，早期不同浏览器分别支持两个方法；
+
+  ```js
+    let divEl = document.querySelector('div');
+    
+    console.log(divEl.innerHTML); //       <p>paragraph</p> divContent
+    console.log(divEl.innerText); // paragraph  divContent
+    console.log(divEl.textContent); //     paragraph divContent
+    
+    divEl.innerHTML = '<p>innerHTML in a p-tag</p>';
+    divEl.firstElementChild.innerText = 'this is innerText in a paragraph';
+    divEl.firstElementChild.textContent = 'this is textContent';
+  ```
+
+* textContent / innerText 兼容性写法
+
+  ```js
+  let divEl = document.querySelector('div');
+  function setText(obj, text) {
+      if (obj.textContent) {
+          obj.textContent = text;
+      } else {
+          obj.innerText = text;
+      }
+  }
+  setText(divEl, 'the text of the div');
+  ```
+
+  

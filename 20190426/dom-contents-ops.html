@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>element contents ops</title>
+</head>
+<body>
+  <div>
+    <p>paragraph</p> divContent
+  </div>
+  
+<script type="text/javascript">
+  let divEl = document.querySelector('div');
+  
+  console.log(divEl.innerHTML); //       <p>paragraph</p> divContent
+  console.log(divEl.innerText); // paragraph  divContent
+  console.log(divEl.textContent); //     paragraph divContent
+  
+  divEl.innerHTML = '<p>innerHTML in a p-tag</p>';
+  divEl.firstElementChild.innerText = '<p>this is innerText in a paragraph</p>';
+  divEl.firstElementChild.textContent = '<p>this is textContent</p>';
+  
+</script>
+</body>
+</html>
