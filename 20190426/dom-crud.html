@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title> DOM CRUD </title>
+</head>
+<body>
+
+<div id="box">
+  <p class="para">paragraph</p>
+  <span>span</span>
+</div>
+
+<script>
+  let boxEl = document.querySelector('#box');
+  let paraEl = document.querySelector('.para');
+  let spanEl = document.querySelector('span');
+
+// create a new element
+
+  let anchorEl = document.createElement('a');
+  anchorEl.setAttribute('href', 'https://www.bing.com');
+  anchorEl.innerHTML = 'bing.com';
+    
+// append to #box
+
+  boxEl.appendChild(anchorEl);
+  
+// clone an anchor tag
+
+  let anotherAnchorEl = anchorEl.cloneNode(true);
+  
+// insert before para tag
+
+  boxEl.insertBefore(anotherAnchorEl, paraEl);
+
+// remove span tag
+
+  spanEl.parentElement.removeChild(spanEl);
+  
+  console.log(boxEl);
+
+</script>
+</body>
+</html>

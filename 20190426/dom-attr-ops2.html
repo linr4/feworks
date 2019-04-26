@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM attributes CRUD operations</title>
+</head>
+<body>
+  
+  <div id="box">
+    <img src="1.png" alt="this is an image" title="this is title" greeting = "Hello"/>
+  </div>
+  
+  <script type="text/javascript">
+    let boxEl = document.querySelector('#box');
+    let imgEl = document.querySelector('img');
+    
+    // query elements' attributes 获取元素属性
+    
+    console.log(imgEl.alt);                 // this is a image
+    console.log(imgEl.getAttribute('alt')); // this is a image
+    
+    // both methods work, if it's a built-in attribute, 
+    // but not the case if it's a user-added attribute,
+    // for el.attr will refer to the user-added property of the DOM object!
+    
+    console.log(imgEl.greeting);  // undefined. 
+    console.log(imgEl.getAttribute('greeting'));  // hello  <---- attribute of HTML element <img>
+    
+    imgEl.greeting = 'user-added property of DOM object imgEl';
+    console.log(imgEl.greeting);  // user-added property of DOM object imgEl <---- just added above
+    console.dir(imgEl);
+    
+    /*
+    img
+      ...
+      alt: "this is an image"
+      attributes: NamedNodeMap {...}
+        0: src
+        1: alt
+        2: title
+        3: greeting  <--------  attribute of html element <img>
+      ...
+      greeting: "user-added property of DOM object imgEl"  <--------  property of imgEl object  
+    */
+    
+    
+    // 增加和修改元素属性
+    
+    // 自带的元素属性可以用 el.attr 进行新增或修改，也可以用 setAttribute()
+    // 自定义属性必须用 setAttribute()
+    
+    imgEl.name = 'img name'; // 新增， it works
+    imgEl.setAttribute('title', 'a new title'); // 修改，this works as well
+    imgEl.newAttr1 = 'will this be added to the attribute of the element?'; // it won't work
+    imgEl.setAttribute('newAttr2', 'value of newAttr2'); // it only works in this way
+    console.log(imgEl);
+    
+    // 删除元素属性
+    imgEl.name = '';  // 点操作符只能重置属性为空值，无法删除属性
+    imgEl.removeAttribute('name'); // 此方法可以删除属性
+    imgEl.removeAttribute('newAttr2');
+    console.log(imgEl);
+    
+    
+    
+  </script>
+</body>
+</html>

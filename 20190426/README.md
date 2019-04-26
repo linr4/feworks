@@ -99,7 +99,7 @@
 
 
 
-#### 获取 DOM 元素 - 父、子、兄弟的元素节点
+#### 获取 DOM 元素 --- 父/子/兄弟的元素节点
 
 * 获取指定元素的子元素/节点：
 
@@ -204,7 +204,10 @@
 
 * 可通过元素对象来获取到元素属性，进而操作其属性；
 
-* 获取元素属性：点操作符无法获取到标签的自定义属性，而 getAttribute() 可以获取自定义属性；
+* 获取元素属性：
+
+  * 元素自带的属性可以用 el.attr（点操作符）的方式获取，也可以用 getAttribute()；
+  * 自定义的元素属性必须用 getAttribute()；
 
   ```js
   let oImg = document.querySelector('img');  
@@ -216,9 +219,10 @@
   console.log(oImg.getAttribute('lwm')); // I am lwm
   ```
 
-* 修改元素属性：oEl.customAttr = 'newValue';
+* 修改元素属性：
 
-  * 跑代码测试的结果，自定义属性在通过 setAttribute 修改之后，若用 console.log(oImg.xx) 查看自定义属性仍在、仍为旧值；通过点操作符重新赋值修改的话，就是新值；
+  * 元素自带的属性可以用 el.attr（点操作符）的方式进修改，也可以用 setAttribute()；
+  * 自定义的元素属性必须用 setAttribute()；
 
   ```html
   <!DOCTYPE html>
@@ -251,12 +255,18 @@
 
 * 新增元素属性：setAttribute('newAttr', 'attrValue')，存在就修改、不存在就新增；
 
+  * 元素自带的属性可以用 el.attr（点操作符）的方式进新增或修改，也可以用 setAttribute()；
+  * 自定义的元素属性必须用 setAttribute()；
+
 * 删除元素属性：
 
+  * 点操作符无法操作自定义属性，也只能重置元素自带的属性为空值，无法删除属性；
+  * 删除元素属性（无论自带或自定义）必须用 removeAttribute()；
+  
   ```js
-  oImg.alt = ""; // 通过修改为空值，清除属性值
+oImg.alt = ""; // 通过修改为空值，清除属性值
   oImg.removeAttribute('alt'); // 删除属性名称和它的值
   ```
-
+  
   
 
