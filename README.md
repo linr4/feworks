@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190426 - Day 36
+
+- 学习  [DOM](20190426) (+3h = 78.5 of 600)
+
 ###### 20190425 - Day 35
 
 * 学习  [字符串常用方法、JS 内置对象](20190425) (+2.5h = 75.5 of 600)
