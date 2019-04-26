@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title> JavaScript DOM intro </title>
+</head>
+<body>
+
+<div id="box" class='divbox'> 
+  <h1>h1</h1>
+  <span>span</span>
+  <p>paragraph</p>
+</div>
+<div id="box2" class='divbox'> </div>
+
+<input type="text" name="inputBox" />
+<input type="text" name="inputBox" />
+
+<script type="text/javascript">
+/*
+console.log(window.document);
+console.log(typeof window.document);
+console.log(window.document.title);
+
+let oDiv = document.getElementById('box');
+console.log(oDiv);
+console.log(typeof oDiv);
+
+let oDivs = document.getElementsByClassName('divbox');
+console.log(oDivs);
+console.log(typeof oDivs);
+
+let oInputs = document.getElementsByName('inputBox');
+console.log(oInputs);
+
+let oDivs1 = document.getElementsByTagName('div');
+console.log(oDivs1);
+*/
+
+let oDivX = document.querySelector('div');
+// console.log(oDivX.childNodes);
+for (let node of oDivX.childNodes) {
+    // if(node.nodeType == 1) {
+    if(node.nodeType === Node.ELEMENT_NODE) { // Node.ELEMENT_NODE 为 JS 内置常量
+        console.log(node);
+    }
+}
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+</head>
+<body>
+
+<img src="1.png" alt="I am alt" title="I am title" nj="I am nj">
+
+<script type="text/javascript">
+
+let oImg = document.querySelector('img');  
+// console.dir(oImg); // 以目录树的形式显示对象的结构和内容
+/*
+console.log(oImg.alt);  // I am alt
+console.log(oImg.getAttribute('alt')); // I am alt
+console.log(oImg.nj); // undefined
+console.log(oImg.getAttribute('nj')); // I am nj
+
+// 点操作符无法获取到标签的自定义属性，getAttribute() 可以；
+
+oImg.title = 'a new title';
+console.log(oImg.title);  // a new title
+oImg.setAttribute('title', 'an even newer title')
+console.log(oImg.title); // an even newer title
+*/
+
+console.log(oImg.getAttribute('nj')); // I am nj
+oImg.nj = 'a new nj';
+console.log(oImg.nj); // a new nj
+oImg.setAttribute('nj', 'a totoally new nj');   // 不生效，自定义属性无法通过 setAttribute 修改
+console.log(oImg); // a new nj 
+
+
+//oImg.removeAttribute('nj');
+//console.log(oImg); // a new nj // 自定义属性无法通过 removeAttribute 删除？
+
+//oImg.removeAttribute('alt');
+//console.log(oImg); // a new nj // 自定义属性无法通过 removeAttribute 删除？
+
+
+
+</script>
+</body>
+</html>
