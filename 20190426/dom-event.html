@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>DOM events</title>
+</head>
+<body>
+  <button>button</button>
+  <a href="http://bing.com">anchor</a>
+</body>
+
+<script type="text/javascript">
+let btnEl = document.querySelector('button');
+let anchorEl = document.querySelector('a');
+
+btnEl.onclick = function () {
+  alert('button clicked');
+}
+
+anchorEl.onclick = function () {
+  alert('link clicked');
+  return false; 
+  // 如果没有 return false，在alert之后仍会转向<a>标签中的链接
+}
+
+btnEl.style.position = "absolute";
+btnEl.style.top = "100px";
+console.log(btnEl.style.top);
+</script>
+</html>

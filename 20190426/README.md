@@ -311,3 +311,91 @@ oImg.alt = ""; // 通过修改为空值，清除属性值
   ```
 
   
+
+#### 元素样式的操作
+
+* 获取和设置元素样式
+
+  ```js
+    let divEl = document.querySelector('div');
+    let spanEl = document.querySelector('span');
+    // 1. 设置样式
+    // 1.1 通过绑定类名的方式修改样式：
+    divEl.className = "box";  
+    
+    // 1.2a 通过直接设置某个样式属性的方式（为行内样式，优先级最高）：
+    divEl.style.width = "300px";
+    divEl.style.height = "300px";
+    divEl.style.backgroundColor = "green"; // 属性名需从hyphen写法改为camelCase写法
+    
+    // 1.2b 也可以把样式属性写在一起，属性名仍用CSS标准写法 - hyphen写法：
+    divEl.style = "width: 400px; height: 400px; background-color: skyblue;";
+    
+    // 2. 获取样式
+    // 2.1 通过 element.style.attr 获取
+    console.log(divEl.style.width); // 若非行内（写在标签中的）样式，无法获取到属性
+    
+    // 2.2 通过 window.getComputedStyle 获取
+    let divStyle = window.getComputedStyle(divEl);
+    console.dir(divStyle); // 可获取到伪数组 CSSStyleDeclaration 包含众多CSS属性
+    console.log(divStyle.width); // 可获取到设置非行内样式中的属性
+    
+    // 3. classList 是 H5 新增，可通过其方法 add / remove / replace 等来操作样式类
+    console.log(divEl.classList);
+    /*
+    DOMTokenList ["box", value: "box"]
+      0: "box"
+      length: 1
+      value: "box"
+      __proto__: DOMTokenList
+          add: ƒ add()  <----
+          contains: ƒ contains()  <----
+          entries: ƒ entries()
+          forEach: ƒ forEach()
+          item: ƒ item()  <----
+          keys: ƒ keys()
+          length: (...)
+          remove: ƒ remove()  <----
+          replace: ƒ replace()  <----
+          supports: ƒ supports()
+          toString: ƒ toString()
+          toggle: ƒ toggle()  <----
+          value: (...)
+          values: ƒ values()
+          constructor: ƒ DOMTokenList()
+          Symbol(Symbol.iterator): ƒ values()
+          Symbol(Symbol.toStringTag): "DOMTokenList"
+          get length: ƒ length()
+          get value: ƒ value()
+          set value: ƒ value()
+          __proto__: Object
+    */
+    
+    spanEl.classList.add('box1');
+  
+  ```
+
+
+
+#### 点击事件
+
+* 事件：用户与浏览器的交互行为，如鼠标点击、移动等；
+
+* 绑定事件：所有 HTML 标签均可绑定事件， element.eventName = function() {}
+
+  ```js
+  let btnEl = document.querySelector('button');
+  let anchorEl = document.querySelector('a');
+  
+  btnEl.onclick = function () {
+    alert('button clicked');
+  }
+  
+  anchorEl.onclick = function () {
+    alert('link clicked');
+    return false; // 覆盖默认事件的行为
+    // 如果没有 return false，在alert之后仍会转向<a>标签中的链接
+  }
+  ```
+
+  
