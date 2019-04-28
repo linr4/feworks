@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Letter Typing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            background: url("images/bg.jpg") center center no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
+            overflow: hidden;
+        }
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        .specter {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            background: url("images/yy.png") no-repeat;
+            top: 1000px;
+        }
+        .specter>span {
+            position: absolute;
+            top: 200px;
+            left: 70px;
+            font-size: 70px;
+            font-weight: bold;
+            text-shadow: 5px 5px 5px #414686;
+        }
+
+    </style>
+</head>
+<body>
+<img src="images/play.png" alt="">
+<audio src="media/bg.ogg"></audio>
+<!--<div class="specter"><span>M</span></div>-->
+</body>
+
+<script>
+    let playEl = document.querySelector('img');
+    let bgmEl = document.querySelector('audio');
+
+    class specter {
+      constructor() {
+          // 1. create div and its style
+          let divEl = document.createElement('div');
+          divEl.className = 'specter';
+          divEl.style.top = '1000px';
+          divEl.style.left = Math.random() * 1500 + 'px';
+          // 2. create span and its content
+          let spanEl = document.createElement('span');
+          spanEl.innerText = 'M';
+          // 3. append span to div
+          divEl.appendChild(spanEl);
+          // 4. append div to body
+          document.body.appendChild(divEl);
+          this.divEl = divEl;
+      }
+
+      rise() {
+          let curTop = parseInt(this.divEl.style.top);
+          // console.log(curTop);
+          let self = this;
+          let timerId = setInterval(function () {
+              curTop -= 20;
+              self.divEl.style.top = curTop + 'px';
+          }, 200)
+      }
+    }
+
+
+    playEl.onclick = function () {
+        playEl.parentElement.removeChild(playEl);
+        bgmEl.play();
+        let timerId2 = setInterval(function () {
+            let s1 = new specter();
+            s1.rise();
+        }, 2000)
+    };
+
+
+</script>
+</html>
