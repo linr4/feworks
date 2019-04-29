@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <title>精灵打字游戏</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%
+    }
+    
+    body {
+      background: url("images/bg.jpg") center center no-repeat;
+      background-size: cover;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+    
+    .specter {
+      width: 300px;
+      height: 300px;
+      background: url("images/yy.png");
+      position: absolute;
+      
+      transition: all .8s ease;
+    }
+    
+    .specter>span {
+      position: absolute;
+      top: 192px;
+      left: 80px;
+      font-size: 70px;
+      font-weight: bolder;
+      color: orangered;
+      text-shadow: 5px 5px 5px gray;
+    }
+    
+  </style>
+</head>
+<body>
+
+<img src="images/play.png">
+<audio src="media/bg.ogg" loop autoplay"></audio>
+
+<!-- <div class="specter"><span>A<span></div> -->
+
+<script type="text/javascript">
+  let playEl = document.querySelector('img');
+  let bgmEl = document.querySelector('audio');
+  let oSpecList = [];
+  
+  class Specter {
+    constructor() {
+      let specDiv = document.createElement('div');
+      let letterSpan = document.createElement('span');
+      letterSpan.innerText = this.genLetter();
+      specDiv.className = 'specter ' + letterSpan.innerText;
+      
+      specDiv.appendChild(letterSpan);
+      document.body.appendChild(specDiv);
+      
+      this.specDiv = specDiv;
+    }
+    
+    genLetter() {
+      let key = Math.floor(Math.random() * (90 - 65 + 1)) + 65; // return a number at between 65 and 90
+      return String.fromCharCode(key);
+    }
+    
+    floatSpec() {
+      let specTop = parseInt(window.getComputedStyle(this.specDiv).top); // 获取当前精灵的位置 top 值
+      this.timerId = setInterval(()=>{
+        specTop -= 20;
+        this.specDiv.style.top = specTop + 'px';
+        
+        if (specTop <= -300) {
+          this.removeSpec();
+        }
+      }, 200);
+    }
+
+    removeSpec() {
+      this.specDiv.parentNode.removeChild(this.specDiv);
+      clearInterval(this.timerId);
+    }
+    
+  }
+  
+  function isAlphabet(key) {
+    return 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.includes(key) ? true : false
+  }
+  
+  playEl.onclick = function () {
+    playEl.parentNode.removeChild(playEl);
+    bgmEl.play();
+    let timerId = setInterval(()=>{
+      let oSpecter = new Specter();
+      oSpecList.push(oSpecter);
+      oSpecter.specDiv.style.left = Math.floor(Math.random() * (document.documentElement.clientWidth - 300)) + 'px';
+      oSpecter.specDiv.style.top = document.documentElement.clientHeight + 'px';
+      oSpecter.floatSpec();
+    }, 1000);
+  }
+  
+  document.onkeydown = function(ev) {
+    // if(/^[a-zA-Z]+$/.test(ev.key)) { // why keys like CapLock(20), Tab(9) will pass the test ?
+    // if (ev.keyCode >= 65 && ev.keyCode <= 90) { // keycode is deprecated
+    
+    if (isAlphabet(ev.key)) {
+      let specDiv = document.querySelector('.specter.' + ev.key.toUpperCase()); // 类名之间不要空格，否则找不到
+      if (specDiv) { // 如果所按字母的精灵有在屏幕上
+      oSpecList.forEach(function(oSpec, index) { // 遍历保存着现有精灵对象的数组
+        if (oSpec.specDiv === specDiv) {
+          oSpec.removeSpec(); // 调用原型方法，删除该精灵  --- 删除对象和对应的控制上浮的定时器
+          oSpecList.splice(index, 1); // 也从保存对象的数组中删除
+        }
+      })
+      
+        
+      }
+    }
+  }
+  
+</script>
+</body>
+</html>

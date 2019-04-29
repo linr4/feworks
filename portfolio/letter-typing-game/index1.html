@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">  
+  <title>精灵打字游戏</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    
+    body {
+      background: url("images/bg.jpg") center center no-repeat;
+      background-size: cover;
+      overflow: hidden;
+    }
+    
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+    
+    .specter {
+      width: 300px;
+      height: 300px;
+      background: url("images/yy.png") no-repeat;
+      position: absolute;
+      top: 1000px;
+      transition: all .9s ease;
+    }
+    
+    .specter>span {
+      position: absolute;
+      top: 194px;
+      left: 80px;
+      font-size: 70px;
+      font-weight: bold;
+      color: orangered;
+      text-shadow: 5px 5px 5px #414686;
+    }
+
+  </style>
+</head>
+<body>
+  <img src="images/play.png">
+  
+  <script type="text/javascript">
+    let playEl = document.querySelector('img');
+    let specList = [];
+    
+    class Specter {
+      constructor() {
+        let specterDiv = document.createElement('div');
+        specterDiv.className = 'specter';
+        specterDiv.style.left = Math.random() * 1500 + 'px';
+        let specterSpan = document.createElement('span');
+        specterSpan.innerText = 'M';
+        
+        specterDiv.appendChild(specterSpan);
+        document.body.appendChild(specterDiv);
+        
+        this.spec = specterDiv;
+      }
+      
+      floatSpec() {
+        let curTop = parseInt(window.getComputedStyle(this.spec).top); // 获取当前精灵实例的位置高度值 top
+        console.dir(window.getComputedStyle(this.spec));
+        this.timerId = setInterval(()=>{
+          curTop -= 20;
+          if (curTop <= -300) {
+            this.removeSpec();
+          };
+          this.spec.style.top = curTop + 'px';
+        }, 200);
+        
+      }
+      
+      removeSpec() {
+        this.spec.parentNode.removeChild(this.spec);
+        clearInterval(this.timerId);
+      }
+    }
+    
+    playEl.onclick = function () {
+      playEl.style.display = 'none';
+      let timerId = null;
+      timerId = setInterval(()=>{
+        let spec = new Specter();
+        specList.push(spec);
+        spec.floatSpec();
+      }, 1000)
+      
+    }
+  </script>
+</body>
+</html>

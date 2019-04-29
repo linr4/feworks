@@ -54,17 +54,21 @@
 <script>
     let playEl = document.querySelector('img');
     let bgmEl = document.querySelector('audio');
+    let divList = [];
 
     class specter {
       constructor() {
           // 1. create div and its style
           let divEl = document.createElement('div');
-          divEl.className = 'specter';
+          let key = specter.genLetter();
+
+          divEl.className = 'specter ' + key;
           divEl.style.top = '1000px';
           divEl.style.left = Math.random() * 1500 + 'px';
+
           // 2. create span and its content
           let spanEl = document.createElement('span');
-          spanEl.innerText = 'M';
+          spanEl.innerText = key;
           // 3. append span to div
           divEl.appendChild(spanEl);
           // 4. append div to body
@@ -72,14 +76,27 @@
           this.divEl = divEl;
       }
 
+
+
       rise() {
           let curTop = parseInt(this.divEl.style.top);
           // console.log(curTop);
-          let self = this;
-          let timerId = setInterval(function () {
+          this.timerId = setInterval(()=>{
               curTop -= 20;
-              self.divEl.style.top = curTop + 'px';
+              if (curTop <= -300) {
+                  this.removeSpecter();
+              }
+              this.divEl.style.top = curTop + 'px';
           }, 200)
+      }
+
+      removeSpecter() {
+          document.body.removeChild(this.divEl);
+          clearInterval(this.timerId);
+      }
+
+      static genLetter() {
+          return String.fromCharCode(Math.floor(Math.random() * (90 - 65 + 1)) + 65)
       }
     }
 
@@ -89,8 +106,26 @@
         bgmEl.play();
         let timerId2 = setInterval(function () {
             let s1 = new specter();
+            divList.push(s1);
+            console.log(s1.divEl);
             s1.rise();
         }, 2000)
+    };
+
+    document.body.onkeydown = function (ev) {
+
+        if (!/^[A-Za-z]+$/.test(ev.key)) { // if not letters
+            // do nothing, means to return with nothing done.
+        } else {
+            let divEl = document.querySelector(`.${ev.key}`.toUpperCase());
+            let curIdx = divList.findIndex(function (curVal) {
+                return curVal.divEl === divEl;
+            });
+            if (curIdx > -1) {
+                divList[curIdx].removeSpecter();
+                divList.splice(curIdx, 1);
+            }
+        }
     };
 
 
