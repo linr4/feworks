@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>精灵打字游戏</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      background: url("images/bg.jpg") center center no-repeat;
+      background-size: cover;
+      overflow: hidden;
+    }
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+    
+    .specter {
+      width: 300px;
+      height: 300px;
+      background: url("images/yy.png") no-repeat;
+      position: absolute;
+      transition: all 1s ease;
+    }
+    
+    .specter>span {
+      font-size: 70px;
+      font-weight: bold;
+      color: orangered;
+      position: absolute;
+      left: 70px;
+      top: 200px;
+    }
+    
+  </style>
+</head>
+<body>
+
+<image class="play-btn" src="images/play.png"></image>
+<!-- <div class="specter"><span>M</span></div> -->
+
+<script type="text/javascript">
+  let playBtn = document.querySelector('.play-btn'); 
+  let specArr = [];
+  
+  class Specter {
+    constructor() {
+      let specDiv = document.createElement('div');
+      let letterSpan = document.createElement('span');
+      let letter = String.fromCharCode(Math.round(Math.random() * 25) + 65);
+      
+      letterSpan.innerText = letter;
+      specDiv.className = 'specter ' + letter;
+      specDiv.style.top = document.documentElement.clientHeight + 'px';
+      specDiv.style.left = Math.random() * (document.documentElement.clientWidth - 300) + 'px';
+      
+      specDiv.appendChild(letterSpan);
+      document.body.appendChild(specDiv);
+      
+      this.specDiv = specDiv;
+    }
+    
+    floatSpec() {
+      let curTop = parseInt(window.getComputedStyle(this.specDiv).top);
+      this.timerId = setInterval(()=>{
+        curTop -= 20;
+        this.specDiv.style.top = curTop + 'px';
+        if (curTop <= -400) {
+          this.removeSpec();
+        }
+      }, 200);
+    }
+    
+    removeSpec() {
+      clearInterval(this.timerId);
+      this.specDiv.parentNode.removeChild(this.specDiv);
+      delete this;
+    }
+  }
+  
+  playBtn.onclick = function () {
+    playBtn.parentNode.removeChild(playBtn);
+    
+    let timerId = setInterval(()=>{
+      let oSpec = new Specter();
+      specArr.push(oSpec);
+      oSpec.floatSpec();
+    }, 2000);
+  }
+  
+  document.onkeydown = function (e) {
+    if (/^[A-Z]$/i.test(e.key)) {
+    
+    console.log(e.key);
+      let specEl = document.querySelector('.specter.'+ e.key.toUpperCase());
+      specArr.forEach((oSpec, index)=>{
+        if (specEl === oSpec.specDiv) {
+          oSpec.removeSpec();
+          specArr.splice(index, 1);
+          return;
+        }
+      });
+      
+    }
+  }
+
+
+</script>
+</body>
+
+</html>

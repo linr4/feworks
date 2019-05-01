@@ -48,19 +48,45 @@
       text-shadow: 5px 5px 5px gray;
     }
     
+    .banner {
+      width: 100%;
+      height: 100px;
+      line-height: 98px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-align: center;
+      font-size: 80px;
+      font-weight: bold;
+      background-color: #414686;
+      color: white;
+      z-index: 99;
+      opacity: .8;
+    }
+    
   </style>
 </head>
 <body>
 
+<div class="banner">
+  <span>Hit: </span> <span class="hit">0</span> <span> ☯ </span>
+  <span>Missed: </span> <span class="missed">0</span>
+</div>
 <img src="images/play.png">
-<audio src="media/bg.ogg" loop autoplay"></audio>
-
+<audio src="media/bg.ogg" loop autoplay" id="bgm"></audio>
+<audio src="media/click.ogg" id="clk"></audio>
 <!-- <div class="specter"><span>A<span></div> -->
 
 <script type="text/javascript">
   let playEl = document.querySelector('img');
-  let bgmEl = document.querySelector('audio');
+  let bgmEl = document.querySelector('#bgm');
+  let clkEl = document.querySelector('#clk');
+  let hitEl = document.querySelector('.hit');
+  let missedEl = document.querySelector('.missed');
+  let [hit, missed] = [0, 0];
   let oSpecList = [];
+  hitEl.innerText = hit;
+  missedEl.innerText = missed;
   
   class Specter {
     constructor() {
@@ -88,6 +114,8 @@
         
         if (specTop <= -300) {
           this.removeSpec();
+          missed++;
+          missedEl.innerText = missed;
         }
       }, 200);
     }
@@ -99,8 +127,8 @@
     
   }
   
-  function isAlphabet(key) {
-    return 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.includes(key) ? true : false
+  function isAlphabet(ch) {
+  return /^[A-Z]$/i.test(ch); // ^开始，$结束，[A-Z]之间任意字符，i忽略大小写
   }
   
   playEl.onclick = function () {
@@ -116,6 +144,7 @@
   }
   
   document.onkeydown = function(ev) {
+    
     // if(/^[a-zA-Z]+$/.test(ev.key)) { // why keys like CapLock(20), Tab(9) will pass the test ?
     // if (ev.keyCode >= 65 && ev.keyCode <= 90) { // keycode is deprecated
     
@@ -126,6 +155,9 @@
         if (oSpec.specDiv === specDiv) {
           oSpec.removeSpec(); // 调用原型方法，删除该精灵  --- 删除对象和对应的控制上浮的定时器
           oSpecList.splice(index, 1); // 也从保存对象的数组中删除
+          clkEl.play(); // play click sound
+          hit++;
+          hitEl.innerText = hit;
         }
       })
       
