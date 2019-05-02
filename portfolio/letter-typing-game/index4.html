@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>精灵打字游戏</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      background: url("images/bg.jpg") center center no-repeat;
+      -webkit-background-size: cover;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .play-btn {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+
+    .specter {
+      width: 300px;
+      height: 300px;
+      background: url("images/yy.png") no-repeat;
+      position: absolute;
+      transition: all 1.7s ease;
+    }
+
+    .specter>span {
+      position: absolute;
+      top: 200px;
+      left: 70px;
+      font-size: 70px;
+      font-weight: bold;
+      color: orangered;
+      text-shadow: 5px 5px 5px #3e437a;
+    }
+
+  </style>
+</head>
+<body>
+  <audio id="bgm" src="media/bg.ogg" loop autoplay></audio>
+  <audio id="clk" src="media/click.ogg"></audio>
+  <img class="play-btn" src="images/play.png" alt="specter">
+<!--  <div class="specter"><span>M</span></div>-->
+
+  <script>
+    let playBtn = document.querySelector('.play-btn');
+    let bgmEl = document.querySelector('#bgm');
+    let clkEl = document.querySelector('#clk');
+    let specList = [];
+
+    class Specter {
+      constructor() {
+        let specDiv = document.createElement('div');
+        let letterSpan = document.createElement('span');
+        let randomLetter = String.fromCharCode(Math.round(Math.random() * 25) + 65);
+        specDiv.className = 'specter ' + randomLetter;
+        specDiv.style.top = document.documentElement.clientHeight + 'px';
+        specDiv.style.left = Math.random() * (document.documentElement.clientWidth - 300) + 'px';
+
+        letterSpan.innerText = randomLetter;
+
+        specDiv.appendChild(letterSpan);
+        document.body.appendChild(specDiv);
+
+        this.specDiv = specDiv;
+      }
+
+      floatSpec() {
+        let curTop = parseInt(window.getComputedStyle(this.specDiv).top);
+        this.timerId = setInterval(()=>{
+          curTop -= 20;
+          this.specDiv.style.top = curTop + 'px';
+          if (curTop <= -380) {
+            this.removeSpec();
+          }
+        }, 100);
+      }
+
+      removeSpec() {
+        clearInterval(this.timerId);
+        this.specDiv.parentNode.removeChild(this.specDiv);
+        delete this;
+      }
+
+    }
+
+    playBtn.onclick = function () {
+      // bgmEl.play();
+      playBtn.parentNode.removeChild(playBtn);
+      let timerId = setInterval(function () {
+        let spec = new Specter();
+        spec.floatSpec();
+        specList.push(spec);
+      }, 1800);
+    };
+
+    document.body.onkeydown = function (e) {
+      if (/^[A-Z]$/i.test(e.key)) { // if an alphabet key is pressed
+        let specEl = document.querySelector('.specter.' + e.key.toUpperCase());
+        if (specEl) { // if a specter with className ${e.key} exists
+          specList.forEach(function (oSpec, index) {
+            if (oSpec.specDiv === specEl){
+              oSpec.removeSpec();
+              specList.splice(index, 1);
+            }
+          })
+        }
+      }
+    }
+
+  </script>
+</body>
+</html>
