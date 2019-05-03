@@ -16,7 +16,7 @@ Web development learning notes and case study
 
 ###### 20190503 - Day 42
 
-* 学习贪吃蛇游戏 (+xh = 9x of 600)
+* 学习贪吃蛇游戏 (+4.5h = 96 of 600)
 
 ###### 20190502 - Day 41
 
