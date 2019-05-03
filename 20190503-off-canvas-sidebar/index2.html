@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Off Canvas Sidebar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Lato, sans-serif;
+    }
+
+    .content {
+      padding: 2rem;
+      transition: .3s all ease;
+    }
+
+    .shift {
+      margin-left: 260px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .content__heading {
+      text-align: center;
+      padding: 1.4rem;
+    }
+
+    .content__details {
+      padding: 1.4rem;
+      letter-spacing: 1px;
+    }
+
+    .content__image {
+      padding: 1.4rem;
+      width: 100%;
+      height: auto;
+    }
+
+    .nav {
+      width: 260px;
+      height: 100%;
+      position: absolute;
+      left: -260px;
+      background-color: #27292f;
+      z-index: 999;
+      transition: .3s all ease;
+    }
+
+    .open {
+      left: 0;
+    }
+
+    .menu {
+      list-style-type: none;
+    }
+
+    .menu__item {
+      font-size: 1.4rem;
+      padding: 1rem;
+      color: #eee;
+      border-bottom: 1px solid #333;
+      text-transform: uppercase;
+    }
+
+    .menu__item:hover {
+      background-color: #111;
+      transition: .3s;
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 10px;
+      right: -50px;
+    }
+
+    .hamburger:hover {
+      cursor: pointer;
+    }
+
+    .hamburger>span {
+      display: block;
+      width: 36px;
+      height: 6px;
+      margin: 6px 0;
+      background-color: #222;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .change.bar1 {
+      top: 11px;
+      transform: rotate(45deg);
+    }
+    .change.bar2 {
+      opacity: 0;
+    }
+    .change.bar3 {
+      bottom: 13px; 
+      transform: rotate(-45deg);
+    }
+
+
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <ul class="menu">
+      <li class="menu__item">Home</li>
+      <li class="menu__item">About</li>
+      <li class="menu__item">Services</li>
+      <li class="menu__item">Products</li>
+      <li class="menu__item">Contact</li>
+    </ul>
+    <div class="hamburger">
+      <span class="bar1"></span>
+      <span class="bar2"></span>
+      <span class="bar3"></span>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="container">
+      <h1 class="content__heading">Learning to build an Off Canvas Menu</h1>
+      <p class="content__details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, commodi aut, corporis consequatur nostrum reiciendis, obcaecati ea inventore veritatis deserunt laborum distinctio. Iure quo sapiente facere esse assumenda voluptates quae.</p>
+      <img src="off-canvas.jpg" alt="" class="content__image">
+    </div>
+  </main>
+
+  <script>
+    const navEl = document.querySelector('.nav')
+    const hamburgerEl = document.querySelector('.hamburger');
+    const barsEl = document.getElementsByTagName('span');
+    const contentEl = document.querySelector('.content');
+
+    hamburgerEl.addEventListener('click', () => {
+      navEl.classList.toggle('open');
+      contentEl.classList.toggle('shift');
+      for (let item of barsEl) {
+        item.classList.toggle('change');
+      }
+    })
+  </script>
+</body>
+</html>
