@@ -147,6 +147,55 @@
         item.classList.toggle('change');
       }
     })
+
+    /* the rest just for testing, nothing to do with sidebar */
+
+     /**** default function parameters ******************/
+
+    function dispEdu(college) {
+      college = college || 'No education background provided';
+      console.log(college);
+    }
+    dispEdu('depaul university');
+
+    /*********** destructuring objects ******************/
+    const Person = {
+      fullName: 'John',
+      age: 27,
+      hobbies: ['comedy', 'youtube', 'being lazy'],
+      address: {
+          street: '123 main st.',
+          zipcode: 518000
+      }
+    }
+    const {fullName, age} = Person;
+    console.log(fullName, age); // John 27
+    const {fullName: pName, age: pAge} = Person;
+    console.log(pName, pAge); // John 27
+
+     /********** rest / spread operator *****************/
+     
+    function adder() {
+      console.log(arguments); // Arguments(6) [1, 2, 3, 4, 5, 6, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+       let total = 0;
+       for (let el of arguments) {
+         total += el;
+       }
+       return total;
+     }
+    console.log(adder(1, 2, 3, 4, 5, 6));  // 21
+     
+     function adder2(...values) {
+       console.log(values); // [1, 2, 3, 4, 5, 6]
+       let total = 0;
+       for (let val of values) {
+        total += val;
+       }
+       return total;
+     }
+    console.log(adder2(1, 2, 3, 4, 5, 6));  // 21
+     
+
   </script>
 </body>
 </html>
