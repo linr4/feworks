@@ -14,6 +14,7 @@
 
   let oMap = new Map(); // 创建地图
   let oFood = new Food(100, 100, 'images/body.png', oMap); // 创建食物
+
   oFood.render(); // 渲染食物，在地图上画出食物，位置随机
 
   let sParam = { // snake parameters，简化参数传递
@@ -25,7 +26,7 @@
   };
 
   let oSnake = new Snake(sParam); // 创建蛇实例
-  oSnake.render(); // 画出蛇
+  oSnake.render();      // 画出蛇
   oSnake.update(oFood); // 让蛇动起来，并检测是否超出边界和是否吃掉食物
 
 </script>

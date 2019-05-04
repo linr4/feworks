@@ -17,10 +17,11 @@ Web development learning notes and case study
 ###### 20190504 - Day 43
 
 * 复习 [ES6 知识点](webdev-learning-notes/es6-kp.md) (+2.5h = 98.5 of 600)
+* 学习[贪吃蛇游戏](portfolio/snake-game) (+1h = 99.5 of 600)
 
 ###### 20190503 - Day 42
 
-* 学习贪吃蛇游戏 (+4.5h = 96 of 600)
+* 学习[贪吃蛇游戏](portfolio/snake-game) (+4.5h = 96 of 600)
 * 学习 [off canvas sidebar](20190503-off-canvas-sidebar) (+3h = 99 of 600)
 
 ###### 20190502 - Day 41

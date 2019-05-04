@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+    <script src="Map.js"></script>
+    <script src="Food.js"></script>
+    <script src="Snake.js"></script>
+    <script>
+
+      let oMap = new Map(); // instance object of Map
+      let oFood = new Food(100, 100, 'images/body.png', oMap);
+      oFood.render();
+
+      let s = { // snake parameters
+        width: 100,
+        height: 100,
+        headImg: 'images/head.png',
+        bodyImg: 'images/body.png',
+        oMap: oMap
+      };
+
+      let oSnake = new Snake(s); // instance object of Snake
+      oSnake.render();
+      oSnake.update(oFood);
+
+    </script>
+  </body>
+</html>
