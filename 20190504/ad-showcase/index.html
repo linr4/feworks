@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+  <title>广告图片展示</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #27292f;
+  }
+
+  div {
+    width: 590px;
+    height: 500px;
+    margin: 100px auto;
+    text-align: center;
+  }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  li>img {
+    width: 114px;
+    cursor: pointer;
+  }
+
+</style>
+<body>
+  <div>
+    <img src="ad1.webp" alt="">
+    <ul>
+      <li><img src="ad1.webp" alt=""></li>
+      <li><img src="ad2.webp" alt=""></li>
+      <li><img src="ad3.webp" alt=""></li>
+      <li><img src="ad4.webp" alt=""></li>
+      <li><img src="ad5.webp" alt=""></li>
+    </ul>
+  </div>
+
+  <script>
+    let bImgEl = document.querySelector('div>img');
+    let sImgEls = document.querySelectorAll('li>img');
+
+    for (let img of sImgEls) {
+      img.onclick = changeImg;
+    }
+
+function changeImg() {
+  bImgEl.src = this.src;
+}
+    
+  </script>
+</body>
+</html>

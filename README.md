@@ -18,6 +18,7 @@ Web development learning notes and case study
 
 * 复习 [ES6 知识点](webdev-learning-notes/es6-kp.md) (+2.5h = 98.5 of 600)
 * 学习[贪吃蛇游戏](portfolio/snake-game) (+1h = 99.5 of 600)
+* 学习[关闭浮动广告、广告图片展示和切换](20190504) 的案例  (+1h = 100.5 of 600)
 
 ###### 20190503 - Day 42
 
