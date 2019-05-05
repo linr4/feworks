@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title> 简易轮播图 - Carousel </title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    
+    body {
+      font-family: Magneto, Sans-serif;
+      font-size: 40px;
+      color: #eee;
+      background-color: #27292f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    div {
+      position: relative;
+    }
+    
+    img {
+      vertical-align: bottom;
+    }
+    
+    .indicator {
+      display: flex;
+      justify-content: center;
+      letter-spacing: 10px;
+    }
+    
+    .arrows {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .arrows>span {
+      margin: 0 5px;
+      width: 34px;
+      height: 44px;
+      line-height: 44px;
+      font-size: 44px;
+      background-color: rgba(0,0,0,0.5);
+      user-select: none;
+      cursor: pointer;
+    }
+    
+  </style>
+</head>
+<body>
+    <div>
+      <p class="indicator">
+        <span>No. </span>
+        <span>1</span>
+      </p>
+      <img src="ad1.webp">
+      <p class="arrows">
+        <span id="prev">&lt;</span>
+        <span id="next">&gt;</span>
+      </p>
+    </div>
+  
+  <script>
+    let btnEls = document.querySelectorAll('.arrows>span');    
+    let imgEl = document.querySelector('img');
+    let idcEl = document.querySelector('.indicator>span:last-child');
+    let imgArr = [
+      'ad1.webp',
+      'ad2.webp',
+      'ad3.webp',
+      'ad4.webp',
+      'ad5.webp'
+    ];
+    let curImgIdx = 0;
+    let maxImgIdx = imgArr.length - 1;
+    
+    btnEls[0].onclick = _=>changeImg(0);
+    btnEls[1].onclick = _=>changeImg(1);
+    
+    function changeImg(btn) {
+      if (0 === btn) {        // prev
+        curImgIdx = curImgIdx <= 0 ? maxImgIdx : --curImgIdx;
+      } else if (1 === btn){  // next
+        curImgIdx = curImgIdx >= maxImgIdx ? 0 : ++curImgIdx;
+      }
+      idcEl.innerText = curImgIdx + 1;
+      imgEl.src = imgArr[curImgIdx];
+    }
+    
+  </script>
+</body>
+</html>
