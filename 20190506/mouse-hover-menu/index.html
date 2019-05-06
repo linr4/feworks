@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Show QR code when mouse enters</title>
+  <link rel="stylesheet" href="fa/css/font-awesome.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+    }
+    ul {
+      width: 50px;
+      height: 150px;
+      border-radius: 5px;
+      list-style-type: none;
+      background-color: skyblue;
+      color: aliceblue;
+    }
+    ul>li {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 30px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;      
+    }
+    Ul>li:last-child {
+      border-bottom: none;
+    }
+    ul>li:hover {
+      background-color: rgb(0, 122, 204);
+    }
+
+    .qrcode {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      position: absolute;
+      top: 50%;
+      right: 60px;
+      transform: translateY(-50%);
+    }
+    .qrcode>img {
+      width: 200px;
+      margin: 5px;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <ul>
+      <li><i class="fa fa-qq"></i></li>
+      <li><i class="fa fa-wechat"></i></li>
+      <li><i class="fa fa-envelope"></i></li>
+    </ul>
+    <div class="qrcode">
+      <p>微信二维码</p>
+      <img src="qrcode.jpg" alt="">
+    </div>
+  </div>
+
+  <script>
+    let wechatEl = document.querySelector('.fa-wechat').parentElement;
+    let qrcodeEl = document.querySelector('.qrcode');
+
+    wechatEl.onmouseenter = function () {
+      qrcodeEl.style.display = 'block';
+    }
+    wechatEl.onmouseleave = _=> {
+      qrcodeEl.style.display = 'none';
+    }
+
+  </script>
+</body>
+</html>

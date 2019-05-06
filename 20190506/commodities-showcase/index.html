@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>商品展示</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: 0;
+    }
+    div {
+      margin: 50px auto;
+      width: 430px;
+      height: 520px;
+      border: 1px solid #ccc;
+    }
+    div>img {
+      width: 430px;
+      height: 430px;
+    }
+    ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-between;
+    }
+    li>img {
+      width: 80px;
+      height: 80px;
+      border: 2px solid transparent;
+      vertical-align: bottom;
+    }
+    .current {
+      border: 2px solid skyblue;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <img src="1.jpg" alt="">
+    <ul>
+      <li><img src="1.jpg" alt=""></li>
+      <li><img src="2.jpg" alt=""></li>
+      <li><img src="3.jpg" alt=""></li>
+      <li><img src="4.jpg" alt=""></li>
+      <li><img src="5.jpg" alt=""></li>
+    </ul>
+  </div>  
+
+  <script>
+    let bigImgEl = document.querySelector('div>img');
+    let smlImgEls = document.querySelectorAll('li>img');
+
+    for (img of smlImgEls) {
+      img.onmouseenter = function() {
+        this.classList.add('current');
+        bigImgEl.src = this.src;
+      }
+      img.onmouseleave = function() {
+        this.classList.remove('current')
+      }
+    }
+
+  </script>
+</body>
+</html>
