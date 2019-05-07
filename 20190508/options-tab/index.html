@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Options Tab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .wrapper {
+      width: 400px;
+      height: auto;
+      margin: 100px auto;
+      text-align: center;
+
+    }
+    ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-between;
+    }
+    li {
+      width: 80px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #cccccc;
+      border-right: none;
+      cursor: pointer;
+      border-radius: 5px 5px 0 0;
+    }
+    li:last-child {
+      border-right: 1px solid #cccccc;
+    }
+    .contents {
+      width: 100%;
+      height: 300px;
+      border: 1px solid #cccccc;
+      border-top: none;
+      background-color: #cccccc;
+    }
+    .contents>div {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+    .selected-div {
+      display: block !important;
+    }
+    .selected-tab {
+      background-color: #cccccc;
+      border-bottom-color: transparent;
+      font-weight: bolder;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <ul class="tabs">
+      <li class="selected-tab">国内</li>
+      <li>国际</li>
+      <li>军事</li>
+      <li>经济</li>
+      <li>本地</li>
+    </ul>
+    <div class="contents">
+      <div class="selected-div">国内详情</div>
+      <div>国际详情</div>
+      <div>军事内容</div>
+      <div>经济内容</div>
+      <div>本地新闻</div>
+    </div>
+  </div>
+  <script>
+    window.onload = function () {
+      let tabEls = document.querySelectorAll('li');
+      let contEls = document.querySelectorAll('.contents>div');
+      let curIdx = 0;
+
+      for (let i=0; i < tabEls.length; i++) {
+        tabEls[i].onclick = function () {
+          if (i !== curIdx) { // if clicked tab is not the one currently active
+            tabEls[curIdx].classList.remove('selected-tab');
+            this.classList.add('selected-tab');
+            contEls[curIdx].classList.remove('selected-div');
+            contEls[i].classList.add('selected-div');
+            curIdx = i;
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

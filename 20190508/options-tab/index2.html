@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Option Tab - 选项卡</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .wrapper {
+      width: 400px;
+      height: 430px;
+      margin: 100px auto;
+    }
+    .tabs {
+      list-style-type: none;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+    }
+    .tabs>li {
+      width: 80px;
+      border: 1px solid #cccccc;
+      border-radius: 5px 5px 0 0;
+      cursor: pointer;
+    }
+    .contents {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #cccccc;
+      border-top: none;
+    }
+    .contents>div{
+      width: 100%;
+      height: 100%;
+      line-height: 50px;
+      padding: 10px;
+      display: none;
+    }
+    .cur-tab {
+      border-bottom: none !important;
+      background-color: #cccccc;
+      font-weight: bold;
+    }
+    .cur-div {
+      display: block !important;
+      background-color: #cccccc;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <ul class="tabs">
+      <li class="cur-tab">tab01</li>
+      <li>tab02</li>
+      <li>tab03</li>
+      <li>tab04</li>
+      <li>tab05</li>
+    </ul>
+    <div class="contents">
+      <div class="cur-div">contents of tab01</div>
+      <div>contents of tab02</div>
+      <div>contents of tab03</div>
+      <div>contents of tab04</div>
+      <div>contents of tab05</div>
+    </div>
+  </div>
+  <script>
+    window.onload = function () {
+      let tabEls = document.querySelectorAll('li');
+      let cntEls = document.querySelectorAll('.contents>div');
+      let cur = 0;
+      for (let i = 0; i <= tabEls.length; i++) {
+        tabEls[i].onclick = function () {
+          if (i !== cur) {
+            tabEls[cur].classList.remove('cur-tab');
+            this.classList.add('cur-tab');
+            cntEls[cur].classList.remove('cur-div');
+            cntEls[i].classList.add('cur-div');
+            cur = i;
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
