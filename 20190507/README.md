@@ -26,7 +26,7 @@
 
 ### [input 相关事件](input-events)
 
-* 留意 `onchange`与`oninput`的区别
+* 留意 `onchange`与`oninput`的区别：前者只有在失去焦点时触发，后者实时触发；
 
 * IE9 及之前的版本不支持 `oninput`，可用`onpropertychange`代替；
 
@@ -58,7 +58,10 @@
 
 * 实现：在输入框`oninput`事件中判断输入框内容的长度，据此设置按钮的 disabled 属性；
 
-* 注意点：通过代码设置输入框的值不会触发`oninput`事件；
+* 知识点：
+
+  * 通过代码设置输入框的值不会触发`oninput`事件；
+  * HTML标签属性与值若一样，如 disabled="disabled"，则 JS 取值时均返回 true / false；
 
   ```js
   let inputEl = document.querySelector('input[type=text]');
