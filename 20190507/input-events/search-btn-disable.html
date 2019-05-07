@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>搜索按钮与搜索框联动，根据有无内容启用/禁用</title>
+</head>
+<body>
+<form action="">
+  <input type="text" placeholder="pleae input your keywords">
+  <input type="submit" value="search">
+</form>
+<script>
+  /*
+  * 文本框无内容时，搜索按钮处于禁用状态，输入内容后自动启用（可点击）状态
+  * 知识点：HTML标签属性与值若一样，如 disabled="disabled"，则JS取值时均返回 true/false
+  */
+  let inputEl = document.querySelector('input[type=text]');
+  let submitEl = document.querySelector('input[type=submit]');
+
+  submitEl.disabled = true;
+  inputEl.oninput = function () {
+    submitEl.disabled = inputEl.value.length === 0;
+  };
+
+  inputEl.value = 'some keywords'; // 按钮不会启用，通过代码设置input value不会触发oninput事件
+</script>
+</body>
+</html>

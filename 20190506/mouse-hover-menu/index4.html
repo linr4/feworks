@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>鼠标移入移出菜单 - 第四遍练习</title>
+  <link rel="stylesheet" href="fa/css/font-awesome.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    .wrapper {
+      position: fixed;
+      top: 50%;
+      right: 1px;
+      transform: translateY(-50%);
+    }
+    .qrcode {
+      position: absolute;
+      top: 50%;
+      right: 60px;
+      transform: translateY(-50%);
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      padding: 10px;
+      text-align: center;
+      transition: all .5s ease;
+      opacity: 0;
+    }
+    .qrcode>p {
+      margin-bottom: 10px;
+    }
+    .qrcode>img {
+      width: 100px;
+    }
+    ul {
+      list-style-type: none;
+      width: 50px;
+      height: 150px;
+      background-color: skyblue;
+      border-radius: 5px;
+    }
+    ul>li {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-bottom: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 25px;
+      color: white;
+    }
+    ul>li:hover {
+      background-color: deepskyblue;
+    }
+    ul>li:last-child {
+      border-bottom: none;
+    }
+
+    .mouseOn {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="qrcode">
+    <p>微信二维码</p>
+    <img src="qrcode.jpg" alt="">
+  </div>
+  <ul>
+    <li><i class="fa fa-qq"></i></li>
+    <li><i class="fa fa-wechat"></i></li>
+    <li><i class="fa fa-envelope"></i></li>
+  </ul>
+</div>
+
+<script>
+  window.onload = function () {
+    let qrCodeEl = document.querySelector('.qrcode');
+    let weChatEl = document.querySelector('.fa-wechat').parentElement;
+
+    weChatEl.onmouseenter = function () {
+      qrCodeEl.classList.add('mouseOn');
+    };
+    weChatEl.onmouseleave = function () {
+      qrCodeEl.classList.remove('mouseOn');
+    };
+  }
+
+</script>
+</body>
+</html>

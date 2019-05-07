@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>商品橱窗展示 - 第二遍</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    div {
+      width: 432px;
+      height: auto;
+      margin: 100px auto;
+      border: 1px solid #cccccc;
+    }
+    div>img {
+      width: 430px;
+      height: 430px;
+    }
+    ul {
+      width: 430px;
+      list-style-type: none;
+      display: flex;
+      justify-content: space-between;
+
+    }
+
+    li>img {
+      width: 75px;
+      height: 75px;
+      border: 2px solid transparent;
+      vertical-align: bottom;
+    }
+
+    .addBorder {
+      border: 2px solid deepskyblue;
+    }
+
+  </style>
+</head>
+<body>
+  <div>
+    <img src="1.jpg" alt="">
+    <ul>
+      <li><img src="1.jpg" alt=""></li>
+      <li><img src="2.jpg" alt=""></li>
+      <li><img src="3.jpg" alt=""></li>
+      <li><img src="4.jpg" alt=""></li>
+      <li><img src="5.jpg" alt=""></li>
+    </ul>
+  </div>
+
+  <script>
+    let bigImgEl = document.querySelector('div>img');
+    let smlImgEls = document.querySelectorAll('li>img');
+
+    for (let img of smlImgEls) {
+      img.onmouseenter = function () {
+        this.classList.add('addBorder');
+        bigImgEl.src = this.src;
+      };
+      img.onmouseleave = function () {
+        this.classList.remove('addBorder');
+      }
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>表單校驗</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    fieldset {
+      width: 200px;
+      margin: 100px auto;
+      text-align: center;
+    }
+    input {
+      width: 150px;
+      height: 30px;
+      margin: 10px;
+      padding: 5px;
+    }
+
+    .warn {
+      background-color: orangered;
+    }
+
+  </style>
+</head>
+<body>
+
+<form action="https://www.baidu.com">
+  <fieldset>
+    <legend>信息輸入</legend>
+    <input type="text" placeholder="請輸入賬戶名" name="username">
+    <input type="password" placeholder="請輸入密碼" name="password">
+    <input type="submit" value="註冊">
+  </fieldset>
+</form>
+
+<script>
+  let userEl = document.querySelector('input[type=text]');
+  let pswdEl = document.querySelector('input[type=password]');
+  let submitEl = document.querySelector('input[type=submit]');
+
+  submitEl.onclick = function () {
+    if (userEl.value.length < 6) {
+      userEl.classList.add('warn');
+      return false;
+    } else {
+      userEl.classList.remove('warn');
+    }
+
+    if (pswdEl.value.length < 6) {
+      pswdEl.classList.add('warn');
+      return false;
+    } else {
+      pswdEl.classList.remove('warn');
+    }
+  };
+
+  userEl.onfocus = function () {
+    userEl.classList.remove('warn');
+  };
+  pswdEl.onfocus = function () {
+    pswdEl.classList.remove('warn');
+  }
+
+</script>
+</body>
+</html>

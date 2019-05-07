@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>表单数据校验</title>
+  <style>
+    fieldset {
+      width: 200px;
+      margin: 100px auto;
+      text-align: center;
+    }
+    input {
+      margin: 10px 0;
+      width: 180px;
+      height: 30px;
+      outline: none;
+    }
+    .warning {
+      background-color: red;
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+<!-- 用户名或者密码长度小于 6 位，就设置输入框背景为红色 -->
+<form action="https://www.baidu.com">
+  <fieldset>
+    <legend> 信息輸入 </legend>
+    <input type="text" placeholder="请输入用户名" name="userName">
+    <input type="password" placeholder="请输入密码" name="userPassword">
+    <input type="submit" value="注册">
+  </fieldset>
+</form>
+
+<script>
+  let userEl = document.querySelector('input[type=text]');
+  let passwordEl = document.querySelector('input[type=password]');
+  let submitEl = document.querySelector('input[type=submit]');
+
+  submitEl.onclick = function () {
+    if (userEl.value.length < 6) {
+      userEl.classList.add('warning');
+      return false;
+    } else {
+      userEl.classList.remove('warning');
+    }
+
+    if (passwordEl.value.length < 6) {
+      passwordEl.classList.add('warning');
+      return false;
+    } else {
+      passwordEl.classList.remove('warning');
+    }
+  };
+
+  userEl.oninput = function () {
+    userEl.classList.remove('warning');
+  };
+
+  passwordEl.oninput = function () {
+    passwordEl.classList.remove('warning');
+  }
+
+</script>
+</body>
+</html>
