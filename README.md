@@ -17,6 +17,7 @@ Web development learning notes and case study
 ###### 20190508 - Day 47
 
 - 练习 JS 案例 - [选项卡](20190508) (+1.5h = 108.5 of 600)
+- 尝试应用前端技能于工作需求 - [自动登录网站](20190508/auto-login) (+2h = 110.5 of 600)
 
 ###### 20190507 - Day 46
 
