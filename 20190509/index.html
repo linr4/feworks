@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>结合闭包做循环索引的同步</title>
+</head>
+<body>
+
+<button>button 1</button>
+<button>button 2</button>
+<button>button 3</button>
+
+<script>
+  btnEls = document.querySelectorAll('button');
+
+// 示例一：无法同步，onclick执行时，for早就执行完了，i为3
+/*  for (var i = 0; i < 3; i++) {
+    btnEls[i].onclick = function () {
+      console.log(i); // 3 3 3
+    };
+  }*/
+
+// 示例二：可以同步，let会产生块作用域，三次循环创建了3个onclick事件对应的函数，i的值也相应保留当次循环的值
+/*for (let i = 0; i < 3; i++) {
+    btnEls[i].onclick = function () {
+      console.log(i); // 0 1 2
+    };
+  }*/
+
+// 示例三：可以同步，结合闭包，保留每次循环中i的值，以形参方式传递给每个onclick对应的函数；
+  for (var i = 0; i < 3; i++) {
+    (function (idx) {
+      btnEls[idx].onclick = function () {
+        console.log(idx); // 0 1 2
+      };
+    })(i);
+  }
+
+</script>
+</body>
+</html>
