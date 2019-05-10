@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exclusive selection - 排它思想</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      width: 300px;
+      height: 300px;
+      margin: 100px auto;
+      padding: 10px;
+      border: 1px solid #cccccc;
+    }
+
+    ul {
+      list-style-type: none;
+      box-sizing: border-box;
+    }
+
+    li {
+      width: 280px;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #cccccc;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .selected {
+      background-color: blue;
+      color: white;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+<div>
+  <ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+    <li>item 4</li>
+    <li>item 5</li>
+    <li>item 6</li>
+  </ul>
+</div>
+
+<script>
+  window.onload = function () {
+    let liEls = document.querySelectorAll('li');
+    let activeItemIndex = 0;
+    liEls[0].classList.add('selected');
+
+    for (let i = 0; i <= liEls.length; i++) {
+      liEls[i].onclick = function () {
+        if (activeItemIndex !== i) {  // not clicking on the item which is currently active
+          liEls[activeItemIndex].classList.remove('selected');
+          this.classList.add('selected');
+          activeItemIndex = i;
+        }
+      }
+    }
+  }
+</script>
+</body>
+</html>
