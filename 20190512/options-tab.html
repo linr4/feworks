@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Options Tab</title>
+  <style>
+    html, body, ul, li, div {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Consolas", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 18px;
+    }
+    ul {
+      list-style-type: none;
+    }
+    .tab-wrapper {
+      width: 400px;
+      height: auto;
+      margin: 100px auto;
+      box-shadow: 10px 10px 10px #cccccc;
+    }
+    #tab_list {
+      width: 100%;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .tab-item {
+      width: 80px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border: 1px solid #cccccc;
+      border-bottom: transparent;
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    #tab_contents {
+      width: 100%;
+      height: 300px;
+    }
+    .tab-content {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 300px;
+      border: 1px solid #cccccc;
+      display: none;
+    }
+    .selected {
+      background-color: turquoise;
+      color: white;
+      font-weight: bold;
+      display: block;
+      border-color: turquoise !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tab-wrapper">
+  <ul id="tab_list">
+    <li class="tab-item selected">Tab 1</li>
+    <li class="tab-item">Tab 2</li>
+    <li class="tab-item">Tab 3</li>
+    <li class="tab-item">Tab 4</li>
+    <li class="tab-item">Tab 5</li>
+  </ul>
+  <div id="tab_contents">
+    <div class="tab-content selected">tab content 1</div>
+    <div class="tab-content">tab content 2</div>
+    <div class="tab-content">tab content 3</div>
+    <div class="tab-content">tab content 4</div>
+    <div class="tab-content">tab content 5</div>
+  </div>
+</div>
+
+<script>
+  class Tab {
+    constructor() {
+      this.tabItemEls = document.querySelectorAll('#tab_list>li');
+      this.tabContEls = document.querySelectorAll('#tab_contents>div');
+      this.currentIndex = 0;
+    }
+
+    _changeTab(evt) {
+      for (let i = 0; i < this.tabItemEls.length; i++) {
+        this.tabItemEls[i].addEventListener(evt, ()=>{
+          if (i !== this.currentIndex) {
+            this.tabItemEls[this.currentIndex].classList.remove('selected');
+            this.tabContEls[this.currentIndex].classList.remove('selected');
+            this.tabItemEls[i].classList.add('selected');
+            this.tabContEls[i].classList.add('selected');
+            this.currentIndex = i;
+          }
+        })
+      }
+    }
+
+    addClickEvent() {
+      this._changeTab('click');
+    }
+
+    addMouseEvent() {
+      this._changeTab('mousemove');
+    }
+  }
+
+  let tab = new Tab();
+  // tab.addClickEvent();
+  tab.addMouseEvent();
+
+</script>
+</body>
+</html>

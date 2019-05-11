@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>列表全选、取消全选、反选</title>
+  <style>
+    html, body, div, ul, li, h3 {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style-type: none;
+    }
+    .container {
+      width: 400px;
+      height: auto;
+      margin: 100px auto;
+      border: 1px solid #cccccc;
+      box-shadow: 0 0 5px #cccccc;
+      padding: 20px;
+    }
+    h3 {
+      margin: 20px;
+      text-align: center;
+      border-bottom: 1px solid #cccccc;
+    }
+    .billboard {
+      width: 350px;
+    }
+    .song {
+      width: 100%;
+      height: 35px;
+      line-height: 35px;
+      border-bottom: 1px solid #cccccc;
+    }
+    .btns-wrapper {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+    }
+    input {
+      margin-right: 10px;
+    }
+    button {
+      width: 90px;
+      height: 30px;
+      margin: 20px 10px 0 10px;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h3>歌曲排行榜</h3>
+  <ul id="billboard" class="billboard">
+    <li class="song"><input type="checkbox">当爱已成往事</li>
+    <li class="song"><input type="checkbox">鬼迷心窍</li>
+    <li class="song"><input type="checkbox">旧爱新欢</li>
+    <li class="song"><input type="checkbox">爱情有什么道理</li>
+    <li class="song"><input type="checkbox">如果你要离去</li>
+    <li class="song"><input type="checkbox">再回首</li>
+    <li class="song"><input type="checkbox">始终只爱你</li>
+    <li class="song"><input type="checkbox">你走你的路</li>
+  </ul>
+  <div class="btns-wrapper">
+    <button id="select_all">全选</button>
+    <button id="select_cancel">取消全选</button>
+    <button id="select_reverse">反选</button>
+  </div>
+</div>
+
+<script>
+  let songListEls = document.querySelectorAll('#billboard input');
+  let selectAllEl = document.querySelector('#select_all');
+  let selectCancelEl = document.querySelector('#select_cancel');
+  let selectReverseEl = document.querySelector('#select_reverse');
+
+  selectAllEl.onclick = function () {
+    songListEls.forEach(function (chkbox, idx, arr) {
+      chkbox.checked = true;
+    })
+  };
+
+  selectCancelEl.onclick = function () {
+    songListEls.forEach(function (chkbox) {
+      chkbox.checked = false;
+    })
+  };
+
+  selectReverseEl.onclick = function () {
+    songListEls.forEach(function (chkbox) {
+      chkbox.checked = !chkbox.checked;
+    })
+  }
+
+</script>
+</body>
+</html>
