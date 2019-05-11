@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>options tab - oop</title>
+  <style>
+    html, body, ul, li, div {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Georgia, serif;
+      font-size: 14px;
+    }
+    #tab {
+      width: 400px;
+      height: auto;
+      margin: 100px auto;
+    }
+    ul {
+      list-style-type: none;
+      box-sizing: border-box;
+    }
+    #tab_options {
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+    }
+    .tab-item {
+      width: 78px;
+      height: 100%;
+      border: 1px solid #cccccc;
+      border-radius: 5px 5px 0 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    #tab_contents {
+      width: 100%;
+      height: 250px;
+      line-height: 250px;
+      text-align: center;
+    }
+    .tab-content {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+    .selected {
+      background-color: turquoise;
+      border: 1px solid turquoise;
+      color: white;
+      font-weight: bold;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div id="tab">
+  <ul id="tab_options">
+    <li class="tab-item selected">tab item 1</li>
+    <li class="tab-item">Tab item 2</li>
+    <li class="tab-item">Tab item 3</li>
+    <li class="tab-item">Tab item 4</li>
+    <li class="tab-item">Tab item 5</li>
+  </ul>
+  <div id="tab_contents">
+    <div class="tab-content selected">tab content 1</div>
+    <div class="tab-content">tab content 2</div>
+    <div class="tab-content">tab content 3</div>
+    <div class="tab-content">tab content 4</div>
+    <div class="tab-content">tab content 5</div>
+  </div>
+</div>
+
+<script>
+  class Tab {
+    constructor() {
+      this.tabItemEls = document.querySelectorAll('.tab-item');
+      this.tabContEls = document.querySelectorAll('.tab-content');
+      this.currentIndex = 0;
+    }
+    addEvent() {
+      for (let i = 0; i < this.tabItemEls.length; i++) {
+        this.tabItemEls[i].onclick = _=> {
+          if (i !== this.currentIndex) {
+            this.tabItemEls[this.currentIndex].classList.remove('selected');
+            this.tabContEls[this.currentIndex].classList.remove('selected');
+            this.tabItemEls[i].classList.add('selected');
+            this.tabContEls[i].classList.add('selected');
+            this.currentIndex = i;
+          }
+        }
+
+      }
+    }
+  }
+
+  new Tab().addEvent();
+</script>
+</body>
+</html>

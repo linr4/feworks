@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>options tab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      width: 400px;
+      height: auto;
+      margin: 100px auto;
+      font-family: "Consolas", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    ul {
+      list-style-type: none;
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+    }
+    .tab {
+      width: 20%;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border: 1px solid #cccccc;
+      border-bottom: transparent;
+      border-radius: 5px 5px 0 0;
+      user-select: none;
+      cursor: pointer;
+    }
+    .contents {
+      width: 100%;
+      height: 250px;
+    }
+    .cont {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 36px;
+      padding-top: 30px;
+      display: none;
+    }
+    .selected {
+      background-color: turquoise;
+      color: white;
+      font-weight: bold;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <ul class="tabs" id="tabs">
+    <li class="tab">Tab No.1</li>
+    <li class="tab">Tab No.2</li>
+    <li class="tab">Tab No.3</li>
+    <li class="tab">Tab No.4</li>
+    <li class="tab">Tab No.5</li>
+  </ul>
+
+  <div class="contents" id="contents">
+    <div class="cont">tab content No.1</div>
+    <div class="cont">tab content No.2</div>
+    <div class="cont">tab content No.3</div>
+    <div class="cont">tab content No.4</div>
+    <div class="cont">tab content No.5</div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener('load', function () {
+
+    let tabEls = document.querySelectorAll('.tab');
+    let contEls = document.querySelectorAll('.cont');
+    let curIdx = 0;
+
+    tabEls[curIdx].classList.add('selected');
+    contEls[curIdx].classList.add('selected');
+
+    for (let i = 0; i < tabEls.length; i++) {
+      tabEls[i].addEventListener('click', function () {
+        if (i !== curIdx) {
+          this.classList.add('selected');
+          contEls[i].classList.add('selected');
+          tabEls[curIdx].classList.remove('selected');
+          contEls[curIdx].classList.remove('selected');
+          curIdx = i;
+        }
+      })
+    }
+  })
+</script>
+</body>
+</html>

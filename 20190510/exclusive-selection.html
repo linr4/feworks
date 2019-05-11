@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>exclusive selection</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    div {
+      width: 300px;
+      height: auto;
+      margin: 100px auto;
+      border: 1px solid #cccccc;
+    }
+    ul {
+      list-style-type: none;
+    }
+    li {
+      width: 98%;
+      height: 30px;
+      line-height: 30px;
+      margin: 2px;
+      border: 1px solid #cccccc;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .selected {
+      background-color: turquoise;
+      color: white;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+<div>
+  <ul>
+    <li>list item 1</li>
+    <li>list item 2</li>
+    <li>list item 3</li>
+    <li>list item 4</li>
+    <li>list item 5</li>
+    <li>list item 6</li>
+    <li>list item 7</li>
+    <li>list item 8</li>
+    <li>list item 9</li>
+    <li>list item 10</li>
+  </ul>
+</div>
+
+<script>
+  let liEls = document.querySelectorAll('li');
+  let curIdx = 0;
+  liEls[curIdx].classList.add('selected');
+
+  for (let i = 0; i < liEls.length; i++) {
+    liEls[i].addEventListener('click', function () {
+      if (i !== curIdx) {
+        this.classList.add('selected');
+        liEls[curIdx].classList.remove('selected');
+        curIdx = i;
+      }
+    })
+  }
+</script>
+
+</body>
+</html>
