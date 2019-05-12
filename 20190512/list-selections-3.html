@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>列表全选、反选、取消选择</title>
+  <style>
+    html, body, div, ul, li, label, input, span {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Consolas", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+    }
+    ul {
+      list-style-type: none;
+    }
+
+    .billboard {
+      width: 400px;
+      height: auto;
+      border: 1px solid #cccccc;
+      border-radius: 10px;
+      margin: 100px auto;
+      box-shadow: 0 0 5px #cccccc;
+    }
+
+    h2 {
+      width: 380px;
+      margin: 10px;
+      text-align: center;
+      border-bottom: 1px solid #cccccc;
+    }
+    .songs {
+
+    }
+    .song {
+      width: 380px;
+      height: 30px;
+      line-height: 30px;
+      margin: 10px;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    input {
+      margin-right: 5px;
+      vertical-align: center;
+    }
+
+    .btns {
+      width: 100%;
+      height: 50px;
+      margin: 20px 0 0 15px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="billboard">
+  <h2>bill board</h2>
+  <ul class="songs">
+    <li class="song"><label><input type="checkbox">here is the name of song No. 1</label></li>
+    <li class="song"><label><input type="checkbox">here is the name of song No. 2</label></li>
+    <li class="song"><label><input type="checkbox">here is the name of song No. 3</label></li>
+    <li class="song"><label><input type="checkbox">here is the name of song No. 4</label></li>
+    <li class="song"><label><input type="checkbox">here is the name of song No. 5</label></li>
+    <li class="song"><label><input type="checkbox">here is the name of song No. 6</label></li>
+    <li class="song"><label><input type="checkbox">here is the name of song No. 7</label></li>
+    <li class="song"><label><input type="checkbox">here is the name of song No. 8</label></li>
+    <li class="song"><label><input type="checkbox">here is the name of song No. 9</label></li>
+  </ul>
+  <div class="btns">
+    <button class="select-">select all</button>
+    <button class="select-">unselect all</button>
+    <button class="select-">select reverse</button>
+  </div>
+</div>
+
+<script>
+  window.onload = function () {
+    let songEls = document.querySelectorAll('input[type=checkbox]');
+    let btnEls = document.querySelectorAll('button');
+
+    btnEls[0].onclick = function () {
+      doSelection('true');
+    };
+    btnEls[1].onclick = function () {
+      doSelection('false');
+    };
+    btnEls[2].onclick = function () {
+      doSelection('!song.checked')
+    };
+
+    function doSelection(state) {
+      songEls.forEach(function (song) {
+        song.checked = eval(state);
+      })
+    }
+  }
+</script>
+</body>
+</html>
