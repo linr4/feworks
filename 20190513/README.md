@@ -83,3 +83,29 @@
   * 计算天数就把差值除以天vs.毫秒的位权后取整即可；
   * 计算小时则需排除差值可以取整的天数（做取余操作：差值 % 天的位权），再把余数除以小时的位权；
   * 计算分、秒，与计算小时是同样的逻辑。
+
+
+
+
+
+##### 做日期时间格式化的函数：
+
+```js
+function formatTime(date) {
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
+
+    return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+}
+
+function formatNumber(n) {
+    n = n.toString();
+    return n[1] ? n : '0' + n;
+}
+```
+
