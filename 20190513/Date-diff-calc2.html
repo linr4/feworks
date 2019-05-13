@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>日期时间差的计算</title>
+</head>
+<body>
+  
+  <script>
+    let curDate = new Date(); // current date
+    let tgtDate = new Date('2019-10-01 00:00'); // target date
+
+    const second = 1000;  // milliseconds of a second
+    const minute = 60 * second; // milliseconds of a minute
+    const hour = 60 * minute;
+    const day = 24 * hour;
+
+    let totalDiffMs = tgtDate - curDate; // milliseconds of differential of the two dates
+    let diffDays = Math.floor(totalDiffMs / day); // days of differential of the two dates
+    let diffHours = Math.floor(totalDiffMs % day / hour); 
+    let diffMinutes = Math.floor(totalDiffMs % hour / minute);
+    let diffSeconds = Math.floor(totalDiffMs % minute / second);
+
+    console.log(diffDays, diffHours, diffMinutes, diffSeconds);
+  </script>
+</body>
+</html>

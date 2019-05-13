@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date Differential Calculation</title>
+</head>
+<body>
+  
+  <script>
+    const curDate = new Date();
+    const tgtDate = new Date('2019-10-1 00:00:00');
+    let diffMs = tgtDate - curDate; // 日期对象实例可直接作为操作数
+
+    // 等价于 valueOf() 做计算：
+    // let diffMs2 = tgtDate.valueOf() - curDate.valueOf();
+    // console.log(diffMs, diffMs2); // 12195049363 12195049363 毫秒
+
+    const second = 1000; // milliseconds of a second
+    const minute = 60 * second; // milliseconds of a minute
+    const hour = 60 * minute; // milliseconds of an hour
+    const day = 24 * hour;  // milliseconds of a day
+    console.log(day, hour, minute, second);
+
+    let diffDay  = parseInt(diffMs / day);
+
+// 取余表示要去掉可以整除天数的时间、只拿无法整除的部分计算剩余的小时数；
+    let diffHour = parseInt(diffMs / hour   % 24);
+
+// 取余表示要去掉可以整除小时数的时间、只拿无法整除的部分计算剩余分钟数；
+    let diffMin  = parseInt(diffMs / minute % 60);
+
+// 取余表示要去掉可以整除分钟数的时间、只拿无法整除的部分计算剩余秒数；
+    let diffSec  = parseInt(diffMs / second % 60);
+
+    console.log(`剩下 ${diffDay} 天 ${diffHour} 小时 ${diffMin} 分 ${diffSec} 秒`);
+  </script>
+</body>
+</html>

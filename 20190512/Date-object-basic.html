@@ -1,0 +1,45 @@
+<script type="text/javascript">
+  // 1. 获取当前时间
+  let date1 = new Date();
+  console.log(date1); // Sun May 12 2019 19:55:42 GMT+0800 (China Standard Time)
+  
+  // 2. 获取当前时间距离1970年1月1日（世界标准时间）的毫秒数
+  // 2a. 调用 Date 对象的静态方法 now() 即可
+  console.log(Date.now()); // 1557662265767
+  
+  // 2b. 或者调用 Date() 对象实例的 valueOf() 方法
+  console.log(date1.valueOf()); // 1557662348202
+  
+  // 3. 创建指定时间的对象实例
+  // 3a. 创建 Date() 对象实例时，传入日期格式的字符串
+  let date2 = new Date('2019-05-20 20:50:30');
+  console.log(date2); // Mon May 20 2019 20:50:30 GMT+0800 (China Standard Time)
+  
+  // 3b. 或者，按照：年、月、日、时、分、秒 传入数值参数
+  let date3 = new Date(2019, 06, 20, 20, 50, 30); // 留意月份要 +1，一月份从 0 开始计算
+  console.log(date3); // Sat Jul 20 2019 20:50:30 GMT+0800 (China Standard Time)
+  
+  // 4. 获取指定时间的 年、月、日、时、分、秒 
+  console.log(date1); // Sun May 12 2019 20:09:58 GMT+0800 (China Standard Time)
+  console.log(date1.getFullYear()); // 2019
+  console.log(date1.getMonth()); // 4，一月份为 0，转换成实际月份时要 +1
+  console.log(date1.getDate()); // 12
+  console.log(date1.getDay()); // 0，星期日为 0
+  console.log(date1.getHours()); // 20
+  console.log(date1.getMinutes()); // 9
+  console.log(date1.getSeconds()); // 58
+  console.log(date1.getMilliseconds()); // 447
+  
+  // 5. 时间日期的格式化
+  function formatDate(date) {
+    // return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    return date.getFullYear() + '-' +
+           (date.getMonth() + 1) + '-' +
+           date.getDate() + ' ' +
+           date.getHours() + ':' + 
+           date.getMinutes() + ':' + 
+           date.getSeconds();
+  }
+  console.log(formatDate(new Date())); // 2019-5-12 20:17:59
+</script>
+</script>
