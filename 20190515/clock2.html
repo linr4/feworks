@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>clock</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .clock {
+      width: 600px;
+      height: 600px;
+      background: url("clock.jpg");
+      margin: 100px auto;
+      position: relative;
+    }
+    .clock>div {
+      width: 30px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin-left: -15px;
+      visibility: hidden;
+    }
+    .hour {
+      background: url("hour.png");
+    }
+    .minute {
+      background: url("minute.png");
+    }
+    .second {
+      background: url("second.png");
+    }
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <div class="hour"></div>
+    <div class="minute"></div>
+    <div class="second"></div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const hourEl = document.querySelector('.hour'),
+        minuteEl = document.querySelector('.minute'),
+        secondEl = document.querySelector('.second');
+
+      function getHms() {
+        let dt = new Date();
+        let ms = dt.getMilliseconds(),
+            ss = dt.getSeconds() + ms / 1000,
+            mm = dt.getMinutes() + ss / 60,
+            hh = dt.getHours() + mm / 60;
+        return {hh, mm, ss}
+      }
+
+      function spinClockHands(hms) {
+        hourEl.style.transform = `rotate(${hms.hh * 30}deg)`;
+        minuteEl.style.transform = `rotate(${hms.mm * 6}deg)`;
+        secondEl.style.transform = `rotate(${hms.ss * 6}deg)`;
+      }
+
+      function showClockHands() {
+        hourEl.style.visibility = 'visible';
+        minuteEl.style.visibility = 'visible';
+        secondEl.style.visibility = 'visible';
+      }
+
+      spinClockHands(getHms());
+      showClockHands(); // 偏转角度设置好了之后再显示指针，以免刚开页面时看到指针在初始位置
+      setInterval(_ => spinClockHands(getHms()), 500);
+    }
+  </script>
+</body>
+</html>

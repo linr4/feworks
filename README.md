@@ -17,6 +17,7 @@ Web development learning notes and case study
 ###### 20190515 - Day 53
 
 * 再做一次 [秒杀倒计时](20190514/index4.html) 练习 (+1h = 123 of 600)
+* 练习 [时钟](20190515) (+1.5h = 124.5 of 600)
 
 ###### [20190514](20190514) - Day 52
 
