@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>秒杀倒计时</title>
+  <link rel="stylesheet" href="iconfont/iconfont.css">
+  <style>
+    html, body, div, p, i {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Microsoft YaHei UI', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    }
+    .wrapper {
+      width: 190px;
+      height: 270px;
+      margin: 100px auto;
+      background-color: #d00;
+      color: #fff;
+      text-align: center;
+    }
+    h3 {
+      display: inline-block;
+      margin: 40px 0 8px 0;
+      font-size: 26px;
+    }
+    p:nth-of-type(1) {
+      color: rgba(255,255,255,.5);
+    }
+    .icon-flash {
+      font-size: 46px;
+      display: inline-block;
+      margin: 8px;
+    }
+    .time {
+      margin-top: 8px;
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+    }
+    .time>div {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      background-color: #333;
+      font-size: 22px;
+      position: relative;
+    }
+    .time>.minutes {
+      margin: 0 5px 0 5px;
+    }
+    .time>div::before {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      height: 2px;
+      background-color: #dd0000;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <h3>东哥秒杀</h3>
+  <p>FLASH DEALS</p>
+  <i class="iconfont icon-flash"></i>
+  <p>本场距离结束还剩</p>
+  <div class="time">
+    <div class="hours">00</div>
+    <div class="minutes">00</div>
+    <div class="seconds">00</div>
+  </div>
+</div>
+
+<script>
+
+window.onload = function () {
+  // 获取用于显示时分秒的 3 个 div DOM对象
+  const hoursEl = document.querySelector('.hours'),
+    minutesEl = document.querySelector('.minutes'),
+    secondsEl = document.querySelector('.seconds');
+
+  // 设置目标日期时间常量
+  const tgtDate = new Date('2019-10-1 5:00');
+
+  // 设置时间进位权的常量，方便后面以清晰的逻辑进行计算
+  const aSecond = 1000, // a second is equal to 1000 millisecond
+    aMinute = 60 * aSecond,
+    anHour = 60 * aMinute,
+    aDay = 24 * anHour;
+
+  // 用于添加前缀 0 的函数
+  function alz(n) { // add leading zero
+    return n >= 10 ? ('' + n) : ('0' + n); // 结果均转换为字符串类型
+  }
+
+  // 计算两个日期时间差值的函数
+  function getDateDiff(tgtDate = new Date('2019-10-1 5:00'), curDate = new Date()) {
+
+    let totalMsDiff = tgtDate - curDate; // 日期实例对象之间相减，等于毫秒级差值
+    return {
+      days: alz(Math.floor(totalMsDiff / aDay)),
+      hours: alz(Math.floor(totalMsDiff % aDay / anHour)),
+      minutes: alz(Math.floor(totalMsDiff % anHour / aMinute)),
+      seconds: alz(Math.floor(totalMsDiff % aMinute / aSecond))
+    }
+  }
+
+  // 把时间设置/显示到相应的 DOM 对象的函数
+  function setTime(diff) { // 传入已经转换为天、时、分、秒的差值的对象字面量
+    hoursEl.innerText = diff.hours;
+    minutesEl.innerText = diff.minutes;
+    secondsEl.innerText = diff.seconds;
+  }
+
+  // 在定时器之前先执行一次，以免显示 00:00:00；定时器要等 1 秒钟才开始
+  setTime(getDateDiff(tgtDate));
+
+  // 开始定时器，每秒刷新一次时间
+  let timer1 = setInterval(function () {
+    setTime(getDateDiff(tgtDate));
+  }, 1000);
+}
+
+</script>
+</body>
+</html>

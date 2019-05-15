@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>秒杀倒计时</title>
+  <link rel="stylesheet" href="iconfont/iconfont.css">
+  <style>
+    html, body, div, p, i, h3 {
+      margin: 0;
+      padding: 0;
+      font-family: "Microsoft YaHei UI", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      box-sizing: border-box;
+    }
+    .wrapper {
+      margin: 100px auto;
+      width: 190px;
+      height: 270px;
+      background-color: #dd0000;
+      text-align: center;
+      color: #fff;
+      padding-top: 50px;
+    }
+    h3 {
+      font-size: 26px;
+    }
+    .wrapper>p:first-of-type {
+      color: rgba(255, 255, 255, .5);
+      margin: 10px;
+    }
+    .wrapper>.icon-flash {
+      font-size: 48px;
+    }
+    .wrapper>p:nth-of-type(2) {
+      margin: 5px;
+    }
+    .wrapper>.time {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+    }
+    .time>div {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      background-color: #333333;
+      position: relative;
+    }
+    .time>div::before {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      height: 2px;
+      background-color: #dd0000;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+    .time>.minutes {
+      margin: 0 5px 0 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <h3>京西秒杀</h3>
+  <p>FLASH DEALS</p>
+  <i class="iconfont icon-flash"></i>
+  <p>本场距离结束还剩</p>
+  <div class="time">
+    <div class="hours">00</div>
+    <div class="minutes">00</div>
+    <div class="seconds">00</div>
+  </div>
+</div>
+
+<script>
+  window.onload = function () {
+    let hoursEl = document.querySelector('.hours'),
+      minutesEl = document.querySelector('.minutes'),
+      secondsEl = document.querySelector('.seconds');
+
+    function alz(n) { // add leading zero
+      return (n >=10 ? n : '0' + 1).toString();
+    }
+
+    let tgtDate = new Date('2019-10-1 5:00');
+
+    function getDiff(tgtDate, curDate = new Date()) {
+
+      let diffMs = tgtDate - curDate;
+      const aSecond = 1000, // = 1000 millisecond
+        aMinute = 60 * aSecond,
+        anHour = 60 * aMinute,
+        aDay = 24 * anHour;
+
+      let diffDays = alz(Math.floor(diffMs / aDay)),
+        diffHours = alz(Math.floor(diffMs % aDay / anHour)),
+        diffMinutes = alz(Math.floor(diffMs % anHour / aMinute)),
+        diffSeconds = alz(Math.floor(diffMs % aMinute / aSecond));
+
+      return {
+        diffDays,
+        diffHours,
+        diffMinutes,
+        diffSeconds
+      }
+    }
+
+    function setTime(diff) {
+      hoursEl.innerText = diff.diffHours;
+      minutesEl.innerText = diff.diffMinutes;
+      secondsEl.innerText = diff.diffSeconds;
+    }
+
+    setTime(getDiff(tgtDate));
+    let timerId = setInterval(function () {
+      setTime(getDiff(tgtDate));
+    }, 1000)
+  }
+</script>
+</body>
+</html>
