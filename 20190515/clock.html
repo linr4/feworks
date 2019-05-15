@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>clock</title>
+  <style>
+    html, body, div {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .clock {
+      width: 600px;
+      height: 600px;
+      background: url("clock.jpg");
+      margin: 100px auto;
+      position: relative;
+    }
+    .clock>div {
+      position: absolute;
+      width: 30px;
+      height: 600px;
+      top: 0;
+      left: 50%;
+      /*transform: translateX(-50%);*/
+      margin-left: -15px;
+    }
+    .clock>.hour {
+      background: url("hour.png");
+    }
+    .clock>.minute {
+      background: url("minute.png");
+    }
+    .clock>.second {
+      background: url("second.png");
+    }
+  </style>
+</head>
+<body>
+
+<div class="clock">
+  <div class="hour"></div>
+  <div class="minute"></div>
+  <div class="second"></div>
+</div>
+
+<script>
+  window.onload = function () {
+    let hourEl = document.querySelector('.hour'),
+      minuteEl = document.querySelector('.minute'),
+      secondEl = document.querySelector('.second');
+
+    function clock() {
+      let fullDate = new Date();
+
+      // 指针旋转角度是线性的，并非总是垂直指向5n刻度，计算时需要加上 下一级时间单位的增量；
+      // 如在 13:14:00 时，分针指向表盘3点钟偏上的方向（43度），时针指向 37度多一点的位置；
+
+      // 获取当前时间，转换为时分秒
+      let ms = fullDate.getMilliseconds(),
+          ss = (fullDate.getSeconds() + ms / 1000),
+          mm = (fullDate.getMinutes() + ss / 60),
+          hh = (fullDate.getHours() %12 + mm / 60);
+      // getHours返回24小时制的时间，表盘是12小时制的，因此需先与12取余再做偏转角度的计算
+
+      // 计算指针偏转角度
+      let ssDeg = ss * 6,  // 秒针偏转6度每秒
+          mmDeg = mm * 6,  // 分针偏转6度每分钟
+          hhDeg = hh * 30; // 时针偏转30度每小时
+
+      /* 如下语句会覆盖掉内联样式中 transform: translateX(-50%) 导致指针没有居中
+      * 两种解决方法：把 transform: translateX(-50%) 写在下列语句中，或者
+      * 在式中不设置 transform: translateX(-50%)，而通过 margin-left: -15px 实现居中；
+      */
+      hourEl.style.transform = `rotate(${hhDeg}deg)`;
+      minuteEl.style.transform = `rotate(${mmDeg}deg)`;
+      secondEl.style.transform = `rotate(${ssDeg}deg)`;
+    }
+
+    setInterval(_=>clock(), 10)
+  }
+
+</script>
+</body>
+</html>
