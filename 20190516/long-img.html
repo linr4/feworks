@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>长图滑动效果</title>
+  <style>
+    html, body, div, img {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .wrapper {
+      width: 1080px;
+      height: 600px;
+      border: 1px solid #cccccc;
+      margin: 100px auto;
+      overflow: hidden;
+      position: relative;
+    }
+    .modal-upper, .modal-lower {
+      width: 100%;
+      height: 50%;
+      position: absolute;
+      left: 0;
+    }
+    .modal-upper {
+      top: 0;
+    }
+    .modal-lower {
+      bottom: 0;
+    }
+    img {
+      position: absolute;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <img src="long-img.jpg" alt="">
+    <div class="modal-upper"></div>
+    <div class="modal-lower"></div>
+  </div>
+
+  <script>
+    let imgEl = document.querySelector('img');
+    let mUpEl = document.querySelector('.modal-upper');
+    let mLoEl = document.querySelector('.modal-lower');
+    let boxEl = document.querySelector('.wrapper');
+
+    let timerId = null;
+    let imgTop = parseInt(getComputedStyle(imgEl).top);
+    let maxLength = parseInt(getComputedStyle(boxEl).height) - parseInt(getComputedStyle(imgEl).height);  // 长图最大滑动距离 = 外框高度 - 图片高度
+
+
+    mUpEl.onmouseenter = function () {
+      timerId = setInterval(function () {
+        if (imgTop <= maxLength) {  // 是否已滑动到最底部；负值比较，所以用 <=
+          clearInterval(timerId);
+          imgTop = maxLength;
+          return false;
+        }
+        imgEl.style.top = imgTop + 'px';
+        imgTop -= 1;
+      }, 1)
+    };
+    mUpEl.onmouseleave = function () {
+      clearInterval(timerId);
+    };
+
+    mLoEl.onmouseenter = function () {
+      timerId = setInterval(function () {
+        if (imgTop >=0) {
+          imgTop = 0;
+          clearInterval(timerId);
+          return false;
+        }
+        imgEl.style.top = imgTop + 'px';
+        imgTop += 1;
+
+      }, 1)
+    };
+
+    mLoEl.onmouseleave = function () {
+      clearInterval(timerId);
+    }
+  </script>
+</body>
+</html>

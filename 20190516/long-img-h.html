@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>长图 - 横向</title>
+  <style>
+    html, body, div, img {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .box {
+      width: 1024px;
+      height: 512px;
+      margin: 100px auto;
+      overflow: hidden;
+      position: relative;
+    }
+    img {
+      width: auto;
+      height: 512px;
+      position: absolute;
+      left: 0;
+    }
+    .box>div {
+      width: 50%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+    .box>.modal-left {
+      left: 0;
+    }
+    .box>.modal-right {
+      right: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <img src="long-img-horizontal.jpg" alt="">
+  <div class="modal-left"></div>
+  <div class="modal-right"></div>
+</div>
+
+<script>
+  window.onload = function () {
+    let boxEl = document.querySelector('.box');
+    let imgEl = document.querySelector('img');
+    let mLeftEl = document.querySelector('.modal-left');
+    let mRightEl = document.querySelector('.modal-right');
+    let timerId = null;
+    let maxOffset = parseInt(getComputedStyle(imgEl).width) - parseInt(getComputedStyle(boxEl).width);
+
+
+    function moveImg(direction) {
+
+      // 设定移动方向
+      let pnSign = null; // positive-negative sign
+      if ('right' === direction) {pnSign = '-';}
+      else if ('left' === direction) {pnSign = '+';}
+      else {return false;}
+
+      let imgLeft = parseInt(getComputedStyle(imgEl).left); // 图片当前位置
+
+      timerId = setInterval(function () {
+        if (imgLeft > 0 || imgLeft < -maxOffset) { // 图片左边线出界
+          clearInterval(timerId);
+          imgLeft = parseInt(getComputedStyle(imgEl).left); // 保存图片当前位置
+          return false;
+        }
+        imgEl.style.left = imgLeft + 'px'; // 移动图片
+        imgLeft = Number(pnSign + 10) + imgLeft;      // 移动增量和方向
+        console.log(imgLeft);
+
+      }, 10)
+    }
+
+    mLeftEl.onmouseenter = function () {
+      moveImg('right');
+    };
+
+    mRightEl.onmouseenter = function () {
+      moveImg('left');
+    };
+
+    mLeftEl.onmouseleave = function () {
+      clearInterval(timerId);
+    };
+
+    mRightEl.onmouseleave = function () {
+      clearInterval(timerId);
+    };
+
+  }
+</script>
+</body>
+</html>
