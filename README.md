@@ -13,6 +13,9 @@ Web development learning notes and case study
 
 
 ---
+###### 20190519 
+
+* 这两天电脑故障，耽误了写代码
 
 ###### 20190517 - Day 55
 
