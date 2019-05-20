@@ -13,6 +13,10 @@ Web development learning notes and case study
 
 
 ---
+###### 20190520 
+
+* 继续瘫痪一天，争取明天把电脑修好继续开撸
+
 ###### 20190519 
 
 * 这两天电脑故障，耽误了写代码
