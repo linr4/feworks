@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linear Animation</title>
+    <style>
+        html, body, div, button {
+            margin: 0;
+            padding: 0;
+        }
+        button {
+            height: 30px;
+            border-radius: 5px;
+            outline: none;
+            margin-top: 30px;
+        }
+        div {
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+        .wrapper {
+            width: 600px;
+            height: 250px;
+            margin: 100px auto;
+            border: 1px solid #cccccc;
+            padding: 5px;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            margin-top: 5px;
+            background-color: skyblue;
+        }
+        .line1, .line2 {
+            height: 30px;
+            line-height: 30px;
+            text-align: right;
+        }
+        .line1 {
+            background-color: aquamarine;
+            width: 500px;
+        }
+        .line2 {
+            background-color: mediumaquamarine;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="box"></div>
+    <div class="line1">500</div>
+    <div class="line2">200</div>
+    <button id="btn1"> 从当前位置移到500 </button>
+    <button id="btn2"> 从当前位置移到200 </button>
+    <button id="btn3"> == Stop == </button>
+</div>
+
+<script>
+    let boxEl = document.querySelector('.box'),
+        btnEl1 = document.querySelector('#btn1'),
+        btnEl2 = document.querySelector('#btn2'),
+        btnEl3 = document.querySelector('#btn3');
+    let timerId = null;
+
+    btnEl1.onclick = function () {  // move forwards to 500px
+        clearInterval(timerId);
+        moveBox(boxEl, 500);
+    };
+
+    btnEl2.onclick = function () {  // move backwards to 200px
+        clearInterval(timerId);
+        moveBox(boxEl, 200);
+    };
+
+    btnEl3.onclick = function () {  // stop moving
+        clearInterval(timerId);
+    };
+
+    /**
+     * moving the box as per given element object and target position
+     * @param el: Object
+     * @param tgtPos: Number
+     */
+    function moveBox(el, tgtPos) {
+
+        let curPos = parseInt(getComputedStyle(el).marginLeft);
+
+        let step = (tgtPos - curPos) > 0 ? 2 : -2;  // determine moving step length and direction
+        // if target position is greater than current,
+        // step length should be a positive number,
+        // else negative, which means it should be moving backwards.
+
+        timerId = setInterval(function () {
+            // whatever which direction it moves,
+            // target minus current should be greater than step length,
+            // otherwise it means the moving has met the end.
+            if (Math.abs(tgtPos - curPos) > Math.abs(step)) {
+                curPos += step; // increase/decrease current position by given step length
+            } else {
+                curPos = tgtPos;    // moving meets the end
+                clearInterval(timerId);
+            }
+            el.style.marginLeft = curPos + 'px';
+        }, 10);
+    }
+</script>
+
+</body>
+</html>

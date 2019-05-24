@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linear Animation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+        .line1 {
+            width: 500px;
+            background-color: aquamarine;
+        }
+        .line2 {
+            width: 200px;
+            background-color: mediumaquamarine;
+        }
+
+        button {
+            width: 80px;
+            height: 40px;
+            margin-bottom: 5px;
+        }
+        .line1, .line2 {
+            text-align: right;
+            height: 20px;
+            line-height: 20px;
+        }
+        .wrapper {
+            width: 700px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid #cccccc;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <button id="start1">开始到500</button>
+        <button id="start2">开始到200</button>
+        <button id="end">结束</button>
+        <div class="box"></div>
+        <div class="line1">500</div>
+        <div class="line2">200</div>
+    </div>
+
+    <script>
+        let btnEl1 = document.querySelector('#start1');
+        let btnEl2 = document.querySelector('#start2');
+        let btnEl3 = document.querySelector('#end');
+        let divEl = document.querySelector('.box');
+        let timerId = null;
+        // let target = parseInt(getComputedStyle(document.querySelector('.line1')).width);
+
+        btnEl1.onclick = function () {
+            doAni(divEl, 500);
+        };
+        btnEl2.onclick = function () {
+            doAni(divEl, 200);
+        };
+        btnEl3.onclick = function () {
+            clearInterval(timerId);
+        };
+
+        function doAni(el, target) {
+
+            clearInterval(timerId);
+            timerId = setInterval(function () {
+                let begin = parseInt(el.style.marginLeft) || 0;
+                let step = (begin - target) < 0 ? 2 : -2;
+                begin += step;
+                if (Math.abs(target - begin) <= Math.abs(step)) { // 终点位置 - 当前位置 <= 步长
+                    begin = target;
+                    clearInterval(timerId);
+                }
+                el.style.marginLeft = begin + 'px';
+            }, 10)
+
+        }
+    </script>
+</body>
+</html>
