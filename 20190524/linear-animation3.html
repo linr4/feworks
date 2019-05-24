@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linear Animation</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            width: 600px;
+            height: 250px;
+            border: 1px solid #cccccc;
+            margin: 100px auto;
+            padding: 5px;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: orangered;
+        }
+        .line1, .line2 {
+            width: 500px;
+            height: 30px;
+            line-height: 30px;
+            text-align: right;
+            background-color: cyan;
+        }
+        .line2 {
+            width: 200px;
+            background-color:lightblue;
+        }
+        button {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="box"></div>
+        <div class="line1">500</div>
+        <div class="line2">200</div>
+        <button class="btn1">move to 500</button>
+        <button class="btn2">move to 200</button>
+        <button class="btn3">stop moving</button>
+    </div>
+
+    <script>
+        let btnEls = document.querySelectorAll('button');
+        let boxEl = document.querySelector('.box');
+        let timerId = null;
+
+        btnEls[0].onclick = function () {
+            clearInterval(timerId);
+            moveBox(boxEl, 500);
+        };
+
+        btnEls[1].onclick = function () {
+            clearInterval(timerId);
+            moveBox(boxEl, 200);
+        };
+
+        btnEls[2].onclick = function () {
+            clearInterval(timerId);
+        }
+
+        function moveBox(elm, tgtPos) {
+            let curPos = parseInt(getComputedStyle(boxEl).marginLeft);
+            let step = (tgtPos - curPos) > 0 ? 2 : -2;
+            timerId = setInterval(() => {
+                if (Math.abs(tgtPos - curPos) > Math.abs(step)) {
+                    curPos += step;
+                } else {
+                    curPos = tgtPos;
+                    clearInterval(timerId);
+                }
+                elm.style.marginLeft = curPos + 'px';
+            }, 10);
+        }
+    </script>
+</body>
+</html>
