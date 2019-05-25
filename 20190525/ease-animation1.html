@@ -75,8 +75,10 @@
 
         clearInterval(timerId);
         timerId = setInterval(() => {
-            let step = (tgtPos - curPos) * .5;
-            if (Math.abs(tgtPos - curPos) > Math.abs(step)) {
+            let step = (tgtPos - curPos) * .05;
+            console.log(step);
+            // if (Math.abs(tgtPos - curPos) > Math.abs(step)) {
+            if (Math.abs(step) > 0.01) {
                 curPos = curPos + step;
             } else {
                 curPos = tgtPos;
