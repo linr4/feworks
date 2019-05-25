@@ -12,7 +12,7 @@
 
   ```js
   let step = tgtPos > curPos ? 2 : -2;	// 匀速动画步长，固定值
-  let step = (tgtPos - curPos) * 0.5;		// 缓动动画步长，逐渐变小
+  let step = (tgtPos - curPos) * 0.5;	// 缓动动画步长，逐渐变小
   ```
 
 * 由于该步长计算公式的结果只会无限趋近于零、却不会等于零，因此终值判断要据此做出调整：
