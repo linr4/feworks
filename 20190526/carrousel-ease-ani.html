@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>carrousel images with ease animation</title>
+    <style>
+        html, body, div, ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .wrapper {
+            width: 590px;
+            height: 470px;
+            margin: 100px auto;
+            position: relative;
+            /*overflow: hidden;*/
+            border-radius: 16px;
+        }
+        ul {
+            list-style-type: none;
+            display: flex;
+        }
+        .arrows {
+             position: absolute;
+             top: 50%;
+             left: 0;
+             transform: translateY(-50%);
+             width: 100%;
+             display: flex;
+             justify-content: space-between;
+         }
+        .arrows>span {
+            width: 40px;
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            background-color: rgba(0,0,0,.5);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .indicator {
+            color: #000000;
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            font-size: 40px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <ul>
+        <li><img src="images/1.webp" alt=""></li>
+        <li><img src="images/2.webp" alt=""></li>
+        <li><img src="images/3.webp" alt=""></li>
+        <li><img src="images/4.webp" alt=""></li>
+        <li><img src="images/1.webp" alt=""></li>
+    </ul>
+    <p class="arrows">
+        <span>&lt;</span>
+        <span>&gt;</span>
+    </p>
+</div>
+<p class="indicator">0</p>
+
+<script>
+    let ulEl = document.querySelector('ul');
+    let liEls = document.querySelectorAll('li');
+    let arrowEls = document.querySelectorAll('span');
+    let timerId = null;
+    let curIdx = 0; // 当前显示的图片的索引
+    let imgWidth = parseInt(getComputedStyle(document.querySelector('img')).width);
+
+    // 向右移
+    arrowEls[0].onclick = function () {
+
+        if (curIdx >= liEls.length - 1) { // 到了形式上的最后一张（与第一张相同的图片）
+            curIdx = 0; // 重置图片索引为第一张
+            ulEl.style.marginLeft = 0 + 'px'; // 将 UL 移回第一张的位置
+        }
+
+        curIdx++;
+        document.querySelector('.indicator').innerHTML = curIdx;
+
+        moveElm(ulEl, -(imgWidth * curIdx));
+    };
+
+    // 向左移
+    arrowEls[1].onclick = function () {
+
+        if (curIdx <= 0) { // 到了第一张图片
+            curIdx = liEls.length - 1;
+            ulEl.style.marginLeft = -(imgWidth * curIdx) + 'px'; // 移到最后一张（与第一张图片一样）
+        }
+
+        curIdx--;
+        document.querySelector('.indicator').innerHTML = curIdx;
+
+        moveElm(ulEl, -(imgWidth * curIdx));   // ul 的 margin left 始终都小于零（若大于零则左侧就露出空白了），因此为负数
+    };
+
+
+    /**
+     * 移动 UL 的函数
+     * @param elm: Object
+     * @param tgtPos: Number
+     */
+    function moveElm(elm, tgtPos) {
+        let curPos = parseInt(getComputedStyle(elm).marginLeft);
+        let step = 0;
+
+        clearInterval(timerId);
+        timerId = setInterval(function () {
+            step = (tgtPos - curPos) * 0.05;
+            if (Math.abs(tgtPos - curPos) > 0.5) {
+                curPos += step;
+            } else {
+                curPos = tgtPos;
+                clearInterval(timerId);
+            }
+            elm.style.marginLeft = curPos + 'px';
+        }, 5);
+
+    }
+</script>
+</body>
+</html>

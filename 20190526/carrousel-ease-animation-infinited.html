@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>无限循环的轮播图 - 带缓动动画</title>
+    <style>
+        html, body, div, ul, li, p, span {
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            width: 590px;
+            height: 470px;
+            margin: 200px auto;
+            border: 1px solid #cccccc;
+            position: relative;
+            overflow: hidden;
+        }
+        ul {
+            list-style-type: none;
+            display: flex;
+        }
+        ul>li {
+
+        }
+        .arrows {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+        }
+        .arrows>span {
+            display: inline-block;
+            width: 40px;
+            font-size: 40px;
+            text-align: center;
+            color: white;
+            background-color: rgba(0,0,0,0.5);
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <ul class="img-list">
+        <li><img src="images/1.webp" alt=""></li>
+        <li><img src="images/2.webp" alt=""></li>
+        <li><img src="images/3.webp" alt=""></li>
+        <li><img src="images/4.webp" alt=""></li>
+        <li><img src="images/1.webp" alt=""></li>
+    </ul>
+    <p class="arrows">
+        <span class="to-left">&lt;</span>
+        <span class="to-right">&gt;</span>
+    </p>
+</div>
+
+<script>
+    let imgUlEl = document.querySelector('.img-list'),
+        imgLiEls = document.querySelectorAll('.img-list>li');
+    let aLeftEl = document.querySelector('.to-left'),
+        aRightEl = document.querySelector('.to-right');
+    let imgWidth = parseInt(getComputedStyle(imgLiEls[0]).width),
+        imgLstLen = imgLiEls.length,
+        timerId = null,
+        curIdx = 0;
+
+    // arrow To-The-Left is clicked
+    aLeftEl.onclick = function () {
+        if (curIdx >= imgLstLen - 1) { // at the end of the image list
+            curIdx = 0; // rest index to the first image
+            imgUlEl.style.marginLeft = -curIdx * imgWidth + 'px'; // move the list to the beginning
+        }
+        curIdx++;
+        moveElm(imgUlEl, -curIdx * imgWidth);
+    };
+
+    // arrow To-The-Right is clicked
+    aRightEl.onclick = function () {
+        if (curIdx <= 0) { // at the beginning of the list
+            curIdx = imgLstLen - 1; // reset index to the last image (same pic as the first one)
+            imgUlEl.style.marginLeft = -curIdx * imgWidth + 'px'; // move to the end of the list
+        }
+        curIdx--;
+        moveElm(imgUlEl, -curIdx * imgWidth);
+    };
+
+
+    /**
+     * function to do Movement for the images list
+     * @param elm: Object - the element which is going to be moved
+     * @param tgtPos: Number - target position to move to
+     */
+    function moveElm(elm, tgtPos) {
+        let curPos = parseInt(getComputedStyle(elm).marginLeft); // current position of the element
+        clearInterval(timerId);
+        timerId = setInterval(function () {
+            let step = (tgtPos - curPos) * .05; // ease movement, speed is decreasing during the move
+            if (Math.abs(tgtPos - curPos) > .05) { // not too close to the end yet
+                curPos += step;
+            } else { // if current position is approaching to target very closely, stop it
+                curPos = tgtPos;
+                clearInterval(timerId);
+            }
+            elm.style.marginLeft = curPos + 'px'; // do the move
+        }, 10);
+    }
+
+</script>
+</body>
+</html>
