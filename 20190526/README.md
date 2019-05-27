@@ -26,7 +26,15 @@
   moveElm(ulEl, -(imgWidth * curIdx));   // 始终不大于 0（若大于 0 则左侧就露出空白了）
   ```
 
+* JS 代码要放在 `window.onload = function () {...}` 中运行，否则一些需要实时计算 DOM 元素的表达式可能无法取得正确的结果；如下语句，如果没有放入 window.onload 中，则在 vscode 中运行结果总是 0，在 WebStorm 中第一次运行也是 0，刷新后才能获取正确结果；原因是 DOM 元素还未完成加载、JS 代码就已运行：
 
+  ```js
+  let imgWidth = parseInt(getComputedStyle(imgEls[0]).width)
+  ```
+
+  
+
+  
 
 ### 无限轮播图的实现原理
 

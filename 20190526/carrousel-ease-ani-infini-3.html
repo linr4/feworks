@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inifinty Carrousel with ease animation</title>
+    <style>
+        html, body, div, ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .wrapper {
+            width: 590px;
+            height: 470px;
+            border: 1px solid #ccc;
+            margin: 200px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        ul {
+            list-style-type: none;
+            display: flex;
+        }
+        .arrows {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);   
+            display: flex;
+            justify-content: space-between;
+        }
+        .arrows>span {
+            width: 40px;
+            height: 60px;
+            line-height: 60px;
+            color: white;
+            background-color: rgba(0,0,0,0.5);
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            user-select: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <ul>
+            <li><img src="images/1.webp" alt=""></li>
+            <li><img src="images/2.webp" alt=""></li>
+            <li><img src="images/3.webp" alt=""></li>
+            <li><img src="images/4.webp" alt=""></li>
+            <li><img src="images/1.webp" alt=""></li>
+        </ul>
+        <p class="arrows">
+            <span>&lt;</span><span>&gt;</span>
+        </p>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let imgUlEl = document.querySelector('ul');
+            let imgEls = document.querySelectorAll('ul>li');
+            let arrowEls = document.querySelectorAll('.arrows>span');
+
+            let imgWidth = parseInt(getComputedStyle(imgEls[0]).width),
+                listLength = imgEls.length,
+                curIdx = 0,
+                timerId = null;
+
+            arrowEls[0].onclick = function () {
+                if (curIdx >= listLength - 1) {
+                    imgUlEl.style.marginLeft = 0;
+                    curIdx = 0;
+                }
+                curIdx++;
+                moveElm(imgUlEl, -curIdx * imgWidth);
+            };
+
+            arrowEls[1].onclick = function () {
+                if (curIdx <= 0) {
+                    curIdx = listLength - 1;
+                    imgUlEl.style.marginLeft = -curIdx * imgWidth + 'px';
+                }
+                curIdx--;
+                moveElm(imgUlEl, -curIdx * imgWidth);
+            };
+
+            function moveElm(elm, tgtPos) {
+                curPos = parseInt(getComputedStyle(elm).marginLeft);
+                clearInterval(timerId);
+                timerId = setInterval(() => {
+                    let step = (tgtPos - curPos) * .05;
+                    if (Math.abs(tgtPos - curPos) < 0.5) {
+                        curPos = tgtPos;
+                        clearInterval(timerId);
+                    } else {
+                        curPos += step;
+                    }
+                    elm.style.marginLeft = curPos + 'px';
+                }, 10);
+
+            }
+        }
+
+    </script>
+</body>
+</html>

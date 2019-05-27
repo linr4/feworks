@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infinited Carrousel with Ease Animation</title>
+    <style>
+        html, body, div, ul, li, p {
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            width: 590px;
+            height: 470px;
+            border: 1px solid #cccccc;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        ul {
+            list-style-type: none;
+            display: flex;
+        }
+        .arrows {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+        }
+        .arrows>span {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            background-color: rgba(0,0,0,.5);
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <ul>
+        <li><img src="images/1.webp" alt=""></li>
+        <li><img src="images/2.webp" alt=""></li>
+        <li><img src="images/3.webp" alt=""></li>
+        <li><img src="images/4.webp" alt=""></li>
+        <li><img src="images/5.webp" alt=""></li>
+        <li><img src="images/6.webp" alt=""></li>
+        <li><img src="images/1.webp" alt=""></li>
+    </ul>
+    <p class="arrows">
+        <span class="left">&lt;</span>
+        <span class="right">&gt;</span>
+    </p>
+</div>
+
+<script>
+    let imgUlEl = document.querySelector('ul'),
+        imgLiEls = document.querySelectorAll('ul>li');
+    let aLeftEl = document.querySelector('.left'),
+        aRightEl = document.querySelector('.right');
+    let imgWidth = parseInt(getComputedStyle(imgLiEls[0]).width),
+        listLength = imgLiEls.length,
+        curIdx = 0,
+        timerId = null;
+
+    aLeftEl.onclick = function () {
+        if (curIdx >= listLength - 1) {
+            curIdx = 0;
+            imgUlEl.style.marginLeft = -curIdx * imgWidth + 'px';
+        }
+        curIdx++;
+        moveElm(imgUlEl, -imgWidth * curIdx);
+    };
+
+    aRightEl.onclick = function () {
+        if (curIdx <= 0) {
+            curIdx = listLength - 1;
+            imgUlEl.style.marginLeft = -curIdx * imgWidth + 'px';
+        }
+        curIdx--;
+        moveElm(imgUlEl, -curIdx * imgWidth);
+    };
+
+    function moveElm(elm, tgtPos) {
+        let curPos = parseInt(getComputedStyle(elm).marginLeft);
+
+        clearInterval(timerId);
+        timerId = setInterval(function () {
+            let step = (tgtPos - curPos) * .05;
+            if (Math.abs(tgtPos - curPos ) > 0.05) {
+                curPos += step;
+            } else {
+                curPos = tgtPos;
+                clearInterval(timerId);
+            }
+            elm.style.marginLeft = curPos + 'px';
+        }, 10);
+    }
+
+</script>
+</body>
+</html>
