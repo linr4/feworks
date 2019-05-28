@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>无限轮播图 - 缓动动画</title>
+    <style>
+        html, body, div, ul, li, p {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .wrapper {
+            width: 590px;
+            height: 470px;
+            border: 1px solid #cccccc;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        ul {
+            list-style-type: none;
+            display: flex;
+        }
+        .arrows {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+        }
+        .arrows>span {
+            width: 40px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            background-color: rgba(0,0,0,.5);
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <ul>
+            <li><img src="../20190526/images/1.webp" alt=""></li>
+            <li><img src="../20190526/images/2.webp" alt=""></li>
+            <li><img src="../20190526/images/3.webp" alt=""></li>
+            <li><img src="../20190526/images/4.webp" alt=""></li>
+            <li><img src="../20190526/images/5.webp" alt=""></li>
+            <li><img src="../20190526/images/6.webp" alt=""></li>
+            <li><img src="../20190526/images/1.webp" alt=""></li>
+        </ul>
+        <p class="arrows">
+            <span>&lt;</span>
+            <span>&gt;</span>
+        </p>
+    </div>
+    <script src="js/ease-ani.js"></script>
+    <script>
+        window.onload = function () {
+            let wrapperEl = document.querySelector('.wrapper');
+            let imgUlEl = document.querySelector('ul');
+            let imgLiEls = document.querySelectorAll('ul>li');
+            let arrowEls = document.querySelectorAll('.arrows>span');
+            let imgWidth = parseInt(getComputedStyle(imgLiEls[0]).width);
+            let imgCounts = imgLiEls.length;
+            let curIdx = 0;
+            let timerId = null;
+
+            arrowEls[0].onclick = function () {
+                if (curIdx <= 0) {
+                    curIdx = imgCounts - 1;
+                    imgUlEl.style.marginLeft = -curIdx * imgWidth + 'px';
+                }
+                curIdx--;
+                moveElm(imgUlEl, -curIdx * imgWidth);
+            };
+
+            arrowEls[1].onclick = function () {
+                if (curIdx >= imgCounts - 1) {
+                    curIdx = 0;
+                    imgUlEl.style.marginLeft = -curIdx * imgWidth + 'px';
+                }
+                curIdx++;
+                moveElm(imgUlEl, -curIdx * imgWidth);
+            };
+
+            function autoRun() {
+                clearInterval(timerId);
+                timerId = setInterval(function () {
+                    arrowEls[1].onclick();
+                }, 2000);
+
+
+            }
+
+            autoRun();
+
+            wrapperEl.onmouseenter = function () {
+                clearInterval(timerId);
+            };
+
+            wrapperEl.onmouseleave = function () {
+                autoRun();
+            };
+        }
+
+    </script>
+</body>
+</html>
