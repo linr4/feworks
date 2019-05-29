@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Event Object</title>
+</head>
+<body>
+
+<button>click me</button>
+<a href="http://github.com">github</a>
+
+<script>
+    window.onload = function () {
+        let btnEl = document.querySelector('button');
+        btnEl.onclick = function (event) {
+            event = event || window.event;
+            console.log(event); // MouseEvent {isTrusted: true, screenX: 2003, screenY: 135, clientX: 46, clientY: 19, …}
+            console.log(typeof event); // object
+        };
+
+        let aEl = document.querySelector('a');
+        aEl.onclick = function (evt) {
+            alert('anchor tag is clicked');
+            // return false; // 阻止默认行为（跳转到 href 所指 URL）
+            evt.preventDefault(); // 同样可以阻止默认行为，但仅IE9及以上才支持
+            evt.returnValue = false; // IE9 以下支持，兼容起见，两句都写上
+        }
+    }
+</script>
+</body>
+</html>
