@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### [20190530](20190530) - Day 61
+
+- JavaScript 事件的三个阶段 (+1h = 140 of 600)
+
 ###### [20190529](20190529) - Day 60
 
 - JavaScript 的事件对象 (+1h = 139 of 600)
