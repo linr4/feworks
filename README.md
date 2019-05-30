@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### [20190531](20190531) - Day 62
+
+- JavaScript 冒泡事件的应用、阻止，以及两组鼠标移入移出事件的区别 (+2h = 142 of 600)
+
 ###### [20190530](20190530) - Day 61
 
 - JavaScript 事件的三个阶段 (+1h = 140 of 600)

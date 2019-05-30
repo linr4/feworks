@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阻止事件冒泡的方法</title>
+    <style>
+        .parent {
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+            margin: 25% 40%;
+        }
+        .child {
+            width: 100px;
+            height: 100px;
+            background-color: darkturquoise;
+        }
+    </style>
+</head>
+<body>
+
+<div class="parent">
+    <div class="child">
+        child box
+    </div>
+        parent box
+</div>
+
+<script>
+        var parentEl = document.querySelector('.parent');
+        var childEl = document.querySelector('.child');
+
+        parentEl.onclick = function () {
+            console.log('parent');
+        };
+
+        childEl.onclick = function (event) {
+            event = event || window.event;
+            console.log('child');
+            console.log(event.cancelBubble); // still false in IE8
+            event.cancelBubble = true;
+            if (event.stopPropagation) {
+                event.stopPropagation()
+            }
+
+            // if (event.cancelBubble) {
+            //     event.cancelBubble = true;
+            // } else {
+            // event.stopPropagation();
+            // }
+        };
+</script>
+</body>
+</html>

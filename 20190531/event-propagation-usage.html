@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件冒泡的应用 - 排他选单</title>
+    <style>
+        html, body, div, ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .wrapper {
+            width: 200px;
+            height: auto;
+            margin: 100px auto;
+            border: 1px solid #cccccc;
+        }
+        ul {
+            width: 100%;
+            list-style-type: none;
+        }
+        li {
+            width: 100%;
+            height: 30px;
+            text-align: center;
+            padding: 5px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .selected {
+            color: yellow;
+            background-color: skyblue;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <ul>
+        <li class="selected">这是第1个选项</li>
+        <li>这是第2个选项</li>
+        <li>这是第3个选项</li>
+        <li>这是第4个选项</li>
+        <li>这是第5个选项</li>
+        <li>这是第6个选项</li>
+    </ul>
+</div>
+
+
+<script TYPE="text/html">
+    // 第一种写法：给每个 li 添加点击事件
+    window.onload = function () {
+        let liEls = document.querySelectorAll('li');
+        let curLi = document.querySelector('.selected');
+
+        for (let item of liEls) {
+            item.onclick = change;
+        }
+        function change() {
+            curLi.classList.remove('selected');
+            this.classList.add('selected');
+            curLi = this;
+        }
+    }
+</script>
+
+<script>
+    // 第二种方法：利用事件冒泡机制，监听 UL 的点击事件，事件对象的target属性即指向被点击的li
+    window.onload = function () {
+        let ulEl = document.querySelector('ul');
+        let curLi = document.querySelector('.selected');
+
+        ulEl.onclick = function (event) {
+            console.log(event.target);
+            event.target.classList.add('selected');
+            curLi.classList.remove('selected');
+            curLi = event.target;
+        }
+    }
+</script>
+</body>
+</html>

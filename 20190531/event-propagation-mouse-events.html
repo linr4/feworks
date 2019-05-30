@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>两组鼠标移入移出事件的区别</title>
+    <style>
+        .parent {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            margin: 100px auto;
+            padding: 50px;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        .child {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+
+<div class="parent">
+    <div class="child"></div>
+</div>
+
+<script>
+    let parentEl = document.querySelector('.parent'),
+        childEl = document.querySelector('.child');
+
+    /*parentEl.onmouseover = function () {
+        console.log('parent mouse over');
+    };
+    childEl.onmouseover = function () {
+        console.log('child mouse over');
+    }*/
+
+    parentEl.onmouseenter = function () {
+        console.log('parent mouse enter');
+    };
+    childEl.onmouseenter = function () {
+        console.log('child mouse enter');
+    }
+
+    /*parentEl.onmouseout = function () {
+        console.log('parent mouse out');
+    };
+    childEl.onmouseout = function () {
+        console.log('child mouse out');
+    }*/
+
+    /*parentEl.onmouseleave = function () {
+        console.log('parent mouse leave');
+    };
+    childEl.onmouseleave = function () {
+        console.log('child mouse leave');
+    }*/
+
+
+</script>
+</body>
+</html>
