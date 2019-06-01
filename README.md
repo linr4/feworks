@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### [[20190601](20190601) - Day 63
+
+- JavaScript 鼠标事件对象的4组位置属性 (+0.5h = 142.5 of 600)
+
 ###### [20190531](20190531) - Day 62
 
 - JavaScript 冒泡事件的应用、阻止，以及两组鼠标移入移出事件的区别 (+2h = 142 of 600)

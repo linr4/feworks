@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>X Y location properties in event object</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #27292c;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: turquoise;
+            margin: 100px 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box"></div>
+
+</body>
+
+<script>
+    let divEl = document.querySelector('.box');
+    divEl.onclick = function (event) {
+        event = event || window.event;
+        console.log(event.offsetX, event.offsetY);
+        console.log(event.clientX, event.clientY);
+        console.log(event.pageX, event.pageY);
+        console.log(event.screenX, event.screenY);
+
+    }
+</script>
+</html>
