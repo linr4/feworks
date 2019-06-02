@@ -29,6 +29,7 @@
     let divEl = document.querySelector('.box');
     divEl.onclick = function (event) {
         event = event || window.event;
+        console.dir(event);
         console.log(event.offsetX, event.offsetY);
         console.log(event.clientX, event.clientY);
         console.log(event.pageX, event.pageY);

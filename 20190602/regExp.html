@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Regular Expression</title>
+</head>
+<body>
+
+<script>
+    let str = '123abc456';
+    // 1. 创建正则表达式对象
+    // 2. 指定匹配规则 'a'，默认区分大小写
+    let re1 = new RegExp('a');
+
+    // 3. 调用 test() 方法做匹配
+    console.log(re1.test(str));  // true
+
+    // 正则表达式可接收第二个参数；'i' 表示不区分大小写
+    let re2 = new RegExp('A', 'i');
+    console.log(re2.test(str)); // true
+
+
+    // 匹配日期
+    let str2 = 'abc2020-3-11def';
+    let re3 = new RegExp('\\d{4}-\\d{1,2}-\\d{1,2}');
+    /*
+     在字符串中反斜线需要做转义，因此元字符 \d 要再加上个 \ 做转义，写为 \\d
+     \d{4} 表示匹配4个数字
+     \d{1,2} 表示匹配1到2个数字
+    */
+    console.log(re3.test(str2));
+
+</script>
+</body>
+</html>
