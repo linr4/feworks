@@ -12,6 +12,11 @@ Web development learning notes and case study
 
 ---
 
+###### [20190603](20190603) - Day 65
+
+- 学习 BOM 基础知识 (+0.5h = 144.5 of 600)
+- 练习用正则表达式做[日期时间的格式化](20190603/date-time-formatting.html) (+1.5h = 146 of 600)
+
 ###### [20190602](20190602) - Day 64
 
 - 练习鼠标事件的位置属性；学习正则表达式 (+1.5h = 144 of 600)

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>date and time formatting</title>
+</head>
+<body>
+
+<script>
+    let result = dtFormat('yyyy-MM-dd hh:mm:ss', new Date());
+    let res11 = dtFormat('yy-M-d', new Date());
+    let res12 = dtFormat('yyyy-MM-dd', new Date());
+    let res21 = dtFormat('h:m:s', new Date());
+    let res22 = dtFormat('hh:mm:ss', new Date());
+
+    console.log(result);
+    console.log(res11);
+    console.log(res12);
+    console.log(res21);
+    console.log(res22);
+
+    function dtFormat(formatStr, dateTime) {
+
+        // 1. 解析年份的格式字符串，确定是两位（yy）还是四位（yyyy），并依此取出相应的年份数字
+        let yearFmt = formatStr.match(/y+/i); // 加号（+）表示匹配一个或多个连续的指定字符，在这个表达式中，匹配多个 y
+        if (yearFmt) {  // 如果有传递年份格式化字符进来，才做处理
+            yearFmt = yearFmt[0];   // 年份格式字符为伪数组的第一个值
+
+            let yearNum = (dateTime.getFullYear() + '').substr(4 - yearFmt.length); // 取出年份数字
+            // substr(startIndex, [charCounts])
+            // 这个公式比较巧妙：
+            // 若 yearFmt = 'yyyy'、长度为 4，则表达式 4 - 4 = 0，从索引 0 开始取子串、直至结束（取 4 位，如 2019）；
+            // 若 yearFmt = 'yy'、长度为 2，则表达式 4 - 2 = 2，从索引 2 开始取子串、直至结束（取 2 位，如 19）；
+
+            formatStr = formatStr.replace(yearFmt, yearNum);    // 替换格式字符串中的年份y字符为取到的数字
+        }
+
+
+        let dtObj = {
+            'M+' : dateTime.getMonth() + 1,
+            'd+' : dateTime.getDate(),
+            'h+' : dateTime.getHours(),
+            'm+' : dateTime.getMinutes(),
+            's+' : dateTime.getSeconds()
+        };
+
+        for (let key in dtObj) {    // 解析余下的数字
+            let keyFmt = formatStr.match(new RegExp(key));
+            let keyVal = '';
+
+            if (keyFmt) {   // 如果有传递相应的格式字符进来才做进一步处理
+                keyFmt = keyFmt[0];
+                if (keyFmt.length === 1) {  // 格式字符为一位，如 M, d, h
+                    keyVal = dtObj[key] + '';
+                } else {  // 格式字符为两位，如 MM, dd, hh
+                    keyVal = ('00' + dtObj[key]).substr((dtObj[key] + '').length);
+                    // 如果取到的为一位数字，如 3，那么 ('003').substr('3'.length) = ('003').substr(1) = '03'
+                    // 如果取到的为两位数字，如 13，那么 ('0013').substr('13'.length) = ('0013').substr(2) = '13'
+                }
+                formatStr = formatStr.replace(keyFmt, keyVal);
+            }
+        }
+
+        return  formatStr;
+    }
+
+</script>
+</body>
+</html>

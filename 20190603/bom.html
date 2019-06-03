@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<title>BOM</title>
+<head>
+
+<body>
+
+<script>
+	console.log(window.screen);
+	console.log(window.navigator);
+	console.log(window.navigator.userAgent);
+	var ua = window.navigator.userAgent;
+	
+	if (/chrome/i.test(ua)) {
+		console.log('chrome');
+	} else if (/firefox/i.test(ua)) {
+		console.log('firefox');
+	} else if (/msie/i.test(ua)) {
+		console.log('old IE');
+	} else if ('ActiveXObject' in window) {
+		console.log('mordern IE');
+	}
+</script>
+</body>
+
+</html>
