@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>BOM Object - location</title>
+</head>
+<body>
+
+<button class="btn"> 获取 </button>
+<button class="btn"> 设置 </button>
+<button class="btn"> 刷新 </button>
+<button class="btn"> 强制刷新 </button>
+
+<script>
+	let btnEls = document.querySelectorAll('.btn');
+	
+	btnEls[0].onclick = function () {
+		console.log(window.location.href);
+	};
+	
+	btnEls[1].onclick = function () {
+		window.location.href = 'http://www.qq.com';
+	};
+	
+	btnEls[2].onclick = function () {
+		window.location.reload(); // 可能不更新缓存
+	};
+	
+	btnEls[3].onclick = function () {
+		window.location.reload(true); // 会更新缓存
+	};
+
+</script>
+</body>
+</html>
