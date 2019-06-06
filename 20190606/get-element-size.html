@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取元素宽高的其它方式</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 100px;
+            height: 100px;
+            padding: 50px;
+            border: 50px solid turquoise;
+            background: red;
+            background-clip: content-box;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box"></div>
+
+<script type="text/html">
+    /* 通过 getComputedStyle() 获取 */
+    var divEl = document.getElementById('box');
+    var divStyle = window.getComputedStyle(divEl);
+
+    console.log(divStyle.width, divStyle.height); // 100px, 100px // 此方式获取的宽高不包括 border 和 padding
+
+    divEl.style.width = '166px';
+    divEl.style.height = '166px';
+
+    console.log(divStyle.width, divStyle.height); // 166px, 166px // 通过 JS 设置的样式同样能获取到
+
+    // divStyle.width = '177px';   // These styles are computed, and therefore the 'width' property is read-only.
+    // divStyle.height = '177px';  // 会报错，只读属性、不能修改
+
+    // IE9 以下版本的 IE 不支持 getComputedStyle() 方法，需要用 elm.currentStyle 属性来获取；
+
+</script>
+
+<script type="text/html">
+
+    // IE9 以下版本的 IE 不支持 getComputedStyle() 方法，需要用 elm.currentStyle 属性来获取；
+
+    var divEl = document.getElementById('box');
+    var divStyleIE8 = divEl.currentStyle;
+    console.log(divStyleIE8);   // 非 IE 浏览器会报出 undefined，不支持这个属性
+    console.log(divStyleIE8.width, divStyleIE8.height); // IE 可以输出 100px, 100px， 其它浏览器报错
+
+    divEl.style.width = '166px';
+    divEl.style.height = '166px';
+
+    console.log(divStyleIE8.width, divStyleIE8.height); // 166px, 166px，可以获取 JS 设置的样式
+
+    divStyleIE8.width = '177px';   // NoModificationAllowedError.
+    divStyleIE8.height = '177px';  // 一样会报错，只读属性、不能修改
+
+</script>
+
+<script type="text/html">
+
+    var divEl = document.getElementById('box');
+    console.log(divEl.style.width, divEl.style.height); // 没有输出，elm.style 只能获取到行内设置的属性，内联、外联样式获取不到
+
+    divEl.style.width = '166px';
+    divEl.style.height = '166px';
+    console.log(divEl.style.width, divEl.style.height); // 166px 166px，通过 JS 设置的样式可以获取到，值不包括 border & padding
+    // IE9 以下浏览器也支持
+
+</script>
+
+<script>
+    var divEl = document.getElementById('box');
+    console.log(divEl.offsetWidth, divEl.offsetHeight); // 300 300，包括了 border 和 padding，不带单位 px，IE8也支持
+    divEl.offsetWidth = 166;
+    divEl.offsetHeight = 166;
+    console.log(divEl.offsetWidth, divEl.offsetHeight); // 300 300，没报错，但设置无法生效，对原值没影响
+
+    divEl.style.width = '166px';
+    divEl.style.height = '166px';
+    console.log(divEl.offsetWidth, divEl.offsetHeight); // 366 366，行内和CSS设置的样式均可获取到
+
+</script>
+
+</body>
+</html>
