@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### [20190607](20190607) - Day 68
+
+- JS 获取元素位置和大小的三大家族（offsetXX, clientXX, scrollXX） (+2h = 150 of 600)
+
 ###### [20190606](20190606) - Day 67
 
 - 学习获取元素宽高的几种方法 (+1h = 148 of 600)

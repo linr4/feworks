@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>元素的 client 大小、位置相关属性</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            margin-top: 123px;
+            margin-left: 456px;
+            width: 100px;
+            height: 100px;
+            padding: 50px;
+            border: 50px solid turquoise;
+            background: orangered;
+            background-clip: content-box;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box"></div>
+
+<script>
+    let divEl = document.querySelector('.box');
+
+    console.log(divEl.clientWidth, divEl.clientHeight); // (200 200) = content + padding
+    console.log(divEl.clientLeft, divEl.clientTop); // (50 50) = borderLeft & borderTop
+
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>元素的 scrollXX 相关属性</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 100px;
+            height: 100px;
+            padding: 50px;
+            border: 50px solid turquoise;
+            background: orangered;
+            background-clip: content-box;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, at consectetur corporis ducimus eaque exercitationem fugiat incidunt laboriosam nisi nostrum omnis quas, quidem quo ratione saepe tempora, temporibus tenetur unde!
+</div>
+
+<script>
+    let divEl = document.querySelector('div');
+    console.log(divEl.scrollWidth, divEl.scrollHeight); // 200 200
+    divEl.onscroll = function () {
+        console.log(divEl.scrollLeft, divEl.scrollTop);
+
+    }
+</script>
+</body>
+</html>
