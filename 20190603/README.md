@@ -58,3 +58,21 @@ btnEls[3].onclick = function () {
 
 ### history
 
+操作当前session的页面，前进、后退、刷新：
+
+```js
+btnForward.onclick = function () {
+    window.history.forward(); // 或者用 .go()
+    window.history.go(1); 	  // 前进 1 个页面
+};
+
+btnRefresh.onclick = function () {
+    window.history.go(0); // 刷新当前页面
+};
+
+btnBackward.onclick = function () {
+    window.history.back(); // 或者用 .go()
+    window.history.go(-1); // 回退 1 个页面
+};
+```
+

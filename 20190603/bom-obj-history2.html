@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BOM object - history</title>
+</head>
+<body>
+
+<h1>This is Page No. Two</h1>
+<button id="btn3">Go Backward</button>
+
+<script>
+  let btnBackward = document.getElementById('btn3');
+  btnBackward.onclick = function () {
+    // window.history.back();
+    window.history.go(-1); // 回退 1 个页面
+  };
+</script>
+</body>
+</html>

@@ -5,7 +5,24 @@
 </head>
 <body>
 
+<h1>Page No. One</h1>
+<button id="btn1">Go Forward</button>
+<button id="btn2">Refresh</button>
+<a href="bom-obj-history2.html">Go to Page No.<strong>Two</strong></a>
 
-  
+<script>
+  let btnForward = document.getElementById('btn1');
+  let btnRefresh = document.getElementById('btn2');
+
+  btnForward.onclick = function () {
+    // window.history.forward();
+    window.history.go(1); // 前进 1 个页面
+  };
+
+  btnRefresh.onclick = function () {
+    window.history.go(0); // 刷新当前页面
+  };
+
+</script>
 </body>
 </html>

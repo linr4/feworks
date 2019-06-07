@@ -12,6 +12,14 @@ Web development learning notes and case study
 
 ---
 
+###### [20190606](20190606) - Day 67
+
+- 学习获取元素宽高的几种方法 (+1h = 148 of 600)
+
+###### [20190604](20190604) - Day 66
+
+- 学习 BOM 对象 navigator/history/location (+1h = 147 of 600)
+
 ###### [20190603](20190603) - Day 65
 
 - 学习 BOM 基础知识 (+0.5h = 144.5 of 600)
