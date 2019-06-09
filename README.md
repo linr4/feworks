@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### [20190609](20190609) - Day 69
+
+- JS 获取页面宽高的方法 (+1h = 151 of 600)
+
 ###### [20190607](20190607) - Day 68
 
 - JS 获取元素位置和大小的三大家族（offsetXX, clientXX, scrollXX） (+2h = 150 of 600)
