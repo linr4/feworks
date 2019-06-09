@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>inner-width and height of a page</title>
+</head>
+<body>
+
+<script type="text/html">
+    console.log(window.innerWidth, window.innerHeight); // 页面可视区域的宽高，IE9及以上
+
+    var de = document.documentElement;
+    console.log(de); // HTML 文档对象，既是整个网页的父元素
+    console.log(de.clientWidth, de.clientHeight);
+    // IE9 以下标准模式适用，等同innerWidth/Height
+    // 混杂模式/怪异模式 下不适用
+    // 若文档未声明 DOCTYPE 则以混杂模式渲染
+
+    console.log(document.compatMode); // CSS1Compat 标准模式
+    // 注释掉 <!DOCTYPE html> 之后，为 BackCompat，既：混杂模式、怪异模式
+
+    // 混杂模式下可用 body.clientWidth 获取页面宽度，但在标准模式中无效
+    console.log(document.body.clientWidth, document.body.clientHeight);
+</script>
+
+<script>
+    window.onload = function () {
+
+        function getPageWH() {
+            var w, h;
+            if (window.innerWidth) {
+                w = window.innerWidth;
+                h = window.innerHeight;
+            } else if (document.compatMode === "CSS1Compat") {
+                w = document.documentElement.clientWidth;
+                h = document.documentElement.clientHeight;
+            } else {    // BackCompact
+                w = document.body.clientWidth;
+                h = document.body.clientHeight;
+            }
+            return {width: w, height: h}
+        }
+
+        var pageWidth = getPageWH().width;
+        var pageHeight = getPageWH().height;
+        console.log(pageWidth, pageHeight);
+    }
+</script>
+</body>
+</html>
