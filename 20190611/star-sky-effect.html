@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星空背景效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            overflow: hidden;
+        }
+        span {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: url("star.jpg") no-repeat;
+            background-size: 100% 100%;
+
+            position: absolute;
+
+            animation: flash 1s alternate infinite;
+        }
+        @keyframes flash {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        span:hover {
+            transform: scale(3, 3) rotate(180deg) !important;
+            transition: all 1s;
+        }
+    </style>
+</head>
+<body>
+
+<span></span>
+
+<script>
+    window.onload = function () {
+
+        for (let i = 1; i < 200; i++) {
+            let starEl = document.createElement('span');
+            document.body.appendChild(starEl);
+
+            starEl.style.left = Math.random() * getPageWH().pageW + 'px';
+            starEl.style.top = Math.random() * getPageWH().pageH + 'px';
+
+            let scale = Math.random() * 2;
+            starEl.style.transform = `scale(${scale}, ${scale})`;
+
+            starEl.style.animationDelay = Math.random() * 2 + 's';
+
+        }
+    };
+
+    function getPageWH() {
+      var pageW, pageH;
+      if (window.innerWidth) {
+          pageW = window.innerWidth;
+          pageH = window.innerHeight;
+      } else if (document.compatMode === 'CSS1Compat') {
+          pageW = document.documentElement.clientWidth;
+          pageH = document.documentElement.clientHeight;
+      } else {
+          pageW = document.body.clientWidth;
+          pageH = document.body.clientHeight;
+      }
+      return {pageW, pageH}
+    }
+</script>
+
+</body>
+</html>

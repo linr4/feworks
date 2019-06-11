@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>star sky - 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+        span {
+            display: inline-block;
+            background: url("star.jpg") no-repeat;
+            background-size: 100% 100%;
+            width: 30px;
+            height: 30px;
+
+            position: absolute;
+
+            animation: flash 1s alternate infinite;
+        }
+        @keyframes flash {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        span:hover {
+            transform: rotate(180deg) scale(3, 3) !important;
+            transition: all 1s;
+        }
+    </style>
+
+</head>
+<body>
+
+    <span></span>
+
+    <script>
+        window.onload = function () {
+
+          function getPageWH() { // get width and height of a web page
+              var width, height;
+              if (window.innerWidth) {
+                  width = window.innerWidth;
+                  height = window.innerHeight;
+              } else if (document.compatMode === 'CSS1Compat') {
+                  width = document.documentElement.clientWidth;
+                  height = document.documentElement.clientHeight;
+              } else {
+                  width = document.body.clientWidth;
+                  height = document.body.clientHeight;
+              }
+              return {width, height}
+          }
+
+
+          for (let i = 0; i < 200; i++) {
+
+              let starEl = document.createElement('span');
+              document.body.appendChild(starEl);    // create a star and append to body
+
+              starEl.style.left = Math.random() * getPageWH().width + 'px'; // set star's position
+              starEl.style.top = Math.random() * getPageWH().height + 'px';
+
+              starEl.style.animationDelay = Math.random() * 2 + 's'; // make stars flash randomly
+
+              let scale = Math.random() * 2;
+              starEl.style.transform = `scale(${scale}, ${scale})`; // adjust stars' size randomly
+          }
+        };
+    </script>
+</body>
+</html>
