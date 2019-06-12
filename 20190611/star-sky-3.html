@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>stary sky</title>
+	<style>
+	  * {
+	    margin: 0;
+		padding: 0;
+	  }
+	  body, html {
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+		overflow: hidden;
+	  }
+	  span {
+	    width: 30px;
+		height: 30px;
+	    background: url("star.jpg") no-repeat;
+		background-size: 100% 100%;
+		
+		position: absolute;
+		
+		animation: flash 1s alternate infinite;
+	  }
+	  @keyframes flash {
+	    from {
+		  opacity: 0;
+		}
+		to {
+		  opacity: 1;
+		}
+	  }
+	  span:hover {
+	    transform: scale(3, 3) rotate(180deg) !important;
+		transition: all 1s;
+	  }
+	  
+	</style>
+</head>
+
+<body>
+	<span></span>
+</body>
+
+<script>
+
+  function getPageSize() {
+	var width, height;
+	if (window.innerWidth) {
+	  width = window.innerWidth;
+	  height = window.innerHeight;
+	} else if (document.compatMode === 'CSS1Compat') {
+	  width = document.documentElement.clientWidth;
+	  height = document.documentElement.clientHeight;
+	} else {
+	  width = document.body.clientWidth;
+	  height = document.body.clientHeight;
+	}
+	return {width, height}
+  }
+
+  for (let i = 0; i < 200; i++) {
+	let spanEl = document.createElement('span');
+	
+	// set random position for a star
+	spanEl.style.left = Math.random() * getPageSize().width + 'px';
+	spanEl.style.top = Math.random() * getPageSize().height + 'px';
+	
+	// scale a star to a random size 
+	let scale = Math.random() * 2;
+	spanEl.style.transform = `scale(${scale},${scale})`;
+	
+	// flash stars randomly
+	spanEl.style.animationDelay = Math.random() * 3 + 's';
+	
+	document.body.appendChild(spanEl);
+	
+	
+	
+  }
+</script>
+</html>

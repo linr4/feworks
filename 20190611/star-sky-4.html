@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>stary night</title>
+  <style>
+    * {
+	  margin: 0;
+	  padding: 0;
+	}
+	html, body {
+	  width: 100%;
+	  height: 100%;
+	  background-color: #000;
+	  overflow: hidden;
+	}
+	span {
+	  display: inline-block;
+	  width: 30px;
+	  height: 30px;
+	  background: url("star.jpg") no-repeat;
+	  background-size: 100% 100%;
+	  
+	  position: absolute;
+	  
+	  animation: flash 1s alternate infinite;
+	}
+	@keyframes flash {
+	  from {
+	    opacity: 0;
+	  }
+	  to {
+	    opactiy: 1;
+	  }
+	}
+	span:hover {
+	  transform: scale(3, 3) rotate(180deg) !important;
+	  transition: all 1s;
+	}
+  </style>
+</head>
+
+<body>
+  <span></span>
+</body>
+
+<script>
+  function getPageSize() {
+    var width, height;
+	if (window.innerWidth) {  // is modern browsers
+	  width = window.innerWidth;
+	  height = window.innerHeight;
+	} else if (document.compatMode === 'CSS1Compat') { // is below IE9, standard mode
+	  width = document.documentElement.clientWidth;
+	  height = document.documentElement.clientHeight;
+	} else {  // is below IE9, quirks mode
+	  width = document.body.clientWidth;
+	  height = document.body.clientHeight;
+	}
+	
+	return {width, height}
+  }
+  
+  window.onload = function () {
+    for (let i = 0; i < 200; i++) {
+	  let spanEl = document.createElement('span');
+	  
+	  // set random position for a star
+	  spanEl.style.left = Math.random() * getPageSize().width + 'px';
+	  spanEl.style.top = Math.random() * getPageSize().height + 'px';
+	  
+	  // set random size for a star
+	  let scale = Math.random() * 2;
+	  spanEl.style.transform = `scale(${scale}, ${scale})`;
+	  
+	  // set random flash interval for a star
+	  spanEl.style.animationDelay = Math.random() * 3 + 's';
+	  
+	  // append a star to the page doc
+	  document.body.appendChild(spanEl);
+	}
+  }
+
+</script>
+</html>
