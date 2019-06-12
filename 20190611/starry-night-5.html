@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>starry night sky</title>
+	<style>
+	  * {
+		margin: 0;
+		padding: 0;
+	  }
+	  html, body {
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+		overflow: hidden;
+	  }
+	  span {
+	    display: inline-block;
+		width: 30px;
+		height: 30px;
+		background: url("star.jpg");
+		background-size: 100% 100%;
+		position: absolute;
+		animation: flash 1s alternate infinite;
+	  }
+	  @keyframes flash {
+	    from {
+		  opacity: 0;
+		}
+		to {
+		  opacity: 1;
+		}
+	  }
+	  span:hover {
+	    transform: scale(3, 3) rotate(180deg) !important;
+		transition: all 1s;
+	  }
+	</style>
+</head>
+<body>
+	<span></span>
+	<script>
+	  window.onload = function () {
+		console.log(getPageSize().width, getPageSize().height);
+	    function getPageSize() {
+		  var width, height;
+		  if (window.innerWidth) {		// modern browsers
+		    width = window.innerWidth;
+			height = window.innerHeight;
+		  } else if ('CSS1Compat' === document.compatMode) {  // pre IE9, standards mode
+		    width = document.documentElement.clientWidth;
+			height = document.documentElement.clientHeight;
+		  } else {  // pre IE9, quirks mode
+		    width = document.body.clientWdith;
+			height = document.body.clientHeight;
+		  }
+		  return {
+		    width: width, 
+			height: height
+		  }
+		}
+		
+		for (var i = 0; i < 200; i++) {
+		  var spanEl = document.createElement('span');
+		  // set star's position
+		  spanEl.style.top = Math.random() * getPageSize().height + 'px';
+		  spanEl.style.left = Math.random() * getPageSize().width + 'px';
+		  // set star's size
+		  var scale = Math.random() * 2;
+		  spanEl.style.transform = `scale(${scale}, ${scale})`;
+		  // set flash interval
+		  spanEl.style.animationDelay = Math.random() * 3 + 's';
+		  // add star to body
+		  document.body.appendChild(spanEl);
+		}
+	  }
+	</script>
+</body>
+</html>
