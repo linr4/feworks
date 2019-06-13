@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>弹性导航条</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            width: 900px;
+            height: 63px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            color: white;
+            background: url("11.png") #000 no-repeat right center;
+            background-size: auto 100%;
+            position: relative;
+        }
+
+        ul {
+            position: relative;
+            z-index: 99;
+        }
+
+        ul>li {
+            list-style-type: none;
+            float: left;
+            width: 88px;
+            height: 63px;
+            line-height: 63px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        span {
+            display: inline-block;
+            width: 88px;
+            height: 63px;
+            background: url("tmall.png") no-repeat left center;
+            background-size: auto 60%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <ul>
+            <li>双11狂欢</li>
+            <li>服装会场</li>
+            <li>数码家电</li>
+            <li>家具建材</li>
+            <li>母婴童装</li>
+            <li>手机会场</li>
+            <li>美妆会场</li>
+            <li>进口会场</li>
+            <li>飞猪旅行</li>
+        </ul>
+        <span></span>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let spanEl = document.querySelector('span');
+            let ulEl = document.querySelector('ul');
+            let timerId = null;
+
+            ulEl.onclick = function (event) {
+                // spanEl.style.left = event.target.offsetLeft + 'px';
+                moveElm(spanEl, event.target.offsetLeft);
+            }
+
+            function moveElm(elm, tgtPos) {
+                let curPos = parseInt(getComputedStyle(elm).marginLeft); // current position of the element
+                clearInterval(timerId);
+                timerId = setInterval(function () {
+                    let step = (tgtPos - curPos) * .05; // ease movement, speed is decreasing during the move
+                    if (Math.abs(tgtPos - curPos) > .05) { // not too close to the end yet
+                        curPos += step;
+                    } else { // if current position is approaching to target very closely, stop it
+                        curPos = tgtPos;
+                        clearInterval(timerId);
+                    }
+                    elm.style.marginLeft = curPos + 'px'; // do the move
+                }, 10);
+            }
+        }
+    </script>
+</body>
+
+</html>
