@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flexible navigation bar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #27292c;
+            color: white;
+        }
+        .nav {
+            width: 800px;
+            height: 63px;
+            border: 1px solid yellow;
+            margin: 100px auto;
+            background: url('11.png') no-repeat right center;
+            background-size: auto 90%;
+            border-radius: 10px;
+            position: relative;
+        }
+        ul {
+            list-style-type: none;
+            margin-left: 5px;
+            position: relative;
+            z-index: 99;
+
+        }
+        ul>li {
+            float: left;
+            width: 70px;
+            height: 63px;
+            line-height: 63px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+        span {
+            display: inline-block;
+            width: 70px;
+            height: 63px;
+            background: url('tmall.png') no-repeat left center;
+            background-size: auto 60%;
+            position: absolute;
+            left: 5px;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <li>双11狂欢</li>
+            <li>服装会场</li>
+            <li>数码家电</li>
+            <li>家具建材</li>
+            <li>母婴童装</li>
+            <li>手机会场</li>
+            <li>美妆会场</li>
+            <li>进口会场</li>
+            <li>飞猪旅行</li>
+        </ul>
+        <span></span>
+    </div>
+
+    <script src="ease-animation.js"></script>
+    <script>
+        let spanEl = document.querySelector('span');
+        let ulEl = document.querySelector('ul');
+
+        ulEl.onclick = function (event) {
+            event = event || window.event;
+            console.log(event.target.offsetLeft);
+            // spanEl.style.left = event.target.offsetLeft + 'px';
+            moveElm(spanEl, event.target.offsetLeft);
+        }
+    
+    </script>
+</body>
+</html>
