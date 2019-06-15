@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>可拖拽的弹出窗口（带蒙版效果）</title>
+    <title>可拖拽的弹出窗口（带蒙板效果）</title>
     <style>
         * {
             margin: 0;
@@ -89,6 +89,7 @@
             transform: translate(0, -50%) rotate(-45deg);
         }
         .close>.x-sign-mask {
+            display: inline-block;
             width: 50px;
             height: 50px;
             background-color: transparent;
@@ -117,8 +118,7 @@
             <span class="close">
                 <span></span>
                 <span></span>
-                <div class="x-sign-mask">
-                </div>
+                <span class="x-sign-mask"></span>
             </span>
         </div>
     </div>
@@ -129,7 +129,7 @@
             let closeBtnEl = document.querySelector('.close');
             let maskEl = document.querySelector('.mask');
             let loginEl = document.querySelector('.login');
-            let closeXsignEl = document.querySelector('.x-sign-mask'); // 关闭按钮加上蒙版，用于避免点到×符号（span画的）时仍会相应拖动事件
+            let closeXsignEl = document.querySelector('.x-sign-mask'); // 关闭按钮加上蒙板，用于避免点到×符号（span画的）时仍会相应拖动事件
 
             loginBtnEl.onclick = function () {
                 maskEl.style.display = 'block';
@@ -145,7 +145,7 @@
                 the X (horizontal) coordinate (in pixels) at which the mouse was clicked, 
                 relative to the left edge of the entire document. 
                 */
-                if (event.target === closeXsignEl) { // 点到关闭按钮（实际上是按钮的蒙版）上就不响应拖动事件
+                if (event.target === closeXsignEl) { // 点到关闭按钮（实际上是按钮的蒙板）上就不响应拖动事件
                     return false;
                 }
                 let x = event.pageX - this.offsetLeft; // 鼠标相对于 loginEl 窗口的偏移量
