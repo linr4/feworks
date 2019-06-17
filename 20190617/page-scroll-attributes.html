@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面滚动距离的相关属性</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .v-box {
+            margin: 10px 0 10px 100px;
+            width: 200px;
+            height: 3000px;
+            background-color: turquoise;
+        }
+        .h-box {
+            width: 3000px;
+            height: 200px;
+            margin-left: 10px;
+            background-color: skyblue;
+            position: absolute;
+            top: 200px;
+
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="v-box"></div>
+    <div class="h-box"></div>
+    
+    <script>
+        window.onscroll = function () {
+
+            console.log(getPageScroll().x, getPageScroll().y);
+
+            // IE9 以上的现代浏览器
+            // console.log(window.pageXOffset, window.pageYOffset);
+            // IE9 以下，标准模式
+            // console.log(document.documentElement.scrollLeft ,document.documentElement.scrollTop);
+            // IE9 以下，怪异模式
+            // console.log(document.body.scrollLeft, document.body.scrollTop);
+            // 实际测试时发现，
+            //  现代浏览器在怪异模式中也支持 body.scrollXX，但IE8返回 0,0 并不支持
+            //  标准模式中无论现代浏览器或IE8均不支持body.scrollXX
+        }
+
+        // 封装兼容写法：
+        function getPageScroll () {
+            var x, y; // 为了兼容，用 var 定义变量
+            if (window.pageXOffset) { // 现代浏览器
+                x = window.pageXOffset;
+                y = window.pageYOffset;
+            } else if ('BackCompat' === document.compatMode) { // IE9以下的怪异模式
+                x = document.body.scrollLeft;
+                y = document.body.scrollTop;
+            } else { // IE9以下的标准模式
+                x = document.documentElement.scrollLeft;
+                y = document.documentElement.scrollTop;
+            }
+            return {
+                x: x, 
+                y: y
+            }
+        }
+
+        
+
+    </script>
+</body>
+</html>
