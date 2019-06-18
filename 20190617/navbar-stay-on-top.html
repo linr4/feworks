@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>导航条吸顶效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 36px;
+        }
+
+        .banner {
+            width: 1000px;
+            height: 100px;
+            line-height: 100px;
+            margin: 0 auto;
+            background-color: skyblue;
+        }
+        .navbar {
+            width: 1000px;
+            height: 50px;
+            line-height: 50px;
+            margin: 0 auto;
+            background-color: orangered;
+        }
+        .content {
+            width: 1000px;
+            height: 2500px;
+            margin: 0 auto;
+            background-color: turquoise;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">BANNER</div>
+    <div class="navbar">NAVIGATION BAR</div>
+    <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta magnam facere odit veritatis porro cumque veniam laudantium iste odio autem nobis, ipsa, ullam voluptates ab ad assumenda! Sint, quidem natus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta magnam facere odit veritatis porro cumque veniam laudantium iste odio autem nobis, ipsa, ullam voluptates ab ad assumenda! Sint, quidem natus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta magnam facere odit veritatis porro cumque veniam laudantium iste odio autem nobis, ipsa, ullam voluptates ab ad assumenda! Sint, quidem natus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta magnam facere odit veritatis porro cumque veniam laudantium iste odio autem nobis, ipsa, ullam voluptates ab ad assumenda! Sint, quidem natus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta magnam facere odit veritatis porro cumque veniam laudantium iste odio autem nobis, ipsa, ullam voluptates ab ad assumenda! Sint, quidem natus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta magnam facere odit veritatis porro cumque veniam laudantium iste odio autem nobis, ipsa, ullam voluptates ab ad assumenda! Sint, quidem natus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta magnam facere odit veritatis porro cumque veniam laudantium iste odio autem nobis, ipsa, ullam voluptates ab ad assumenda! Sint, quidem natus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta magnam facere odit veritatis porro cumque veniam laudantium iste odio autem nobis, ipsa, ullam voluptates ab ad assumenda! Sint, quidem natus.</p>
+    </div>
+
+    <script>
+        let bannerEl = document.querySelector('.banner');
+        let navbarEl = document.querySelector('.navbar');
+
+        window.onscroll = function () {
+            if (window.scrollY >= bannerEl.offsetHeight) {
+                navbarEl.style.position = 'fixed';
+                navbarEl.style.top = 0;
+                navbarEl.style.left = bannerEl.offsetLeft + 'px';
+            } else {
+                navbarEl.style.position = 'static';
+            }
+        };
+    </script>
+</body>
+</html>

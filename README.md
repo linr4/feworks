@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### [20190617](20190617) - Day 76
+
+- 学习网页滚动的相关属性（scrollTop 等），导航条吸顶效果  (+2h = 165 of 600)
+
 ###### [20190615](20190615) - Day 75
 
 - 练习放大镜效果  (+2.5h = 163 of 600)
