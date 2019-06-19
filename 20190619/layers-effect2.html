@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>楼层效果 - 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        li {
+            list-style: none;
+            text-align: center;
+        }
+        ul {
+            width: 100%;
+            height: 100%;
+        }
+        ul>li {
+            width: 100%;
+            height: 100%;
+            font-size: 60px;
+        }
+
+        ol {
+            position: fixed;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            border: 1px solid #000;
+        }
+        ol>li {
+            width: 70px;
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid #666;
+
+            cursor: pointer;
+            user-select: none;
+        }
+        .selected {
+            font-weight: bold;
+            color: white;
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>第1楼</li>
+        <li>第2楼</li>
+        <li>第3楼</li>
+        <li>第4楼</li>
+        <li>第5楼</li>
+    </ul>
+    <ol>
+        <li class="selected">第1楼</li>
+        <li>第2楼</li>
+        <li>第3楼</li>
+        <li>第4楼</li>
+        <li>第5楼</li>
+    </ol>
+
+    <script>
+        window.onload = function () {
+            let ulLiEls = document.querySelectorAll('ul>li');
+            let colorArr = ['skyblue','yellowgreen','seagreen','pink','turquoise'];
+            for (let i = 0; i < ulLiEls.length; i++) {
+                ulLiEls[i].style.backgroundColor = colorArr[i];
+            }
+
+            let olLiEls =document.querySelectorAll('ol>li');
+            let curItem = document.querySelector('.selected');
+            let timerId = null;
+
+            for (let i = 0; i <= olLiEls.length; i++) {
+                olLiEls[i].onclick = function () {
+                    curItem.classList.remove('selected');
+                    this.classList.add('selected');
+                    curItem = this;
+
+                    clearInterval(timerId);
+                    timerId = setInterval(() => {
+                        let curPos = document.documentElement.scrollTop; // window.scrollY, window.pageYOffeset, all are the same
+                        let tgtPos = window.innerHeight * i;
+                        let inc = (tgtPos - curPos) * .3;
+
+                        curPos += inc;
+
+                        if (Math.abs(inc) < 1) {
+                            clearInterval(timerId);
+                            curPos = tgtPos;
+                        }
+
+                        window.scrollTo(0, curPos);
+                        // document.documentElement.scrollTop = curPos; // the same as above
+
+                    }, 50);
+
+                    
+                }
+            }
+        };
+    </script>
+</body>
+</html>

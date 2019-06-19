@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>楼层效果</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        html,
+        body,
+        ol,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+            text-align: center;
+        }
+
+        ul {
+            width: 100%;
+            height: 100%;
+        }
+
+        ul>li {
+            width: 100%;
+            height: 100%;
+            font-size: 200px;
+        }
+
+        ol {
+            position: fixed;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 99;
+        }
+
+        ol>li {
+            width: 60px;
+            height: 20px;
+            border: 1px solid black;
+
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .selected {
+            color: white;
+            background-color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>Layer 1</li>
+        <li>Layer 2</li>
+        <li>Layer 3</li>
+        <li>Layer 4</li>
+        <li>Layer 5</li>
+    </ul>
+    <ol>
+        <li class="selected">layger 1</li>
+        <li>layger 2</li>
+        <li>layger 3</li>
+        <li>layger 4</li>
+        <li>layger 5</li>
+    </ol>
+
+    <script>
+
+        window.onload = function () {
+            let ulLiEls = document.querySelectorAll('ul>li');
+            let olLiEls = document.querySelectorAll('ol>li');
+            let curLi = document.querySelector('.selected');
+            let curIdx = 0;
+
+            console.log(ulLiEls[0].offsetHeight);
+            console.log(window.innerHeight);
+
+            let colorArr = ['skyblue', 'greenyellow', 'turquoise', 'seagreen', 'wheat'];
+            for (let i = 0; i < ulLiEls.length; i++) {
+                ulLiEls[i].style.backgroundColor = colorArr[i];
+                ulLiEls[i].setAttribute('index', i);
+                olLiEls[i].setAttribute('index', i);
+            }
+
+            let timerId = null; 
+            // timerId 要定义在函数外面，否则如果在前一次滚动未结束之前再次点击的话，
+            // 程序会重新定义一个不同的timerId，导致clearInterval无法清除之前timerId，
+            // 前一个定时器仍在运行、后一个定时器也开始运行的情况下，滚动时页面会抖动；
+
+            olLiEls[0].parentElement.onmousedown = function (event) { // 用onclick的话，鼠标按下拖动会导致ol被加上class
+                curLi.classList.remove('selected');
+                event.target.classList.add('selected');
+                curLi = event.target;
+                curIdx = curLi.getAttribute('index');
+
+                let curPos = window.scrollY;
+                let tgtPos = window.innerHeight * curIdx;
+
+                clearInterval(timerId);
+                timerId = setInterval(() => {
+                    let inc = (tgtPos - curPos) * .2;
+                    curPos += inc;
+                console.log(curPos, tgtPos);
+
+                    if (Math.abs(inc) < 1) {
+                        curPos = tgtPos;
+                        clearInterval(timerId);
+                    }
+                    document.documentElement.scrollTop = curPos;
+                }, 50);
+            };
+
+            function getPageWH() {
+                var w, h;
+                if (window.innerWidth) {
+                    w = window.innerWidth;
+                    h = window.innerHeight;
+                } else if (document.compatMode === "CSS1Compat") {
+                    w = document.documentElement.clientWidth;
+                    h = document.documentElement.clientHeight;
+                } else {    // BackCompact
+                    w = document.body.clientWidth;
+                    h = document.body.clientHeight;
+                }
+                return { width: w, height: h }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scroll to Top with Ease Out effect</title>
+    <style>
+        html, body, div {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        div {
+            width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 30px;
+        }
+        .banner {
+            height: 150px;
+            line-height: 150px;
+            color: white;
+            background-color: skyblue;
+        }
+        .navbar {
+            height: 50px;
+            line-height: 50px;
+            color: white;
+            background-color: orangered;
+        }
+        .content {
+            border: 1px solid #eee;
+        }
+        .content>p {
+            margin: 10px;
+            background-color: #eee;
+        }
+
+        .go--top {
+            position: fixed;
+            right: 15px;
+            bottom: 15px;
+
+            width: 60px;
+            height: 40px;
+            line-height: 40px;
+            font-weight: bold;
+            text-align: center;
+            color: yellow;
+            background-color: green;
+            display: none;
+
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">THIS IS BANNER</div>
+    <div class="navbar">THIS IS NAVIGATION BAR</div>
+    <div class="content">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam veritatis quam itaque asperiores nobis dolorum recusandae optio adipisci suscipit illo nihil voluptatibus hic perspiciatis molestiae saepe temporibus, aperiam maxime. Id?</p>
+    </div>
+    <span class="go--top">Go Top</span>
+
+    <script>
+        window.onload = () => {
+            let bannerEl = document.querySelector('.banner');
+            let navbarEl = document.querySelector('.navbar');
+            let goTopEl = document.querySelector('.go--top');
+            let contentEl = document.querySelector('.content');
+            let contentInitMarginTop = getComputedStyle(contentEl).marginTop;
+
+            window.onscroll = () => {
+                if (window.pageYOffset > bannerEl.offsetHeight) { // banner scrolled out of page top
+                    navbarEl.style.position = 'fixed';  // make navbar stick to page top
+                    navbarEl.style.top = 0;
+                    navbarEl.style.left = bannerEl.offsetLeft + 'px';
+                    contentEl.style.marginTop = navbarEl.offsetHeight + 'px';
+                } else {  // banner scrolls back to viewable area, release navbar back to normal 
+                    navbarEl.style.position = 'static';
+                    contentEl.style.marginTop = contentInitMarginTop;
+                }
+
+                if (window.pageYOffset > 300) {  // page scrolls down enough to show goTop span
+                    goTopEl.style.display = 'inline-block';
+                } else {
+                    goTopEl.style.display = 'none';
+                }
+            };
+
+            goTopEl.onclick = () => {
+                let timerId = null;
+                let curPos = window.scrollY; // alias to window.pageYOffset
+                let tgtPos = 0;
+                
+                clearInterval(timerId);
+                timerId = setInterval(() => {
+                    let inc = (tgtPos - curPos) * .2; // incrementer, it decreases each time
+                    curPos = curPos + inc; // set current Y position of the page
+                    if (curPos < 1) {   // page scrolls very closed to top, end scroll.
+                        clearInterval(timerId);
+                        return false;
+                    } else {
+                        document.documentElement.scrollTop = curPos;
+                        // window.scrollTo(0, curPos); // this also works the same way
+                    }
+                }, 50);
+            };
+        };
+    </script>
+</body>
+</html>

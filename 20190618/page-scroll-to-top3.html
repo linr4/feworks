@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>scroll to top</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            background-color: #666;
+        }
+
+        div {
+            width: 100%;
+            color: white;
+            font-size: 36px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .wrapper {
+            position: absolute;
+            width: 1000px;
+            height: auto;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .banner {
+            height: 150px;
+            line-height: 150px;
+            background-color: seagreen;
+        }
+
+        .navbar {
+            height: 50px;
+            line-height: 50px;
+            background-color: orangered;
+        }
+        .content {
+            height: auto;
+            text-align: left;
+            padding: 10px;
+            color: #555;
+            background-color: #fff;
+        }
+
+        .go-top {
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+            background-color: orangered;
+            width: 30px;
+            height: 45px;
+            cursor: pointer;
+            user-select: none;
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="banner">BANNER</div>
+            <div class="navbar">NAVIGATION BAR</div>
+            <div class="content">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure ducimus provident placeat tempore
+                    quasi magni
+                    praesentium, iste qui earum quod accusamus ipsa suscipit sunt sapiente inventore, voluptas natus
+                    minus
+                    saepe?</p>
+            </div>
+        </div>
+        <span class="go-top">↑</span>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let bannerEl = document.querySelector('.banner');
+            let navbarEl = document.querySelector('.navbar');
+            let contentEl = document.querySelector('.content');
+            let goTopEl = document.querySelector('.go-top');
+
+            window.onscroll = function () {
+                if (window.scrollY >= bannerEl.offsetHeight) {
+                    navbarEl.style.position = 'fixed';
+                    navbarEl.style.top = window.pageYOffset + 'px';
+                    navbarEl.style.left = 0;
+                    contentEl.style.marginTop = navbarEl.offsetHeight + 'px';
+                } else {
+                    navbarEl.style.position = 'static';
+                    contentEl.style.marginTop = 0;
+                }
+
+                if (window.pageYOffset > 300) {
+                    goTopEl.style.display = 'inline-block';
+                } else {
+                    goTopEl.style.display = 'none';
+                }
+            };
+
+            goTopEl.onclick = function () {
+                // window.scrollTo(0, 0); 
+                // document.documentElement.scrollTop = 0;
+
+                let timerId = null;
+                let curPos = window.scrollY;
+                let tgtPos = 0;
+
+                clearInterval(timerId);
+                timerId = setInterval(function () {
+                    curPos = curPos + (tgtPos - curPos) * .3;
+                    if (curPos < 1) {
+                        clearInterval(timerId);
+                        return false;
+                    } else {
+                        document.documentElement.scrollTop = curPos;
+                    }
+                }, 50);
+            };
+        };
+    </script>
+</body>
+
+</html>

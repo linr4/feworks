@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>layer effect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        ul, ol {
+            list-style-type: none;
+        }
+        ul {
+            width: 100%;
+            height: 100%;
+            transition: all 500ms ease-out;
+        }
+        li {
+            width: 100%;
+            height: 100%;
+            font-weight: bold;
+            text-align: center;
+        }
+        ul>li {
+            font-size: 60px;
+        }
+        li:nth-child(1) {
+            background-color: deepskyblue;
+        }
+        li:nth-child(2) {
+            background-color: seagreen;
+        }
+        li:nth-child(3) {
+            background-color: greenyellow;
+        }
+        li:nth-child(4) {
+            background-color: turquoise;
+        }
+        li:nth-child(5) {
+            background-color: orange;
+        }
+
+        ol {
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            border: 1px solid #000;
+        }
+        ol>li {
+            height: 30px;
+            line-height: 30px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .selected {
+            font-size: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li>layer 1</li>
+        <li>layer 2</li>
+        <li>layer 3</li>
+        <li>layer 4</li>
+        <li>layer 5</li>
+    </ul>
+    <ol>
+        <li>layer 1</li>
+        <li>layer 2</li>
+        <li>layer 3</li>
+        <li>layer 4</li>
+        <li>layer 5</li>
+    </ol>
+
+    <script>
+        window.onload = function () {
+            let olLiEls = document.querySelectorAll('ol>li');
+            let ulLiEls = document.querySelectorAll('ul>li');
+            let curLayer = 0;
+            let timerId = null;
+
+            for (let i = 0; i < olLiEls.length; i++) {
+                olLiEls[i].onclick = function () {
+                    olLiEls[curLayer].classList.remove('selected');
+                    this.classList.add('selected');
+                    curLayer = i;
+
+                    // ulLiEls[i].parentElement.style.transform = `translateY(${-window.innerHeight * i}px)`; // 效果接近，但是点到 layer 5的时候，没有垂直滚动条，鼠标滚轮也无法把页面滚回在它前面的页面
+                    // document.documentElement.scrollTop = window.innerHeight * i;
+
+                    let curPos = document.documentElement.scrollTop; // curPos/tgtPos 要在定时器之外做定义
+                    let tgtPos = window.innerHeight * i;
+                    let incrementor = 0;
+
+                    clearInterval(timerId);
+                    timerId = setInterval(() => {
+                        incrementor = (tgtPos - curPos) * 0.3;
+                        curPos += incrementor;
+
+                        if (Math.abs(incrementor) < 1) {
+                            curPos = tgtPos;
+                            clearInterval(timerId);
+                        }
+
+                        document.documentElement.scrollTop = curPos;
+
+                    }, 50);
+
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
