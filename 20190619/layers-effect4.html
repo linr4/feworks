@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面楼层效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body, ul, li {
+            width: 100%;
+            height: 100%;
+        }
+        ul, ol {
+            list-style: none;
+            text-align: center;
+            font-size: 36px;
+            color: white;
+        }
+        li:nth-child(1) {
+            background-color: seagreen;
+        }
+        li:nth-child(2) {
+            background-color: skyblue;
+        }
+        li:nth-child(3) {
+            background-color: orchid;
+        }
+        li:nth-child(4) {
+            background-color: royalblue;
+        }
+        li:nth-child(5) {
+            background-color: lightgreen;
+        }
+
+        ol {
+            width: 150px;
+            padding: 10px;
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 3px solid orange;
+            border-radius: 15px;
+            box-sizing: border-box;
+
+            cursor: pointer;
+            user-select: none;
+        }
+        ol>li {
+            border-radius: 15px;
+            margin-top: 5px;
+        }
+        .selected {
+            font-weight: bold;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>layer 1</li>
+        <li>layer 2</li>
+        <li>layer 3</li>
+        <li>layer 4</li>
+        <li>layer 5</li>
+    </ul>
+    <ol>
+        <li class="selected">layer 1</li>
+        <li>layer 2</li>
+        <li>layer 3</li>
+        <li>layer 4</li>
+        <li>layer 5</li>
+    </ol>
+
+    <script>
+        window.onload = function () {
+            let olLiEls = document.querySelectorAll('ol>li');
+            let timerId = null;
+            let curIdx = 0;
+
+            for (let i = 0; i < olLiEls.length; i++) {
+                olLiEls[i].onclick = function () {
+                    olLiEls[curIdx].classList.remove('selected');
+                    this.classList.add('selected');
+                    curIdx = i;
+                    scrollEaseOut(curIdx);
+                }
+            }
+
+            function scrollEaseOut(i) {
+                let curPos = window.pageYOffset;
+                let tgtPos = window.innerHeight * i;
+                let incrementor = 0;
+
+                clearInterval(timerId);
+                timerId = setInterval(() => {
+                    incrementor = (tgtPos - curPos) * 0.1;
+                    curPos += incrementor;
+                    if (Math.abs(incrementor) < .1) {
+                        curPos = tgtPos;
+                        clearInterval(timerId);
+                    }
+                    document.documentElement.scrollTop = curPos;
+                }, 10);
+            }
+        }
+    
+    </script>
+</body>
+</html>

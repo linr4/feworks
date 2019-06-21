@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>橱窗展示效果 - 水平滚动</title>
+    <style>
+        html, body, div, ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .box {
+            width: 1200px;
+            height: 262px;
+            margin: 200px auto;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        ul {
+            display: flex;
+            width: 100%;
+            height: 230px;
+            list-style-type: none;
+            position: relative;
+        }
+        ul>li {
+            width: 100%;
+            height: 100%;
+            margin: 0 5px;
+        }
+        ul>li:first-child {
+            margin-left: 0;
+        }
+        ul>li:last-child {
+            margin-right: 0;
+        }
+        
+        ul>li>img {
+            border: 1px solid #aaa;
+            border-radius: 15px;
+            user-select: none;
+        }
+
+        .scroll-bar-wrapper {
+            width: 100%;
+            height: 28px;
+            background-color: turquoise;
+            border-radius: 15px;
+        }
+        .scroll-bar {
+            width: 50%;
+            height: 28px;
+            margin-top: 2px;
+            background-color: royalblue;
+            border-radius: 15px;
+            cursor: pointer;
+            user-select: none;
+
+            position: relative;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="images/1.jpg" alt=""></li>
+            <li><img src="images/2.jpg" alt=""></li>
+            <li><img src="images/3.jpg" alt=""></li>
+            <li><img src="images/4.jpg" alt=""></li>
+            <li><img src="images/5.jpg" alt=""></li>
+            <li><img src="images/6.jpg" alt=""></li>
+            <li><img src="images/7.jpg" alt=""></li>
+            <li><img src="images/8.jpg" alt=""></li>
+            <li><img src="images/9.jpg" alt=""></li>
+            <li><img src="images/10.jpg" alt=""></li>
+            <li><img src="images/11.jpg" alt=""></li>
+            <li><img src="images/12.jpg" alt=""></li>
+            <li><img src="images/13.jpg" alt=""></li>
+            <li><img src="images/14.jpg" alt=""></li>
+            <li><img src="images/15.jpg" alt=""></li>
+        </ul>
+        <div class="scroll-bar-wrapper">
+            <div class="scroll-bar"></div>
+        </div>
+    </div>
+    
+
+    <script>
+        window.onload = function () {
+            let boxEl = document.querySelector('.box');
+            let ulEl = document.querySelector('ul');
+            let liEls = document.querySelectorAll('ul>li');
+            let sbarEl = document.querySelector('.scroll-bar');
+            let boxWidth = boxEl.offsetWidth;
+            let imgsWidth = 0;
+
+            // 计算图片列表的总宽度
+            for (let i = 0; i < liEls.length; i++) {
+                imgsWidth += liEls[i].offsetWidth + parseInt(getComputedStyle(liEls[i]).marginLeft) + parseInt(getComputedStyle(liEls[i]).marginRight);
+            }
+
+            // 按比例设置滚动条长度
+            // 滚动条长度 ÷ 盒子长度 = 盒子长度 ÷ 图片列表长度
+            // 滚动条长度 = 盒子长度 ÷ 图片列表长度 × 盒子长度
+            sbarEl.style.width = (boxWidth / imgsWidth) * boxWidth + 'px';
+
+            // 监听点击和拖动的事件
+            // 监听 document 的鼠标事件，再判断是否点在滚动条上，
+            // 以便在拖动过程中鼠标偏离滚动条区域时，事件代码仍能生效
+
+            document.onmousedown = function (event) {
+                event = event || window.event;
+                if (event.target !== sbarEl) { // 点击位置不在滚动条上，则不响应
+                    return false;
+                }
+                let mousePosX = event.pageX;  // 鼠标横坐标
+                let sbarPosX = sbarEl.offsetLeft - boxEl.offsetLeft; // 滚动条当前位置
+                let sbarMaxMove = boxEl.offsetWidth - sbarEl.offsetWidth; // 最大滚动距离
+
+                document.onmousemove = function (event) {
+                    event = event || window.event;
+
+                    let mouseNewPosX = event.pageX; // 鼠标指针在拖动之后的新位置
+                    // 滚动条位置 = 鼠标新位置 - 鼠标原位置 + 滚动条原位置
+                    let sbarLeft = mouseNewPosX - mousePosX + sbarPosX;
+                    
+                    // 边界检查
+                    sbarLeft = sbarLeft < 0 ? 0 : sbarLeft; // 最小
+                    sbarLeft = sbarLeft > sbarMaxMove ? sbarMaxMove : sbarLeft; // 最大
+                    // 设定滚动条新位置
+                    sbarEl.style.left = sbarLeft + 'px';
+                    console.log(sbarLeft);
+
+                    // 移动图片列表：
+                    // 滚动条当前位置 ÷ 滚动条最大移动距离 = 图片列表当前位置 ÷ 图片列表最大移动距离
+                    // 图片列表当前位置 = 滚动条当前位置 ÷ 滚动条最大移动距离 × 图片列表最大移动距离
+
+                    // 图片列表最大移动距离 = 图片列表宽度 - 盒子宽度
+                    let imgsMaxMove = imgsWidth - boxWidth;
+                    let imgsLeft = sbarLeft / sbarMaxMove * imgsMaxMove;
+                    ulEl.style.left = -imgsLeft + 'px';
+                };
+            };
+
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        };
+    </script>
+</body>
+</html>

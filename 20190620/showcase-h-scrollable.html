@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>橱窗效果 - 带横向滚动条</title>
+    <style>
+        html, body,div, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            width: 1200px;
+            height: 230px;
+            margin: 200px auto;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+        ul {
+            position: relative;
+            list-style-type: none;
+            display: flex;
+        }
+        ul>li {
+            height: 200px;
+            margin: 1px;
+        }
+        ul>li>img {
+            height: 100%;
+            vertical-align: top;
+            user-select: none;
+        }
+        .progress-bar {
+            width: 1198px;
+            height: 30px;
+            border: 1px solid #ccc;
+            background-color: #ccc;
+            position: relative;
+        }
+        .scroll-bar {
+            width: 30px;
+            height: 28px;
+            background-color: #666;
+            border-radius: 5px;
+
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <ul>
+            <li><img src="images/1.jpg"></li>
+            <li><img src="images/2.jpg"></li>
+            <li><img src="images/3.jpg"></li>
+            <li><img src="images/4.jpg"></li>
+            <li><img src="images/5.jpg"></li>
+            <li><img src="images/6.jpg"></li>
+            <li><img src="images/7.jpg"></li>
+            <li><img src="images/8.jpg"></li>
+            <li><img src="images/9.jpg"></li>
+            <li><img src="images/10.jpg"></li>
+            <li><img src="images/11.jpg"></li>
+            <li><img src="images/12.jpg"></li>
+            <li><img src="images/13.jpg"></li>
+            <li><img src="images/14.jpg"></li>
+            <li><img src="images/15.jpg"></li>
+        </ul>
+        <div class="progress-bar">
+            <div class="scroll-bar"></div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let boxEl = document.querySelector('.wrapper');
+            let ulEl = document.querySelector('ul');
+            let liEls = document.querySelectorAll('li');
+            let imgEls = document.querySelectorAll('img');
+            let scrollBarEl = document.querySelector('.scroll-bar');
+            let imgTotalWidth = 0;
+
+            for (let i = 0; i < imgEls.length; i++) {
+                imgTotalWidth += imgEls[i].offsetWidth;
+            }
+            scrollBarEl.style.width = (ulEl.offsetWidth / imgTotalWidth * ulEl.offsetWidth) + 'px';
+            
+
+            scrollBarEl.onmousedown = function (event) {
+                let mouseOffsetX = event.pageX - boxEl.offsetLeft;
+                let barCurOffsetX = scrollBarEl.offsetLeft;
+                document.onmousemove = function (event) {
+                    let mouseNewOffsetX = event.pageX - boxEl.offsetLeft;
+                    let barOffsetLeft = mouseNewOffsetX - mouseOffsetX + barCurOffsetX;
+                    barOffsetLeft = barOffsetLeft < 0 ? 0 : barOffsetLeft;
+                    barOffsetLeft = barOffsetLeft > ulEl.offsetWidth - scrollBarEl.offsetWidth ? ulEl.offsetWidth - scrollBarEl.offsetWidth : barOffsetLeft;
+                    scrollBarEl.style.left = barOffsetLeft + 'px';
+
+                    // 滚动条移动距离 ÷ 滚动条最大移动距离 = 图片列表移动距离 ÷ 图片列表最大移动距离
+                    // 滚动条移动距离 ÷ 滚动条最大移动距离 × 图片列表最大移动距离 = 图片列表移动距离                   
+
+                    ulEl.style.left = -(barOffsetLeft / (ulEl.offsetWidth - scrollBarEl.offsetWidth) * (imgTotalWidth - ulEl.offsetWidth)) + 'px';
+                };
+            };
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+
+            
+            
+        }
+    </script>
+</body>
+</html>

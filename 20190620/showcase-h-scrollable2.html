@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>橱窗效果 - 水平滚动</title>
+    <style>
+        html, body, div, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 1200px;
+            margin: 100px auto;
+            border: 3px solid deepskyblue;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        ul {
+            list-style: none;
+            display: flex;
+            width: 100%;
+            position: relative;
+        }
+        ul>li {
+            padding: 1px;
+            border-radius: 5px;
+        }
+        ul>li>img {
+            width: auto;
+            height: 200px;
+            user-select: none;
+        }
+
+        .scroll-bar-wrapper {
+            width: 100%;
+            height: 30px;
+            background-color: lightblue;
+            position: relative;
+        }
+        .scroll-bar {
+            width: 50px;
+            height: 100%;
+            background-color: royalblue;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="images/1.jpg"></li>
+            <li><img src="images/2.jpg"></li>
+            <li><img src="images/3.jpg"></li>
+            <li><img src="images/4.jpg"></li>
+            <li><img src="images/5.jpg"></li>
+            <li><img src="images/6.jpg"></li>
+            <li><img src="images/7.jpg"></li>
+            <li><img src="images/8.jpg"></li>
+            <li><img src="images/9.jpg"></li>
+            <li><img src="images/10.jpg"></li>
+            <li><img src="images/11.jpg"></li>
+            <li><img src="images/12.jpg"></li>
+            <li><img src="images/13.jpg"></li>
+            <li><img src="images/14.jpg"></li>
+            <li><img src="images/15.jpg"></li>
+        </ul>
+        <div class="scroll-bar-wrapper">
+            <div class="scroll-bar"></div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let boxEl = document.querySelector('.box');
+            let sbarEl = document.querySelector('.scroll-bar');
+            let imgEls = document.querySelectorAll('img');
+            let imgUlEl = document.querySelector('ul');
+
+            let imgTotalWidth = 0;
+
+            for (let i = 0; i < imgEls.length; i++) {
+                imgTotalWidth += imgEls[i].offsetWidth;
+            }
+
+            // 滚动条长度 ÷ 展示框长度 = 展示框长度 ÷ 图片列表总长度, so
+            // 滚动条长度 = (展示框长度 ÷ 图片列表总长度) × 展示框长度
+            sbarEl.style.width = (boxEl.offsetWidth / imgTotalWidth * boxEl.offsetWidth) + 'px';
+
+            sbarEl.onmousedown = function (event) {
+                event.stopPropagation();
+                // 鼠标点击位置相对于滚动条左侧起点的偏移量
+                // = 鼠标相对于整个文档的坐标 event.pageX - 整个盒子离左侧的偏移量 
+                let mouseOffsetX = event.pageX - boxEl.offsetLeft;
+
+                // 滚动条当前相对于父元素的偏移量 
+                // 后续用于作为移动起点，以免第二次点击时滚动条如果不在最左边的话会跳回最左侧
+                let sbarCurOffsetX = sbarEl.offsetLeft; 
+
+                document.onmousemove = function (event) { 
+                // 监听document的mousemove而不是滚动条的，是因为拉动滚动条过程中，鼠标指针可能会偏离滚动条时，事件仍可生效
+
+                    // 鼠标实时偏移量(相对于滚动条左侧起点) = 鼠标当前位置 - 整体离左侧的距离 + 移动前的位置
+                    let mouseNewOffsetX = event.pageX - boxEl.offsetLeft + sbarCurOffsetX; 
+
+                    // 滚动条实时位置 = mouseMove的实时位置 - mouseDown时的位置
+                    let sbarLeft = (mouseNewOffsetX - mouseOffsetX) - 6; // 减掉边框
+
+                    // 做最大最小边界检查
+                    sbarLeft = sbarLeft < 0 ? 0 : sbarLeft;
+                    sbarLeft = sbarLeft > boxEl.offsetWidth - sbarEl.offsetWidth ? boxEl.offsetWidth - sbarEl.offsetWidth - 6 : sbarLeft;
+
+                    // 设置滚动条实时位置
+                    sbarEl.style.left = sbarLeft + 'px';
+
+                    // 滚动条当前位置 ÷ 滚动条最右侧位置 = 图片列表当前位置 ÷ 图片列表最右侧位置，so
+                    // 图片列表当前位置 = 滚动条当前位置 ÷ 滚动条最右侧位置 × 图片列表最右侧位置
+                    let imgsLeft = sbarLeft / (boxEl.offsetWidth - sbarEl.offsetWidth) * (imgTotalWidth - boxEl.offsetWidth);
+                    imgUlEl.style.left = -imgsLeft + 'px';
+                    console.log(imgsLeft);
+                };
+            };
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        };
+    </script>
+</body>
+</html>
