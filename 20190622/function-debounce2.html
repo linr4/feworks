@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>function debounce</title>
+</head>
+<body>
+    <input type="text">
+    <span></span>
+
+    <script>
+        let inputEl = document.querySelector('input');
+        let spanEl = document.querySelector('span');
+
+        inputEl.oninput = debounce(showInput);
+
+        function debounce(fn, delay) {
+            let timerId = null;
+            return function () {
+                let self = this;
+                let args = arguments;
+                timerId && clearTimeout(timerId);
+                timerId = setTimeout(() => {
+                    fn.apply(self, args); 
+                    // 类似 self.fn() 意即让 self 变成 fn() 的调用者
+                    // 如此，在回调函数中引用 this 关键字，才会指向 self
+                    // args 接收了回调函数的 arguments 包括了 event，如此可以引用 event
+                }, delay || 1000);
+            }
+        }
+
+        function showInput(event) {
+            console.log(this);
+            console.log(event);
+        }
+    </script>
+</body>
+</html>

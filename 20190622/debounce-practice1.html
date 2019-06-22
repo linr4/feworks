@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>debounce - div resize according to window resize</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        div {
+            background-color: turquoise;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        window.onload = function () {
+
+        function debounce(fn, timeout) {
+            let timerId = null;
+            return function () {
+                let self = this;
+                let args = arguments;
+                timerId && clearTimeout(timerId);
+                timerId = setTimeout(() => {
+                    fn.apply(self, args);
+                }, timeout || 1000);
+            }
+        }
+
+            let divEl = document.querySelector('div');
+
+            function setDivSize() {
+                divEl.style.width = (window.innerWidth / 2) + 'px';
+                divEl.style.height = (window.innerHeight / 2) + 'px';
+                console.log('resizing div');
+            }
+
+            setDivSize();
+
+            window.onresize = debounce(setDivSize);
+        };
+    </script>
+</body>
+
+</html>

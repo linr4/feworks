@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>橱窗展示效果</title>
+    <style>
+        html, body, div, ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .box {
+            width: 1200px;
+            height: auto;
+            margin: 200px auto;
+            overflow: hidden;
+
+            border-radius: 15px;
+        }
+        ul {
+            list-style: none;
+            display: flex;
+            position: relative;
+        }
+        ul>li {
+            margin-right: 5px;
+        }
+        ul>li:last-child {
+            margin-right: 0;
+        }
+        ul>li>img {
+            border: 1px solid #aaa;
+            border-radius: 15px;
+        }
+        .sbar-wrapper {
+            width: 100%;
+            height: 30px;
+            background-color: #ccc;
+
+            border-radius: 15px;
+        }
+        .sbar {
+            /* width: 100px; */
+            height: 100%;
+            background-color: turquoise;
+            border-radius: 15px;
+            user-select: none;
+            cursor: pointer;
+
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="images/1.jpg" alt=""></li>
+            <li><img src="images/2.jpg" alt=""></li>
+            <li><img src="images/3.jpg" alt=""></li>
+            <li><img src="images/4.jpg" alt=""></li>
+            <li><img src="images/5.jpg" alt=""></li>
+            <li><img src="images/6.jpg" alt=""></li>
+            <li><img src="images/7.jpg" alt=""></li>
+            <li><img src="images/8.jpg" alt=""></li>
+            <li><img src="images/9.jpg" alt=""></li>
+            <li><img src="images/10.jpg" alt=""></li>
+            <li><img src="images/11.jpg" alt=""></li>
+            <li><img src="images/12.jpg" alt=""></li>
+            <li><img src="images/13.jpg" alt=""></li>
+            <li><img src="images/14.jpg" alt=""></li>
+            <li><img src="images/15.jpg" alt=""></li>
+        </ul>
+        <div class="sbar-wrapper">
+            <div class="sbar"></div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let boxEl = document.querySelector('.box');
+            let ulEl = document.querySelector('ul');
+            let liEls = document.querySelectorAll('ul>li');
+            let sbarEl = document.querySelector('.sbar');
+
+            // 计算图片列表总宽度
+            let imgLstWidth = 0;
+            for (let i = 0; i < liEls.length; i++) {
+                imgLstWidth += liEls[i].offsetWidth + parseInt(getComputedStyle(liEls[i]).marginRight);
+            }
+
+            // 计算滚动条宽度：
+            // 滚动条宽度 ÷ 滚动条总宽度 = 展示框宽度 ÷ 图片列表总宽度
+            // 滚动条宽度 = 展示框宽度 ÷ 图片列表总宽度 × 滚动条总宽度
+            let sbarWidth = boxEl.offsetWidth / imgLstWidth * boxEl.offsetWidth;
+            sbarEl.style.width = sbarWidth + 'px';
+
+            document.onmousedown = function (e) {
+                if (sbarEl !== e.target) {
+                    return false;
+                }
+
+                // 鼠标按下之后的鼠标位置
+                let mousePosX = e.pageX;
+                
+                // 滚动条相对于整个展示框的偏移量
+                let sbarXOffset = sbarEl.offsetLeft - boxEl.offsetLeft; 
+                
+                // 最大滚动距离
+                let sbarMaxXOffset = boxEl.offsetWidth - sbarWidth;
+
+                document.onmousemove = function (e) {
+                    let mouseNewPosX = e.pageX;
+
+                    // 滚动条新位置 = 鼠标新位置 - 鼠标原位置 + 滚动条相对于展示框的偏移量
+                    let sbarPosX = mouseNewPosX - mousePosX + sbarXOffset;
+                    
+                    // 边界检查
+                    sbarPosX = sbarPosX < 0 ? 0 : sbarPosX;
+                    sbarPosX = sbarPosX > sbarMaxXOffset ? sbarMaxXOffset : sbarPosX;
+
+                    // 设置滚动条新位置
+                    sbarEl.style.left = sbarPosX +'px';
+
+                    // 计算图片列表位置
+                    // 滚动条位移 ÷ 滚动条总长 = 图片列表位移 ÷ 图片列表总长
+                    // 图片列表位移 = 滚动条位移 ÷ 滚动条总长 × 图片列表总长
+                    let imgLstPosX = sbarPosX / boxEl.offsetWidth * imgLstWidth;
+                    ulEl.style.left = -imgLstPosX + 'px';
+                };   
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                }
+            };
+
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        div {
+            background-color: turquoise;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        window.onload = function () {
+            function debounce(fn, timeout) {
+                let timerId = null;
+                return function () {
+                    let self = this;
+                    let args = arguments;
+                    timerId && clearTimeout(timerId);
+                    timerId = setTimeout(() => {
+                        fn.apply(self, args);
+                    }, timeout || 1000);
+                }
+            }
+
+            let divEl = document.querySelector('div');
+
+            function setSize() {
+                divEl.style.width = (window.innerWidth / 2) + 'px';
+                divEl.style.height = (window.innerHeight / 2) + 'px';
+            }
+
+            setSize();
+            window.onresize = debounce(setSize);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>function debounce</title>
+</head>
+<body>
+    <input type="text">
+    <script>
+
+        function debounce(fn, timeout) {
+            let timerId = null;
+            return function () {
+                let self = this;
+                let args = arguments;
+                timerId && clearTimeout(timerId);
+                timerId = setTimeout(() => {
+                    fn.apply(self, args);
+                }, timeout || 1000);
+            }
+        }
+
+        let inputEl = document.querySelector('input');
+        inputEl.oninput = debounce(function (event){
+            console.log(this);
+            console.log(event);
+        }, 500);
+    </script>
+</body>
+</html>
