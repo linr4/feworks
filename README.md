@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190625 - Day 84
+
+- 练习 debounce 和 throttle (+1h = 181.5 of 600)
+
 ###### 20190624 - Day 83
 
 - 看视频播放器的课程 (+1h = 180.5 of 600)

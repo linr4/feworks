@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Throttle function</title>
+    <style>
+        div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            background-color: teal;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        window.onload = function () {
+            let divEl = document.querySelector('div');
+
+            function resizeDiv() {
+                divEl.style.width = window.innerWidth / 2 + 'px';
+                divEl.style.height = window.innerHeight / 2 + 'px';
+                console.log('resizing div');
+            }
+
+            function throttle(fn, timeout) {
+                let timerId = null;
+                let isCallingFn = false;
+
+                return function () {
+                    let self = this;
+                    let args = arguments;
+                    if (isCallingFn) {return;}
+
+                    isCallingFn = true;
+
+                    timerId && clearTimeout(timerId);
+                    timerId = setTimeout(() => {
+                        fn.apply(self, args);
+                        isCallingFn = false;
+                    }, timeout || 1000);
+                }
+            }
+
+            resizeDiv();
+
+            window.onresize = throttle(resizeDiv, 500);
+            
+        };
+    </script>
+</body>
+</html>

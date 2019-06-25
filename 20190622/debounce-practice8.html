@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>debounce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-radius: 15px;
+            font-size: 14px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        input {
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            margin-bottom: 20px;
+            outline: none;
+            padding: 0 10px;
+        }
+        span {
+            display: inline-block;
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input type="text"> <br>
+        <span></span>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let inputEl = document.querySelector('input');
+            let spanEl = document.querySelector('span');
+
+            function debounce(fn, timeout) {
+                let timerId = null;
+                return function () {
+                    let self = this;
+                    let args = arguments;
+
+                    timerId && clearTimeout(timerId);
+                    timerId = setTimeout(() => {
+                        fn.apply(self, args);
+                    }, timeout || 1000);
+                }
+            }
+
+            inputEl.oninput = debounce(function () {
+                spanEl.innerText = this.value;
+            }, 500);
+        };
+    </script>
+</body>
+</html>
