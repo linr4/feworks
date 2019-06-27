@@ -68,5 +68,7 @@ function throttle(fn, timeout) {
         }, timeout || 500);
     }
 }
+
+window.dispatchEvent(new Event('resize')); // 手动触发一次 resize 做 div 大小的初始化
 ```
 

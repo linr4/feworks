@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>debounce function</title>
+</head>
+<body>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <script>
+        window.onload = function () {
+            let taEls = document.querySelectorAll('textarea');
+
+            function debounce(fn, timeout) {
+                let timerId = null;
+                return function () {
+                    let self = this;
+                    let args = arguments;
+                    timerId && clearTimeout(timerId);
+                    timerId = setTimeout(() => {
+                        fn.apply(self, args);
+                    }, timeout || 1000);
+                }
+            }
+
+            taEls[0].oninput = debounce(function () {
+                taEls[1].value = this.value;
+            })
+        }
+    </script>
+</body>
+</html>

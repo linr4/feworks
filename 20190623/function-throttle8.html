@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>function trottle</title>
+    <style>
+      div {
+          background-color: yellowgreen;
+          border-radius: 10px;
+
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+
+          box-shadow: 10px 10px #ccc;
+      }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        window.onload = function () {
+            let divEl = document.querySelector('div');
+            function throttle(fn, timeout) {
+                let timerId = null;
+                let isCallingFn = false;
+
+                return function () {
+                    if (isCallingFn) return;
+                    let self = this;
+                    let args = arguments;
+                    isCallingFn = true;
+                    timerId && clearTimeout(timerId);
+                    timerId = setTimeout(() => {
+                        fn.apply(self, args);
+                        isCallingFn = false;
+                    }, timeout || 500);
+                }
+            }
+
+            window.onresize = throttle(function () {
+                divEl.style. width = window.innerWidth / 2 + 'px';
+                divEl.style.height = window.innerHeight / 2 + 'px';
+                console.log('resizing');
+            });
+
+            window.dispatchEvent(new Event('resize'));
+        };
+    </script>
+</body>
+</html>
