@@ -11,7 +11,7 @@
 * 提前预编译
   * 编写 Less 文件
   * 工具转换 Less 为 CSS
-    * 考拉： http://kaola-app.com/
+    * 考拉： http://kaola-app.com/ （Win版不能改安装路径，否则会工作异常）
     * 开源中国 https://tool.oschina.net/less
     * 构建工具配置 loader 之后可以自动编译和导入
   * 引入 CSS 文件
