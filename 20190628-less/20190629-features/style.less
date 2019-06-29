@@ -1,0 +1,18 @@
+// this is a comment in single line
+/* this is a comment in multiple line*/
+
+@width: 500px;
+@height: @width;
+@bgcolor: blue;
+
+@w: width;
+@h: height;
+@bgc: background-color;
+
+@box: div;
+
+@{box} {
+    @{w}: @width;
+    @{h}: @height;
+    @{bgc}: @bgcolor;
+}
