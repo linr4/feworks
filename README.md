@@ -12,6 +12,14 @@ Web development learning notes and case study
 
 ---
 
+###### [20190629](20190628-less) - Day 88
+
+- 学习 Less (+1h = 189 of 600)
+
+###### [20190628](20190628-less) - Day 87
+
+- 学习 Less (+1h = 188 of 600)
+
 ###### 20190626 - Day 86
 
 - 学习 puppeteer，练习整合工作所需的数据页面 (+4.5h = 187 of 600)
