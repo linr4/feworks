@@ -1,0 +1,7 @@
+div {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 80px;
+  border-color: #ff0000 transparent transparent transparent;
+}

@@ -1,0 +1,18 @@
+.center,
+.parent,
+.parent .child {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.parent {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+.parent .child {
+  width: 200px;
+  height: 200px;
+  background-color: blue;
+}

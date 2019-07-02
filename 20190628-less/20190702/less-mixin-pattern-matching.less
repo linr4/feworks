@@ -1,0 +1,25 @@
+.triangle(@_, @width, @color) {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: @width;
+}
+.triangle(down, @width, @color) {
+    // width: 0;
+    // height: 0;
+    // border-width: @width;
+    // border-style: solid solid solid solid;
+    border-color: @color transparent transparent transparent;
+}
+
+.triangle(up, @width, @color) {
+    // width: 0;
+    // height: 0;
+    // border-width: @width;
+    // border-style: solid solid solid solid;
+    border-color: transparent transparent @color transparent;
+}
+
+div {
+    .triangle(down, 80px, red);
+}

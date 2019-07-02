@@ -1,0 +1,9 @@
+.size(@width, @height) when (@width = 50px), (@height = 100px) {
+    width: @width;
+    height: @height;
+}
+
+div {
+    .size(100px, 100px);
+    background-color: red;
+}

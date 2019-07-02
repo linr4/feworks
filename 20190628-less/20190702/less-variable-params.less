@@ -1,0 +1,17 @@
+// .animate(@element: all, @duration: 1s, @mode: linear, @delay: 0s) {
+// .animate(...) {
+.animate(@element, @duration, ...) {
+    transition: @arguments;
+}
+div {
+    width: 200px;
+    height: 200px;
+    background-color: seagreen;
+    .animate(all 2s ease 0s);
+}
+
+div:hover {
+    width: 400px;
+    height: 400px;
+    background-color: greenyellow;
+}

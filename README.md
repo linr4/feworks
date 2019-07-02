@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### [20190702](20190628-less) - Day 89
+
+- 学习 Less (+3h = 192 of 600)
+
 ###### [20190629](20190628-less) - Day 88
 
 - 学习 Less (+1h = 189 of 600)

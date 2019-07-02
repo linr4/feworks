@@ -1,0 +1,9 @@
+@color: seagreen;
+div {
+    width: 1000px;
+    height: 1000px;
+    background-color: @color;
+    &:hover {
+    background-color: saturate(@color, 50%);
+    }
+}
