@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### [20190703](20190703-fullpage) - Day 90
+
+- 学习 fullpage.js (+2h = 194 of 600)
+
 ###### [20190702](20190628-less) - Day 89
 
 - 学习 Less (+3h = 192 of 600)
