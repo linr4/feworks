@@ -156,6 +156,101 @@
         position: relative;
         left: 50%;
         transform: translateX(-50%);
-        margin-top: 10%;
+        margin-top: 5%;
+        overflow: hidden;
+        .v-line {
+            position: absolute;
+            top: 0;
+            display: inline-block;
+            width: 1px;
+            height: 600px;
+            background-color: white;
+            &:nth-of-type(1) {
+                left: 0;
+                transform: translateY(-600px);
+                transition: all 1s linear 0s;
+            }
+            &:nth-of-type(2) {
+                right: 0;
+                transform: translateY(-600px);
+                transition: all 1s linear 2s;
+            }
+        }
+        .h-line {
+            position: absolute;
+            left: 0;
+            display: inline-block;
+            width: 1004px;
+            height: 1px;
+            background-color: white;
+            &:nth-of-type(1) {
+                top: 0;
+                transform: translateX(-1004px);
+                transition: all 1s linear 1s;
+            }
+            &:nth-of-type(2) {
+                bottom: 0;
+                transform: translateX(1004px);
+                transition: all 1s linear 3s;
+            }
+        }
+        .toolbar {
+            width: 1004px;
+            height: 79px;
+            background: url('images/section5_toolbar.png') no-repeat center center;
+            opacity: 0;
+            transition: all 1s linear 4s;
+            position: relative;
+            span {
+                position: absolute;
+                left: -1000px;
+                top: 28px;
+                display: inline-block;
+                width: 920px;
+                height: 30px;
+                border: 1px solid #fff;
+                transition: all 1s linear 5s;
+            }
+        }
+        .extra {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 1004px;
+            height: 29px;
+            border-top: 1px solid #ccc;
+            background: url('images/section5_extra.png') no-repeat center right;
+            opacity: 0;
+            transition: all 1s linear 6s;
+        }
+    }
+    &.current {
+        .browser {
+            .v-line {
+                &:nth-of-type(1) {
+                    transform: none;
+                }
+                &:nth-of-type(2) {
+                    transform: none;
+                }
+            }
+            .h-line {
+                &:nth-of-type(1) {
+                    transform: none;
+                }
+                &:nth-of-type(2) {
+                    transform: none;
+                }
+            }
+            .toolbar {
+                opacity: 1;
+                span {
+                    left: 70px;
+                }
+            }
+            .extra {
+                opacity: 1;
+            }
+        }
     }
 }

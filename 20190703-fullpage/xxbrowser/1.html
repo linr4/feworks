@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        window.onload = function () {
+            var returnCitySN = {"cip": "61.144.248.17", "cid": "440300", "cname": "广东省深圳市"};
+            var citiesName = [returnCitySN.cname, '广西壮族自治区南宁市'];
+
+            for (let item of citiesName) {
+                let startIndex = item.indexOf('省') > -1 ? item.indexOf('省') + 1 : 
+                                 item.indexOf('区') > -1 ? item.indexOf('区') + 1 : -1;
+                let cityName = startIndex > -1 ? item.substr(startIndex) : 'N/A';
+                console.log(cityName);  // 深圳市、南宁市
+            }
+        }    
+    </script>
+</body>
+</html>
