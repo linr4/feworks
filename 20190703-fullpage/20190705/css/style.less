@@ -1,0 +1,26 @@
+.section-1 {
+    text-align: center;
+    .logo {
+        padding-top: 10%;
+        box-sizing: border-box;
+    }
+    .text {
+        margin: 5% 0;
+        img {
+            margin: 0 3%;
+            opacity: 0;
+            transition: all 1s linear 0s;
+        }
+    }
+    .info {
+        margin-top: 5%;
+    }
+    &.current {
+        .text {
+            img {
+                margin: 0;
+                opacity: 1;
+            }
+        }
+    }
+}
