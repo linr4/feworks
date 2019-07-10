@@ -15,6 +15,7 @@ Web development learning notes and case study
 ###### 20190710 - Day 94
 
 * 这些天陆续练习了 Less 案例，但是有些盲目和和迷失方向，应该规划一下接下来的学习路线，把时间主要放在关键技能的培养上；
+* 学习 Less, fullpage 的综合案例 (+1h = 200 of 600)
 
 ###### 20190705 - Day93
 
