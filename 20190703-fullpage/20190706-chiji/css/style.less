@@ -4,16 +4,17 @@
 .fr {
     float: right;
 }
-.clearfix::after {
-    content: "";
-    display: block;
-    height: 0;
-    visibility: hidden;
-    clear: both;
-}
+
 /* 兼容IE6 */
 .clearfix {
     *zoom: 1;
+    &::after {
+        content: "";
+        display: block;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
 }
 
 .toolbar {
@@ -25,33 +26,30 @@
     top: 0;
     z-index: 999;
     .toolbar-inner {
+        .clearfix;
         width: 970px;
         height: 100%;
         border-top: 1px solid #c9c9c9;
         border-bottom: 1px solid #c9c9c9;
         background-color: yellow;
         margin: 0 auto;
-        .clearfix();
         li {
-            &:nth-of-type(1) {
+            &:nth-child(1) {
                 width: 220px;
                 height: 100%;
-                background: url(../images/icons-top.png) no-repeat 0 -40px;
-                float: left;
+                background: url("../images/icons-top.png") no-repeat 0 -40px;
                 a {
                     display: inline-block;
                     width: 100%;
                     height: 100%;
                 }
             }
-            &:nth-of-type(2) {
-                float: left;
+            &:nth-child(2) {
                 a {
-                    img {
-                        width: 230px;
-                        height: 40px;
-                        
-                    }
+                    display: inline-block;
+                    width: 230px;
+                    height: 40px;
+                    background: green;
                 }
             }
         }

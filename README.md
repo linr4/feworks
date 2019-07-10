@@ -12,6 +12,18 @@ Web development learning notes and case study
 
 ---
 
+###### 20190710 - Day 94
+
+* 这些天陆续练习了 Less 案例，但是有些盲目和和迷失方向，应该规划一下接下来的学习路线，把时间主要放在关键技能的培养上；
+
+###### 20190705 - Day93
+
+- 用 fullpage.js 再写一次某浏览器 (+1.5h = 199 of 600)
+
+###### 20190704 - Day92
+
+* 用 fullpage.js 写某浏览器 (+2h = 197.5 of 600)
+
 ###### [20190703](20190703-fullpage) - Day 91
 
 - 练习 fullpage.js 案例 (+1.5h = 195.5 of 600)

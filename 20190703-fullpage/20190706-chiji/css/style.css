@@ -1,0 +1,78 @@
+.f1 {
+  float: left;
+}
+.fr {
+  float: right;
+}
+/* 兼容IE6 */
+.clearfix {
+  *zoom: 1;
+}
+.clearfix::after {
+  content: "";
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+.toolbar {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 999;
+}
+.toolbar .toolbar-inner {
+  *zoom: 1;
+  width: 970px;
+  height: 100%;
+  border-top: 1px solid #c9c9c9;
+  border-bottom: 1px solid #c9c9c9;
+  background-color: yellow;
+  margin: 0 auto;
+}
+.toolbar .toolbar-inner::after {
+  content: "";
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+.toolbar .toolbar-inner li:nth-child(1) {
+  width: 220px;
+  height: 100%;
+  background: url("../images/icons-top.png") no-repeat 0 -40px;
+}
+.toolbar .toolbar-inner li:nth-child(1) a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.toolbar .toolbar-inner li:nth-child(2) a {
+  display: inline-block;
+  width: 230px;
+  height: 40px;
+  background: green;
+}
+.nav {
+  width: 100%;
+  height: 88px;
+  background-color: green;
+  position: fixed;
+  left: 0;
+  top: 42px;
+  z-index: 999;
+}
+.nav .nav-inner {
+  width: 1200px;
+  height: 100%;
+  background-color: pink;
+  margin: 0 auto;
+}
+.footer {
+  width: 1200px;
+  height: 160px;
+  margin: 0 auto;
+}
