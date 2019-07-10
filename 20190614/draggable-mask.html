@@ -150,6 +150,8 @@
                 }
                 let x = event.pageX - this.offsetLeft; // 鼠标相对于 loginEl 窗口的偏移量
                 let y = event.pageY - this.offsetTop;
+                // console.log(x, y);
+                console.log('pageX:' + event.pageX, 'offsetLeft:' + this.offsetLeft);
 
                 document.onmousemove = function (event) {
                     // 如果把事件绑定到 loginEl 的话，在快速拖动时，鼠标有可能会飘离 loginEl 窗口、导致事件失效

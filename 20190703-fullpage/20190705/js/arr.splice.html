@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 200px;
+            line-height: 40px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        ul {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul></ul>
+    </div>
+
+    <script>
+        let ulEl = document.querySelector('.box>ul');
+        let arr = [
+            { myName: 'John Doe' },
+            { myAge: 18 },
+            { myGender: 'male' },
+            { myJob: 'FE Engineer' },
+            { mySchool: 'Jiang College' }
+        ];
+
+        arr.forEach((obj, idx) => {
+            for (let key in obj) {
+                let entry = document.createElement('li');
+                entry.innerHTML = `${key}: ${obj[key]}`;
+                entry.setAttribute('index', idx);
+                ulEl.appendChild(entry);
+            }
+        })
+
+
+        ulEl.onclick = function (event) {
+            arr.splice(event.target.getAttribute('index'), 1);
+            this.removeChild(event.target);
+        }
+
+    </script>
+</body>
+
+</html>
