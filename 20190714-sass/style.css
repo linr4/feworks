@@ -1,0 +1,21 @@
+div {
+  width: 200px;
+  height: 200px;
+  background-color: skyblue;
+}
+
+.box1 {
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: 400px;
+}
+
+.box2 {
+  width: 200px;
+  height: 200px;
+  background: blue;
+  transition: all 4s linear, 0s;
+}
+
+/*# sourceMappingURL=style.css.map */

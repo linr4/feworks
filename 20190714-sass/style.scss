@@ -1,0 +1,25 @@
+$elm: div;
+$w: width;
+$size: 200px;
+#{$elm} {
+    #{$w}: $size;
+    height: 200px;
+    background-color: skyblue;
+}
+
+.box1 {
+    position: absolute;
+    left: 50%;
+    margin-left: (-$size / 2);
+    margin-top: (200px * 2);
+}
+
+@mixin animate ($name, $time, $args...) {
+    transition: $name $time $args;
+}
+.box2 {
+    width: 200px;
+    height: 200px;
+    background: blue;
+    @include animate(all, 4s, linear, 0s);
+}
