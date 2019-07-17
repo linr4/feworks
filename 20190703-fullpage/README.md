@@ -26,7 +26,9 @@
     	<div class="section">Some section</div>
     	<div class="section">Some section</div>
     	<div class="section">Some section</div>
-    	<div class="section">Some section</div>
+    	<div class="section fp-auto-height">Some section</div>
+        
+        <!-- fp-auto-height 类使得该Section的高度为内容高度，不会占满全屏 -->
     </div>
     ```
 
@@ -60,6 +62,8 @@
       // loopTop: true,
       
       continuousVertical: true,	// 到最后一个页面在往下就直接滚动到第一页，不显示回滚的过程
+      verticalCentered: false,	// section内容默认剧中
+     
   
       onLeave: function (origin, destination, direction) { // 页面滚动之前
           console.log('on leave:', origin, destination, direction)

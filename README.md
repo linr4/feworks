@@ -12,6 +12,14 @@ Web development learning notes and case study
 
 ---
 
+###### 20190717 - Day 97
+
+- 学习项目视频 (+2h = 206 of 600)
+
+###### 20190716 - Day 96
+
+* 学习项目视频 (+2h = 204 of 600)
+
 ###### 20190714 - Day 95
 
 * [SASS Basics](20170714-SASS) (+2h = 202 of 600)
