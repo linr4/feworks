@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON vs. JS Object</title>
+</head>
+<body>
+    
+    <Script>
+        
+    // JSON 是字符串，是 KEY 为字符串类型的 JS 对象，Value 可以为其它数据类型
+
+    let obj = {
+        name: 'lwm',
+        age: 18,
+        gender: 'male'
+    }
+
+    // JS Object to JSON
+    json = JSON.stringify(obj);
+    console.log(json, typeof json); 
+    // {"name":"lwm","age":18,"gender":"male"} string
+
+    // JSON to JS object
+    obj2 = JSON.parse(json);
+    console.log(obj2, typeof obj2);
+    // {name: "lwm", age: 18, gender: "male"} "object"
+
+    </Script>
+</body>
+</html>

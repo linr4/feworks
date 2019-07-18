@@ -263,3 +263,35 @@ div {
 }
 ```
 
+
+
+### SASS 循环
+
+```scss
+// for 循环
+@for $i from 起始整数 through 结束整数 { } // through 包头包尾
+@for $i from 起始整数 to 结束整数 { }  // to 包头不包尾
+
+// while 循环
+@while(condition) { }
+```
+
+改变部分 `li` 颜色的例子：
+
+```scss
+@for $li from 5 through 8 {
+    &:nth-child(#{$li}) {
+        background: red;
+    }
+}
+
+// 或用 while 循环
+@li: 5;
+@while ($li <= 8) {
+    &:nth-child(#{$li}) {
+        background: red;
+    }
+    $li: $li + 1;
+}
+```
+

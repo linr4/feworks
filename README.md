@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190718 - Day 98
+
+- 学习项目视频 (+1h = 207 of 600)
+
 ###### 20190717 - Day 97
 
 - 学习项目视频 (+2h = 206 of 600)
