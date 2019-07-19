@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190719 - Day 99
+
+- 学习 jQuery - D1 (+3h = 210 of 600)
+
 ###### 20190718 - Day 98
 
 - 学习项目视频 (+1h = 207 of 600)

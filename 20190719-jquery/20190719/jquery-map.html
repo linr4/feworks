@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery 静态方法 - map</title>
+</head>
+<body>
+    
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        var arr = ['a','b','c','d','e','f'];
+        var obj = {0:'z', 1:'y', 2:'x', 3:'w', 4:'v', 5:'u', length: 6};
+
+        arr.map(function(value, index){
+            // console.log(index, value);
+        })
+
+        // Uncaught TypeError: obj.map is not a function
+        // obj.map(function(value, index){
+        //     console.log(index, value)
+        // })
+
+        var arrMapRes = $.map(arr, function(value, index) {
+            console.log(index, value);
+            return index + value;
+        });
+
+        var objMapRes = $.map(obj, function(value, index) {
+            console.log(index, value);
+        });
+
+        var arrEachRes = $.each(arr, function(value, index){
+            console.log(index, value);
+            return index + value;
+        })
+
+        console.log(arrMapRes);  // ["0a", "1b", "2c", "3d", "4e", "5f"]
+        console.log(objMapRes);  // []
+        console.log(arrEachRes); // ["a", "b", "c", "d", "e", "f"]
+    </script>
+</body>
+</html>

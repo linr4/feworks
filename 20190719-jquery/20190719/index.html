@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - getting started</title>
+</head>
+<script src="../lib/jquery-1.12.4.js"></script>
+<script>
+    // 1. 原生JS写法
+    window.onload = function (ev) {
+        console.log('----------------- Vanilla JS begin ----------------');
+        var imgEl = document.getElementsByTagName('img')[0];
+        var imgWidth = getComputedStyle(imgEl).width;
+        var imgHeight = getComputedStyle(imgEl).height;
+        console.log('width: ' + imgWidth, 'Height: ' + imgHeight); // 143 59
+
+        // alert('hello 1');
+        console.log('----------------- Vanilla JS end ----------------');
+    }
+    window.onload = function () {
+        //alert('hello 2'); // 后写的会覆盖先写的，‘hello 1’ 所在的函数被覆盖、不执行
+    }
+
+    // 2. JQ的写法
+
+    $(document).ready(function(){ // 比 windows.onload 先执行
+        console.log('----------------- jQuery begin ----------------');
+        var $img = $('img');
+        console.log($img);
+        console.log($img.width()); // 0 for the first time (without cache)
+        console.log($img.height()); // 0
+
+        // alert('jQuery 1');
+        console.log('----------------- jQuery end ----------------');
+    })
+
+    $(document).ready(function() {
+        // alert('jQuery 2'); // 两个在不同入口函数中的 alert 都会执行，不会覆盖
+    })
+</script>
+<body>
+    <img src="http://img.alicdn.com/tfs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png" alt="">
+</body>
+</html>

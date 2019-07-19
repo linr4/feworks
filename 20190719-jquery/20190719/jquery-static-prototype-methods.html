@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>静态方法和实例方法</title>
+</head>
+<body>
+    <script>
+    // 静态方法添加在类上面，通过类名调用
+    // 实例方法添加在原型上面，通过实例调用
+
+    function ClassA () {};  // 创建类
+
+    ClassA.staticMethod = function () { // 添加静态方法
+        console.log('static method');
+    }
+    ClassA.staticMethod();  // 通过类名调用静态方法
+
+    ClassA.prototype.instanceMethod = function () {  // 在原型上添加实例方法
+        console.log('instance method');
+    }
+
+    var instClassA = new ClassA(); // 创建实例
+    instClassA.instanceMethod(); // 同实例调用实例方法
+
+
+    </script>
+</body>
+</html>

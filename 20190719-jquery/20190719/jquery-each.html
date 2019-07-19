@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery 静态方法 each </title>
+</head>
+<body>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        var arr = ['a','b','c','d','e','f'];
+        var obj = {0:'z', 1:'y', 2:'x', 3:'w', 4:'v', 5:'u', length: 6};
+
+        arr.forEach(function(value, index){
+            console.log('index:', index, ' value:', value);
+        })
+
+        // 原生 JS 无法用 forEach 遍历伪数组
+        // Uncaught TypeError: obj.forEach is not a function
+        // obj.forEach(function(value, index){ 
+        //     console.log('index:', index, ' value:', value);
+        // })
+
+        // jQuery.each 静态方法可以遍历数组和伪数组，但回调函数的参数位置相反
+        $.each(arr, function(index, value){
+            console.log('index:', index, ' value:', value);
+        })
+        $.each(obj, function(index, value){
+            console.log('index:', index, ' value:', value);
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery core functiions</title>
+</head>
+<body>
+    <div class="box1"></div>
+    <div id="box2"></div>
+    <span></span>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+    
+//     jQuery 核心函数
+
+// - `$()` 代表调用 jQuery 的核心函数，可以接收如下参数
+// - 接收一个函数
+        $(function(){console.log('接收一个函数')});
+
+// - 接收一个字符串
+//   - 接收一个字符串选择器
+        var $box1 = $('.box1');
+        var $box2 = $('#box2');
+        console.log($box1, $box2);
+
+//   - 接收一个代码片段
+        var $p = $('<p>接收一个代码片段</p>');
+        console.log($p); // jQuery.fn.init [p]
+        $box1.append($p);
+
+// - 接收一个 DOM 元素
+        var span = document.getElementsByTagName('span')[0];
+        var $span = $(span); // 将原生 DOM 元素包装成 jQuery 对象
+        console.log(span);  // <span></span>
+        console.log($span); // jQuery.fn.init [span, context: span]
+
+    </script>
+</body>
+</html>

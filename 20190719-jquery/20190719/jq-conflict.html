@@ -1,0 +1,10 @@
+<script src="../lib/jquery-1.12.4.js"></script>
+<script>
+    // 释放 $ 符号的使用权、避免与其它代码关于 $ 的冲突；
+    // 必须在所有 jQuery 代码前释放；
+    // 释放后就只能用 jQuery 关键字、不能再用 $；
+    jQuery.noConflict();
+
+    // 自定义一个访问符号/关键字；
+    jq = jQuery.noConflict();
+</script>
