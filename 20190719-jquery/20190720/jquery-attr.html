@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery attr method</title>
+</head>
+<body>
+    <span class="span1" name="abc"></span>
+    <span class="span2" name="xyz"></span>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function(){
+            console.log($('span').attr('class'));   // span1
+            $('span').attr('class', 'box');
+            $('span').attr('abc', '123'); 
+
+            $('span').removeAttr('class name abc');
+        });
+    </script>
+</body>
+</html>

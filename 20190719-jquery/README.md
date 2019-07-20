@@ -205,8 +205,8 @@
   * 回调函数的参数顺序：function(value, index)，与原生JS一样；
   * 原生map不支持伪数组，jQuery.map() 支持；
   * jQuery 的 each 和 map 的区别：
-    * each 返回值为原数组，map 默认返回空数组；
-    * each 不支持在回调函数中处理数组并返回，map 支持处理数组、返回新数组；
+    * each 返回值为原数组，不支持在回调函数中处理数组并返回；
+    * map 默认返回空数组；支持在回调函数中进一步处理数组、并返回处理后的新数组；
 
   ```js
   var arr = ['a','b','c','d','e','f'];
@@ -242,3 +242,98 @@
   ```
 
   
+
+* jQuery 内容选择器
+
+  * `:empty` - 选中内容为空的元素（没有文本、也没有子元素）
+  * `:parent` - 选中有内容的元素（有文本和/或子元素、是其它节点的父元素）
+  * `:contains(text)` - 选中包含了指定文本内容的元素
+  * `:has(selector)` - 选中包含了指定子元素 selector 的元素
+    
+    ```js
+    var $div1 = $('div:empty');	// 选中内容为空的 div
+    var $div2 = $('div:parent');	// 选中存在文本或子元素、是其它节点的父元素的元素
+    var $div3 = $('div:contains("我是div")');	// 选中包含了“我是div” 文本的元素
+    var $div4 = $('div:has("span")');	// 选中包含 <span> 子元素的元素
+```
+    
+    
+
+* jQuery 属性和属性节点
+
+  
+
+  * 什么是属性：对象所保存的变量既是属性
+
+    ```js
+    function Person() {}
+    var p1 = new Person() {
+        p1.name = "lwm";	// 这里的 name 既是对象的属性
+        console.log(p1.name);	// 获取属性
+    }
+    ```
+
+    
+
+  * 如何操作属性
+
+    * 获取：`console.log(obj.attr);` 或 `console.log(obj["attr"]);`
+
+    * 设置： `obj.attr = value;` 或 `obj["attr"] = value;`
+
+      
+
+  * 什么是属性节点
+
+    * 在 HTML 标签中添加的属性，既是“属性节点”；
+
+      * 在浏览器找到 DOM 元素，展开看到的都是属性；
+      * 在 attributes 属性中保存的所有内容都是属性节点；
+      * 所有对象都有属性，但只有 DOM 对象才有属性节点；
+
+      ```html
+      <span name="logo-wrap"></span>		<!-- 这里的 name 既是属性节点 -->
+      ```
+
+    * 查看方法：Chrome DevTools -> Sources -> 选中文件 -> 右侧 Watch -> new "document.getElementByTagName('span')" -> span -> attributes: NameNodeMap -> '0: name' <--- 这个就是属性节点之一；
+
+      
+
+  * 如何操作属性节点
+
+    ```js
+    var spanEl = document.getElementByTagName('span')[0];
+    spanEl.setAttribute('name', 'anotherValue');	// 设置属性节点的值
+    spanEl.getAttribute('name');	// 获取属性节点的值
+    ```
+
+  * 属性和属性节点的区别
+
+    * 任何对象都有属性，但只有 DOM 对象才有属性节点
+
+
+
+* jQuery 属性节点操作的方法
+
+  * `.attr(name|pro|key, val|fn)` - 获取或设置属性节点的值
+
+    * 只传递一个参数，表示获取属性节点的值 ---> 无论选中几个元素，都只返回第一个元素的属性节点值
+
+      ```js
+      console.log($('span').attr('class'));   // span1，示例代码中有两个 span 只返回第一个
+      ```
+
+    * 传递两个参数，表示设置属性节点的值 ---> 所有选中的元素的属性节点值都会被设置
+
+      ```js
+      $('span').attr('class', 'box');		// 所有 span 的 class 都被设置为 box
+      $('span').attr('abc', '123'); 		// 若属性节点不存在，会自动新增
+      ```
+
+  * `.removeAttr(attrNode1 attrNode2 ...)` 删除属性节点 - 所有选中的元素的属性节点都会删除
+
+    ```js
+    $('span').removeAttr('class name abc');	// 同时删除三个属性节点
+    ```
+
+    

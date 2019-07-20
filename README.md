@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190720 - Day 100
+
+- 学习 jQuery - 属性、属性节点 (+1h = 211 of 600)
+
 ###### 20190719 - Day 99
 
 - 学习 jQuery - D1 (+3h = 210 of 600)

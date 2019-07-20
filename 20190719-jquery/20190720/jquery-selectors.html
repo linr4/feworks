@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery selectors</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            margin-top: 50px;
+            font-size: 36px;
+            color: wheat;
+        }
+        div:nth-child(1) {
+            background-color: skyblue;
+        }
+        div:nth-child(2) {
+            background-color: seagreen;
+        }
+        div:nth-child(3) {
+            background-color: rebeccapurple;
+        }
+        div:nth-child(4) {
+            background-color: salmon;
+        }
+        div:nth-child(5) {
+            background-color: turquoise;
+        }
+        span, p {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div>I am a div</div>
+    <div>They say I am a division</div>
+    <div><span name="logo-wrap"></span></div>
+    <div><p></p></div>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function(){
+            // :empty
+            var $div1 = $('div:empty');
+            console.log($div1);
+            // :parent
+            var $div2 = $('div:parent');
+            console.log($div2);
+            // :contains(text)
+            var $div3 = $('div:contains("I am a div")');
+            console.log($div3);
+            // :has(selector)
+            var $div4 = $('div:has("span")');
+            console.log($div4);
+        });
+    </script>
+</body>
+</html>
