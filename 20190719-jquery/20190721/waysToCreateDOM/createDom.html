@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>create DOM</title>
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+
+// 测试三种不同的创建DOM的方法，创建一万个DOM，第一种最快，最后一种最慢；
+
+		
+        doPerfAssess2(createNodeByInnerHTML);         // 一万个：221     十万个：1806 
+		doPerfAssess(createNodeByInnerHTML);         // 一万个：221     十万个：1806 
+     // doPerfAssess(createNodeByDOMParser);         // 一万个：1104    十万个：11380 
+     // doPerfAssess(createNodeByDocumentFragment);  // 一万个：1805    十万个：230161
+
+
+        // 1.通过 document.createElement 方法创建 DOM
+        function createNodeByInnerHTML (tpl) {
+            let tempEl = document.createElement('div');
+            tempEl.innerHTML = tpl;
+            return tempEl.firstChild;
+        }
+
+        // 2.通过 DOMParser 对象把字符串转为 DOM 对象
+        function createNodeByDOMParser (tpl) {
+            let doc = new DOMParser().parseFromString(tpl, 'text/html');
+            return doc.querySelector('.child');
+        }
+
+        // 3.通过 DocumentFragment
+        function createNodeByDocumentFragment (tpl) {
+            return document.createRange().createContextualFragment(tpl);
+        }
+		
+		// 4.
+		
+		function string2dom(template) {
+            
+                fragment.innerHTML = template;
+				console.log(fragment);
+				console.log(fragment.innerHTML);
+				console.log(fragment.children);
+				
+				return fragment.children;
+				
+				
+        }
+        // 性能测试代码
+        function doPerfAssess(fn) {
+            let containerEl = document.querySelector('.container');
+            let template = '';          // 模板字符串
+            let startTime = Date.now(); // 测试起始时间
+
+            for (let i = 0; i < 500000; i++) {
+                template = `<div class="child">Hello ${i}</div>`;
+                containerEl.appendChild(fn(template)); // 179 
+            }
+            console.log('Time elapsed:', Date.now() - startTime, 'ms');
+        }
+		
+
+
+        // 性能测试代码
+        function doPerfAssess2(fn) {
+			let fragment = document.createDocumentFragment();
+            let containerEl = document.querySelector('.container');
+            let template = '';          
+            let startTime = Date.now(); 
+
+            for (let i = 0; i < 500000; i++) {
+                template = `<div class="child">Hello ${i}</div>`;
+                fragment.appendChild(fn(template)); // 
+            }
+			containerEl.appendChild(fragment);
+            console.log('Time elapsed:', Date.now() - startTime, 'ms');
+        }
+		
+
+
+    </script>
+</body>
+</html>
