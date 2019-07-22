@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190722 - Day 102
+
+- 学习 jQuery methods (+2.5h = 230.5 of 600)
+
 ###### 20190721 - Day 101
 
 - 练习 bookmark 代码重构，学习字符串模板转 DOM 对象的方法 (+17h = 228 of 600)
