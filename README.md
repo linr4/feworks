@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ###### 20190720 - Day 100
 
+- 练习 bookmark 代码重构，学习字符串模板转 DOM 对象的方法 (+10h = 221 of 600)
+
+###### 20190720 - Day 100
+
 - 学习 jQuery - 属性、属性节点 (+1h = 211 of 600)
 
 ###### 20190719 - Day 99
