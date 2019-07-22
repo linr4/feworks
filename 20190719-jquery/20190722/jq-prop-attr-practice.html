@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prop and attr</title>
+    <style>
+        div {
+            width: 400px;
+            height: 300px;
+            margin: 100px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        input {
+            width: 400px;
+            height: 30px;
+            margin: 0 auto;
+            line-height: 30px;
+            border-radius: 6px;
+            outline: none;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+        button {
+            width: 100px;
+            height: 30px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin: 10px auto;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text">
+        <button>change img</button>
+        <img src="https://www.baidu.com/img/bd_logo1.png" alt="">
+        <!-- https://img.alicdn.com/tfs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png -->
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        let btn = document.querySelector('button');
+
+        btn.onclick = function () {
+            $('img').attr('src', $('input').val());
+        }
+    </script>
+</body>
+</html>

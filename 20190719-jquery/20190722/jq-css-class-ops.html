@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS class operations</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+        }
+        .class1 {
+            background-color: turquoise;
+        }
+        .class2 {
+            border: 20px solid royalblue;
+        }
+    </style>
+</head>
+<body>
+    <button>add class</button>
+    <button>remove class</button>
+    <button>toggle class</button>
+
+    <div></div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        let btnEls = document.querySelectorAll('button');
+        btnEls[0].onclick = function () {
+            $('div').addClass('class1 class2');
+        }
+        btnEls[1].onclick = function () {
+            $('div').removeClass('class1');
+        }
+        btnEls[2].onclick = function () {
+            $('div').toggleClass('class2');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery .css()</title>
+</head>
+<body>
+    <div></div>
+
+    <script src="../lib/jquery-1.12.4.min.js"></script>
+    <script>
+        // 1.逐个设置
+        $('div').css('width', '100px');
+        $('div').css('height', '123px');
+        $('div').css('background-color', 'turquoise');
+
+        // 2.链式设置：超过3个以上的话最好分开写，利于阅读
+        $('div').css('width', '200px')
+                .css('height', '222px')
+                .css('background-color', 'red');
+
+        // 3.批量设置
+        $('div').css({
+            width: "300px",
+            height: "333px",
+            "background-color": "yellowgreen"
+            // 有连字符的属性需要引号，否则会出错
+            // 或者改写为JS风格的驼峰命名法 backgroundColor
+        });
+
+        // 4. 获取设置
+        console.log($('div').css('width')); // 300px
+        console.log($('div').css('height'));    // 333px
+        console.log($('div').css('background-color'));  // rgb(154, 205, 50) 黄绿色
+        console.log($('div').css('backgroundColor'));   // rgb(154, 205, 50) 黄绿色
+    </script>
+</body>
+</html>

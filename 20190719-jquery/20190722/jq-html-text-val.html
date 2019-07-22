@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 200px;
+            margin: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        input {
+            width: 400px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <button>Set HTML</button>    
+    <button>Get HTML</button>    
+
+    <button>Set Text</button>    
+    <button>Get Text</button>    
+
+    <button>Set val</button>    
+    <button>Get val</button>    
+
+    <div></div>
+    <input type="text">
+
+    <script src="../lib/jquery-1.12.4.min.js"></script>
+    <script>
+        let btnEls = document.querySelectorAll('button');
+
+        btnEls[0].onclick = _=> {
+            $('div').html('<p>this is a <b style="font-size: 40px;">paragraph<b><p>');
+        }
+        btnEls[1].onclick = _=> {
+            console.log($('div').html());
+        }
+
+        btnEls[2].onclick = _=> {
+            $('div').text('<p>this is a <b style="font-size: 40px;">paragraph<b><p>')
+        }
+        btnEls[3].onclick = _=> {
+            console.log($('div').text());
+        }
+
+        btnEls[4].onclick = _=> {
+            $('input').val('please input your message here');
+        }
+        btnEls[5].onclick = _=> {
+            console.log($('input').val());
+        }
+    </script>
+</body>
+</html>

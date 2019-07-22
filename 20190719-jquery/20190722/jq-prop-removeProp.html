@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>操作属性的方法：prop(), removeProp()</title>
+</head>
+<body>
+    <div>
+        <span class="span1-class"></span>
+        <span class="span2-class"></span>
+        <input type="checkbox" checked>
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function(){
+            // set
+            $('span').eq(0).prop('prop', 'value of property 1');
+            $('span').eq(1).prop('prop', 'linweimin');
+            // get
+            console.log($('span').prop('prop')); // 只会找到第一个 span
+            // remove
+            $('span').removeProp('prop');   // 会删除所有 span 的 prop
+
+            // 也能操作属性节点
+            // get
+            console.log($('span').prop('class'));
+            // set
+            $('span').prop('class', 'box-class');
+
+            // 使用建议：
+            // 具有 true/false 值的属性节点（如checked, selected, disabled）用prop()
+            // 其它场景用 attr()
+            console.log($('input').prop('checked'));    // true | false
+            console.log($('input').attr('checked'));    // checked | undefined
+
+        });
+    </script>
+</body>
+</html>

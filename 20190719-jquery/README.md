@@ -213,7 +213,7 @@
   var obj = {0:'z', 1:'y', 2:'x', 3:'w', 4:'v', 5:'u', length: 6};
   
   arr.map(function(value, index){
-      // console.log(index, value);
+      console.log(index, value);
   })
   
   // 原生JS不支持用map遍历伪数组
@@ -224,7 +224,7 @@
   
   var arrMapRes = $.map(arr, function(value, index) {
       console.log(index, value);
-      return index + value;	// map 可以指定返回经过计算的结果
+      return index + value;	// map 可以返回经过计算的新数组
   });
   
   var objMapRes = $.map(obj, function(value, index) {
@@ -255,25 +255,23 @@
     var $div2 = $('div:parent');	// 选中存在文本或子元素、是其它节点的父元素的元素
     var $div3 = $('div:contains("我是div")');	// 选中包含了“我是div” 文本的元素
     var $div4 = $('div:has("span")');	// 选中包含 <span> 子元素的元素
-```
-    
-    
-
-* jQuery 属性和属性节点
+    ```
 
   
+
+* jQuery 属性和属性节点
 
   * 什么是属性：对象所保存的变量既是属性
 
     ```js
     function Person() {}
     var p1 = new Person() {
-        p1.name = "lwm";	// 这里的 name 既是对象的属性
+        p1.name = "lwm";	    // 这里的 name 既是对象的属性
         console.log(p1.name);	// 获取属性
     }
     ```
 
-    
+
 
   * 如何操作属性
 
@@ -337,3 +335,128 @@
     ```
 
     
+
+* jQuery 的属性操作方法： `prop` 与 `removeProp`
+
+  * 与 `attr` 和 `removeAttr` 操作方法一样
+  * 不仅能操作属性，同时也能操作属性节点
+  * 用 `prop()` 还是 `attr()`？
+    * 具有 true/false 值的属性节点（如checked, selected, disabled）用`prop()`
+      其它类型的属性节点用 `attr()`
+
+  ```js
+  // set
+  $('span').eq(0).prop('demo', 'value of span 0 property demo');
+  $('span').eq(1).prop('demo', 'heiheihei');
+  
+  // get
+  console.log($('span').prop('demo')); // 只会找到第一个 span
+  
+  // remove
+  $('span').removeProp('demo');   // 会删除所有 span 的 demo 属性
+  
+  // 也能操作属性节点
+  // get
+  console.log($('span').prop('class'));
+  // set
+  $('span').prop('class', 'box-class');
+  
+  // 使用建议：
+  // 具有 true/false 值的属性节点（如checked, selected, disabled）用prop()
+  // 其它场景用 attr()
+  console.log($('input').prop('checked'));    // true | false
+  console.log($('input').attr('checked'));    // checked | undefined
+  ```
+
+  
+
+* jQuery CSS 类的操作
+
+  * `addClass(class | fn)`
+  * `removeClass([class | fn])`
+  * `toggleClass(class | fn [, sw])`
+
+  ```js
+  btnEls[0].onclick = function () {
+      $('div').addClass('class1 class2');
+  }
+  btnEls[1].onclick = function () {
+      $('div').removeClass('class1');
+  }
+  btnEls[2].onclick = function () {
+      $('div').toggleClass('class2');
+  }
+  ```
+
+  
+
+* jQuery 文本操作相关的方法
+
+  * `html([val|fn])`	-	与原生的 `innerHTML` 一样，写上内容就是设置、不写内容就是获取
+  * `text([val|fn]) `	-	与原生的 `innerText` 一样，写上内容就是设置、不写内容就是获取
+  * `val([val|fn|arr])`	-	与原生的属性节点 `.value` 一样，写上内容就是设置、不写内容就是获取
+
+  ```js
+  btnEls[0].onclick = _=> {
+      $('div').html('<p>this is a <b style="font-size: 40px;">paragraph<b><p>');
+  }
+  btnEls[1].onclick = _=> {
+      console.log($('div').html());
+  }
+  
+  btnEls[2].onclick = _=> {
+      $('div').text('<p>this is a <b style="font-size: 40px;">paragraph<b><p>')
+  }
+  btnEls[3].onclick = _=> {
+      console.log($('div').text());
+  }
+  
+  btnEls[4].onclick = _=> {
+      $('input').val('please input your message here');
+  }
+  btnEls[5].onclick = _=> {
+      console.log($('input').val());
+  }
+  ```
+
+  
+
+* jQuery 操作 CSS 样式的方法
+
+  * `.css(name|prop|[,val|fn])`
+  * 三种设置CSS属性的方式
+    * 逐个设置 `$('div').css('width', '100px');`
+    * 链式设置 `$('div').css('width', '200px').css('height', '222px');`
+    * 批量设置 `$('div').css({width: "300px",height: "333px"});`
+  * 引用属性时需要留意，若属性名有连字符、需要加上引号或改用驼峰命名的写法
+  * 获取属性：`$('div').css('width')`
+
+  ```js
+  // 1.逐个设置
+  $('div').css('width', '100px');
+  $('div').css('height', '123px');
+  $('div').css('background-color', 'turquoise');
+  
+  // 2.链式设置：超过3个以上的话最好分开写，利于阅读
+  $('div').css('width', '200px')
+      .css('height', '222px')
+      .css('background-color', 'red');
+  
+  // 3.批量设置
+  $('div').css({
+      width: "300px",
+      height: "333px",
+      "background-color": "yellowgreen"
+      // 有连字符的属性需要引号，否则会出错
+      // 或者改写为JS风格的驼峰命名法 backgroundColor
+  });
+  
+  // 4. 获取设置
+  console.log($('div').css('width')); // 300px
+  console.log($('div').css('height'));    // 333px
+  console.log($('div').css('background-color'));  // rgb(154, 205, 50) 黄绿色
+  console.log($('div').css('backgroundColor'));   // rgb(154, 205, 50) 黄绿色
+  ```
+
+  
+
