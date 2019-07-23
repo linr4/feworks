@@ -493,3 +493,26 @@ $('p:last').text('outerHeight(true) - content + padding + border + margin: ' + $
 
 ![1563884301217](C:\Data\git\webdev-learning-notes\20190719-jquery\1563884301217.png)
 
+* `.offset()` - 【相对于 document 的位置】retrieve the current position of an element (specifically its border box, which excludes margins) **relative to the document.** 
+
+* `.offset({left/top: value})`可以获取位置、也可设置位置；
+
+*  `.position()` - 【相对于 定位元素 的位置】retrieve the current position of an element (specifically its margin box) **relative to the offset parent** (specifically its padding box, which excludes margins and borders).
+
+* `.position()` 只能获取、无法设置位置；
+
+* When positioning a new element on top of an existing one for global manipulation (in particular, for implementing drag-and-drop), `.offset()` is more useful.
+
+* When positioning a new element near another one and within the same containing DOM element, `.position()` is the more useful.
+
+  ```js
+  var p = $('p:last');
+  var offset = p.offset();
+  p.html("left: " + offset.left + ", top: " + offset.top);
+  
+  var p = $( "p:first" );
+  var position = p.position();
+  $( "p:last" ).text( "left: " + position.left + ", top: " + position.top );
+  ```
+
+  
