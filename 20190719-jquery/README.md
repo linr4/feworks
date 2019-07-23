@@ -460,3 +460,36 @@
 
   
 
+* jQuery 操作位置和尺寸的方法
+
+  
+
+  * `.height()` - Get the current computed **content height** (not including padding, border or margin) for the first element in the set of matched elements or set the height of every matched element.
+
+    * The difference between `.css( "height" )` and `.height()` is that the latter returns a unit-less pixel value (for example, `400`) while the former returns a value with units intact (for example, `400px`). The `.height()` method is recommended when an element's height needs to be used in a mathematical calculation.
+    * This method is also able to find the height of the window and document.
+
+  * `.innerHeight()` - Get the current computed **inner height (**including padding but not border**) for the first element in the set of matched elements or set the inner height of every matched element.
+
+  * `.outerHeight()` - Get the current computed **outer height** (including padding, border, and optionally margin) for the first element in the set of matched elements or set the outer height of every matched element.
+
+    > #### [.outerHeight( [includeMargin \] )](https://api.jquery.com/outerHeight/#outerHeight-includeMargin)
+    >
+    > **include Margin** (default: `false`)
+    >
+    > Type: [Boolean](http://api.jquery.com/Types/#Boolean)
+    >
+    > A Boolean indicating whether to include the element's margin in the calculation.
+
+```js
+$('p:first').text('height() - content only: ' + $('p:last').height());
+
+$('p:nth-of-type(2)').text('innerHeight() - content + padding: ' + $('p:last').innerHeight());
+
+$('p:nth-of-type(3)').text('outerHeight() - content + padding + border: ' + $('p:first').outerHeight());
+
+$('p:last').text('outerHeight(true) - content + padding + border + margin: ' + $('p:first').outerHeight(true));
+```
+
+![1563884301217](C:\Data\git\webdev-learning-notes\20190719-jquery\1563884301217.png)
+

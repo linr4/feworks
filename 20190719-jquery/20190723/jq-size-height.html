@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - size and position</title>
+    <style>
+        html {
+            border: 1px solid red;
+        }
+        body {
+            border: 1px solid #000;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+        p {
+            width: 100px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <button class="geth">get heights</button>
+    <div></div>
+    <ul id="box">
+        <li  id="paragraph">paragraph: <span></span></li>
+        <li  id="document">document: <span></span></li>
+        <li  id="window">window: <span></span></li>
+        <li  id="html">html: <span></span></li>
+        <li  id="body">body: <span></span></li>
+    </ul>
+
+    <p>sample paragraph to test .height()</p>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        function showHeight (element) {
+            return $(element).height();
+        }
+
+        $('.geth').click(function() {
+            $('#paragraph>span').text(showHeight($('p')))
+            $('#document>span').text(showHeight($(document)))
+            $('#window>span').text(showHeight($(window)))
+            $('#html>span').text(showHeight($('html')))
+            $('#body>span').text(showHeight($('body')))
+        })
+
+    </script>
+</body>
+</html>

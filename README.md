@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190723 - Day 103
+
+- 学习 jQuery 方法 - 尺寸和位置  (+1h = 231.5 of 600)
+
 ###### 20190722 - Day 102
 
 - 学习 jQuery methods (+2.5h = 230.5 of 600)

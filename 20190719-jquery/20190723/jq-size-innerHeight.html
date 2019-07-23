@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - innerHeight</title>
+</head>
+<body>
+    <p>Hello</p>
+    <p></p>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $('p').css('border', '1px solid #ccc');
+        $('p:last').text('innerHeight is: ' + $('p:first').innerHeight());
+    </script>
+</body>
+</html>
