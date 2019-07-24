@@ -12,6 +12,14 @@ Web development learning notes and case study
 
 ---
 
+###### 20190725 - Day 105
+
+- 学习 jQuery - 事件的绑定、移除、自动触发等  (+2h = 234.5 of 600)
+
+###### 20190724 - Day 104
+
+- 学习 jQuery 方法 - scrollTop 等  (+1h = 232.5 of 600)
+
 ###### 20190723 - Day 103
 
 - 学习 jQuery 方法 - 尺寸和位置  (+1h = 231.5 of 600)

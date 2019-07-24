@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event bubbling and default behavior</title>
+    <style>
+        .parent {
+            width: 200px;
+            height: 200px;
+            border: 1px solid turquoise;
+            background-color: turquoise;
+        }
+        .child {
+            width: 100px;
+            height: 100px;
+            margin: 50px;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+    <br>
+    <a href="http://www.baidu.com">b a i d u</a>
+    <br><br>
+    <form action="http://www.taobao.com">
+        <input type="text">
+        <input type="submit">
+    </form>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $('.child').click(function(event) {
+            alert('Click event is trigged on child element');
+            // return false;
+            event.stopPropagation();
+        });
+        $('.parent').click(function(event) {
+            alert('Click event is trigged on parent element');
+        });
+
+        $('a').click(function(event) {
+            alert('<a> clicked');
+            return false;
+        });
+        $('input[type=submit]').click(function(event) {
+            alert('input[type=submit] is clicked');
+            event.preventDefault();
+        })
+    </script>
+</body>
+</html>

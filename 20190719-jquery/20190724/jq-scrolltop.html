@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - ScrollTop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 3000px;
+        }
+
+        .box {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+        }
+
+        .text {
+            position: relative;
+            top: 70px;
+            left: 10px;
+            width: 100px;
+            height: 200px;
+            overflow: auto;
+            border: 1px solid #ccc;
+        }
+
+        .banner {
+            width: 200px;
+            height: 20px;
+            line-height: 20px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <button id="get">Get ScrollTop</button>
+        <button id="set">Set ScrollTop</button>
+        <p class="banner"></p>
+    </div>
+    <div class="text">this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is
+        a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div.
+        this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is
+        a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div.
+        this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is
+        a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div.
+        this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is
+        a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div.
+        this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is
+        a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div.
+        this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is
+        a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div. this is a div.
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        // $('#get').click(function() {
+        //     $('.banner').html('scrollTop = ' + $('.text').scrollTop());
+        // });
+
+        // $('#set').click(function() {
+        //     $('.text').scrollTop(300);
+        // });
+
+
+        $('#get').click(function () {
+            var docScrollTop = $('body').scrollTop() + $('html').scrollTop();
+            $('.banner').html('document scrollTop = ' + docScrollTop);
+        });
+
+        $('#set').click(function () {
+            $('body').scrollTop(700) + $('html').scrollTop(700);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,5 +1,7 @@
 # jQuery
 
+### 入口函数
+
 * 代码初始化（入口函数）的写法
 
   ```js
@@ -82,87 +84,87 @@
 
 
 
-* jQuery 核心函数
+### jQuery 核心函数
 
-  * `$()` 或 `jQuery()` 代表调用 jQuery 的核心函数，可以传递如下参数
+* `$()` 或 `jQuery()` 代表调用 jQuery 的核心函数，可以传递如下参数
 
-    * 函数，如：`$(function(){})`
-    * 字符串
-      * 字符串选择器；返回一个 jQuery 对象，保存了找到的 DOM 元素
-      * HTML 代码片段；返回一个 jQuery 对象，保存了创建的 DOM 元素
-    * DOM 对象，把它包装成 jQuery 对象返回
+  * 函数，如：`$(function(){})`
+  * 字符串
+    * 字符串选择器；返回一个 jQuery 对象，保存了找到的 DOM 元素
+    * HTML 代码片段；返回一个 jQuery 对象，保存了创建的 DOM 元素
+  * DOM 对象，把它包装成 jQuery 对象返回
 
-  ```js
-    // 传递函数
-    $(function(){
-        console.log('传递函数')
-    });
-    
-    // 传递字符串选择器，返回 jQuery 对象，保存了找到的 DOM 元素
-    var $box1 = $('.box1');
-    var $box2 = $('#box2');
-    console.log($box1, $box2);
-    
-    // 传递代码片段，返回 jQuery 对象，保存了创建的 DOM 元素
-    var $p = $('<p>代码片段</p>');
-    console.log($p); // jQuery.fn.init [p]
-    $box1.append($p);
-    
-    // 传递 DOM 对象，把它包装成 jQuery 对象返回
-    var span = document.getElementsByTagName('span')[0];
-    var $span = $(span); // 将原生 DOM 元素包装成 jQuery 对象
-    console.log(span);  // <span></span>
-    console.log($span); // jQuery.fn.init [span, context: span]
-    
-  ```
-
-    
-
-* jQuery 对象
-
-  * 一个 jQuery 对象是一个伪数组
-
-  * 什么是伪数组：有从 0 到 length - 1 的属性、且有 length 属性的对象；
-
-  ```js
-    var $div = $('div');
-    console.log($div);
-    /*
-        jQuery.fn.init(3)
-        0: div
-        1: div
-        2: div
-        context: document
-        length: 3
-        prevObject: jQuery.fn.init [document, context: document]
-        selector: "div"
-        __proto__: Object(0)
-    */
-  ```
-
-    
-
-* 静态方法与实例方法
-
-  * 静态方法添加在类上面，通过类名调用
-  * 实例方法添加在原型上面，通过实例调用
-
-  ```js
-  function ClassA () {};  // 创建类
+```js
+  // 传递函数
+  $(function(){
+      console.log('传递函数')
+  });
   
-  ClassA.staticMethod = function () { // 在类上添加静态方法
-      console.log('static method');
-  }
-  ClassA.staticMethod();  // 通过类名调用静态方法
+  // 传递字符串选择器，返回 jQuery 对象，保存了找到的 DOM 元素
+  var $box1 = $('.box1');
+  var $box2 = $('#box2');
+  console.log($box1, $box2);
   
+  // 传递代码片段，返回 jQuery 对象，保存了创建的 DOM 元素
+  var $p = $('<p>代码片段</p>');
+  console.log($p); // jQuery.fn.init [p]
+  $box1.append($p);
   
-  ClassA.prototype.instanceMethod = function () {  // 在原型上添加实例方法
-      console.log('instance method');
-  }
+  // 传递 DOM 对象，把它包装成 jQuery 对象返回
+  var span = document.getElementsByTagName('span')[0];
+  var $span = $(span); // 将原生 DOM 元素包装成 jQuery 对象
+  console.log(span);  // <span></span>
+  console.log($span); // jQuery.fn.init [span, context: span]
   
-  var instClassA = new ClassA(); // 创建实例
-  instClassA.instanceMethod(); // 同实例调用实例方法
-  ```
+```
+
+  
+
+### jQuery 对象
+
+* 一个 jQuery 对象是一个伪数组
+
+* 什么是伪数组：有从 0 到 length - 1 的属性、且有 length 属性的对象；
+
+```js
+  var $div = $('div');
+  console.log($div);
+  /*
+      jQuery.fn.init(3)
+      0: div
+      1: div
+      2: div
+      context: document
+      length: 3
+      prevObject: jQuery.fn.init [document, context: document]
+      selector: "div"
+      __proto__: Object(0)
+  */
+```
+
+  
+
+### 静态方法与实例方法
+
+* 静态方法添加在类上面，通过类名调用
+* 实例方法添加在原型上面，通过实例调用
+
+```js
+function ClassA () {};  // 创建类
+
+ClassA.staticMethod = function () { // 在类上添加静态方法
+    console.log('static method');
+}
+ClassA.staticMethod();  // 通过类名调用静态方法
+
+
+ClassA.prototype.instanceMethod = function () {  // 在原型上添加实例方法
+    console.log('instance method');
+}
+
+var instClassA = new ClassA(); // 创建实例
+instClassA.instanceMethod(); // 同实例调用实例方法
+```
 
 
 
@@ -243,7 +245,7 @@
 
   
 
-* jQuery 内容选择器
+  ### jQuery 内容选择器
 
   * `:empty` - 选中内容为空的元素（没有文本、也没有子元素）
   * `:parent` - 选中有内容的元素（有文本和/或子元素、是其它节点的父元素）
@@ -259,17 +261,18 @@
 
   
 
-* jQuery 属性和属性节点
+  ### jQuery 属性和属性节点
 
-  * 什么是属性：对象所保存的变量既是属性
+* 什么是属性：对象所保存的变量既是属性
 
-    ```js
-    function Person() {}
-    var p1 = new Person() {
-        p1.name = "lwm";	    // 这里的 name 既是对象的属性
-        console.log(p1.name);	// 获取属性
-    }
-    ```
+  ```js
+  function Person() {}
+  var p1 = new Person() {
+      p1.name = "lwm";	    // 这里的 name 既是对象的属性
+      console.log(p1.name);	// 获取属性
+  }
+  ```
+
 
 
 
@@ -370,7 +373,7 @@
 
   
 
-* jQuery CSS 类的操作
+  ### jQuery CSS 类的操作
 
   * `addClass(class | fn)`
   * `removeClass([class | fn])`
@@ -390,7 +393,7 @@
 
   
 
-* jQuery 文本操作相关的方法
+  ### jQuery 文本操作相关的方法
 
   * `html([val|fn])`	-	与原生的 `innerHTML` 一样，写上内容就是设置、不写内容就是获取
   * `text([val|fn]) `	-	与原生的 `innerText` 一样，写上内容就是设置、不写内容就是获取
@@ -421,7 +424,7 @@
 
   
 
-* jQuery 操作 CSS 样式的方法
+  ### jQuery 操作 CSS 样式的方法
 
   * `.css(name|prop|[,val|fn])`
   * 三种设置CSS属性的方式
@@ -460,14 +463,14 @@
 
   
 
-* jQuery 操作位置和尺寸的方法
+  ### jQuery 操作位置和尺寸的方法
 
   
 
-  * `.height()` - Get the current computed **content height** (not including padding, border or margin) for the first element in the set of matched elements or set the height of every matched element.
+* `.height()` - Get the current computed **content height** (not including padding, border or margin) for the first element in the set of matched elements or set the height of every matched element.
 
-    * The difference between `.css( "height" )` and `.height()` is that the latter returns a unit-less pixel value (for example, `400`) while the former returns a value with units intact (for example, `400px`). The `.height()` method is recommended when an element's height needs to be used in a mathematical calculation.
-    * This method is also able to find the height of the window and document.
+  * The difference between `.css( "height" )` and `.height()` is that the latter returns a unit-less pixel value (for example, `400`) while the former returns a value with units intact (for example, `400px`). The `.height()` method is recommended when an element's height needs to be used in a mathematical calculation.
+  * This method is also able to find the height of the window and document.
 
   * `.innerHeight()` - Get the current computed **inner height (**including padding but not border**) for the first element in the set of matched elements or set the inner height of every matched element.
 
@@ -499,7 +502,7 @@ $('p:last').text('outerHeight(true) - content + padding + border + margin: ' + $
 
 *  `.position()` - 【相对于 定位元素 的位置】retrieve the current position of an element (specifically its margin box) **relative to the offset parent** (specifically its padding box, which excludes margins and borders).
 
-* `.position()` 只能获取、无法设置位置；
+* `.position()` 只能获取、无法设置位置；可通过 `.css({left/top: value})` 来设置 position；
 
 * When positioning a new element on top of an existing one for global manipulation (in particular, for implementing drag-and-drop), `.offset()` is more useful.
 
@@ -516,3 +519,121 @@ $('p:last').text('outerHeight(true) - content + padding + border + margin: ' + $
   ```
 
   
+
+* `scrollTop()` - 获取或设置元素的 scrollTop；
+
+  * 获取或设置文档的scrollTop 用 `$('html').scrollTop()`，大部分浏览器支持；但兼容起见，要写成 `var scrolltop = $('html').scrollTop() + $('body').scrollTop();`，获取不到的即为 0；
+
+  ```js
+  console.log($('.text').scrollTop());
+  $('.text').scrollTop(300);
+  
+  var docScrollTop = $('body').scrollTop() + $('html').scrollTop();
+  $('body').scrollTop(700) + $('html').scrollTop(700);
+  ```
+
+  
+
+### jQuery 事件绑定
+
+* 绑定事件的两种方式
+
+  * `$(elm).eventName(fn);` - 编码效率略高，推荐用这种
+  * `$(elm).on(eventName, fn);` - 部分未在 jQuery 中实现的 JS 事件，可用此方式绑定
+
+* 可用添加多个相同或不同类型的事件，不会互相覆盖（即 JS 的 `addEventListener()`）
+
+  ```js
+  $('button').click(function () { alert('button clicked') });
+  $('button').on('click', function () { alert('button clicked again') });
+  ```
+
+  
+
+### jQuery 事件移除
+
+* `$(elm).off()` - 移除所有绑定的事件
+* `$(elm).off('click')` - 移除指定类型的事件
+* `$(elm).off('click', fn1)` - 移除指定类型的指定事件
+
+```js
+function fn1 () {
+    alert('click 1');
+}
+function fn2 () {
+    alert('click 2');
+}
+
+$('button').click(fn1);
+$('button').on('click', fn2);
+$('button').mouseenter(function() {
+    alert('mouse entered');
+})
+
+$('button').off();	// 移除所有绑定了的事件
+$('button').off('click');	// 移除所有 click 事件
+$('button').off('click', fn1);	// 移除 click 事件的 fn1
+```
+
+
+
+### jQuery 事件冒泡和默认行为
+
+* 事件冒泡：从内往外、从下往上传递事件的过程
+
+* 阻止事件冒泡：两种方法
+
+  * 在子元素事件回调函数中 `return false`，或
+  * 在子元素事件回调函数中 `event.stopPropagation();`
+
+  ```js
+  $('.child').click(function(event) {
+      alert('Click event is trigged on child element');
+      // return false;
+      event.stopPropagation();
+  });
+  
+  $('.parent').click(function(event) {
+      alert('Click event is trigged on parent element');
+  });
+  ```
+
+* 默认行为：诸如 `<a>`、`<input type="submit">` 等标签在触发事件后，有跳转到指定URL的默认行为
+* 阻止默认行为：两种方法
+  - 在元素的事件回调函数中 `return false`，或
+  - 在元素的事件回调函数中 `event.preventDefault();`
+
+```js
+$('a').click(function(event) {
+    alert('<a> clicked');
+    return false;
+});
+
+$('input[type=submit]').click(function(event) {
+    alert('input[type=submit] is clicked');
+    event.preventDefault();
+})
+```
+
+
+
+### jQuery 事件自动触发
+
+* 两种方法
+
+  * `$(elm).trigger(eventName)` - 会触发事件冒泡和默认行为
+
+    * 例外：`<a>` 标签使用 trigger 触发时，不会触发默认行为，需要在其中再包含一个 span 标签并监听 span 的事件、用 trigger 触发 span 默认行为方可；
+
+      ```html
+      <a href="http://www.baidu.com"> <span> click me </span> </a>
+      ```
+
+      ```js
+      $('a>span').click(function() {alert('a>span is click')});	// 
+      $('a>span').trigger('click');	// 如此方可触发默认行为（a标签跳转到指定URL）
+      ```
+
+      
+
+  * `$(elm).triggerHandler(eventName)` - 不会触发事件冒泡和默认行为

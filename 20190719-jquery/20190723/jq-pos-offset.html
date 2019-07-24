@@ -4,21 +4,36 @@
     <meta charset="UTF-8">
     <title>jQuery - .offset()</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
         p {
             margin: 10px;
             border: 1px solid #000;
+        }
+        p:last-child {
+            position: absolute;
+        }
+        div {
+            position: relative;
         }
     </style>
 </head>
 <body>
     <p>hello</p>
-    <p>the second paragraph</p>
+    <div>
+            <p>the second paragraph</p>
+    </div>
 
     <script src="../lib/jquery-1.12.4.js"></script>
     <script>
-        var p = $('p:last');
-        var offset = p.offset();
-        p.html("left: " + offset.left + ", top: " + offset.top);
+        var p1 = $('p:first');
+        var p2 = $('p:last');
+
+        p1.html('p1.offset().left = ' + p1.offset().left + '<br>' + 'p1.offset().top = ' + p1.offset().top);
+        p2.html('p2.position().left = ' + p2.position().left + '<br>' + 'p2.position().top = ' + p2.position().top);
+
     </script>
 </body>
 </html>
