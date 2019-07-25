@@ -637,3 +637,32 @@ $('input[type=submit]').click(function(event) {
       
 
   * `$(elm).triggerHandler(eventName)` - 不会触发事件冒泡和默认行为
+
+* 自定义事件
+
+  * 通过 .on( ) 绑定、通过 .trigger( ) 触发的事件：
+
+    ```js
+    $('button').on('myClick', function () { alert('my click event is triggered.') });
+    $('button').trigger('myClick');
+    ```
+
+    
+
+* 事件命名空间
+
+  * 同一类型的事件名可以加上后缀，以区分代码功能或代码 owner
+
+  * 通过 .on( ) 绑定、通过 .trigger( ) 或 .triggerhandler( ) 触发
+
+    ```js
+    $('button').on('click.ray', function () { alert('Raymond owns this event') });
+    $('button').on('click.lwm', function () { alert('Linweimin wrote this event') });
+    
+    $('button').click();	// 两个事件都会触发
+    $('button').trigger('click.ray');	// 只触发 click.ray
+    $('button').triggerhandler('click.lwm');	// 只触发 click.lwm
+    ```
+
+    
+
