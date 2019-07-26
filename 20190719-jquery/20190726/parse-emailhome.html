@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>parse emailhome message</title>
+    <style>
+        html, body, div {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        html, body, div, textarea {
+            box-sizing: border-box;
+        }
+        .box {
+            text-align: center;
+        }
+        textarea {
+            width: 600px;
+            height: 870px;
+            margin: 15px 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <textarea id="encoded-xml" placeholder="请在此处输入加密的 email home 信息"></textarea>
+        <textarea id="decoded-xml" placeholder="此处将显示已解码的 email home 信息"></textarea>
+        <textarea id="key-info" placeholder="此处将显示 email home 的主要内容"></textarea>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var encodedEl = document.getElementById('encoded-xml');
+            var decodedEl = document.getElementById('decoded-xml');
+            var keyinfoEl = document.getElementById('key-info');
+
+            encodedEl.oninput = updateText;
+
+            function parseXml(xmlStr) {
+                var xmlDoc;
+                if (window.DOMParser) {
+                    xmlDoc = (new DOMParser()).parseFromString(xmlStr, 'text/xml');
+                } else {
+                    xmlDoc = new ActiveXObject('Microsoft.XMLDOM');
+                    xmlDoc.async = false;
+                    xmlDoc.loadXML(xmlStr);
+                }
+                return xmlDoc;                
+            }
+            
+            function updateText() {
+                var decodedStr = '';
+                var encodedStr = encodedEl.value;
+
+                encodedStr = encodedStr.split('\n');    // 转成数组，判断头尾是否有CECSTART ... CECEND字符串
+                if (encodedStr[0].indexOf('CECSTART') > 0) { // 若有
+                    encodedStr.splice(0, 1);  // 掐头
+                }
+                if (encodedStr[encodedStr.length - 1].indexOf('CECEND') > 0) {
+                    encodedStr.splice(encodedStr.length - 1, 1);  // 去尾
+                }
+                encodedStr = encodedStr.join('\n');     // 转回字符串
+
+                try {
+                    decodedStr = atob(encodedStr); // base64 解码
+                } catch (error) {
+                    console.log(error);
+                }
+                finally {
+                    decodedEl.value = decodedStr;
+                }
+
+                // var xmlCont = parseXml(decodedStr).querySelector('Node>InternalData>FileList>Content'); // XML 解析
+                var xmlCont = parseXml(decodedStr).getElementsByTagName('Content')[0]; // XML 解析
+                if (xmlCont) {
+                    keyinfoEl.value = xmlCont.childNodes[1].nodeValue; // 显示CDATA
+                } else {
+                    keyinfoEl.value = '';
+                }
+            }
+        }
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
