@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event delegation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        .mask {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,.5);
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .login {
+            width: 400px;
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin: 100px auto;
+            padding: 3px;
+            background-color: #fff;
+            text-align: right;
+        }
+        .close {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background-color: turquoise;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+        a {
+            display: inline-block;
+            margin-top: 50px;
+        }
+        p {
+            width: 100%;
+            height: 2000px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <a href="">登录</a>
+    <p></p>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function() {
+            $('a').click(function() {
+                $('body').append(`<div class="mask"> 
+                    <div class="login"> 
+                        <span class="close">X</span>
+                    </div>
+                </div>
+                `);
+                return false;
+            })
+            $('body').delegate('.close', 'click', function() {
+                $('.mask').remove();
+            })
+        })
+    </script>
+</body>
+</html>

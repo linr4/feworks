@@ -472,7 +472,7 @@ instClassA.instanceMethod(); // 同实例调用实例方法
   * The difference between `.css( "height" )` and `.height()` is that the latter returns a unit-less pixel value (for example, `400`) while the former returns a value with units intact (for example, `400px`). The `.height()` method is recommended when an element's height needs to be used in a mathematical calculation.
   * This method is also able to find the height of the window and document.
 
-  * `.innerHeight()` - Get the current computed **inner height (**including padding but not border**) for the first element in the set of matched elements or set the inner height of every matched element.
+  * `.innerHeight()` - Get the current computed **inner height (**including padding but not border) for the first element in the set of matched elements or set the inner height of every matched element.
 
   * `.outerHeight()` - Get the current computed **outer height** (including padding, border, and optionally margin) for the first element in the set of matched elements or set the outer height of every matched element.
 
@@ -666,3 +666,26 @@ $('input[type=submit]').click(function(event) {
 
     
 
+### jQuery 事件委托
+
+* 事件委托：请别人代劳，完后反馈结果回来
+
+  ```js
+  $('li').click(function() {
+      console.log($(this).html());
+  })
+  // 若 $('li') 找到多个 li，则 jQuery 会遍历每个 li 并逐个添加事件
+  // 事件添加以后，通过 append 新增的 li 无法通过这个方法再绑定事件，要用如下的事件委托的方法
+  
+  $('button').click(function() {
+      $('ul').append('<li> a new li</li>');
+  })
+  
+  $('ul').delegate('li', 'click', function() {	// 将 li 的点击事件委托给 ul
+      console.log('you have clicked on li: ' + $(this).html());
+  })
+  
+  // ul 在事件注册时已经存在，li 不管是已有的还是新增的，都会因为事件冒泡把点击事件传递给 ul，由 ul 来响应此事件；谁触发事件、this 就指向谁
+  ```
+
+  

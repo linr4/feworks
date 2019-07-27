@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - event delegate</title>
+</head>
+<body>
+    <ul>
+        <li>tag li no.1</li>
+        <li>tag li no.2</li>
+        <li>tag li no.3</li>
+    </ul>
+
+    <button>append a li</button>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        // $('li').click(function() {
+        //     console.log($(this).html());
+        // })
+        // 若 $('li') 找到多个 li，则 jQuery 会遍历每个 li 并逐个添加事件
+
+        $('button').click(function() {
+            $('ul').append('<li> a new li</li>');
+        })
+
+        $('ul').delegate('li', 'click', function() {
+            console.log('you\'ve clicked on li: ' + $(this).html());
+        })
+    </script>
+</body>
+</html>
