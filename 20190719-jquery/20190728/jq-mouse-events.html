@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Mouse events</title>
+    <style>
+        div {
+            box-sizing: border-box;
+        }
+        .parent {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            border-radius: 15px;
+            border: 1px solid turquoise;
+            background-color: turquoise;
+        }
+        .child {
+            width: 200px;
+            height: 200px;
+            margin: 100px;
+            border-radius: 15px;
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        // $('.parent').mouseover(function () {    // 鼠标移入事件
+        //     console.log('mouse cursor is over div.parent');
+        // })
+        // $('.parent').mouseout(function () {     // 鼠标移出事件
+        //     console.log('mouse cursor is out of div.parent');
+        // })
+        // mouseover/mouseout 会响应子元素事件冒泡 —— 鼠标从parent移入移出child时，会触发一次mouseout和mouseover
+
+        // $('.parent').mouseenter(function () {
+        //     console.log('mouse enters div.parent');
+        // })
+        // $('.parent').mouseleave(function () {
+        //     console.log('mouse leaves div.parent');
+        // })
+        // mouse enter/leave 不会响应子元素的事件冒泡 —— 鼠标从parent移入移出child时，不会触发这俩事件
+
+        // hover = enter + leave
+        // $('.parent').hover(function () {
+        //     console.log('mouse moves into div.parent');
+        // }, function () {
+        //     console.log('mouse moves out of div.parent');
+        // })
+
+        $('.parent').hover(function () {
+            console.log('mouse moves into or out of div.parent');
+        })
+    </script>
+</body>
+</html>

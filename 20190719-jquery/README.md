@@ -688,4 +688,122 @@ $('input[type=submit]').click(function(event) {
   // ul 在事件注册时已经存在，li 不管是已有的还是新增的，都会因为事件冒泡把点击事件传递给 ul，由 ul 来响应此事件；谁触发事件、this 就指向谁
   ```
 
+
+
+
+### jQuery 鼠标移入移出事件
+
+* `mouseover(fn)` 移入、 `mouseout(fn)` 移出：会响应子元素的事件冒泡；
+
+  * 鼠标从 parent 移入 child 时，会触发一次`mouseout`和`mouseover`
+  * 记忆锚点 —— Over/Out 都是以 O 开头，把 Oo 想象成泡泡，与它们相关的事件会冒泡泡
+
+  ```js
+  $('.parent').mouseover(function () {    // 鼠标移入事件
+      console.log('mouse cursor is over div.parent');
+  })
+  $('.parent').mouseout(function () {     // 鼠标移出事件
+      console.log('mouse cursor is out of div.parent');
+  })
+  // mouseover/mouseout 会响应子元素事件冒泡
+  // 鼠标从 parent 移入移出 child 时，会触发一次 mouseout 和 mouseover
+  ```
+
+* `mouseenter(fn)` 移入、`mouseleave(fn)` 移出：不响应子元素事件冒泡； 
+
+  * 记忆锚点 —— enter/leave -> interleave -> 交织 -> 叉叉 -> XX -> NO! -> no bubbling
+
+  ```js
+  $('.parent').mouseenter(function () {
+      console.log('mouse enters div.parent');
+  })
+  $('.parent').mouseleave(function () {
+      console.log('mouse leaves div.parent');
+  })
+  // mouse enter/leave 不响应子元素事件冒泡 —— 鼠标从 parent 移入移出 child 时，不会触发这俩事件
+  ```
+
+* `hover(fnIn, fnOut)` 或 `hover(fnInOut)`
+
+  * 是 `mouseenter` 和 `mouseleave` 的组合，不响应子元素事件冒泡；
+  * 可以分成两个回调函数、分别响应移入移出事件，也可以在一个回调函数里同时处理移入移出；
+
+  ```js
+  $('.parent').hover(function () {
+      console.log('mouse moves into div.parent');
+  }, function () {
+      console.log('mouse moves out of div.parent');
+  })
+  // 或者：
+  $('.parent').hover(function () {
+      console.log('mouse moves into or out of div.parent');
+  })
+  ```
+
   
+
+* 练习案例的知识点
+
+  * CSS 知识点
+
+    * `nth-child (-n+3)` 表示选中前三个，(-0+3)=3, (-1+3)=2, (-2+3)=1 ...
+    * `nth-child(n+8):nth-child(-n+15)` 表示选中第8~15个元素；
+
+    ```css
+    .box>ul>li:nth-child(-n+3)>span {
+        color: #fff;
+        background-color: deeppink; }
+    ```
+
+    * `.current .content {display: block;}` 用于 `<div class="content">` 的显示/隐藏的切换；
+
+      * 鼠标 enter 时，把 `.current`  类加到 `<li>` 上，使得 `<li class="current">` 下的 `<div class="content">`  显示出来；
+
+      ```css
+      .current .content {
+          display: block;}
+      ```
+
+      ```js
+      $('li').mouseenter(function () {
+          $(this).addClass('current')});
+      ```
+
+    * 浮动元素需要设置 border 或者 宽高，总之要有边界，否则其布局/位置无法控制
+
+      ```css
+      .content>p {
+          width: 170px;
+          height: 130px;
+          float: right;}
+      ```
+
+      
+
+  * jQuery 知识点
+
+    * 操作 `<div class="content">` 的显示/隐藏有3种方法：
+
+      ```js
+      // 1. 分别响应 mouseenter 和 mouseleave 事件：
+      $('li').mouseenter(function () {
+          $(this).addClass('current');
+      });
+      $('li').mouseleave(function () {
+          $(this).removeClass('current');
+      });
+      
+      // 2. 在 hover 事件中分别处理 enter 和 leave 事件
+      $('li').hover(function () {
+          $(this).addClass('current');
+      }, function () {
+          $(this).removeClass('current');
+      });
+      
+      // 3. 在 hover 中使用 toggleClass() 切换 CSS class，最为简洁
+      $('li').hover(function () {
+          $(this).toggleClass('current');
+      });
+      ```
+
+      

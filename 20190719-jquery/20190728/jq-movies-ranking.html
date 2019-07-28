@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery 案例练习 - 电影排行榜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 300px;
+            height: 450px;
+            margin: 100px auto;
+            border: 1px solid #000;
+        }
+
+        .box>h1 {
+            font-size: 20px;
+            line-height: 35px;
+            padding-left: 10px;
+            color: deeppink;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .box>ul {
+            list-style: none;
+        }
+
+        .box>ul>li {
+            border: 1px dashed #ccc;
+            padding: 5px 10px;
+            line-height: 35px;
+            font-size: 14px;
+        }
+
+        .box>ul>li>span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 15px;
+            margin-right: 5px;
+
+            background-color: #ccc;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* (-n+3) 表示前三个：(-0+3)=3, (-1+3)=2, (-2+3)=1 */
+        .box>ul>li:nth-child(-n+3)>span {
+            color: #fff;
+            background-color: deeppink;
+        }
+
+        .content {
+            display: none;
+            overflow: hidden;
+        }
+
+        .content>img {
+            height: 130px;
+            margin-right: 5px;
+            float: left;
+        }
+
+        /* 浮动元素需要设置宽高，否则位置无法控制 */
+        .content>p {
+            width: 170px;
+            height: 130px;
+            font-size: 12px;
+            line-height: 18px;
+            float: right;
+        }
+
+        .current .content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>电影排行榜</h1>
+        <ul>
+            <li><span>1</span>這個殺手不太冷
+                <div class="content">
+                    <img src="leon.jpg" alt="">
+                    <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                </div>
+            </li>
+            <li><span>2</span>這個殺手不太冷
+                <div class="content">
+                    <img src="leon.jpg" alt="">
+                    <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                </div>
+            </li>
+            <li><span>3</span>這個殺手不太冷
+                <div class="content">
+                    <img src="leon.jpg" alt="">
+                    <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                </div>
+            </li>
+            <li><span>4</span>這個殺手不太冷
+                <div class="content">
+                    <img src="leon.jpg" alt="">
+                    <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                </div>
+            </li>
+            <li><span>5</span>這個殺手不太冷
+                <div class="content">
+                    <img src="leon.jpg" alt="">
+                    <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                </div>
+            </li>
+            <li><span>6</span>這個殺手不太冷
+                <div class="content">
+                    <img src="leon.jpg" alt="">
+                    <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            // $('li').mouseenter(function () {
+            //     $(this).addClass('current');
+            // });
+            // $('li').mouseleave(function () {
+            //     $(this).removeClass('current');
+            // });
+            
+            // $('li').hover(function () {
+            //     $(this).addClass('current');
+            // }, function () {
+            //     $(this).removeClass('current');
+            // });
+
+            $('li').hover(function () {
+                $(this).toggleClass('current');
+            });
+        })
+    </script>
+</body>
+
+</html>

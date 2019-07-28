@@ -12,6 +12,18 @@ Web development learning notes and case study
 
 ---
 
+###### 20190728 - Day 108
+
+- 学习 jQuery - 鼠标事件，电影排行榜练习  (+2h = 241 of 600)
+
+###### 20190727 - Day 107
+
+- 学习 jQuery - 事件委托  (+0.5h = 239 of 600)
+
+###### 20190726 - Day 106
+
+- 练习 base64 解码、提取 CDATA (+4h = 238.5 of 600)
+
 ###### 20190725 - Day 105
 
 - 学习 jQuery - 事件的绑定、移除、自动触发等  (+2h = 234.5 of 600)
