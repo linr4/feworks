@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>焦点图</title>
+    <style>
+        html, body, ol, ul, li, div {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .box {
+            width: 452px;
+            height: 452px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            position: relative;
+        }
+        ul {
+            list-style: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        ul>li {
+            display: none;
+            width: 98%;
+            height: 98%;
+        }
+        .current {
+            display: block;
+        }
+        ol {
+            list-style: none;
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+            cursor: pointer;
+            user-select: none;
+        }
+        ol>li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid #000;
+            margin: 0 2px;
+            background-color: #fff;
+        }
+        .cur-idx {
+            background-color: turquoise;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li class="current"><img src="op1.jpg" alt=""></li>
+            <li><img src="op2.jpg" alt=""></li>
+            <li><img src="op3.jpg" alt=""></li>
+            <li><img src="op4.jpg" alt=""></li>
+            <li><img src="op5.jpg" alt=""></li>
+        </ul>
+        <ol>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ol>
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $('ol>li').mouseenter(function () {
+                var idx = $(this).index();
+                $('ul>li').eq(idx).addClass('current');
+                $('ul>li').eq(idx).siblings().removeClass('current');
+                $(this).addClass('cur-idx').siblings().removeClass('cur-idx');
+            })
+        })
+    </script>
+</body>
+</html>

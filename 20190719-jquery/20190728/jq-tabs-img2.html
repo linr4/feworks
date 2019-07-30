@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Carousel</title>
+    <style>
+        html, body, div, ul, ol, li {
+            margin: 0;
+            padding: 0;
+        }
+        ul, ol {
+            list-style: none;
+        }
+        .box {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+        ul {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        ul>li {
+            width: 100%;
+            height: 100%;
+            display: none;
+            float: left;
+        }
+        .current {
+            display: inline-block;
+        }
+        ol {
+            position: absolute;
+            right: 6px;
+            bottom: 10px;
+        }
+        ol>li {
+            background-color: #ccc;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2px;
+            float: left;
+
+            cursor: pointer;
+        }
+        .cur-indicator {
+            color: #fff;
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li class="current"><img src="op1.jpg" alt=""></li>
+            <li><img src="op2.jpg" alt=""></li>
+            <li><img src="op3.jpg" alt=""></li>
+            <li><img src="op4.jpg" alt=""></li>
+            <li><img src="op5.jpg" alt=""></li>
+        </ul>
+        <ol>
+            <li class="cur-indicator">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ol>
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            var curIdx = 0;
+            $('ol>li').hover(function () {
+                curIdx = $(this).index();
+                $(this).addClass('cur-indicator').siblings().removeClass('cur-indicator');
+                $('ul>li').eq(curIdx).addClass('current').siblings().removeClass('current');
+            })
+        })
+    </script>
+</body>
+</html>

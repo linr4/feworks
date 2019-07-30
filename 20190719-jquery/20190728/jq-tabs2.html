@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Tabs</title>
+    <style>
+        html, body, div, ul, ol, li {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        div, ul, ol {
+            box-sizing: border-box;
+        }
+        ul, ol {
+            list-style: none;
+        }
+        .box {
+            width: 440px;
+            height: 290px;
+            margin: 100px auto;
+        }
+        ul {
+            overflow: hidden;
+        }
+        ul>li {
+            width: 110px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: orangered;
+            float: left;
+        }
+        .current {
+            display: inline-block;
+            background-color: #aaa;
+        }
+        ol>li {
+            width: 440px;
+            height: 240px;
+            line-height: 240px;
+            text-align: center;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="tabs">
+            <li class="current">H5 + C3</li>
+            <li>jQuery</li>
+            <li>Vue.JS</li>
+            <li>React.JS</li>
+        </ul>
+        <ol>
+            <li class="current">H5 + C3</li>
+            <li>jQuery</li>
+            <li>Vue.JS</li>
+            <li>React.JS</li>
+        </ol>
+    </div>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('ul>li').hover(function () {
+                $(this).addClass('current').siblings().removeClass('current');
+                $('ol>li').eq($(this).index()).addClass('current').siblings().removeClass('current');
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Tabs</title>
+    <style>
+        html, body, div, ul, li {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        .box {
+            width: 440px;
+            height: 290px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+
+        }
+        .navi {
+            overflow: hidden;
+        }
+        .navi>li {
+            list-style: none;
+            width: 110px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 24px;
+            background-color: orangered;
+            text-align: center;
+            float: left;
+        }
+        .current {
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #aaa !important;
+        }
+        .cont>li {
+            list-style: none;
+            text-align: center;
+            width: 100%;
+            height: 240px;
+            font-size: 100px;
+            line-height: 240px;
+            background-color: turquoise;
+            display: none;
+        }
+        .show {
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="navi">
+            <li class="current">H5+C3</li>
+            <li>jQuery</li>
+            <li>VueJS</li>
+            <li>React</li>
+        </ul>
+        <ul class="cont">
+            <li class="show">H5 + C3</li>
+            <li>jQuery</li>
+            <li>Vue.js</li>
+            <li>React.js</li>
+        </ul>
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $('.navi>li').mouseenter(function () {
+                $(this).addClass('current').siblings().removeClass('current');
+                $('.cont>li').eq($(this).index()).addClass('show').siblings().removeClass('show');
+                var idx = $(this).index();
+                console.log(idx, $('.navi>li').eq(idx));
+                console.log(idx, $('.navi>li').get(idx));
+            })
+        })
+    </script>
+</body>
+</html>

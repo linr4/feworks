@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>movies ranking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            box-sizing: border-box;
+        }
+        .box {
+            width: 300px;
+            height: 450px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+        }
+        h3 {
+            font-size: 20px;
+            line-height: 50px;
+            padding-left: 10px;
+            color: deeppink;
+            border-bottom: 1px dashed #ccc;
+        }
+        ol {
+            list-style: none;
+        }
+        ol>li {
+            line-height: 40px;
+            margin-left: 10px;
+            border-bottom: 1px dashed #ccc;
+
+            font-size: 14px;
+        }
+        ol>li>span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #ccc;
+        }
+        ol>li:nth-of-type(-n+3)>span {
+            color: #fff;
+            background-color: deeppink;
+        }
+        .details {
+            width: 280px;
+            height: 150px;
+            display: none;
+            overflow: hidden;
+        }
+        .current .details{
+            display: block;
+        }
+        .details>img {
+            height: 130px;
+            margin-left: 5px;
+            float: left;
+        }
+        .details>p {
+            width: 170px;
+            height: 130px;
+            line-height: 20px;
+            float: right;
+            font-size: 12px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h3>电影排行榜</h3>
+        <ol>
+            <li><span>1</span> 这个杀手不太冷
+                <div class="details">
+                        <img src="leon.jpg" alt="">
+                        <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                        </p>
+                </div>
+            </li>
+            <li><span>2</span> 这个杀手不太冷
+                <div class="details">
+                        <img src="leon.jpg" alt="">
+                        <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                        </p>
+                </div>
+            </li>
+            <li><span>3</span> 这个杀手不太冷
+                <div class="details">
+                        <img src="leon.jpg" alt="">
+                        <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                        </p>
+                </div>
+            </li>
+            <li><span>4</span> 这个杀手不太冷
+                <div class="details">
+                        <img src="leon.jpg" alt="">
+                        <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                        </p>
+                </div>
+            </li>
+            <li><span>5</span> 这个杀手不太冷
+                <div class="details">
+                        <img src="leon.jpg" alt="">
+                        <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                        </p>
+                </div>
+            </li>
+            <li><span>6</span> 这个杀手不太冷
+                <div class="details">
+                        <img src="leon.jpg" alt="">
+                        <p>《終極追殺令》是一部1994年的電影，由法國導演盧·貝松編劇及執導，也是他首部往好萊塢發展拍攝的電影。由尚·雷諾、蓋瑞·歐德曼及娜塔莉·波曼主演。 本片的背景和主要拍攝地是紐約市。</p>
+                        </p>
+                </div>
+            </li>
+        </ol>
+    </div>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $('ol>li').hover(function () {
+                $(this).toggleClass('current');
+            })
+        })
+    </script>
+</body>
+</html>

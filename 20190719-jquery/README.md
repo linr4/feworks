@@ -742,7 +742,7 @@ $('input[type=submit]').click(function(event) {
 
   
 
-* 练习案例的知识点
+* “电影排行榜” 练习案例
 
   * CSS 知识点
 
@@ -807,3 +807,27 @@ $('input[type=submit]').click(function(event) {
       ```
 
       
+
+* “选项卡” 练习案例
+
+  * 主要代码：
+
+  ```js
+  $('.navi>li').mouseenter(function () {
+      var idx = $(this).index();
+      
+      $(this).addClass('current').siblings().removeClass('current');
+      $('.cont>li').eq(idx).addClass('show').siblings().removeClass('show');
+  
+      console.log(idx, $('.navi>li').eq(idx));
+      console.log(idx, $('.navi>li').get(idx));
+  })
+  ```
+
+  
+
+  * jQuery 知识点
+    * `$(this).index()` 可以获取到当前 `<li>` 的索引值；
+    * `$(this).siblings()` 可以获取到当前 `<li>` 之外的其余 `<li>` 的 jQuery 对象；
+    * `$('.cont>li').eq(index)` 可以获取到指定索引值的 `<li>` 的 jQuery 对象；
+    * `$('.navi>li').get(index)` 可以获取到指定索引值的 `<li>` 的 DOM 对象；
