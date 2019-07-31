@@ -12,6 +12,18 @@ Web development learning notes and case study
 
 ---
 
+###### 20190731 - Day 111
+
+- 学习 jQuery 动画  (+1h = 245 of 600)
+
+###### 20190730 - Day 110
+
+- 学习 jQuery 动画  (+2h = 244 of 600)
+
+###### 20190729 - Day 109
+
+- 学习 jQuery AJAX  (+1h = 242 of 600)
+
 ###### 20190728 - Day 108
 
 - 学习 jQuery - 鼠标事件，电影排行榜练习  (+2h = 241 of 600)
