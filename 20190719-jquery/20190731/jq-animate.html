@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义动画</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            margin: 10px 0;
+            background-color: red;
+        }
+        .div1 {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <button>操作属性</button>
+    <button>累加属性</button>
+    <button>关 键 字</button>
+    <div class="div1"></div>
+    <div class="div2"></div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('button').eq(0).click(function () {
+                $('.div1').stop().animate({
+                    width: 300
+                }, 1000, function () {
+                    alert('animation completed')
+                })
+            });
+
+            $('button').eq(1).click(function () {
+                $('.div1').stop().animate({
+                    width: "+=100",
+                    height: "+=100"
+                }, 1000, 'linear', function () {
+                    alert('animation completed')
+                })
+            });
+
+            $('button').eq(2).click(function () {
+                $('.div1').stop().animate({
+                    // width: "hide"
+                    width: "toggle"
+                }, 1000, function () {
+                    alert('animation completed')
+                })
+            });
+        })
+    </script>
+</body>
+</html>

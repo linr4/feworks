@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fadeIn, fadeOut, fadeToggle, fadeTo</title>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            background-color: turquoise;
+        }
+    </style>
+</head>
+<body>
+    <button>fade in</button>
+    <button>fade out</button>
+    <button>fade toggle</button>
+    <button>fade to... </button>
+    <div></div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $('button').eq(0).click(function () {
+                $('div').fadeIn(1000, function () {
+                    alert('fadeIn completed');
+                });
+            });
+            $('button').eq(1).click(function () {
+                $('div').fadeOut(1000, function () {
+                    alert('fadeOut completed');
+                });
+            });
+            $('button').eq(2).click(function () {
+                $('div').fadeToggle(1000, function () {
+                    alert('toggle completed');
+                });
+            });
+            $('button').eq(3).click(function () {
+                $('div').fadeTo(1000, .3, function () {
+                    alert('fadeTo completed');
+                });
+            });
+        });
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Level 2 sub-menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style-type: none;
+        }
+        .nav {
+            width: 350px;
+            margin: 100px auto;
+            cursor: pointer;
+        }
+        .nav>li {
+            line-height: 35px;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            text-indent: 2em;
+            position: relative;
+        }
+        .nav>li:last-of-type {
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .nav>li:first-of-type {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .nav>li>span {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-indent: 0em;
+            text-align: center;
+            position: absolute;
+            right: 18px;
+        }
+        .sub {
+            display: none;
+        }
+        .sub>li {
+            text-indent: 4em;
+            background-color: pink;
+            border-bottom: 1px solid #fff;
+        }
+        .sub>li:hover {
+            background-color: orangered;
+            cursor: pointer;
+        }
+        .current {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav">
+        <li>一级菜单<span> > </span>
+            <ul class="sub">
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+        <li>一级菜单<span> > </span>
+            <ul class="sub">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul></li>
+        <li>一级菜单<span> > </span>
+            <ul class="sub">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul></li>
+        <li>一级菜单<span> > </span>
+            <ul class="sub">
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul></li>
+        <li>一级菜单<span> > </span>
+            <ul class="sub">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul></li>
+    </ul>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $('.nav>li').click(function () {
+                $(this).stop();
+                $(this).children('.sub').slideDown(500);
+                $(this).children('span').addClass('current');
+                
+                $(this).siblings().children('.sub').slideUp(500);
+                $(this).siblings().children('span').removeClass('current');
+            })
+        })
+    </script>
+</body>
+</html>

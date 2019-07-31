@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul {
+            list-style: none;
+        }
+        .nav {
+            width: 410px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+        }
+        .nav>li {
+            width: 90px;
+            margin: 0 5px;
+            float: left;
+            background-color: turquoise;
+        }
+        .sub {
+            display: none;
+            background-color: orangered;
+        }
+    </style>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $('.nav>li').hover(function () {
+                // $(this).children('.sub').stop();
+                $(this).children('.sub').stop().slideToggle();
+            })
+        })
+    </script>
+</head>
+<body>
+    <ul class="nav">
+        <li><span>leve 1 menu</span>
+            <ul class="sub">
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+            </ul>
+        </li>
+        <li><span>leve 1 menu</span>
+            <ul class="sub">
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+            </ul>
+        </li>
+        <li><span>leve 1 menu</span>
+            <ul class="sub">
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+            </ul>
+        </li>
+        <li><span>leve 1 menu</span>
+            <ul class="sub">
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+                <li><span>level 2 menu</span></li>
+            </ul>
+        </li>
+        
+    </ul>    
+</body>
+</html>

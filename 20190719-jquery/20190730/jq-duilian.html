@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 4000px;
+        }
+        
+        .left {
+            left: 0;
+        }
+        .right {
+            right: 0;
+        }
+        img {
+            position: fixed;
+            top: 300px;
+            display: none;
+        }
+        ul {
+            list-style: none;
+            width: 100px;
+            margin: 0 auto;
+        }
+        ul>li {
+            height: 50px;
+            line-height: 50px;
+            margin: 10px 0;
+            text-align: center;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <img src="left.png" class="left">    
+    <img src="right.png" class="right">
+    <ul></ul>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            for (var i = 0; i < 100; i++) {
+                $('ul').append('<li>新年好</li>');
+            }
+            $(window).scroll(function () {
+                var offset = $('html, body').scrollTop();
+                console.log(offset);
+                if (offset > 1000) {
+                    // $('img').show(1000);
+                    $('img').slideDown(1000);
+                } else {
+                    $('img').slideUp(1000);
+                }
+            })
+        })
+    </script>
+</body>
+</html>

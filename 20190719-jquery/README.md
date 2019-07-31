@@ -831,3 +831,115 @@ $('input[type=submit]').click(function(event) {
     * `$(this).siblings()` 可以获取到当前 `<li>` 之外的其余 `<li>` 的 jQuery 对象；
     * `$('.cont>li').eq(index)` 可以获取到指定索引值的 `<li>` 的 jQuery 对象；
     * `$('.navi>li').get(index)` 可以获取到指定索引值的 `<li>` 的 DOM 对象；
+
+
+
+### jQuery 动画
+
+* 显示、隐藏元素：`.show(duration|fn())` 、 `.hide()`
+
+* 滑动：`.slideDown()`、`.slideUp()`、`.slideToggle()`
+
+* 例子：留意 jQuery 对象获取子元素的方法 `.children(sub elm selector)`
+
+  ```js
+  $('.nav>li').click(function () {
+      $(this).children('.sub').slideDown(500);
+      $(this).children('span').addClass('current');
+  
+      $(this).siblings().children('.sub').slideUp(500);
+      $(this).siblings().children('span').removeClass('current');
+  })
+  ```
+
+* 在调用动画方法之前，最好先调用 `.stop()` 方法先停止前一次动画，以免用户在快速操作时、动画队列堵塞而影响动画效果和用户体验；
+
+  ```js
+  $('.nav>li').hover(function () {
+      // $(this).children('.sub').stop();		
+      // $(this).children('.sub').slideToggle();  // or use chain callback
+      $(this).children('.sub').stop().slideToggle();
+  })
+  ```
+
+  
+
+* 淡入淡出动画：
+
+  * `.fadeIn(duration, callback)`, `.fadeOut()`, `.fadeToggle()`,
+  *  `.fadeTo(duration, opacity, callback)`
+
+  ```js
+  $('button').eq(0).click(function () {
+      $('div').fadeIn(1000, function () {
+          alert('fadeIn completed');
+      });
+  });
+  $('button').eq(1).click(function () {
+      $('div').fadeOut(1000, function () {
+          alert('fadeOut completed');
+      });
+  });
+  $('button').eq(2).click(function () {
+      $('div').fadeToggle(1000, function () {
+          alert('toggle completed');
+      });
+  });
+  $('button').eq(3).click(function () {
+      $('div').fadeTo(1000, .3, function () {
+          alert('fadeTo completed');
+      });
+  });
+  ```
+
+  
+
+* 练习案例：弹窗广告
+
+  ```js
+  $(function () {
+      $('span').click(function () {
+          $('div').remove();
+      });
+  
+      // 动画队列排队播放的缘故，可以用链式写法把各个动画写在一起，不必在回调函数里面写下个动画
+      $('div').stop().slideDown(500).fadeOut(500).fadeIn(500);
+  })
+  ```
+
+
+
+* 自定义动画方法 `.animate(object, duration, [ease], fn)`
+
+  * object 是 CSS 属性，值可以是数字、累加 “+=100”、关键字 “hide, toggle”
+  * ease 为动画形式，线性 linear 和 swing (= easeInOut ，中间慢、头尾快，默认值)
+
+  ```js
+  $('button').eq(0).click(function () {
+      $('.div1').stop().animate({
+          width: 300
+      }, 1000, function () {
+          alert('animation completed')
+      })
+  });
+  
+  $('button').eq(1).click(function () {
+      $('.div1').stop().animate({
+          width: "+=100",
+          height: "+=100"
+      }, 1000, 'linear', function () {
+          alert('animation completed')
+      })
+  });
+  
+  $('button').eq(2).click(function () {
+      $('.div1').stop().animate({
+          // width: "hide"
+          width: "toggle"
+      }, 1000, function () {
+          alert('animation completed')
+      })
+  });
+  ```
+
+  

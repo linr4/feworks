@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 300px;
+            margin: 100px auto;
+            border: 1px solid #000;
+        }
+        ul {
+            list-style: none;
+            overflow: hidden;
+        }
+        ul>li {
+            width: 100px;
+            height: 30px;
+            float: left;
+            text-align: center;
+        }
+        .hide-all {
+            width: 100px;
+            margin: 0 auto;
+            padding: 4px;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+        .change-height {
+            height: 80px !important;
+        }
+    </style>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        var isShown = true;
+        var caption = '';
+        $(function () {
+            $('.hide-all').click(function () {
+                $('.ul2').stop().slideToggle(500);
+                caption = isShown ? '显示所有内容' : '隐藏所有内容';
+                $(this).text(caption); 
+                isShown = !isShown;
+
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="box">
+        <ul class="ul1">
+            <li>佳能</li>
+            <li>索尼</li>
+            <li>三星</li>
+            <li>尼康</li>
+            <li>松下</li>
+            <li>柯达</li>
+        </ul>
+        <ul class="ul2">
+            <li>宾得</li>
+            <li>理光</li>
+            <li>奥林巴斯</li>
+            <li>明基</li>
+            <li>卡西欧</li>
+            <li>富士</li>
+            <li>显示其他品牌</li>
+        </ul>
+        <div class="hide-all">隐藏所有内容</div>
+    </div>    
+</body>
+</html>

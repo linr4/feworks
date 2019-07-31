@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹窗广告</title>
+    <style>
+        html, body, div, img, span {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 179px;
+            height: 151px;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            display: none;
+        }
+        span {
+            width: 60px;
+            height: 18px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="ad">
+        <img src="ad.png" alt="">
+        <span></span>
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $('span').click(function () {
+                $('div').remove();
+            });
+
+            // 动画队列排队播放的缘故，可以用链式写法把各个动画写在一起
+            $('div').stop().slideDown(500).fadeOut(500).fadeIn(500);
+        })
+    </script>
+</body>
+</html>
