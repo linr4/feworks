@@ -7,6 +7,7 @@
   ```js
   // 1. 原生JS写法
   window.onload = function () {}
+  window.addEventListener('load', function () {})
   
   // 2. JQuery写法
   	// 1) 第一种写法
@@ -61,9 +62,9 @@
   })
   ```
 
-  * 原生JS若有多个入口函数，后写的会覆盖先写的，导致先写的入口函数不会执行；
+  * 原生 JS 若有多个`onload`入口函数，后写的会覆盖先写的，导致先写的入口函数不会执行；
 
-  * jQuery中编写多个入口函数，不会相互覆盖，会按编写顺序执行；
+  * jQuery 中编写多个入口函数，不会相互覆盖，会按编写顺序执行；
 
     
 
@@ -75,24 +76,23 @@
   ```js
     // 释放 $ 符号的使用权、避免与其它代码关于 $ 的冲突；
     // 必须写在所有 jQuery 代码之前；
-    // 释放后就只能用 jQuery 关键字、不能再用 $；
-    jQuery.noConflict();
+  
+    jQuery.noConflict();	// 释放后就只能用 jQuery 关键字、不能再用 $；
     
     // 也可自定义一个访问符号/关键字来代替 $；
-    jq = jQuery.noConflict();
+    var jq = jQuery.noConflict();
   ```
 
 
 
 ### jQuery 核心函数
 
-* `$()` 或 `jQuery()` 代表调用 jQuery 的核心函数，可以传递如下参数
-
-  * 函数，如：`$(function(){})`
-  * 字符串
-    * 字符串选择器；返回一个 jQuery 对象，保存了找到的 DOM 元素
+* `$()` 或 `jQuery()` 代表调用 jQuery 的核心函数，可以传递如下参数：
+* 回调函数，如：`$(function(){})`
+  * 字符串：
+    * 字符串选择器；返回一个 jQuery 对象，保存了所找到的 DOM 元素
     * HTML 代码片段；返回一个 jQuery 对象，保存了创建的 DOM 元素
-  * DOM 对象，把它包装成 jQuery 对象返回
+  * DOM 对象：把 DOM 对象包装成 jQuery 对象返回
 
 ```js
   // 传递函数
@@ -142,38 +142,63 @@
   */
 ```
 
-  
+* **jQuery 对象与 DOM 对象的相互转换**
+
+  * jQuery Object -> DOM
+
+    * 使用下标引用 jQuery 对象索引 0 的伪数组成员 `$jqObj[0]`，既是 DOM 对象
+
+    * 或者用 jQuery 方法 `.get(0)` 亦可获取到 DOM 对象
+
+      ```js
+      var $img = $('img');	   // jQuery 对象
+      var imgEl1 = $img[0];	   // DOM 对象
+      var imgEl2 = $img.get(0);  // 一样的 DOM 对象
+      ```
+
+  * DOM -> jQuery Object
+
+    * 使用核心函数 `$( )` 包裹 DOM 对象，就成为 jQuery 对象
+
+      ```js
+      var boxEl = document.getElementById('box');	// DOM 对象 
+      var $box = $(boxEl);	// 包装成 jQuery 对象
+      ```
+
+  * 注意点：DOM 和 jQuery 对象之间无法混用各自的属性和方法，如 `boxEl.html()` 和 `$box.innerHTML` 会报错。
+
+
 
 ### 静态方法与实例方法
 
-* 静态方法添加在类上面，通过类名调用
-* 实例方法添加在原型上面，通过实例调用
+* 静态方法添加在类上面，通过类的名字即可调用
+* 实例方法添加在原型上面，需要通过类的实例来调用
 
 ```js
-function ClassA () {};  // 创建类
+function Human () {};  // 创建类
 
-ClassA.staticMethod = function () { // 在类上添加静态方法
+Human.staticMethod = function () { // 在类上添加静态方法
     console.log('static method');
 }
-ClassA.staticMethod();  // 通过类名调用静态方法
+Human.staticMethod();  // 通过类名调用静态方法
 
 
-ClassA.prototype.instanceMethod = function () {  // 在原型上添加实例方法
+Human.prototype.instanceMethod = function () {  // 在原型上添加实例方法
     console.log('instance method');
 }
 
-var instClassA = new ClassA(); // 创建实例
-instClassA.instanceMethod(); // 同实例调用实例方法
+var boy = new Human(); // 创建实例
+boy.instanceMethod(); // 同实例调用实例方法
 ```
 
 
 
 
-* jQuery 静态方法 $.each()
+* jQuery 静态方法 `$.each()`：遍历枚举类型的数据；
 
-  * 格式：$.each(arr, function(index, value){})；
-  * 回调函数的参数与原生forEach(function(value, index){}) 相反；
-  * 原生 forEach 不支持伪数组，jQuery.each() 支持；
+  * 格式：`$.each(arr, function(index, value){})`；
+  * 注意：回调函数的两个参数（index, value）的位置与原生`forEach(function(val, idx){})` 相反；
+  * 原生 `forEach()` 不支持伪数组，`jQuery.each()` 支持伪数组；
 
   ```js
   var arr = ['a','b','c','d','e','f'];
@@ -201,11 +226,11 @@ instClassA.instanceMethod(); // 同实例调用实例方法
 
 
 
-* jQuery 静态方法 $.map()
+* jQuery 静态方法 `$.map()`
 
-  * 格式：$map(array, function(value, index){})；
-  * 回调函数的参数顺序：function(value, index)，与原生JS一样；
-  * 原生map不支持伪数组，jQuery.map() 支持；
+  * 格式：`$map(array, function(value, index){})`；
+  * 回调函数的参数顺序：`fn(value, index)`，与原生 JS 的 `arr.map(fn(v, i))` 一样；
+  * 原生map不支持伪数组，`jQuery.map()` 支持；
   * jQuery 的 each 和 map 的区别：
     * each 返回值为原数组，不支持在回调函数中处理数组并返回；
     * map 默认返回空数组；支持在回调函数中进一步处理数组、并返回处理后的新数组；
@@ -224,23 +249,23 @@ instClassA.instanceMethod(); // 同实例调用实例方法
   //     console.log(index, value)
   // })
   
-  var arrMapRes = $.map(arr, function(value, index) {
+  var arrMapResult = $.map(arr, function(value, index) {
       console.log(index, value);
       return index + value;	// map 可以返回经过计算的新数组
   });
   
-  var objMapRes = $.map(obj, function(value, index) {
+  var objMapResult = $.map(obj, function(value, index) {
       console.log(index, value);	// map 默认返回空数组
   });
   
-  var arrEachRes = $.each(arr, function(value, index){
+  var arrEachResult = $.each(arr, function(value, index){
       console.log(index, value);
       return index + value; // each 默认返回原数组，不支持指定返回值
   })
   
-  console.log(arrMapRes);  // ["0a", "1b", "2c", "3d", "4e", "5f"]
-  console.log(objMapRes);  // []
-  console.log(arrEachRes); // ["a", "b", "c", "d", "e", "f"]
+  console.log(arrMapResult);  // ["0a", "1b", "2c", "3d", "4e", "5f"]
+  console.log(objMapResult);  // []
+  console.log(arrEachResult); // ["a", "b", "c", "d", "e", "f"]
   ```
 
   
@@ -254,16 +279,16 @@ instClassA.instanceMethod(); // 同实例调用实例方法
     
     ```js
     var $div1 = $('div:empty');	// 选中内容为空的 div
-    var $div2 = $('div:parent');	// 选中存在文本或子元素、是其它节点的父元素的元素
-    var $div3 = $('div:contains("我是div")');	// 选中包含了“我是div” 文本的元素
-    var $div4 = $('div:has("span")');	// 选中包含 <span> 子元素的元素
+    var $div2 = $('div:parent');	// 选中有内容的 div（innerHTML 有东西）
+    var $div3 = $('div:contains("我是div")');	// 选中包含了“我是div” 文本的 div
+    var $div4 = $('div:has("span")');	// 选中包含 <span> 子元素的 div
     ```
 
   
 
   ### jQuery 属性和属性节点
 
-* 什么是属性：对象所保存的变量既是属性
+* 什么是属性：对象所保存的局部变量，就是属性
 
   ```js
   function Person() {}
@@ -276,9 +301,9 @@ instClassA.instanceMethod(); // 同实例调用实例方法
 
 
 
-  * 如何操作属性
+  * 如何操作属性：通过点操作符`obj.attr` 或 下标 `obj["attr"]`；
 
-    * 获取：`console.log(obj.attr);` 或 `console.log(obj["attr"]);`
+    * 获取： `console.log(obj.attr);` 或  `console.log(obj["attr"]);`
 
     * 设置： `obj.attr = value;` 或 `obj["attr"] = value;`
 
@@ -286,35 +311,35 @@ instClassA.instanceMethod(); // 同实例调用实例方法
 
   * 什么是属性节点
 
-    * 在 HTML 标签中添加的属性，既是“属性节点”；
+    * 在 HTML 标签中添加的属性，既是“属性节点” ----- `<span index=1>` 这里 index 为属性节点；
 
       * 在浏览器找到 DOM 元素，展开看到的都是属性；
       * 在 attributes 属性中保存的所有内容都是属性节点；
-      * 所有对象都有属性，但只有 DOM 对象才有属性节点；
+      * 所有对象都有属性，但**只有 DOM 对象才有属性节点**；
 
       ```html
       <span name="logo-wrap"></span>		<!-- 这里的 name 既是属性节点 -->
       ```
 
-    * 查看方法：Chrome DevTools -> Sources -> 选中文件 -> 右侧 Watch -> new "document.getElementByTagName('span')" -> span -> attributes: NameNodeMap -> '0: name' <--- 这个就是属性节点之一；
+    * 查看方法：`Chrome DevTools -> Sources -> 选中文件 -> 右侧 Watch -> new "document.getElementByTagName('span')" -> span -> attributes: NameNodeMap -> '0: name'` <--- 这个就是属性节点之一；
 
       
 
-  * 如何操作属性节点
+  * 原生 JS 如何操作属性节点：`setAttribute()` 、 `getAttribute()`
 
     ```js
-    var spanEl = document.getElementByTagName('span')[0];
+    var spanEl = document.getElementsByTagName('span')[0];
     spanEl.setAttribute('name', 'anotherValue');	// 设置属性节点的值
     spanEl.getAttribute('name');	// 获取属性节点的值
     ```
 
-  * 属性和属性节点的区别
+  * 属性和属性节点的**区别**
 
-    * 任何对象都有属性，但只有 DOM 对象才有属性节点
+    * 任何对象都有属性，但**只有 DOM 对象才有属性节点**
 
 
 
-* jQuery 属性节点操作的方法
+* jQuery 对象属性节点的操作方法 `.attr()` 与 `.removeAttr()`
 
   * `.attr(name|pro|key, val|fn)` - 获取或设置属性节点的值
 
@@ -339,13 +364,13 @@ instClassA.instanceMethod(); // 同实例调用实例方法
 
     
 
-* jQuery 的属性操作方法： `prop` 与 `removeProp`
+* jQuery 对象属性的操作方法： `prop()` 与 `removeProp()`
 
-  * 与 `attr` 和 `removeAttr` 操作方法一样
-  * 不仅能操作属性，同时也能操作属性节点
-  * 用 `prop()` 还是 `attr()`？
-    * 具有 true/false 值的属性节点（如checked, selected, disabled）用`prop()`
-      其它类型的属性节点用 `attr()`
+  * 与 `attr()` 和 `removeAttr()` 操作方法一样
+  * 不仅能操作属性，也能操作属性节点
+  * 那么，用 `prop()` 还是 `attr()`？
+    * 具有 true / false 布尔值的属性节点（如`input` 标签的 `checked`, `selected`, `disabled`）用 `prop()` 才能返回 true / false，用 `attr()` 返回文本值；
+    * 值为其它类型的属性节点用 `attr()` ；
 
   ```js
   // set
@@ -467,14 +492,14 @@ instClassA.instanceMethod(); // 同实例调用实例方法
 
   
 
-* `.height()` - Get the current computed **content height** (not including padding, border or margin) for the first element in the set of matched elements or set the height of every matched element.
+* `.height()` - Get the current computed **content height** (<u>not including padding, border or margin</u>) for the first element in the set of matched elements or set the height of every matched element.
 
   * The difference between `.css( "height" )` and `.height()` is that the latter returns a unit-less pixel value (for example, `400`) while the former returns a value with units intact (for example, `400px`). The `.height()` method is recommended when an element's height needs to be used in a mathematical calculation.
   * This method is also able to find the height of the window and document.
 
-  * `.innerHeight()` - Get the current computed **inner height (**including padding but not border) for the first element in the set of matched elements or set the inner height of every matched element.
+  * `.innerHeight()` - Get the current computed **inner height (**<u>including padding but not border</u>) for the first element in the set of matched elements or set the inner height of every matched element.
 
-  * `.outerHeight()` - Get the current computed **outer height** (including padding, border, and optionally margin) for the first element in the set of matched elements or set the outer height of every matched element.
+  * `.outerHeight()` - Get the current computed **outer height** (<u>including padding, border, and optionally margin</u>) for the first element in the set of matched elements or set the outer height of every matched element.
 
     > #### [.outerHeight( [includeMargin \] )](https://api.jquery.com/outerHeight/#outerHeight-includeMargin)
     >
@@ -912,6 +937,8 @@ $('input[type=submit]').click(function(event) {
 * 自定义动画方法 `.animate(object, duration, [ease], fn)`
 
   * object 是 CSS 属性，值可以是数字、累加 “+=100”、关键字 “hide, toggle”
+  * object 中若设置了多个 CSS 属性，他们的动画会同时执行，
+    * 若要串行执行，可以把要做动画的属性分别写在两个 animate() 中；
   * ease 为动画形式，线性 linear 和 swing (= easeInOut ，中间慢、头尾快，默认值)
 
   ```js
@@ -925,7 +952,7 @@ $('input[type=submit]').click(function(event) {
   
   $('button').eq(1).click(function () {
       $('.div1').stop().animate({
-          width: "+=100",
+          width: "+=100",		// 每触发一次，在现有值上+100
           height: "+=100"
       }, 1000, 'linear', function () {
           alert('animation completed')
@@ -942,4 +969,53 @@ $('input[type=submit]').click(function(event) {
   });
   ```
 
+* `delay(duration)`：两个动画之间的若要间隔执行，可用 `animate(1).delay().animate(2)` 
+
+* `stop(true/false, true/false)`：控制当前动画和后续动画的执行
+
+  ```js
+  // 立即停止当前动画，继续执行后续动画
+  $('div').stop();
+  $('div').stop(false);
+  $('div').stop(false, false);
   
+  // 立即停止当前和后续动画
+  $('div').stop(true);
+  $('div').stop(true, false);
+  
+  // 立即完成当前动画，继续执行后续动画
+  $('div').stop(false, true);
+  
+  // 立即完成当前动画，并停止所有后续动画
+  $('div').stop(true, true);
+  ```
+
+  >[From MDN](https://api.jquery.com/stop/)
+  >
+  >###### .stop( [clearQueue ] [, jumpToEnd ] )
+  >
+  >- **clearQueue** (default: `false`)
+  >
+  >  Type: [Boolean](http://api.jquery.com/Types/#Boolean)
+  >
+  >  A Boolean indicating whether to remove queued animation as well. Defaults to `false`.
+  >
+  >- **jumpToEnd** (default: `false`)
+  >
+  >  Type: [Boolean](http://api.jquery.com/Types/#Boolean)
+  >
+  >  A Boolean indicating whether to complete the current animation immediately. Defaults to `false`.
+  >
+  >  ###### [.stop( [queue \] [, clearQueue ] [, jumpToEnd ] )](https://api.jquery.com/stop/#stop-queue-clearQueue-jumpToEnd)
+  >
+  >  **queue**
+  >
+  >  Type: [String](http://api.jquery.com/Types/#String)
+  >
+  >  The name of the queue in which to stop animations.
+
+
+
+* 动画效果设置
+  * `jQuery.fx.off = true;` 全局关闭动画效果；
+  * `jQuery.fx.interval = 13;` 动画帧间隔，越小越流畅、但消耗性能；
