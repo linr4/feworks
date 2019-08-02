@@ -12,7 +12,12 @@ Web development learning notes and case study
 
 ---
 
-###### 20190731 - Day 111
+###### 20190802 - Day 113
+
+- 练习 jQuery 动画案例 (+2h = 249 of 600)
+- 学习 jQuery DOM 操作 (+1.5h = 250.5 of 600)
+
+###### 20190801 - Day 112
 
 - 练习 jQuery 动画  (+.5h = 247 of 600)
 
@@ -66,19 +71,19 @@ Web development learning notes and case study
 
 ###### 20190719 - Day 99
 
-- 学习 jQuery - D1 (+3h = 210 of 600)
+- 学习 jQuery - 基础知识 (+3h = 210 of 600)
 
 ###### 20190718 - Day 98
 
-- 学习项目视频 (+1h = 207 of 600)
+- 学习CSS预处理项目视频 (+1h = 207 of 600)
 
 ###### 20190717 - Day 97
 
-- 学习项目视频 (+2h = 206 of 600)
+- 学习CSS预处理项目视频 (+2h = 206 of 600)
 
 ###### 20190716 - Day 96
 
-* 学习项目视频 (+2h = 204 of 600)
+* 学习CSS预处理项目视频 (+2h = 204 of 600)
 
 ###### 20190714 - Day 95
 

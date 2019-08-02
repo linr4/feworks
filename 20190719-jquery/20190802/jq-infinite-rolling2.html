@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 600px;
+            height: 161px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+        div>ul {
+            list-style: none;
+            width: 1800px;
+            height: 100%;
+            position: relative;
+            background-color: #000;
+        }
+        div>ul>li {
+            width: 300px;
+            height: 100%;
+            float: left;
+        }
+    </style>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            var timerId = null;
+            var offset = 0;
+            function autoPlay () {
+                timerId = setInterval(() => {
+                    offset = offset < -1200 ? 0 : (offset - 2);
+                    $('ul').css('left', offset);
+                }, 20);
+            }
+            autoPlay();
+            $('li').hover(function() {
+                clearInterval(timerId);
+                $(this).siblings().stop().fadeTo(50, 0.5);
+                $(this).fadeTo(50, 1);
+            }, function () {
+                $(this).fadeTo(50, 1);
+                autoPlay();
+            })
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <ul>
+            <li><img src="a.jpg" alt=""></li>
+            <li><img src="b.jpg" alt=""></li>
+            <li><img src="c.jpg" alt=""></li>
+            <li><img src="d.jpg" alt=""></li>
+            <li><img src="a.jpg" alt=""></li>
+            <li><img src="b.jpg" alt=""></li>
+        </ul>
+    </div>    
+</body>
+</html>

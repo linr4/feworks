@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            width: 400px;
+            height: 250px;
+            margin: 100px auto;
+            list-style: none;
+            border: 1px solid #000;
+        }
+        ul>li {
+            width: 99px;
+            height: 50px;
+            margin-top: 50px;
+            text-align: center;
+            overflow: hidden;
+            float: left;
+        }
+        ul>li>span {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+
+    </style>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            var url = '';
+            var corp = ['百度', '淘宝', '新浪', '网易', '搜狐', '腾讯', '优酷', '京东'];
+            
+            $('li').each(function (idx, elm) {
+                url = 'url("bg.png") no-repeat 0 ' + (-24 * idx) + 'px';
+                $(elm).children('span').css('background', url);
+                $(elm).children('p').text(corp[idx]);
+            });
+
+            $('li').mouseenter(function () {
+                $(this).children('span').stop().animate({top: -50}, 500, function () {
+                    $(this).css('top', '50px').animate({top: 0}, 500);
+                })
+            })
+
+        })
+    </script>
+</head>
+<body>
+
+    <ul>
+        <li>
+            <span></span>
+            <p></p>
+        </li>
+        <li>
+            <span></span>
+            <p></p>
+        </li>
+        <li>
+            <span></span>
+            <p></p>
+        </li>
+        <li>
+            <span></span>
+            <p></p>
+        </li>
+        <li>
+            <span></span>
+            <p></p>
+        </li>
+        <li>
+            <span></span>
+            <p></p>
+        </li>
+        <li>
+            <span></span>
+            <p></p>
+        </li>
+        <li>
+            <span></span>
+            <p></p>
+        </li>
+    </ul>
+</body>
+</html>

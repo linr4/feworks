@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button>append</button>
+    <button>prepend</button>
+    <button>appendTo</button>
+    <button>prependTo</button>
+    <button>remove</button>
+    <button>empty</button>
+    <button>detach</button>
+    <button>replaceWith</button>
+    <button>replaceAll</button>
+    <div id="div1">this is div</div>    
+    <ul>
+        <li class="item">li 1</li>
+        <li>li 2</li>
+        <li class="item">li 3</li>
+        <li>li 4</li>
+        <li>li 5</li>
+    </ul>
+    <div id="div2">this is a div
+        <p>this is a paragraph</p>
+    </div>
+
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('button').eq(0).click(function () {
+                $('ul').append('<li> new list item </li>');
+            });
+            $('button').eq(1).click(function () {
+                $('ul').prepend('<li> prepend new list item </li>');
+            });
+            $('button').eq(2).click(function () {
+                $('<span style="color: red;">***</span>').appendTo('#div1');
+            });
+            $('button').eq(3).click(function () {
+                $('<span style="color: red;">***</span>').prependTo('#div1');
+            });
+            $('button').eq(4).click(function () {
+                $('div').remove('#div2');
+            });
+            $('button').eq(5).click(function () {
+                $('div').empty('#div2');
+            });
+            $('button').eq(6).click(function () {
+                $('div').detach();
+            });
+            $('button').eq(7).click(function () {
+                $('button').replaceWith('<span style="border: 1px solid #ccc;margin-left: 5px;">按钮…… </span>');
+            });
+            $('button').eq(8).click(function () {
+                $('<span style="border: 1px solid #ccc;margin-left: 5px;">按钮…… </span>').replaceAll('button');
+            });
+        })
+    </script>
+</body>
+</html>

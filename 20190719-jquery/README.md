@@ -713,6 +713,14 @@ $('input[type=submit]').click(function(event) {
   // ul 在事件注册时已经存在，li 不管是已有的还是新增的，都会因为事件冒泡把点击事件传递给 ul，由 ul 来响应此事件；谁触发事件、this 就指向谁
   ```
 
+> As of jQuery 3.0, `.delegate()` has been deprecated. It was superseded by the [`.on()`](https://api.jquery.com/on/)  method since jQuery 1.7, so its use was already discouraged. For  earlier versions, however, it remains the most effective means to use  event delegation. More information on event binding and delegation is in  the [`.on()`](https://api.jquery.com/on/) method. In general, these are the equivalent templates for the two methods:
+
+```js
+// jQuery 1.4.3+
+$( elements ).delegate( selector, events, data, handler );
+// jQuery 1.7+
+$( elements ).on( events, selector, data, handler );
+```
 
 
 
@@ -733,6 +741,7 @@ $('input[type=submit]').click(function(event) {
   // mouseover/mouseout 会响应子元素事件冒泡
   // 鼠标从 parent 移入移出 child 时，会触发一次 mouseout 和 mouseover
   ```
+```
 
 * `mouseenter(fn)` 移入、`mouseleave(fn)` 移出：不响应子元素事件冒泡； 
 
@@ -746,7 +755,7 @@ $('input[type=submit]').click(function(event) {
       console.log('mouse leaves div.parent');
   })
   // mouse enter/leave 不响应子元素事件冒泡 —— 鼠标从 parent 移入移出 child 时，不会触发这俩事件
-  ```
+```
 
 * `hover(fnIn, fnOut)` 或 `hover(fnInOut)`
 
@@ -1019,3 +1028,175 @@ $('input[type=submit]').click(function(event) {
 * 动画效果设置
   * `jQuery.fx.off = true;` 全局关闭动画效果；默认值 `false`
   * `jQuery.fx.interval = 13;` 动画帧间隔，越小越流畅、但消耗性能； 默认值 `13` 毫秒
+
+
+
+* 案例练习：图标跳动效果
+
+  通过 `.animate()` 改变图片容器 `span` 的`top` 值实现图片动画效果：
+
+  ```js
+  var url = '';
+  var corp = ['百度', '淘宝', '新浪', '网易', '搜狐', '腾讯', '优酷', '京东'];
+  
+  // 动态设置span背景图的position，以显示精灵图上的不同图标
+  $('li').each(function (idx, elm) {
+      url = 'url("bg.png") no-repeat 0 ' + (-24 * idx) + 'px';
+      $(elm).children('span').css('background', url);
+      $(elm).children('p').text(corp[idx]);
+  });
+  
+  // 鼠标悬停时，做动画把图标向上移出边界，再设置css把图标移到下方边界外，最后做动画把图标复位，以实现从原位向上浮出边界、再从底下浮出回到原位的效果；
+  // 留意 第一个 this 指的是是 li、第二个 this 指的是 span，因 this 不同，需要把第二个 this 放在 第一个 this 的回调函数中；
+  
+  $('li').mouseenter(function () {
+      $(this).children('span').stop().animate({top: -50}, 500, function () {
+          $(this).css('top', '50px').animate({top: 0}, 500);
+      })
+  })
+  ```
+
+  
+
+* 案例练习：图片橱窗无限滚动
+
+  
+
+  ```js
+  var timerId = null;
+  var offset = 0;		// 图片滚动步长，动态递增
+  
+  function autoPlay () {
+      timerId = setInterval(() => {
+          offset = offset < -1200 ? 0 : (offset - 2);
+          $('ul').css('left', offset);
+      }, 20);
+  }
+  
+  autoPlay();
+  
+  // 监听鼠标事件，实现当前图片高亮、其它图片加蒙版的效果
+  // 留意在动画方法 fadeTo() 之前要用 stop()，否则在移到隔壁图片时会有透明度切换闪动的情况
+  
+  $('li').hover(function() {
+      clearInterval(timerId);	// 停止滚动
+      $(this).siblings().stop().fadeTo(50, 0.5);//因ul为黑色，li为透明时有蒙板效果
+      $(this).fadeTo(50, 1);  // 鼠标移到隔壁图片时，目标图片的li要恢复不透明
+  }, function () {
+      $(this).fadeTo(50, 1);	// 鼠标离开后恢复原状
+      autoPlay();	// 继续滚动
+  })
+  
+  // 另外一种实现方法，委托给 ul 来监听 li 的鼠标事件：
+  // delegate() 方法在3.0版本后已经废弃，用 on() 替代
+  // 用这个方法没法监听 hover()，需要分别监听 mouseenter() 和 mouseleave()
+  
+  $('ul').on('mouseover', 'li', function() {
+      clearInterval(timer);
+      $(this).siblings().stop().fadeTo(50, .5);
+      $(this).fadeTo(1);
+  });
+  
+  $('ul').on('mouseout', 'li', function() {
+      $(this).siblings().fadeTo(50, 1);                
+      autoPlay();
+  });
+  
+  ```
+
+  
+
+### jQuery - DOM 操作
+
+* 添加节点
+
+  * 添加到指定节点的内部
+
+    * `ul.append(li)`： 在指定节点内部，把新节点作为子元素，添加到现有子元素的最后面
+
+    * `ul.prepend(li)`：在指定节点内部，把新节点作为子元素，添加到现有子元素的最前面
+
+    * `li.appendTo(ul)` ：功能一样，只是 caller 和 callee 对调了一下
+
+    * `li.prependTo(ul)` ：功能一样，只是 caller 和 callee 对调了一下
+
+      ```js
+      var $li = $('<li> new entry </li>');
+      $('ul').append($li);	// 把 $li 作为子元素添加到 ul 下面现有 li 的最后面
+      $('ul').prepend($li);	// 把 $li 作为子元素添加到 ul 下面现有 li 的最后面
+      $li.appendTo($('ul'));	// 功能一样，只是 caller 和 callee 对调了一下
+      $li.prependTo($('ul')); // 功能一样，只是 caller 和 callee 对调了一下
+      ```
+
+  * 添加到指定节点的外部
+
+    * `div.after(span)` ：紧跟着指定元素的后面，添加一个同级的新元素
+    * `div.before(span)` ：紧跟着指定元素的前面，添加一个同级的新元素
+    * `span.insertAfter(div)` ：功能一样，只是 caller 和 callee 对调了一下
+    * `span.insertBefore(div)` ：功能一样，只是 caller 和 callee 对调了一下
+
+* 删除节点
+  * `elm.remove([selector])`：删除 elm 元素；可以用选择器，只删除所选中部分的元素；
+  * `elm.empty()`：清空 elm 子节点，包括文本内容、子元素等；与`remove()`的区别是 elm 本身仍保留；
+  * `elm.detach([selector])`：与 `remove()` 一样。
+
+```js
+$('button').eq(0).click(function () {
+    $('ul').append('<li> new list item </li>');
+});
+$('button').eq(1).click(function () {
+    $('ul').prepend('<li> prepend new list item </li>');
+});
+$('button').eq(2).click(function () {
+    $('<span style="color: red;">***</span>').appendTo('#div1');
+});
+$('button').eq(3).click(function () {
+    $('<span style="color: red;">***</span>').prependTo('#div1');
+});
+$('button').eq(4).click(function () {
+    $('div').remove('#div2');
+});
+$('button').eq(5).click(function () {
+    $('div').empty('#div2');
+});
+$('button').eq(6).click(function () {
+    $('div').detach();
+})
+```
+
+* 替换节点
+  * `elm.replaceWith(new_elm)`：把现有的元素 elm 替换成新元素 new_elm；
+  * `new_elm.replaceAll(elm)`：与 `relaceWith()` 功能一样，只是把 Caller 和 Callee 对调一下；
+
+```js
+$('button').eq(7).click(function () {
+    $('button').replaceWith('<span">本来是按钮</span>');
+});
+$('button').eq(8).click(function () {
+    $('<span">本来是按钮</span>').replaceAll('button');
+});
+```
+
+* 复制节点
+  * `elm.clone(true/false)` 
+    * true 为深拷贝，false 为浅拷贝；
+    * 浅拷贝不复制元素所绑定的事件，深拷贝会复制事件；
+
+```js
+$('button').eq(0).click(function () {
+    // 浅拷贝，clone(false)，不复制元素所绑定的事件
+    var $li = $('li:first').clone(false);
+    $('ol').append($li);
+});
+$('button').eq(1).click(function () {
+    // 浅拷贝，clone(false)，会复制元素所绑定的事件
+    var $li = $('li:first').clone(true);
+    $('ol').append($li);
+});
+
+$('li').click(function () {
+    alert('you have clicked list item' + $(this).index());
+    console.log($(this).index());
+})
+```
+

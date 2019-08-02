@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>node clone</title>
+</head>
+
+<body>
+    <button>shallow clone</button>
+    <button>deep clone</button>
+    <ol>
+        <li>list item No.1</li>
+        <li>list item No.2</li>
+        <li>list item No.3</li>
+        <li>list item No.4</li>
+        <li>list item No.5</li>
+    </ul>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $('button').eq(0).click(function () {
+                // 浅拷贝，clone(false)，不复制元素所绑定的事件
+                var $li = $('li:first').clone(false);
+                $('ol').append($li);
+            });
+            $('button').eq(1).click(function () {
+                // 浅拷贝，clone(false)，会复制元素所绑定的事件
+                var $li = $('li:first').clone(true);
+                $('ol').append($li);
+            });
+
+            $('li').click(function () {
+                alert('you have clicked list item' + $(this).index());
+                console.log($(this).index());
+            })
+        })
+
+    </script>
+</body>
+
+</html>
