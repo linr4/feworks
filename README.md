@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ###### 20190731 - Day 111
 
+- 练习 jQuery 动画  (+.5h = 247 of 600)
+
+###### 20190731 - Day 111
+
 - 学习 jQuery 动画  (+2.5h = 246.5 of 600)
 
 ###### 20190730 - Day 110

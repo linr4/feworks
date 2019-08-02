@@ -1017,5 +1017,5 @@ $('input[type=submit]').click(function(event) {
 
 
 * 动画效果设置
-  * `jQuery.fx.off = true;` 全局关闭动画效果；
-  * `jQuery.fx.interval = 13;` 动画帧间隔，越小越流畅、但消耗性能；
+  * `jQuery.fx.off = true;` 全局关闭动画效果；默认值 `false`
+  * `jQuery.fx.interval = 13;` 动画帧间隔，越小越流畅、但消耗性能； 默认值 `13` 毫秒
