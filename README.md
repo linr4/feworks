@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190803 - Day 114
+
+- 练习 jQuery DOM 操作案例 (+2.5h = 251.5 of 600)
+
 ###### 20190802 - Day 113
 
 - 练习 jQuery 动画案例 (+2h = 249 of 600)
