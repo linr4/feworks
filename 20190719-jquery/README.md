@@ -369,7 +369,7 @@ boy.instanceMethod(); // 同实例调用实例方法
   * 与 `attr()` 和 `removeAttr()` 操作方法一样
   * 不仅能操作属性，也能操作属性节点
   * 那么，用 `prop()` 还是 `attr()`？
-    * 具有 true / false 布尔值的属性节点（如`input` 标签的 `checked`, `selected`, `disabled`）用 `prop()` 才能返回 true / false，用 `attr()` 返回文本值；
+    * 具有 true / false 布尔值的属性节点（如`input` 标签的 `checked`, `selected`, `disabled`）用 `prop()` 才能返回 true / false，用 `attr()` 返回文本值；—— 记忆：Prop --> Boolean
     * 值为其它类型的属性节点用 `attr()` ；
 
   ```js
@@ -1200,3 +1200,40 @@ $('li').click(function () {
 })
 ```
 
+
+
+* 案例练习 - 新浪微博
+
+  * 主要知识点在 jQuery 代码中的两个需要做事件委托才能起作用的场景：
+
+    ```js
+    // $('.comment').on('input propertychange', function () {	// 这句不起作用
+    // 监听 textarea 内容实时变化，若不使用事件委托，便无法让 Textarea 直接监听 input 这两个事件
+    
+    $('body').delegate('.comment', 'input propertychagne', function () {
+        if ($(this).val().length > 0) {
+            $('.send').prop('disabled', false);
+        } else {
+            $('.send').prop('disabled', true);
+        }
+    })
+    ```
+
+    ```js
+    // 若要监听 <a> 标签点击事件，如果不使用事件委托，也是无法生效的；
+    // 而且 <a> 标签必须要写上属性节点 href=“javascript:;” 否则点击会触发默认行为；
+    
+    $('body').delegate('.like', 'click', function () {
+        $(this).text(parseInt($(this).text()) + 1);
+    });
+    ```
+
+    ```JS
+    // 删除祖先元素，可以用 .parents(selector) 方法，.parent() 只能找到父元素
+    
+    $('body').delegate('.delete', 'click', function () {
+        $(this).parents('.msg').remove();
+    });
+    ```
+
+    

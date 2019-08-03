@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.clearfix::after {
+    content: '';
+    display: inline-block;
+    clear: both;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+body {
+    background: url("../images/body_bg.jpg") no-repeat center 0;
+}
+
+.nav {
+    width: 1897px;
+    margin: 0 auto;
+}
+.nav>img {
+    width: 100%;
+}
+.content {
+    width: 1200px;
+    height: 100%;
+    margin: 200px auto 0;
+    background-color: rgb(235, 219, 212);
+}
+
+.content>.left {
+    float: left;
+}
+.content>.right {
+    float: right;
+    width: 260px;
+}
+
+.content>.center {
+    float: left;
+    width: 750px;
+    height: 500px;
+    background: url("../images/comment.png") no-repeat 0 0;
+}
+
+.content>.center>.comment {
+    width: 723px;
+    height: 98px;
+    margin-left: 17px;
+    margin-top: 54px;
+    resize: none;
+    outline: none;
+    border: none;
+}
+.content>.center>.send {
+    width: 103px;
+    height: 38px;
+    margin-left: 638px;
+    margin-top: 3px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+    background-color: rgb(253, 128, 64);
+    cursor: pointer;
+}
+
+.messages {
+    font-size: 14px;
+    width: 747px;
+    border: 1px solid #fff;
+    margin-top: 15px;
+    margin-left: 3px;
+    background-color: #fff;
+}
+.messages>.msg {
+    width: 706px;
+    height: auto;
+    margin: 20px auto 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    font-size: 13px;
+
+}
+.msg-text {
+    padding-bottom: 10px;
+}
+.msg-ops {
+    color: #ccc;
+}
+.msg-datetime {
+    float: left;
+}
+.msg-handlers {
+    float: right;
+}
+.msg-handlers>a {
+    text-decoration: none;
+    margin-right: 5px;
+    padding-left: 25px;
+    color: #ccc;
+    background: url("../images/icons.png") no-repeat 0 0;
+}
+
+.msg-handlers>.dislike {
+    background-position: 0 -16px;
+}
+.msg-handlers>.delete {
+    background-position: 0 -33px;
+}
+
+.page {
+    width: 1200px;
+    height: 40px;
+    margin: 0 auto;
+    padding-right: 10px;
+    background: rgb(159, 80, 36);
+    text-align: right;
+}
+.page>a {
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin: 10px 2px 0 0;
+    border: 1px solid #fff;
+    color: #fff;
+}
