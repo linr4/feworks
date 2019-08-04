@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+}
+body {
+    background: url("../images/body_bg.jpg") no-repeat 0 0;
+}
+
+main, header {
+    width: 100%;
+    height: auto;
+}
+main, header, div {
+    box-sizing: border-box;
+}
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+header img {
+    width: 100%;
+}
+
+main {
+    margin-top: 200px;
+}
+main>.wrapper {
+    width: 1000px;
+    height: auto;
+}
+
+main .left {
+    float: left;
+    width: 186px;
+}
+
+
+main .middle {
+    float: left;
+    width: 600px;
+    height: 1000px;
+    background-color:rgb(235, 219, 212);
+}
+main .right {
+    float: right;
+    width: 214px;
+}
+main .right img {
+    width: 100%;
+}
+
+main .middle .comment {
+    width: 100%;
+    height: 168px;
+    background: url("../images/comment.png") no-repeat 0 0;
+    background-size: contain;
+    text-align: right;
+}
+
+main .middle .comment textarea {
+    width: 573px;
+    height: 77px;
+    margin: 43px 13px 0 0;
+    border: none;
+    outline: none;
+    resize: none;
+}
+main .middle .comment .send {
+    width: 80px;
+    height: 30px;
+    margin: 2px 13px 0 0;
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: rgb(255, 192, 159);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+main .middle .message {
+    width: 99%;
+    margin-left: 2px;
+    border: 1px solid #fff;
+    font-size: 13px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
+.message p {
+    margin: 15px;
+}
+
+.message .dt,.ops {
+    color: #ccc;
+}
+.message .ops {
+    float: right;
+}
+.message .ops a {
+    text-decoration: none;
+    color: #ccc;
+    padding-left: 20px;
+    padding-right: 5px;
+}
+.message .ops .like {
+    background: url("../images/icons.png") no-repeat 0 0;
+}
+.message .ops .dislike {
+    background: url("../images/icons.png") no-repeat 0 -17px;
+}
+.message .ops .delete {
+    background: url("../images/icons.png") no-repeat 0 -34px;
+}
