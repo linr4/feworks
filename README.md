@@ -12,6 +12,14 @@ Web development learning notes and case study
 
 ---
 
+###### 20190807 - Day 117
+
+- 学习 jQuery QQ 音乐案例 (+1h = 256 of 600)
+
+###### 20190805 - Day 116
+
+- 学习 jQuery QQ 音乐案例 (+2h = 255 of 600)
+
 ###### 20190804 - Day 115
 
 - 再练习一遍 jQuery 新浪微博案例 (+1.5h = 253 of 600)
