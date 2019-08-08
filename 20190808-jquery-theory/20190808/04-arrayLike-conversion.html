@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        var arr1 = [1,3,5,7,9];
+        var obj1 = {};
+
+        var arr2 = [];
+        var obj2 = {0: "name", 1: "age", length: 2};
+
+        // 真数组转伪数组
+        [].push.apply(obj1, arr1);
+        console.log(obj1);  // {0: 1, 1: 3, 2: 5, 3: 7, 4: 9, length: 5}
+
+        // 伪数组转真数组
+        [].push.apply(arr2, obj2);  // 和真转伪对比，俩参数对调
+        console.log(arr2);  // (2) ["name", "age"]
+
+        var arr3 = [].slice.call(obj2); // 推荐用这种方法，兼容 IE8
+        console.log(arr3);  // (2) ["name", "age"]
+
+        // 真数组转真数组
+        var arr4 = arr1.slice();
+        console.log(arr4);  // (5) [1, 3, 5, 7, 9]
+        var arr5 = [];
+        [].push.apply(arr5, arr1);  // (5) [1, 3, 5, 7, 9]
+        console.log(arr5);
+
+        // 伪数组转伪数组
+        var obj3 = {};
+        [].push.apply(obj3, obj1);
+        console.log(obj3);  // {0: 1, 1: 3, 2: 5, 3: 7, 4: 9, length: 5}
+
+    </script>
+</body>
+</html>

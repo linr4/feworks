@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190808 - Day 118
+
+- 学习 jQuery 原理 - 入口函数的代码结构、参数的解析和处理 (+4h = 260 of 600)
+
 ###### 20190807 - Day 117
 
 - 学习 jQuery QQ 音乐案例 (+1h = 256 of 600)

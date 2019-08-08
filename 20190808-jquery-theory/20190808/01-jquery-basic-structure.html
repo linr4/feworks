@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        (function (window, undefined) {
+            var jQuery = function () {
+                return new jQuery.fn.init();
+            };
+            jQuery.prototype = {
+                constructor: jQuery
+            };
+            jQuery.fn.init.prototype = jQuery.prototype;
+            window.jQuery = window.$ = jQuery;
+        })(window);
+        
+    </script>
+</body>
+</html>
