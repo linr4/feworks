@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190809 - Day 119
+
+- 学习 jQuery 原理 - 入口函数参数，数组解析功能的实现 (+1h = 261 of 600)
+
 ###### 20190808 - Day 118
 
 - 学习 jQuery 原理 - 入口函数的代码结构、参数的解析和处理 (+4h = 260 of 600)

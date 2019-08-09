@@ -192,9 +192,6 @@
       // 如果字符串以 ‘<’ 起始、以 ‘>’ 结尾，且长度大于等于3（如 <a> 标签），即为 HTML 代码
   };
   ```
-```
-  
-  
 
 * 代码片段优化：将第一级元素添加到 jQuery 对象中，有两种方法：
 
@@ -208,7 +205,8 @@
   // 2. 调用数组方法把 tempEl.children 这个 HTMLCollection 伪数组 push 到 jQuery 对象中
   
   [].push.apply(this, tempEl.children);
-```
+  ```
+
 
   * 知识点：`[].push.call(obj, p1, p2, ...)` 和 `[].push.apply(obj, [p1, p2, ...])`
 
@@ -234,7 +232,7 @@ var arr = [1,3,5,7,9];
     [].push.apply(arr2, divEls);        // 伪数组转真数组；IE8 及以下不支持，要借用slice()实现
     var arr3 = [].slice.call(divEls);	// 所有浏览器都支持，包括 IE8
     ```
-    
+
     * 小结：
       * 真数组转伪数组，用 `[].push.apply(realArr, pseudoArr)`
       * 伪数组转真数组，用 `var realArr = [].slice.call(psuedoArr)`
@@ -271,5 +269,4 @@ var arr = [1,3,5,7,9];
     [].push.apply(obj3, obj1);
     console.log(obj3);  // {0: 1, 1: 3, 2: 5, 3: 7, 4: 9, length: 5}
     ```
-    
-    
+
