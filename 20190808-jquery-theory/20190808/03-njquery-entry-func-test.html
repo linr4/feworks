@@ -78,6 +78,82 @@
     // 传入基本数据类型，返回包含了该基本数据类型的jQuery对象
     console.log($(123));    // jQuery.fn.init [123]
     console.log($(true));   // jQuery.fn.init [true]
+
+    // $(function () {
+    //     var res = document.querySelectorAll('li');
+    //     var res2 = $(res).toArray();
+    //     console.log(res, res2);
+    // })
+
+    // console.log($('li').get());
+    // console.log($('li').get(1));
+    // console.log($('li').get(-1));
+
+    // console.log($('li').eq());
+    // console.log($('li').eq(1));
+    // console.log($('li').eq(-1));
+
+    // console.log($('li').first());
+    // console.log($('li').last());
+
+    var arr1 = [1,3,5,6,7,11,13];
+    var arrLike1 = {0: "Name", 1:"Age", 2:"Gender", 3:"Nationality", length: 4};
+    var obj1 = {"Corp": "ABC", "Addr": "Paradise", "Phone": "109834103"};
+
+    // $.each(arr1, function (i, v) {
+    //     if (i === 2) {
+    //         return true;
+    //     }
+    //     console.log(i, v);
+    // });
+    // $.each(arrLike1, function(i, v) {
+    //     if (i === 2) {
+    //         return false;
+    //     }
+    //     console.log(i, v);
+    // });
+    // $.each(obj1, function(k, v) {
+    //     console.log(k, v);
+    // });
+
+    // $.each(arr1, function (i, v) {
+    //     console.log(i, v, this);
+    // });
+    // $.each(arrLike1, function(i, v) {
+    //     console.log(i, v);
+    // });
+    // $.each(obj1, function(k, v) {
+    //     console.log(k, v);
+    // });
+
+    // $(arr1).each(function (k, v) {
+    //     console.log(k, v, this);
+    // })
+    console.log('------------------------------------');
+    var res1 = njQuery.map(arr1, function(v, k) {
+        // console.log(k, v);
+        return v + k;
+    });
+    console.log(res1);
+
+    var res2 = njQuery.map(arrLike1, function (v, k) {
+        // console.log(k, v);
+        return k + v;
+    });
+    console.log(res2);
+
+    var res3 = njQuery.map(obj1, function (v, k) {
+        // console.log(k, v);
+        return k + v;
+    })
+    console.log(res3);
+
+    var res4 = $(arr1).map(function(v, k) {
+        console.log(k, v);
+        return k + ':' + v;
+    });
+    console.log(res4);
+
     </script>
 </body>
 

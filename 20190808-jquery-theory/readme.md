@@ -270,3 +270,173 @@ var arr = [1,3,5,7,9];
     console.log(obj3);  // {0: 1, 1: 3, 2: 5, 3: 7, 4: 9, length: 5}
     ```
 
+
+
+* 工具方法的封装 `jQuery.extend()`
+
+  * 若把所有工具方法都直接写在入口函数下的话，后续不利于维护和扩展，因此需要把它们做进一步封装；
+  * 把工具方法都封装在 `jQuery.extend({})` 方法中，以键值对的形式存在，再通过 `for` 循环把工具方法挂载到 `jQuery` 命名空间下，使得用户可以通过`jQuery.tool()` 的方式引用；
+  * 把 `.extend()` 方法同时赋值给 `jQuery` 的类和原型，使其通过类和对象实例均能引用到工具方法；
+
+  ```js
+  // 在 jQuery 的类和原型上定义 extend 方法，用于挂载其它工具方法：
+  njQuery.extend = njQuery.prototype.extend = function (obj) {
+      for (var key in obj) {
+          this[key] = obj[key];   // 相当于 njQuery['isString'] = function () {}
+                                  // 即：   njQuery.isString = function () {}
+      }
+  };
+  
+  // 在 extend 方法中定义其它工具方法：
+  njQuery.extend({
+      isFunction: function (param) {
+          return 'function' === typeof param;
+      }
+  });
+  
+  // 此后调用工具方法的方式与之前把工具方法直接定义在入口函数下的时候是一样的
+  if (njQuery.isFunction(selector)) {
+      console.log(' is a function');
+  }
+  ```
+
+  
+
+
+* 入口函数的参数为函数时的处理方法，即如何处理 `$(fn)` 中的 `fn` 
+
+  * 知识点：
+
+    * `window.onload` 事件会等到所有 DOM 元素和相关资源（如图片）加载完毕再执行回调，因此性能和用户体验不佳；
+
+    * jQuery 中的 `ready` 方法使用了 `DOMContentLoaded` 事件来代替 `window.onload`，该方法只监听所有 DOM 元素加载是否完毕、不监听其它资源的加载状态；
+
+      ```js
+      window.onload = function () {
+          console.log('load event completes');
+      };
+      
+      document.addEventListener('DOMContentLoaded', function () {
+          console.log('DOMContentLoaded event completes');
+      })
+      
+      // 结果是 DOMContentLoaded 先于 window.onload 执行
+      ```
+
+    * IE 8 及以下版本不支持 `DOMContentLoaded` 事件和 `addEventListener` 方法，需要通过 `attachEvent` 方法监听 `onreadystatechange` 事件；因此完整的 ready 如下：
+
+      ```js
+      ready: function (fn) { // 监听 DOM 是否加载完毕、是否可以开始执行回调
+          if ('complete' === document.readyState) { // 如果文档已经加载完毕
+              fn();
+          } else if (document.addEventListener) { // 否则监听一下DOM是否加载完毕
+              document.addEventListener('DOMContentLoaded', function () {
+                  fn();
+              })
+          } else {
+              document.attachEvent('onreadystatechange', function () { // 老浏览器
+                  if ('complete' === document.readyState) {
+                      fn();
+                  }
+              })
+          }
+      }
+      ```
+
+      
+
+* jQuery 中的其它方法和属性
+
+  ```js
+  jquery: '1.1.0',
+  selector: '',
+  length: 0,
+  //[].push 意为调用数组的push方法，冒号前的push将由jQuery对象调用，相当于 [].push.apply(this);
+  push: [].push,
+  sort: [].sort,
+  splice: [].splice,
+  
+  toArray: function () {  // 将NodeList伪数组转为真数组
+      return [].slice.call(this);
+  },
+      
+  get: function (num) {  // 将jQuery对象转为DOM对象
+      if (0 === arguments.length) {   // 没有传参给 get()
+          return this.toArray();      // 就返回NodeList转的真数组
+      } else if (num >= 0) {          // 参数为正数或零
+          return this[num];           // 返回索引值为该参数的DOM
+      } else {                        // 参数为负值
+          return this[this.length + num] // 返回索引值为倒数第n个的DOM
+      }
+  },
+  eq: function (num) {                // 与get的区别是eq返回的是jQuery对象；
+      if (0 === arguments.length) {
+          return new njQuery;         // 没有传参，返回空的jQuery对象；
+      } else {                        // 有传参时，处理逻辑与get一样；
+          return njQuery(this.get(num));
+      }
+  },
+  first: function () {
+      return this.eq(0);
+  },
+  last: function () {
+      return this.eq(-1);
+  }
+  ```
+
+  * 有些方法如 `each`、`map` 既有实例方法（通过 `$().each(obj, fn)` 调用）也有静态方法（通过 `$(obj).each(fn)` 调用），是在实例方法定义部分调用了静态方法的代码实现复用，具体写法如下：
+
+    ```js
+    njQuery.prototype = {
+        constructor: njQuery,
+        init: function (selector) {
+            ...
+            each: function (fn) {
+                return njQuery.each(this, fn); 
+            }
+        }
+    }
+    
+    njQuery.extend = njQuery.prototype.extend = function (obj) {
+        for (var key in obj) {
+            this[key] = obj[key];
+            // 相当于 njQuery['isString'] = function () {}
+            // 即：   njQuery.isString = function () {}
+        }
+    };
+    
+    njQuery.extend({
+        ...
+        each: function (obj, fn) {
+            // 判断是否为数组
+            if (njQuery.isArray(obj)) {
+                for (var i = 0; i < obj.length; i++) {
+                    // var res = fn(i, obj[i]);
+                    var res = fn.call(obj[i], i, obj[i]); // 把 this 指向 value，方便调用
+                    // 调用者可以用 return true/false 来实现 continue/break
+                    // 回调中若没有 return（即为 undefined）就按默认流程继续执行
+                    if (true === res) {     
+                        continue;
+                    } else if (false === res) {
+                        break;
+                    }
+                }
+            } else
+                // 判断是否为对象
+                if (njQuery.isObject(obj)) {
+                    for (var key in obj) {
+                        // var res = fn(key, obj[key]);
+                        var res = fn.call(obj[key], key, obj[key]);
+                        if (true === res) {
+                            continue;
+                        } else if (false === res) {
+                            break;
+                        }
+                    }
+                }
+            return obj;
+        }
+    })
+    ```
+
+    
