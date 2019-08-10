@@ -216,15 +216,13 @@
   * 知识点：真伪数组的互相转换
 
       * 伪数组分两种：
-      * 系统自带的伪数组，如：`document.querySelectorAll('div')` 返回的 NodeList；
+          * 系统自带的伪数组，如：`document.querySelectorAll('div')` 返回的 NodeList；
           * 用户自定义的伪数组，如：`var obj = {0: "name", 1: "age", length: 2}`；
       
     ```js
-var arr = [1,3,5,7,9];
+    var arr = [1,3,5,7,9];
     var obj = {};
     [].push.apply(obj, arr);	// 真数组转伪数组
-    
-    // 
     
     var divEls = document.querySelectorAll('div');
     var obj2 = {0: "name", 1: "age", length: 2};
