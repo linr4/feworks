@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        p {
+            width: 100px;
+            height: 20px;
+            border: 1px solid red;
+        }
+
+        div {
+            margin: 5px;
+            width: 200px;
+            height: auto;
+            border: 1px solid green;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <button>do it</button>
+    <p class="para">this is a p-tag</p>
+    <p class="para">this is a p-tag</p>
+
+    <div>
+        div here
+        <p>para 1</p>
+        <p>para 2</p>
+    </div>
+    <div>
+        div here
+        <p>para 1</p>
+        <p>para 2</p>
+    </div>
+
+
+    <script src="../njQuery.1.0.js"></script>
+    <script>
+        var src = document.querySelectorAll('.para');
+        var tgt = document.querySelectorAll('div');
+        var btnEl = document.querySelector('button');
+
+        btnEl.onclick = function () {
+            console.log($(tgt).prepend(src));
+        }
+
+    </script>
+</body>
+
+</html>

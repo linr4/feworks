@@ -233,7 +233,104 @@
         }
     });
 
-
+    // 动态添加其他方法
+    njQuery.prototype.extend({
+        empty: function () {
+            this.each(function (idx, elm) {
+                elm.innerHTML = '';
+            })
+            return this; // 返回调用者，方便链式调用
+        },
+        remove: function (selector) {
+            if (0 === arguments.length) { // 如果没有传参，删除所有
+                this.each(function (idx, elm) {
+                    elm.parentNode.removeChild(elm);
+                })
+            } else { 
+                var $this = this;
+                // 将选择器所对应的标签的类型与调用者的标签类型做比对
+                // 命中的均删除
+                $(selector).each(function (idx, elm) {
+                    $this.each(function (i, e) {
+                        if (elm.tagName === e.tagName) {
+                            elm.parentNode.removeChild(elm);
+                        }
+                    })
+                })
+            }
+            return this;
+        },
+        html: function (content) {
+            if (0 === arguments.length) {
+                return this[0];
+            } else {
+                this.each(function (idx, elm) {
+                    elm.innerHTML = content;
+                })
+            }
+        },
+        text: function (content) {
+            if (0 === arguments.length) {
+                var res = '';
+                this.each(function (idx, elm) {
+                    res += elm.innerText;
+                });
+                return res;
+            } else {
+                this.each(function (idx, elm) {
+                    elm.innerText = content;
+                })
+            }
+        },
+        appendTo: function (selector) {
+            var $target = $(selector);
+            var $source = this;
+            var res = [];
+            $target.each(function (index, tgtEl) {
+                $source.each(function (idx, srcEl) {
+                    if (index === 0) {
+                        tgtEl.appendChild(srcEl);
+                    } else {
+                        tgtEl.appendChild(srcEl.cloneNode(true));
+                    };
+                    res.push(srcEl);
+                });
+            });
+            return $(res);
+        },
+        prependTo: function (selector) {
+            var $target = $(selector);
+            var $source = this;
+            var res = [];
+            $target.each(function (index, tgtEl) {
+                $source.each(function (idx, srcEl) {
+                    if (index === 0) {
+                        tgtEl.insertBefore(srcEl, tgtEl.firstChild);
+                    } else {
+                        tgtEl.insertBefore(srcEl.cloneNode(true), tgtEl.firstChild);
+                    };
+                    res.push(srcEl);
+                });
+            });
+            return $(res);
+        },
+        append: function (param) {
+            if (njQuery.isString(param)) {
+                this[0].innerHTML = param;
+            } else {
+                $(param).appendTo(this);
+            }
+            return this;
+        },
+        prepend: function (param) {
+            if (njQuery.isString(param)) {
+                this[0].innerHTML = param + this[0].innerHTML;
+            } else {
+                $(param).prependTo(this);
+            }
+            return this;
+        }
+    })
 
     njQuery.prototype.init.prototype = njQuery.prototype;   // 把 init 初始化方法的原型指向 njQuery 对象的原型，使得 init 可以顺利访问 njQuery 的方法和属性、方便做初始化
     window.njQuery = window.$ = njQuery;    // 向外部暴露 njQuery 对象、作为接口函数，以方便外部调用

@@ -345,6 +345,21 @@
 
 * jQuery 中的其它方法和属性
 
+  
+  * `jquery` 属性，获取 jQuery 版本号；
+  * `selector` 属性，实例默认的选择器取值；
+  * `length` 属性，实例默认的长度；
+  * `push` 方法，给实例添加新元素；
+  * `sort` 方法，给实例中的元素排序；
+  * `splice` 方法，按指定下标、指定数量进行删除元素，也可替换删除的元素；
+  * `toArray` 方法，把实例转换为数组返回；
+  * `get` 方法，获取指定下标的元素，返回原生 DOM 对象；
+  * `eq` 方法，获取指定下标的元素， 返回 jQuery 实例对象；
+  * `first` 方法，获取实例中第一个元素，返回 jQuery 实例对象；
+  * `last` 方法，获取实例中最后一个元素，返回 jQuery 实例对象；
+  * `each` 方法，遍历实例，把遍历到的数组传给回调函数使用；
+  * `map` 方法，遍历实例，把遍历到的数组传给回调函数使用，把回调的返回值组成新数组返回；
+  
   ```js
   jquery: '1.1.0',
   selector: '',
@@ -366,9 +381,9 @@
       } else {                        // 参数为负值
           return this[this.length + num] // 返回索引值为倒数第n个的DOM
       }
-  },
+},
   eq: function (num) {                // 与get的区别是eq返回的是jQuery对象；
-      if (0 === arguments.length) {
+    if (0 === arguments.length) {
           return new njQuery;         // 没有传参，返回空的jQuery对象；
       } else {                        // 有传参时，处理逻辑与get一样；
           return njQuery(this.get(num));
@@ -381,9 +396,9 @@
       return this.eq(-1);
   }
   ```
-
+  
   * 有些方法如 `each`、`map` 既有实例方法（通过 `$().each(obj, fn)` 调用）也有静态方法（通过 `$(obj).each(fn)` 调用），是在实例方法定义部分调用了静态方法的代码实现复用，具体写法如下：
-
+  
     ```js
     njQuery.prototype = {
         constructor: njQuery,
@@ -421,7 +436,7 @@
                 }
             } else
                 // 判断是否为对象
-                if (njQuery.isObject(obj)) {
+              if (njQuery.isObject(obj)) {
                     for (var key in obj) {
                         // var res = fn(key, obj[key]);
                         var res = fn.call(obj[key], key, obj[key]);
@@ -436,5 +451,9 @@
         }
     })
     ```
-
+  
     
+
+### jQuery DOM 操作
+
+* `empty` 方法，清空指定元素中的所有内容；

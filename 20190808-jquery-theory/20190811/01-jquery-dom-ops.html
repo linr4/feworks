@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button>empty</button>    
+    <button>remove</button>    
+    <button>remove .box</button>    
+    <button>html</button>    
+    <button>text</button>    
+    <div>
+        this is a division
+        <p>this is a paragraph</p>
+    </div>
+    <div class="box">
+        this is a division
+        <p>this is a paragraph</p>
+    </div>
+    <p class="box">this is another p</p>
+
+    <script src="../njQuery.1.0.js"></script>
+    <script>
+        var emptyBtn = document.getElementsByTagName('button')[0];
+        var removeBtn = document.getElementsByTagName('button')[1];
+        var removeBtn2 = document.getElementsByTagName('button')[2];
+        var htmlBtn = document.getElementsByTagName('button')[3];
+        var textBtn = document.getElementsByTagName('button')[4];
+        emptyBtn.onclick = function () {
+            var res = $('div').empty();
+            console.log(res);
+        };
+        removeBtn.onclick = function () {
+            var res = $('div').remove();
+            console.log(res);
+        };
+        removeBtn2.onclick = function () {
+            var res = $('div').remove('.box');
+            console.log(res);
+        };
+        textBtn.onclick = function () {
+            console.log($('div').text());
+            $('.box').text('this is a box');
+            $('div').text('<span style="border: 2px solid red">span</span>');
+        };
+
+    </script>
+</body>
+</html>

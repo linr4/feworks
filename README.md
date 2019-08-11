@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ###### 20190810 - Day 120
 
+- [学习 jQuery 原理](20190808-jquery-theory) - DOM 操作相关的方法 (+3.5h = 266.5 of 600)
+
+###### 20190810 - Day 120
+
 - [学习 jQuery 原理](20190808-jquery-theory) - 入口函数参数为函数时的解析和执行方法 (+2h = 263 of 600)
 - 学习 jQuery 原理 - 入口函数其它属性和方法的实现 (+2.5h = 265.5 of 600)
 
