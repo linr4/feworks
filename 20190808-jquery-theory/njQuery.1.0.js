@@ -187,25 +187,25 @@
                     var res = fn.call(obj[i], i, obj[i]); // 把 this 指向 value，方便调用
                     // 调用者可以用 return true/false 来实现 continue/break
                     // 回调中若没有 return（即为 undefined）就按默认流程继续执行
-                    if (true === res) {     
-                        continue;
-                    } else if (false === res) {
-                        break;
-                    }
-                }
-            } else
-            // 判断是否为对象
-            if (njQuery.isObject(obj)) {
-                for (var key in obj) {
-                    // var res = fn(key, obj[key]);
-                    var res = fn.call(obj[key], key, obj[key]);
                     if (true === res) {
                         continue;
                     } else if (false === res) {
                         break;
                     }
                 }
-            }
+            } else
+                // 判断是否为对象
+                if (njQuery.isObject(obj)) {
+                    for (var key in obj) {
+                        // var res = fn(key, obj[key]);
+                        var res = fn.call(obj[key], key, obj[key]);
+                        if (true === res) {
+                            continue;
+                        } else if (false === res) {
+                            break;
+                        }
+                    }
+                }
             return obj;
         },
 
@@ -220,15 +220,15 @@
                     }
                 }
             } else
-            // 判断是否为对象
-            if (njQuery.isObject(obj)) {
-                for (var key in obj) {
-                    var tempRes = fn(obj[key], key);
-                    if (tempRes) {      // 有值（非undefined）才添加到数组
-                        res.push(tempRes);
-                    };
+                // 判断是否为对象
+                if (njQuery.isObject(obj)) {
+                    for (var key in obj) {
+                        var tempRes = fn(obj[key], key);
+                        if (tempRes) {      // 有值（非undefined）才添加到数组
+                            res.push(tempRes);
+                        };
+                    }
                 }
-            }
             return res;
         }
     });
@@ -246,7 +246,7 @@
                 this.each(function (idx, elm) {
                     elm.parentNode.removeChild(elm);
                 })
-            } else { 
+            } else {
                 var $this = this;
                 // 将选择器所对应的标签的类型与调用者的标签类型做比对
                 // 命中的均删除
@@ -329,8 +329,304 @@
                 $(param).prependTo(this);
             }
             return this;
+        },
+        insertBefore: function (selector) {
+            var $target = $(selector);
+            var $this = this;
+            var res = [];
+            $target.each(function (index, tgtEl) {
+                $this.each(function (idx, srcEl) {
+                    if (index === 0) {
+                        tgtEl.parentNode.insertBefore(srcEl, tgtEl);
+                    } else {
+                        tgtEl.parentNode.insertBefore(srcEl.cloneNode(true), tgtEl);
+                    };
+                    res.push(srcEl);
+                });
+            });
+            return $(res);
+        },
+        insertAfter: function (selector) {
+            var $target = $(selector);
+            var $this = this;
+            var res = [];
+            $.each($target, function (key, value) {
+                var parent = value.parentNode;
+                var nextNode = $.get_nextsibling(value);
+                $this.each(function (k, v) {
+                    if (0 === key) {
+                        parent.insertBefore(v, nextNode);
+                        res.push(v);
+                    } else {
+                        var cloneNode = v.cloneNode(true);
+                        parent.insertBefore(cloneNode, nextNode);
+                        res.push(cloneNode);
+                    }
+                });
+            });
+            return $(res);
+        },
+        replaceAll: function (selector) {
+            var $target = $(selector);
+            var $this = this;
+            var res = [];
+            $.each($target, function (key, value) {
+                var parent = value.parentNode;
+                $this.each(function (k, v) {
+                    if (0 === key) {
+                        $(v).insertBefore(value);
+                        $(value).remove();
+                        res.push(v);
+                    } else {
+                        var cloneNode = v.cloneNode(true);
+                        $(cloneNode).insertBefore(value);
+                        $(value).remove();
+                        res.push(cloneNode);
+                    }
+                });
+            });
+            return $(res);
+        },
+        clone: function (deep) {
+            var res = [];
+            if (deep) {
+                this.each(function (key, elm) {
+                    var cloneNode = elm.cloneNode(true);
+                    njQuery.each(elm.eventsCache, function (name, array) {
+                        njQuery.each(array, function (index, method) {
+                            $(cloneNode).on(name, method);
+                        });
+                    });
+                    res.push(cloneNode);
+                });
+                return $(res);
+            } else { // shallow copy
+                this.each(function (key, elm) {
+                    var cloneNode = elm.cloneNode(true);
+                    res.push(cloneNode);
+                });
+                return $(res);
+            }
         }
-    })
+    });
+    // 筛选相关的方法
+    njQuery.prototype.extend({
+        next: function (selector) {
+            var res = [];
+            if (0 === arguments.length) {
+                this.each(function (key, value) {
+                    var tempElm = njQuery.get_nextsibling(value);
+                    if (null !== tempElm) {
+                        res.push(tempElm);
+                    }
+                });
+            } else {
+                this.each(function (key, value) {
+                    var tempElm = njQuery.get_nextsibling(value);
+                    $(selector).each(function (k, v) {
+                        if (null == v || tempElm !== v) {
+                            return true;
+                        }
+                        res.push(v);
+                    });
+                });
+            }
+            return $(res);
+        },
+        prev: function (selector) {
+            var res = [];
+            if (0 === arguments.length) {
+                this.each(function (key, value) {
+                    var tempElm = njQuery.get_previoussibling(value);
+                    if (null === tempElm) return true;
+                    res.push(tempElm);
+                });
+            } else {
+                this.each(function (key, value) {
+                    var tempElm = njQuery.get_previoussibling(value);
+                    $(selector).each(function (k, v) {
+                        if (null === v || tempElm !== v) return true;
+                        res.push(v);
+                    });
+                });
+            };
+            return $(res);
+        }
+    });
+
+    // 属性相关的操作
+    njQuery.prototype.extend({
+        attr: function (attr, value) {
+            if (njQuery.isString(attr)) {
+                if (arguments.length === 1) {
+                    return this[0].getAttribute(attr);
+                } else {
+                    this.each(function (key, elm) {
+                        elm.setAttribute(attr, value);
+                    });
+                }
+            } else if (njQuery.isObject(attr)) {
+                var $this = this;
+                $.each(attr, function (key, value) {
+                    $this.each(function (k, e) {
+                        e.setAttribute(key, value);
+                    });
+                });
+            }
+            return this;
+        },
+        prop: function (attr, value) {
+            if (njQuery.isString(attr)) {
+                if (arguments.length === 1) {
+                    return this[0][attr];
+                } else {
+                    this.each(function (key, elm) {
+                        elm[attr] = value;
+                    });
+                }
+            } else if (njQuery.isObject(attr)) {
+                $.each(attr, function (key, value) {
+                    $this.each(function (k, e) {
+                        e[key] = value;
+                    });
+                });
+            }
+            return this;
+        },
+        css: function (attr, value) {
+            if (njQuery.isString(attr)) {
+                if (arguments.length === 1) {
+                    return njQuery.getStyle(this[0], attr);
+                } else {
+                    this.each(function (key, elm) {
+                        elm.style[attr] = value;
+                    });
+                }
+            } else if (njQuery.isObject(attr)) {
+                var $this = this;
+                $.each(attr, function (key, value) {
+                    $this.each(function (key, elm) {
+                        elm.style[key] = value;
+                    });
+                });
+            }
+            return this; 
+        },
+        val: function (content) {
+            if (arguments.length === 0) {
+                return this[0].value;
+            } else {
+                this.each(function (key, elm) {
+                    elm.value = content;
+                });
+                return this;
+            }
+        },
+        hasClass: function (name) {
+            var flag = false;
+            if (arguments.length === 0) {
+                return flag;
+            } else {
+                this.each(function (key, elm) {
+                    var className = ' ' + elm.className + ' ';
+                    name = ' ' + name + ' ';
+                    if (className.indexOf(name) != -1) {
+                        flag = true;
+                        return false;
+                    }
+                });
+                return flag;
+            }
+        },
+        addClass: function (name) {
+            if (arguments.length === 0) return this;
+            var names = name.split(' ');
+            this.each(function (key, elm) {
+                $.each(names, function (k, value) {
+                    if(!$(elm).hasClass(value)) {
+                        elm.className = elm.className + ' ' + value;
+                    }
+                });
+            });
+            return this;
+        },
+        removeClass: function (name) {
+            if (arguments.length === 0) {
+                this.each(function (key, elm) {
+                    elm.className = '';
+                });
+            } else {
+                var names = name.split(' ');
+                this.each(function (key, elm) {
+                    if ($(elm).hasClass(k, value)) {
+                        elm.className = (' ' + elm.className + ' ').replace(' ' + value + ' ', '');
+                    }
+                });
+            };
+            return this;
+        },
+        toggleClass: function (name) {
+            if (arguments.length === 0) {
+                this.removeClass();
+            } else {
+                var names = name.split(' ');
+                this.each(function (key, elm) {
+                    $.each(names, function (k, value) {
+                        if($(elm).hasClass(value)) {
+                            $(elm).removeClass(value);
+                        } else {
+                            $(elm).addClass(value);
+                        }
+                    });
+                });
+            }
+            return this;
+        }
+    });
+
+    // 事件操作相关的方法
+    njQuery.prototype.extend({
+
+        on: function(name, callBack) {
+            this.each(function (key, elm) {
+                if (!elm.eventsCache) {
+                    elm.eventsCache = {};
+                }
+                if (!elm.eventsCache[name]) {
+                    elm.eventsCache[name] = [];
+                    elm.eventsCache[name].push(callBack);
+                    njQuery.addEvent(elm, name, function () {
+                        njQuery.each(elm.eventsCache[name], function (k, method) {
+                            method.call(elm);
+                        });
+                    });
+                } else {
+                    elm.eventsCache[name].push(callBack);
+                }
+            });
+            return this;
+        },
+        off: function (name, callBack) {
+            if (arguments.length === 0) {
+                this.each(function (key, elm) {
+                    elm.eventsCache = {};
+                });
+            } else if (arguments.length === 1) {
+                this.each(function (key, elm) {
+                    elm.eventsCache[name] = [];
+                });
+            } else if (arguments.length === 2) {
+                this.each(function (key, elm) {
+                    njQuery.each(elm.eventsCache[name], function (index, method) {
+                        if (method === callBack) {
+                            elm.eventsCache[name].splice(index, 1);
+                        }
+                    });
+                });
+            }
+            return this;
+        }
+    });
 
     njQuery.prototype.init.prototype = njQuery.prototype;   // 把 init 初始化方法的原型指向 njQuery 对象的原型，使得 init 可以顺利访问 njQuery 的方法和属性、方便做初始化
     window.njQuery = window.$ = njQuery;    // 向外部暴露 njQuery 对象、作为接口函数，以方便外部调用

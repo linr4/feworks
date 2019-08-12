@@ -12,7 +12,11 @@ Web development learning notes and case study
 
 ---
 
-###### 20190810 - Day 120
+###### 20190812 - Day 122
+
+- [学习 jQuery 原理](20190808-jquery-theory) - DOM 操作相关的方法 (+2h = 268.5 of 600)
+
+###### 20190811 - Day 121
 
 - [学习 jQuery 原理](20190808-jquery-theory) - DOM 操作相关的方法 (+3.5h = 266.5 of 600)
 
