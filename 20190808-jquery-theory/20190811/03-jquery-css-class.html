@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="box abc aabbcc cc dd"></div>
+    <script>
+        var boxEl = document.getElementsByTagName('div')[0];
+        console.log(hasClass(boxEl, '1'));
+
+        function hasClass(elm, cls) {
+            if ('string' !== typeof cls) {return false};
+
+            cls = ' ' + cls + ' ';
+            if (0 === cls.trim().length) {return false};
+
+            elmCls = ' ' + elm.className + ' ';
+            return elmCls.indexOf(cls) !== -1;
+        }
+    </script>
+</body>
+</html>
