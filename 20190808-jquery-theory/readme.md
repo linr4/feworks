@@ -457,3 +457,33 @@
 ### jQuery DOM 操作
 
 * `empty` 方法，清空指定元素中的所有内容；
+
+
+
+### jQuery Ajax
+
+* 非标准的 JSON 数据如何解析？
+
+  ```js
+  var strNonStdJson = '{error: 0, id: 1, name: "lj", age: 33}'; // 非标准、键值对没有引号
+  var strStdJson = '{"error": "0", "id": "1", "name": "lj", "age": "33"}';
+  
+  // 标准 JSON 可以直接用 JSON.parse() 解析：
+  console.log(JSON.parse(strStdJson));  // {error: "0", id: "1", name: "lj", age: "33"}
+  
+  // 非标准 JSON 使用 JSON.parse() 方法会报错：
+  console.log(JSON.parse(strNonStdJson));   // Uncaught SyntaxError: Unexpected token e in JSON at position 1 at JSON.parse (<anonymous>)
+  
+  // 可以使用 eval() 方法来解析：
+  console.log(eval('(' + strNonStdJson + ')'));// {error: 0, id: 1, name: "lj", age: 33}
+  
+  // eval() 也可以解析标准 JSON 数据：
+  console.log(eval('('+strStdJson+')')); // {error: "0", id: "1", name: "lj", age: "33"}
+  
+  // 使用 eval() 无需再用 JSON.parse()：
+  console.log(JSON.parse(eval(strNonStdJson)));  // Uncaught SyntaxError: Unexpected token ':'
+  
+  // 补充：老版本 IE 没有 JSON 内置对象，可以引入 json2.js 工具库来解决
+  ```
+
+  

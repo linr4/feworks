@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie</title>
+</head>
+<body>
+    <script>
+    
+    // alert(document.cookie);
+    // var date = new Date();
+    // date.setDate(date.getDate() - 1);
+    // document.cookie = "age=33;expires=" + date.toGMTString() + ";";
+    // alert(document.cookie);
+
+    // document.cookie = "name=lnj;";
+    // document.cookie = "age=33;";
+    // alert(document.cookie);
+    // document.cookie = "name=lnj;age=33;gender=male;";
+
+    var date = new Date();
+    date.setDate(date.getDate() - 1);
+    var exp = date.toGMTString();
+    document.cookie = "name=Ray;expires="+ exp +"domain=127.0.0.1;";
+    // document.cookie = "name=Ray;path=/;expires="+ exp +"domain=127.0.0.1;";
+    document.cookie = "Age=88;";
+
+    console.log(document.cookie);
+
+    </script>
+</body>
+</html>

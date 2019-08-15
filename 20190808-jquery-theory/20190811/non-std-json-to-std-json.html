@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        var strNonStdJson = '{error: 0, id: 1, name: "lj", age: 33}';
+        var strStdJson = '{"error": "0", "id": "1", "name": "lj", "age": "33"}';
+
+        console.log(eval('('+strStdJson+')'));  // {error: "0", id: "1", name: "lj", age: "33"}
+        console.log(JSON.parse(strStdJson));    // {error: "0", id: "1", name: "lj", age: "33"}
+        console.log(eval('(' + strNonStdJson + ')')); // {error: 0, id: 1, name: "lj", age: 33}
+        // console.log(JSON.parse(eval(strNonStdJson)));  // Uncaught SyntaxError: Unexpected token ':'
+        // console.log(JSON.parse(strNonStdJson));
+        // Uncaught SyntaxError: Unexpected token e in JSON at position 1 at JSON.parse (<anonymous>)
+    </script>
+</body>
+</html>

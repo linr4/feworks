@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie 操作 - 封装函数</title>
+</head>
+<body>
+<script>
+
+    addCookie('Name', 'ego');
+
+function addCookie (key, value, path, expires, domain) {
+    var pathname = window.location.pathname;
+    var docPath = pathname.slice(0, pathname.lastIndexOf('/'));
+    var docName = pathname.slice(pathname.lastIndexOf('/')+1);
+    var cookieStr = '';
+    path = path || docPath;
+    domain = domain || document.domain;
+    if (!expires) { // 没有传入过期天数
+        cookieStr = key+'='+value+';path='+path+';domain='+domain+';';
+    } else {
+        var date = new Date();
+        date.setDate(date.getDate() + expires);
+        date = date.toGMTString();
+        cookieStr = key+'='+value+';path='+path+';domain='+domain+';expires='+date+';';
+    }
+    console.log(cookieStr);
+    document.cookie = cookieStr;
+}
+
+function getCookie(key) {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookieItem = cookies[i].split('=');
+        if ( cookieItem[0].trim() === key) {
+            return cookieItem[1].trim();
+        }
+    }
+}
+
+function delCookie(key, path) {
+    addCookie(key, getCookie(key),path, -1);
+}
+
+delCookie('Name');
+console.log(getCookie('meNaaame'));
+</script>
+</body>
+</html>

@@ -12,6 +12,15 @@ Web development learning notes and case study
 
 ---
 
+###### 20190814 - Day 124
+
+- [学习 jQuery 原理](20190808-jquery-theory) - AJAX (+2h = 274.5 of 600)
+- 练习 jQuery Ajax 改写现有案例 (+3h = 277.5 of 600)
+
+###### 20190813 - Day 123
+
+- [学习 jQuery 原理](20190808-jquery-theory) - 事件操作相关的方法，Ajax (+4h = 272.5 of 600)
+
 ###### 20190812 - Day 122
 
 - [学习 jQuery 原理](20190808-jquery-theory) - DOM 操作相关的方法 (+2h = 268.5 of 600)
