@@ -33,6 +33,8 @@
 
   `document.cookie = "name=John;path=/;domain=168.com;";`
 
+  
+
 ```js
 var date = new Date();
 date.setDate(date.getDate() - 1);
