@@ -14,6 +14,11 @@ Web development learning notes and case study
 
 ###### 20190814 - Day 124
 
+- 练习 cookie 的操作 (+2h = 279.5 of 600)
+- 学习 Promise / fetch / axios (+3.5h = 283 of 600)
+
+###### 20190814 - Day 124
+
 - [学习 jQuery 原理](20190808-jquery-theory) - AJAX (+2h = 274.5 of 600)
 - 练习 jQuery Ajax 改写现有案例 (+3h = 277.5 of 600)
 
