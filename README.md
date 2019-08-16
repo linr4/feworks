@@ -14,7 +14,7 @@ Web development learning notes and case study
 
 ###### 20190814 - Day 125
 
-- 练习 cookie 的操作 (+2h = 279.5 of 600)
+- 练习 cookie 的操作，以及 sessionStorage / localStorage (+2h = 279.5 of 600)
 - 学习 Promise / fetch / axios (+3.5h = 283 of 600)
 
 ###### 20190814 - Day 124
