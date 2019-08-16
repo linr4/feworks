@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>symbol</title>
+</head>
+<body>
+    <script>
+        let name = Symbol('name');
+        let age = Symbol('age');
+
+        let obj = {
+            [name]: 'rlin',
+            [age]: 333
+        };
+
+        obj.name = 'ray';
+
+        console.log(obj[name]); // rlin
+        console.log(name);      // Symbol(name)
+        console.log(obj.name);  // ray
+    </script>
+</body>
+</html>
