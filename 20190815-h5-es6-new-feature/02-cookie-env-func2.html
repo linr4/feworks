@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title> COOKIE TEST </title>
+	
+</head>
+<body>
+
+<script>
+	 // setCookie("Age",666, 20, '/');
+	
+	function setCookie(key, value, validDay, path, domain) {
+		var pathName = window.location.pathname;
+		var docPath = pathName.slice(0, pathName.lastIndexOf('/'));
+		var docName = pathName.slice(pathName.lastIndexOf('/') + 1);
+		
+		path = path || docPath;
+				
+		var cookieStr = key + '=' + value + ';path=' + path;
+		
+		if(domain) {
+			cookieStr += ';domain=' + domain;			
+		}
+		
+		if (validDay) {
+			var date = new Date();
+			date.setDate(date.getDate() + validDay);
+			date = date.toGMTString();
+			cookieStr += ';expires=' + date;
+			console.log(date);
+		}
+		
+		cookieStr += ';';
+		
+		document.cookie = cookieStr;
+		
+		console.log(cookieStr);
+	}
+	
+	console.log(getCookie('Age'));
+	
+	function getCookie(key) {
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = cookies[i].split('=');
+			if (cookie[0].trim() === key.trim()) {
+				return cookie[1].trim();
+			}
+		}
+	}
+	
+	removeCookie('Age');
+	
+	function removeCookie(key) {
+		var value = getCookie(key);
+		if (value) {
+			var path = '/';
+			setCookie(key, value, -1, path);
+		}
+	}
+	
+	
+</script>
+</body>
+</html>

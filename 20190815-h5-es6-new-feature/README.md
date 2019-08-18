@@ -1,4 +1,8 @@
+# 网页数据存储方案
 
+
+
+### Cookie
 
 ###### cookie 基本概念
 
@@ -45,4 +49,20 @@ document.cookie = "age=888;path=/;expires="+ exp +"domain=127.0.0.1;";
 
 console.log(document.cookie);
 ```
+
+
+
+### sessionStorage and LocalStorage
+
+* 作用：与 cookie 同样用于存储网页数据
+* 目的：缓存数据、优化性能
+* 区别：
+  * 生命周期：
+    * cookie：浏览器关闭就失效，可设置过期时间
+    * sessionStorage：仅当前会话窗口有效，窗口关闭即失效，无法设置过期时间；
+    * localStorage：永久有效，除非被清除
+  * 存储容量：
+    * cookie：有大小（~4KB）和个数（20~50）的限制；
+    * sessionStorage：有大小（5MB左右）限制；
+    * localStorage：有大小（5MB左右）限制；
 

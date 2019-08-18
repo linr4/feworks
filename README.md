@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190818 - Day 127
+
+- 练习 cookie & localStorage/sessionStorage (+1.5h = 286 of 600)
+
 ###### 20190816 - Day 126
 
 - 学习 symbol / iterator / generator / async-await (+1.5h = 284.5 of 600)
