@@ -55,14 +55,55 @@ console.log(document.cookie);
 ### sessionStorage and LocalStorage
 
 * 作用：与 cookie 同样用于存储网页数据
+
 * 目的：缓存数据、优化性能
+
 * 区别：
+
   * 生命周期：
     * cookie：浏览器关闭就失效，可设置过期时间
     * sessionStorage：仅当前会话窗口有效，窗口关闭即失效，无法设置过期时间；
     * localStorage：永久有效，除非被清除
   * 存储容量：
     * cookie：有大小（~4KB）和个数（20~50）的限制；
-    * sessionStorage：有大小（5MB左右）限制；
-    * localStorage：有大小（5MB左右）限制；
+    * sessionStorage & localStorage：有大小（5MB左右）限制；
+    * 大小限制参考： dev-test.nemikor.com/web-storage/support-test/
+  * 网络请求：
+    * cookie：每次请求都包含在 http header 中，若保存了过多数据会影响性能；
+    * sessionStorage & localStorage：仅在浏览器中保存，不参与服务器通讯；
+  * 应用场景：
+    * cookie：判断用户登录状态；
+    * sessionStorage：表单数据；
+    * localStorage：购物车；
+  * 数据共享：
+    * cookie：协议、端口、路径一致方可访问；
+    * sessionStorage：同一窗口（页面）下，数据可共享；
+    * localStorage：同一浏览器、多窗口之间可以共享本地存储的数据；
 
+* 注意点：无论采用何种存储方式，切勿将敏感数据直接存储于本地；
+
+* 常用方法：
+
+  * 写入：.setItem(key, value) - `window.sessionStorage.setItem("myName", "Ray");`
+  * 读取：.getItem(key);
+  * 删除：.removeItem(key);
+  * 清空：.clear();
+
+  ```js
+let myProfile = { 'name': 'Raymond', 'gender': 'male', 'age': 40 }; 
+  $(function () {
+      window.sessionStorage.setItem('Name', 'Raymond');         
+      window.sessionStorage.setItem('Gender', 'Male');                       
+      window.sessionStorage.setItem('myProfile', JSON.stringify(myProfile)); 
+  });
+  
+  $('#set').on('click', function () { let val = $('#user').val();
+  	window.sessionStorage.setItem('user', val); }); 
+    $('#get').on('click', function () { 	          	
+     	   $('span').text(window.sessionStorage.getItem('user')); }); 
+      $('#del').on('click', function () { 	
+         window.sessionStorage.removeItem('user'); 
+   // 或者用 window.sessionStorage.clear() 删除全部 });
+  ```
+  
+  
