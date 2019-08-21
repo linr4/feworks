@@ -12,6 +12,14 @@ Web development learning notes and case study
 
 ---
 
+###### 20190821 - Day 129
+
+- 复习 CSS (+.5h = 289 of 600)
+
+###### 20190819 - Day 128
+
+- 练习用 Puppeteer 做自动化抓数据 (+2.5h = 288.5 of 600)
+
 ###### 20190818 - Day 127
 
 - 练习 cookie & localStorage/sessionStorage (+1.5h = 286 of 600)
