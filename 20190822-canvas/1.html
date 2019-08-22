@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas {
+            margin: 100px auto;
+            background-color: turquoise;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas></canvas>
+    <script>
+        let oCanvas = document.querySelector('canvas');
+        let oCtx = oCanvas.getContext('2d');    // 从 canvas 中获取绘图工具；
+
+        // 通过绘图工具在 Canvas 上绘制图形
+        oCtx.moveTo(50, 50);    // 设置路径起点
+        oCtx.lineTo(200, 50);   // 设置路径终点
+        oCtx.stroke();          // 连接起点和终点
+
+    </script>
+</body>
+</html>
