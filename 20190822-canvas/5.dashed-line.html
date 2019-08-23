@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas {
+            display: block;
+            background-color: turquoise;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="500" width="500"></canvas>        
+</body>
+
+<script>
+    let oCtx = document.querySelector('canvas').getContext('2d');
+    oCtx.moveTo(100, 100);
+    oCtx.lineTo(400, 100);
+    oCtx.lineWidth = 20;
+    oCtx.strokeStyle = 'yellow';
+    // oCtx.lineCap = 'round';
+    oCtx.setLineDash([5, 10, 15]);
+    console.log(oCtx.getLineDash()); // (6) [5, 10, 15, 5, 10, 15]
+    oCtx.lineDashOffset = 50;
+    oCtx.stroke();
+</script>
+</html>

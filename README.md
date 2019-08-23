@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190823 - Day 131
+
+- 学习 Canvas (+1h = 291 of 600)
+
 ###### 20190822 - Day 130
 
 - 学习 Canvas (+0.5h = 290 of 600)

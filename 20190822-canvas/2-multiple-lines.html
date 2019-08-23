@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            background-color: turquoise;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="1024px" height="1000px"></canvas>
+    <script>
+        let canvasEl = document.querySelector('canvas');
+        let ctx = canvasEl.getContext('2d');
+
+        ctx.lineWidth = 50; // 线条纵向宽度（就是高度）
+        ctx.strokeStyle = "yellow"; // 线条颜色
+        ctx.lineCap = "round"; // 线条两端的样式，默认 butt，还可取值 square
+        
+        ctx.moveTo(50, 50);
+        ctx.lineTo(200, 50);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineWidth = 20;
+        ctx.lineCap = "square";
+        ctx.strokeStyle = "red";
+        ctx.moveTo(100, 50);
+        ctx.lineTo(300, 50);
+        ctx.stroke();
+        
+
+    </script>
+</body>
+</html>

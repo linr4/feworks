@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas {
+            margin: 0;
+            padding: 0;
+            background-color: turquoise;
+        }
+
+    </style>
+</head>
+
+<body>
+    <canvas height="500" width="500"></canvas>
+    <script>
+        let oCtx = document.querySelector('canvas').getContext('2d');
+        oCtx.moveTo(100, 100);
+        oCtx.lineTo(300, 100);
+        oCtx.lineTo(300, 300);
+        oCtx.lineTo(100, 300);
+        oCtx.closePath();
+
+        oCtx.moveTo(250, 150);
+        oCtx.lineTo(150, 150);
+        oCtx.lineTo(150, 250);
+        oCtx.lineTo(250, 250);
+        // oCtx.stroke();
+        oCtx.fillStyle = 'yellow';
+        oCtx.fill();
+    </script>
+</body>
+</html>
