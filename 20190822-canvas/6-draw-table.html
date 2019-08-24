@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background-color: turquoise;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="400" width="500"></canvas>    
+
+    <script>
+        let canvasEl = document.querySelector('canvas');
+        let oCtx = canvasEl.getContext('2d');
+
+        // 获取 canvas 宽高的两种方式：
+        console.log(canvasEl.offsetWidth, canvasEl.offsetHeight);
+        console.log(oCtx.canvas.width, oCtx.canvas.height);     // 推荐
+
+        let gridSize = 50;  // 单元格大小
+        let canvasWidth = oCtx.canvas.width;
+        let canvasHeight = oCtx.canvas.height;
+        let row = Math.floor(canvasHeight / gridSize); // 行数
+        let col = Math.floor(canvasWidth / gridSize);  // 列数
+
+        oCtx.strokeStyle = 'yellow';
+
+        // 绘制横线
+        for (let i = 0; i < row; i++) {
+            oCtx.beginPath();
+            oCtx.moveTo(0, gridSize * i - 0.5);
+            oCtx.lineTo(canvasWidth, gridSize * i -0.5);
+            oCtx.stroke();
+        }
+
+        // 绘制竖线
+        for (let i = 0; i < col; i++) {
+            oCtx.beginPath();
+            oCtx.moveTo(i * gridSize - 0.5, 0);
+            oCtx.lineTo(i * gridSize - 0.5, canvasWidth);
+            oCtx.stroke();
+        }
+
+        // 坐标原点位置
+        let originX = gridSize;
+        let originY = canvasHeight - gridSize;
+        // X 轴终点
+        let endX = canvasWidth -gridSize;
+        oCtx.beginPath();
+        oCtx.strokeStyle = 'blue';
+        oCtx.moveTo(originX, originY);
+        oCtx.lineTo(endX, originY);
+        // 箭头
+        oCtx.lineTo(endX - 10, originY + 5);
+        oCtx.lineTo(endX - 10, originY - 5);
+        oCtx.lineTo(endX, originY);
+        oCtx.fill();
+        oCtx.stroke();
+
+        // Y 轴终点
+        let endY = gridSize;
+        oCtx.beginPath();
+        oCtx.moveTo(originX, originY);
+        oCtx.lineTo(originX, endY);
+        // 箭头
+        oCtx.lineTo(originX - 5, endY + 10);
+        oCtx.lineTo(originX + 5, endY + 10);
+        oCtx.lineTo(originX, endY);
+        oCtx.stroke();
+        oCtx.fill();
+
+        // 画点
+        let dotLoc = {x: 100, y: 100}
+        let dotSize = 20;
+        oCtx.beginPath();
+        oCtx.fillStyle = 'orangered';
+        oCtx.moveTo(dotLoc.x - dotSize / 2, dotLoc.y - dotSize / 2);
+        oCtx.lineTo(dotLoc.x + dotSize - dotSize / 2, dotLoc.y - dotSize / 2);
+        oCtx.lineTo(dotLoc.x + dotSize - dotSize / 2, dotLoc.y + dotSize - dotSize / 2);
+        oCtx.lineTo(dotLoc.x - dotSize / 2, dotLoc.y + dotSize - dotSize / 2);
+        oCtx.closePath();
+        oCtx.fill();
+
+        
+    </script>
+</body>
+</html>

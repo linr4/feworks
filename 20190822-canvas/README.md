@@ -119,3 +119,118 @@ oCtx.linDashOffset = 50;	// 正值往右移动，负值往左移动（移出左�
 oCtx.stroke();
 ```
 
+###### 绘制表格、坐标线
+
+```js
+class LineChart {
+    constructor(width = 300, height = 150) {
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = width;
+        this.canvas.height = height;
+        document.body.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+    }
+    drawGrid(gridSize = 20) {
+        let oCtx = this.ctx;
+        let canvasWidth = oCtx.canvas.width;
+        let canvasHeight = oCtx.canvas.height;
+        let row = Math.floor(canvasHeight / gridSize);
+        let col = Math.floor(canvasWidth / gridSize);
+        // 绘制横线
+        for (let i = 0; i < row; i++) {
+            oCtx.beginPath();
+            oCtx.moveTo(0, gridSize * i - 0.5);
+            oCtx.lineTo(canvasWidth, gridSize * i - 0.5);
+            oCtx.stroke();
+        }
+
+        // 绘制竖线
+        for (let i = 0; i < col; i++) {
+            oCtx.beginPath();
+            oCtx.moveTo(i * gridSize - 0.5, 0);
+            oCtx.lineTo(i * gridSize - 0.5, canvasWidth);
+            oCtx.stroke();
+        }
+    }
+    drawCoor(gridSize = 20) {
+        let oCtx = this.ctx;
+        let canvasWidth = oCtx.canvas.width;
+        let canvasHeight = oCtx.canvas.height;
+        // 坐标原点位置
+        let originX = gridSize;
+        let originY = canvasHeight - gridSize;
+        // X 轴终点
+        let endX = canvasWidth - gridSize;
+        oCtx.beginPath();
+        oCtx.strokeStyle = 'blue';
+        oCtx.moveTo(originX, originY);
+        oCtx.lineTo(endX, originY);
+        // 箭头
+        oCtx.lineTo(endX - 10, originY + 5);
+        oCtx.lineTo(endX - 10, originY - 5);
+        oCtx.lineTo(endX, originY);
+        oCtx.fill();
+        oCtx.stroke();
+
+        // Y 轴终点
+        let endY = gridSize;
+        oCtx.beginPath();
+        oCtx.moveTo(originX, originY);
+        oCtx.lineTo(originX, endY);
+        // 箭头
+        oCtx.lineTo(originX - 5, endY + 10);
+        oCtx.lineTo(originX + 5, endY + 10);
+        oCtx.lineTo(originX, endY);
+        oCtx.stroke();
+        oCtx.fill();
+    }
+}
+
+let lineChart = new LineChart(500, 400);
+lineChart.drawGrid();
+lineChart.drawCoor();
+```
+
+###### 绘制矩形
+
+```js
+ctx.fillStyle = 'orangered';
+ctx.strokeStyle = 'yellow';
+
+// 绘制矩形方式一：分别画四条边线；
+ctx.moveTo(100, 100);
+ctx.lineTo(200, 100);
+ctx.lineTo(200, 200);
+ctx.lineTo(100, 200);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+// 绘制矩形方式二：设置边线高度；
+ctx.beginPath();
+ctx.moveTo(300, 100);
+ctx.lineTo(300, 200);
+ctx.lineWidth = 100;
+ctx.stroke();
+
+// 绘制矩形方式三：使用 rect(x, y, w, h) 方法；
+ctx.beginPath();
+ctx.lineWidth = 1;
+ctx.rect(400, 100, 100, 100);
+ctx.fill();
+ctx.stroke();
+
+// 绘制矩形方式四：使用 strokeRect(x, y, w, h) 方法；
+ctx.strokeRect(100, 300, 100, 100);
+ctx.strokeStyle = 'green';
+ctx.strokeRect(125, 325, 50, 50); // 会自动 beginPath()，因此设置颜色不影响以前的
+
+// 绘制矩形方式五：使用 fillRect(x, y, w, h) 方法；
+ctx.fillRect(250, 300, 100, 100);
+ctx.fillStyle = 'yellow';
+ctx.fillRect(275, 325, 50, 50);
+
+// 以清除的方式绘制矩形（清空画布指定区域）；
+ctx.clearRect(0, 0, 300, 300);
+```
+

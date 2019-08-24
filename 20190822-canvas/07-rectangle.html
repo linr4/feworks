@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas {
+            display: block;
+            border: 1px solid #000;
+            background: turquoise;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="800" width="800"></canvas>    
+    <script>
+        let canvasEl = document.querySelector('canvas');
+        let ctx = canvasEl.getContext('2d');
+
+        ctx.fillStyle = 'orangered';
+        ctx.strokeStyle = 'yellow';
+
+        // 绘制矩形方式一：分别画四条边线；
+        ctx.moveTo(100, 100);
+        ctx.lineTo(200, 100);
+        ctx.lineTo(200, 200);
+        ctx.lineTo(100, 200);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // 绘制矩形方式二：设置边线高度；
+        ctx.beginPath();
+        ctx.moveTo(300, 100);
+        ctx.lineTo(300, 200);
+        ctx.lineWidth = 100;
+        ctx.stroke();
+
+        // 绘制矩形方式三：使用 rect(x, y, w, h) 方法；
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.rect(400, 100, 100, 100);
+        ctx.fill();
+        ctx.stroke();
+
+        // 绘制矩形方式四：使用 strokeRect(x, y, w, h) 方法；
+        ctx.strokeRect(100, 300, 100, 100);
+        ctx.strokeStyle = 'green';
+        ctx.strokeRect(125, 325, 50, 50); // 会自动 beginPath()，因此设置颜色不影响以前的
+
+        // 绘制矩形方式五：使用 fillRect(x, y, w, h) 方法；
+        ctx.fillRect(250, 300, 100, 100);
+        ctx.fillStyle = 'yellow';
+        ctx.fillRect(275, 325, 50, 50);
+
+        // 以清除的方式绘制矩形
+        ctx.clearRect(0, 0, 300, 300);
+
+    </script>
+</body>
+</html>
