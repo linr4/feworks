@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        canvas {
+            display: block;
+            background-color: red;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="500" width="600"></canvas>
+    <script>
+        let canvasEl = document.querySelector('canvas');
+        let ctx = canvasEl.getContext('2d');
+
+        // https://www.canvasapi.cn/
+        //context.arc(x, y, radius, startAngle, endAngle [, anticlockwise]);
+        // x, y 确定圆心
+        // radius 半径
+        // startAngle 开始弧度
+        // endAngle 结束弧度
+        // anticlockwise: true 逆时针，false 顺时针（默认）
+
+        ctx.arc(100, 100, 100, 0, Math.PI);
+        ctx.moveTo(200, 200);
+        ctx.arc(200, 200, 100, 0, Math.PI, true);
+        ctx.moveTo(300, 300);
+        ctx.arc(300, 300, 100, 0, Math.PI * 2, true);
+
+        ctx.stroke();
+
+        
+    </script>
+</body>
+</html>

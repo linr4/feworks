@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        canvas {
+            display: block;
+            background-color: red;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="500" width="600"></canvas>
+    <script>
+        let canvasEl = document.querySelector('canvas');
+        let ctx = canvasEl.getContext('2d');
+
+        ctx.moveTo(100, 100);
+        ctx.arc(100, 100, 100, 0, Math.PI / 2);
+        ctx.closePath();
+        ctx.fillStyle = 'yellow';
+        ctx.fill();
+
+        
+    </script>
+</body>
+</html>

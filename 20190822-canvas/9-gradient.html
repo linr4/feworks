@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        canvas {
+            display: block;
+            background-color: red;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="500" width="600"></canvas>
+    <script>
+        let canvasEl = document.querySelector('canvas');
+        let ctx = canvasEl.getContext('2d');
+
+        // 创建渐变方案
+        // x0, y0 / x1, y1 确定渐变方向和范围
+        let lg = ctx.createLinearGradient(100, 100, 300, 300);
+        // 0~1 百分比，颜色
+        lg.addColorStop(0, "pink");
+        lg.addColorStop(.5, "yellow")
+        lg.addColorStop(1, "turquoise");
+
+
+        // ctx.createRadialGradient();
+
+        ctx.fillStyle = lg;
+        ctx.fillRect(100, 100, 200, 200);
+    </script>
+</body>
+</html>

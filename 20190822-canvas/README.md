@@ -234,3 +234,61 @@ ctx.fillRect(275, 325, 50, 50);
 ctx.clearRect(0, 0, 300, 300);
 ```
 
+
+
+###### 渐变色
+
+```js
+let canvasEl = document.querySelector('canvas');
+let ctx = canvasEl.getContext('2d');
+
+// 创建线性渐变方案
+// 四个餐宿 x0, y0, x1, y1 用于确定渐变方向和范围（矩形其中两个角的坐标）
+let lg = ctx.createLinearGradient(100, 100, 300, 300);
+// let lg = ctx.createRadialGradient(100, 100, 300, 300);
+
+// 添加渐变范围和颜色：第一个参数 0~1 为百分比
+lg.addColorStop(0, "pink");
+lg.addColorStop(.5, "yellow")
+lg.addColorStop(1, "turquoise");
+
+
+// ctx.createRadialGradient(100, 100, 300, 300);
+
+ctx.fillStyle = lg;
+ctx.fillRect(100, 100, 200, 200);
+```
+
+
+
+###### 绘制圆弧
+
+```js
+// https://www.canvasapi.cn/
+//context.arc(x, y, radius, startAngle, endAngle [, anticlockwise]);
+// x, y 确定圆心
+// radius 半径
+// startAngle 开始弧度
+// endAngle 结束弧度
+// anticlockwise: true 逆时针，false 顺时针（默认）
+
+ctx.arc(100, 100, 100, 0, Math.PI);
+ctx.moveTo(200, 200);
+ctx.arc(200, 200, 100, 0, Math.PI, true);
+ctx.moveTo(300, 300);
+ctx.arc(300, 300, 100, 0, Math.PI * 2, true);
+
+ctx.stroke();
+```
+
+
+
+###### 绘制扇形
+
+```js
+ctx.moveTo(100, 100);
+ctx.arc(100, 100, 100, 0, Math.PI / 2);
+ctx.closePath();
+ctx.fill();
+```
+
