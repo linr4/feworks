@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas {
+            display: block;
+            background-color: turquoise;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="500" width="600"></canvas>
+    <script>
+        let oCanvas = document.querySelector('canvas');
+        let ctx = oCanvas.getContext('2d');
+        let x = ctx.canvas.width / 2;
+        let y = ctx.canvas.height / 2;
+
+        
+
+        let startAngle = 0;
+
+        for (let i = 1; i <= 4; i++) {
+
+            let endAngle = Math.PI / 2 * i;            
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+
+            ctx.arc(x, y, 100, startAngle, endAngle);
+            ctx.fillStyle = randomColor();
+            ctx.fill();
+            startAngle = endAngle;
+        }
+
+        function randomColor () {
+            let r = Math.floor(Math.random() * 256);
+            let g = Math.floor(Math.random() * 256);
+            let b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+    </script>
+</body>
+
+
+</html>
