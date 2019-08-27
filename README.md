@@ -12,9 +12,9 @@ Web development learning notes and case study
 
 ---
 
-###### 20190826 - Day 134
+###### 20190827 - Day 135
 
-- 学习 Canvas (+.5h = 293 of 600)
+- 学习 Canvas / SVG (+.5h = 293.5 of 600)
 
 ###### 20190825 - Day 133
 
