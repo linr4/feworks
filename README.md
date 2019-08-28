@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190828 - Day 136
+
+- 复习 CSS - 属性、选择器 (+1h = 294.5 of 600)
+
 ###### 20190827 - Day 135
 
 - 学习 Canvas / SVG (+.5h = 293.5 of 600)
