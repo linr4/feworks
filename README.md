@@ -12,6 +12,8 @@ Web development learning notes and case study
 
 ---
 
+20190901 - Day 138
+
 ###### 20190829 - Day 137
 
 - 复习 CSS - 选择器、优先级、显示模式 (+3h = 297.5 of 600)
