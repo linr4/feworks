@@ -244,4 +244,28 @@
 
 
 
-next 93
+### background
+
+* `background-color: rgb() / rgba() / #xyz / red;`
+* `background-image: url()`
+  * 本地或网络图片均可；
+  * 图片和其它代码分开发送请求；
+  * 图片若小于父元素，则默认水平填充；
+* `background-repeat: repeat / no-repeat / repeat-x / repeat-y`
+  * 控制背景图片平铺方式
+  * 默认 `repeat`
+  * 应用场景：有规则的小图做背景平铺，就不用整张大图了，可以加快网页加载速度；
+
+* `background-position: x y;`
+  * 控制背景图位置；
+  * 取值可为方位名词（left center right / top center bottom）或像素；
+  * 默认 `background-position: left top;`
+* `background-attachment: scroll / fixed;` 
+  * 背景图片与滚动条的关联方式，确定背景图是否随页面滚动；
+* 简写格式：`background: color url() repeat attachment position;`
+  * 任何一个属性都可省略，只保留一个；
+
+* `background` vs. `<img>`
+  * 背景图片不占用位置，而 img 会占用位置；
+  * 背景图片有定位属性，方便定位；img 无定位属性，定位不方便；
+  * img 语义强于背景图片，若图片需被搜索引擎收率，推荐用 img；

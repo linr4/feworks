@@ -7,7 +7,7 @@
         
         body {
             text-align: center;
-            font-size: 14px;
+            font-size: 16px;
         }
         div {
             box-sizing: border-box;
@@ -24,6 +24,28 @@
             width: 70px;
             height: 38px;
             line-height: 38px;
+        }
+        .content {
+            height: 50px;
+        }
+        .content>a {
+            display: inline-block;
+            width: 40px;
+        }
+        .searchbox {
+            height: 70px;
+        }
+        .links {
+            height: 100px;
+        }
+        .links>a {
+            display: inline-block;
+            width: auto;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .footer>div {
+            height: 50px;
         }
     </style>
 </head>
@@ -44,16 +66,38 @@
         <a href="">视 频</a>
         <a href="">地 图</a>
     </div>
-    <div>
+    <div class="searchbox">
         <input type="text" name="" id="">
-        <input type="submit" value="搜索">
+        <input type="submit" value="百度一下">
     </div>
-    <div class="">
+    <div class="links">
         <a href="">百科</a>
         <a href="">文库</a>
+        <a href="">hao123</a>
         <span>|</span>
         <a href="">更多>></a>
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+        <div><a href="">百度地图带你吃喝玩乐，全心全意为人民服务</a></div>
+        <div>
+            <a href="">把百度设为主页</a>
+            <a href="">安装百度卫士</a>
+        </div>
+        <div>
+            <a href="">加入百度推广</a>
+            |
+            <a href="">搜索风云榜</a>
+            |
+            <a href="">关于百度</a>
+            |
+            <a href="">About Baidu</a>
+        </div>
+        <div>
+            <span>2016</span>
+            <span>Baidu</span>
+            <span>使用百度前必读</span>
+            <span>京ICP证666号</span>
+        </div>
+    </div>
 </body>
 </html>
