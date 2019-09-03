@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ###### 20190902 - Day 138
 
+- 复习 CSS - 边框属性 (+1h = 299.5 of 600)
+
+###### 20190902 - Day 138
+
 * 复习 CSS - 背景图片 (+1h = 298.5 of 600)
 
 ###### 20190829 - Day 137

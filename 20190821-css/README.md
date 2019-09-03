@@ -269,3 +269,56 @@
   * 背景图片不占用位置，而 img 会占用位置；
   * 背景图片有定位属性，方便定位；img 无定位属性，定位不方便；
   * img 语义强于背景图片，若图片需被搜索引擎收率，推荐用 img；
+
+
+
+### 盒子模型
+
+###### 边框
+
+* 四条边一起写：`border: width style color;` 
+  * style 有：dotted, dashed, solid, double, groove, ridge, inset, outset；
+  * style 不能省略，其它两个要素可以；省略之后，width 默认 1，color 默认黑色；
+* 四条边分别写：
+  * `border-top: with style color;` 
+  * 还有 border-left / border-right / border-bottom 一样写法；
+* 三要素分别写：
+  * `border-width: 四条边一样的宽度;`   或
+  * `border-width: 上 右 下 左;`
+  * `border-color` 和 `border-style` 一样的道理；
+* 【上右下左】取值省略时的规律：
+  * 只写【上、右、下】三个，则左右一样；
+  * 只写【上、右】两个，则左右一样、上下一样；
+  * 只写【上】，则四边一个样；
+
+* 分别设置四条边各自的属性的写法：
+
+  ```css
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: turquoise;
+  ...
+  border-left-width: 2px;
+  ...
+  border-right-style: dashed;
+  ...
+  border-bottom-color: orangered;
+  ...
+  ```
+
+* 画三角形箭头（向下）：
+
+  ```css
+  div {
+      width: 0;
+      height: 0;
+      border-width: 50px;
+      border-style: solid;
+      border-color: red transparent;
+      border-bottom: none;
+  }
+  ```
+
+  
+
+next time: 106
