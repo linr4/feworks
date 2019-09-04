@@ -321,4 +321,47 @@
 
   
 
-next time: 106
+###### 边距
+
+* 内边距 padding：
+  * 边框和内容之间的距离；
+  * 默认情况下，设置 padding 会撑大盒子；
+  * padding 也会有颜色，与盒子的 背景色一致；
+
+* 外边距 margin：
+  * 标签与标签之间的距离；
+  * margin 没有背景颜色；
+  * margin 的合并（塌陷）现象：
+    * 水平方向的 margin 可以叠加（相邻标签的 margin 数值相加）；
+    * 垂直方向的 margin 不会叠加，而是以较大的 margin 为准；
+
+
+
+###### 盒子模型
+
+* conclusion
+  * 在 HTML 中所有标签均可设置如下属性，与现实中的盒子相似（以手机盒子为例），因此称为盒子模型：
+    * 宽高 ---> 默认为存放内容的区域的宽高（手机本身的宽高）；
+    * padding ---> 盒子与手机之间的空隙；
+    * border ---> 盒子本身的四边；
+    * margin ---> 盒子之间的间隙；
+
+* 宽高
+  * 内容宽高：通过 width / height 属性设置的值；
+  * 元素宽高：width / height + padding + border；
+    * 默认情况下，设置 padding 和 border 会增大元素的宽高，可能影响布局；
+    * CSS3 新特性：设置 box-sizing 为 border-box，让 width / height 属性从 border 开始计算， 即可不受影响，默认为 content-box；
+  * 元素空间的宽高：width / height + padding + border + margin；
+
+* 居中
+  * 嵌套的两个盒子，若要使小盒子在大盒子里居中，可以给大盒子加 padding，也可给小盒子加 margin；
+  * 大盒子加 padding 的方式，大盒子默认会被撑大，需要设置 box-sizing: border-box;
+  * 小盒子加 margin 的方式，在垂直方向，大盒子会随小盒子被顶下来，需要大盒子设置 border；
+  * 优先使用 padding 方式，因 margin 主要用于设置兄弟关系的盒子，padding 用于父子关系的盒子；
+  * 小盒子水平居中，可以设置 margin: 0 auto; 来实现；
+  * `text-align: center;` vs. `margin: 0 auto;`
+    * tac 用于设置盒子里的文字和图片等行内标签（inline & inline-block）水平居中，对块级标签无效；
+    * m0-a 用于设置盒子本身（块级标签）的水平居中；
+* 重置默认边距：YUI CSS reset
+* 行高：line-height
+  * 文字默认垂直居中于行高，因此常通过设置行高等于盒子高度，即可实现单行文字垂直居中，若是多行，则需通过设置 padding-top & padding-bottom 实现垂直居中；
