@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box1 {
+            float: left;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .box3 {
+            float: left;
+            width: 150px;
+            height: 150px;
+            background-color: green;
+        }
+        .box4 {
+            float: left;
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+        }
+
+        /* 
+        元素浮动之后的位置，由元素在之前标准流中的位置来确定；
+        - 元素在浮动前是在标准流第一行，浮动后也在第一行；
+        - 元素在浮动前是在标准流第二行，浮动后会在第二行；
+        */
+    </style>
+</head>
+<body>
+    <div class="box1">1</div>
+    <div class="box2">2</div>
+    <div class="box3">3</div>
+    <div class="box4">4</div>
+</body>
+</html>

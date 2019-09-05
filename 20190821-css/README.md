@@ -362,6 +362,221 @@
   * `text-align: center;` vs. `margin: 0 auto;`
     * tac 用于设置盒子里的文字和图片等行内标签（inline & inline-block）水平居中，对块级标签无效；
     * m0-a 用于设置盒子本身（块级标签）的水平居中；
-* 重置默认边距：YUI CSS reset
+  
+* 重置默认边距：[YUI CSS reset](https://yuilibrary.com/yui/docs/cssreset/)
+
+  ```css
+  /*
+  YUI 3.18.1 (build f7e7bcb)
+  Copyright 2014 Yahoo! Inc. All rights reserved.
+  Licensed under the BSD License.
+  http://yuilibrary.com/license/
+  */
+   html {
+      color:#000;
+      background:#FFF
+  }
+  body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+      margin:0;
+      padding:0
+  }
+  table {
+      border-collapse:collapse;
+      border-spacing:0
+  }
+  fieldset, img {
+      border:0
+  }
+  address, caption, cite, code, dfn, em, strong, th, var {
+      font-style:normal;
+      font-weight:normal
+  }
+  ol, ul {
+      list-style:none
+  }
+  caption, th {
+      text-align:left
+  }
+  h1, h2, h3, h4, h5, h6 {
+      font-size:100%;
+      font-weight:normal
+  }
+  q:before, q:after {
+      content:''
+  }
+  abbr, acronym {
+      border:0;
+      font-variant:normal
+  }
+  sup {
+      vertical-align:text-top
+  }
+  sub {
+      vertical-align:text-bottom
+  }
+  input, textarea, select {
+      font-family:inherit;
+      font-size:inherit;
+      font-weight:inherit;
+      *font-size:100%
+  }
+  legend {
+      color:#000
+  }
+  #yui3-css-stamp.cssreset {
+      display:none
+  }
+  ```
+
+  
+
 * 行高：line-height
-  * 文字默认垂直居中于行高，因此常通过设置行高等于盒子高度，即可实现单行文字垂直居中，若是多行，则需通过设置 padding-top & padding-bottom 实现垂直居中；
+  
+  * 文字默认垂直居中于行高，因此常通过设置行高等于盒子高度来可实现单行文字的垂直居中；若是多行，则需通过设置 padding-top & padding-bottom 实现垂直居中；
+
+
+
+###### 浮动
+
+* 布局方式：浏览器对网页元素的排班方式
+
+* 三种布局方式：标准流、浮动流、定位流；
+
+* 标准流（文档流/普通流），浏览器默认排版方式
+
+  * 块级元素：垂直排版
+  * 行内、行内块级元素：水平排版
+
+* 浮动流：“**半**脱离标准流” 的排版方式；“半” 的原因：元素浮动后的位置，由元素在标准流中的位置来确定。
+
+  * 只能水平排版，只能左/右对齐；
+    
+    * `float: left;` 该元素要与父元素的左边对齐；`float: right;` 该元素要与父元素右对齐；
+    
+* 不区分元素类型（block / inline / inline-block 是标准流的概念，浮动流中的元素不做这个区分）均可水平排版、设置宽高，与标准流 inline-block 特性相似；
+  
+* 无法设置居中，`margin: 0 auto;` 不起作用；
+  
+  * 浮动元素脱标：元素浮动后，脱离标准流；
+
+    * 元素浮动后，看似元素从标准流中删除，不再遵循标准流排版规则；
+  * 若前一个元素浮动、其后的元素没有浮动，则前一个已浮动元素脱离了标准流，空出来的位置由未浮动的后一个元素按标准流排版方式往前移动填充，已浮动的前一个元素会显示在上层、盖住后一个元素；
+  
+* 浮动元素排版规则
+  
+  * 相同方向浮动的元素，先浮动显示在前、后浮动显示在后；
+  
+  * 不同方向浮动的元素，左浮动贴靠左浮动、右浮动贴靠右浮动；
+  
+    * 元素浮动之后的位置，由元素在之前标准流中的位置来确定；
+
+      * 元素在浮动前是在标准流第一行，浮动后也在第一行；
+    * 元素在浮动前是在标准流第二行，浮动后会在第二行；
+  
+    * 浮动元素贴靠现象：
+
+      * 当父元素宽度不足以容下所有浮动子元素时，最后一个浮动元素 (n) 会往前一个元素 (n-2) 贴靠；
+    * 若还是容不下，会继续往前贴靠，直至贴靠到父元素的水平方向的边界（左或右）；
+  
+  * 浮动元素字围现象：
+  
+    * 元素浮动后，会覆盖在标准流中未浮动的元素的上层，但被覆盖的标准流元素中的文字会绕着浮动元素排版，文字并不会被覆盖，即为“**字围现象**”；
+  
+      * 常用于图文混排：
+  
+        ```css
+        img {
+        	float: left;
+          }
+        p {
+        	border: 1px solid #000;
+        	width: 500px;
+      	height: 200px;
+          }
+        ```
+  
+        ```html
+      <img src="Takeshi.jpg">
+        <p>金城武（Takeshi Kaneshiro）</p>
+      ```
+  
+    * 布局 Tips:
+  
+      * 实际开发中，水平方向用浮动流布局，垂直方向用标准流布局；
+    * 布局过程从上到下、从外到内；
+      * 同一层的水平布局若较复杂，可分割成左右两个模块来做细节布局；
+    * 局部模块若仍较为复杂，仍可继续分割为左右再做更小模块的布局；
+  
+    * 浮动元素高度问题：
+
+      * 标准流中，盒子的高度由其内容的高度撑起；
+    * 浮动流中，浮动元素不会撑起父元素的高度；
+  
+  * 清除浮动：
+  
+    * 案例(CSS-130)：分属俩 div 的 6 个 p 在标准流中分列两行，p 浮动后，6 个 p 都贴靠在第一行；
+  
+      * 此即为浮动的负面效果，因此需要有清除浮动的操作，以消除浮动带来的负面作用；
+  
+        ```html
+        <div class="box1">
+            <p>para 1</p>
+            <p>para 2</p>
+            <p>para 3</p>
+        </div>
+        <div class="box2">
+            <p>para 01</p>
+            <p>para 02</p>
+          <p>para 03</p>
+        </div>    
+        ```
+  
+        ```css
+        .box1 {
+            background-color: turquoise;
+        }
+        .box1>p {
+            background-color: yellow;
+        }
+        .box2 {
+            background-color: pink;
+        }
+        .box2>p {
+            background-color: orange;
+        }
+        p {
+            border: 1px dotted #000;
+            width: 100px;
+          float: left;
+        }
+      ```
+  
+      * 清除浮动方式一：给父元素设置高度；
+
+        * 如上例，给第一个 div.box1 设置高度，即可实现 p 浮动后仍分列两行；
+      * 实际开发中，尽量不写高度，因此这个方式实际上用得少；
+  
+    * 清除浮动方式二：设置容器元素的 `clear` 属性（谁不想贴靠就设在谁身上，通常是后面的）；
+  
+        * 给后面的 div.box2 元素添加 `clear` 属性，使其子元素 p 不贴靠到 box1 已浮动的 p 上；
+  
+          ```css
+          .box2 {
+              background-color: pink;
+            clear: both;
+          }
+        ```
+  
+        * `clear` 属性取值：
+  
+          * `none` 默认值，按浮动默认的排版规则（左浮贴靠左浮、右浮贴靠右浮）；
+          * `left` ，不要贴靠前面左浮的元素；
+        * `right` ，不要贴靠前面右浮的元素；
+          * `both` ，不要贴靠前面左浮和右浮的元素；
+        * 注意点：元素设置了 `clear` 属性后，`margin` 属性会失效；因此需要如下其它方式；
+  
+      * 清除浮动方式三：（133)
+  
+  * 定位流
+  
+  * 

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>综合练习</title>
+    <style>
+        div {
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .header {
+            width: 980px;
+            height: 100px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+        }
+        .header .h-left {
+            width: 250px;
+            height: 100px;
+            background-color: pink;
+            float: left;
+        }
+        .header .h-right {
+            width: 150px;
+            height: 50px;
+            background-color: skyblue;
+            float: right;
+        }
+        .header .h-bottom {
+            width: 650px;
+            height: 50px;
+            background-color: purple;
+            float: right;
+        }
+        .content {
+            width: 980px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        .content .c-left {
+            width: 320px;
+            height: 400px;
+            background-color: yellow;
+            float: left;
+        }
+        .content .c-right {
+            width: 650px;
+            height: 400px;
+            float: right;
+        }
+        .content .c-right .c-right-up {
+            width: 400px;
+            height: 200px;
+            background-color: rgb(254, 32, 149);
+            float: left;
+            margin-bottom: 10px;
+        }
+        .content .c-right .c-right-down {
+            width: 400px;
+            height: 140px;
+            background-color: rgb(0, 188, 254);
+            float: left;
+        }
+        .content .c-right .c-right-right {
+            width: 240px;
+            height: 350px;
+            background-color: rgb(157, 203, 49);
+            float: right;
+        }
+        .content .c-right .c-right-bottom {
+            width: 650px;
+            height: 40px;
+            background-color: rgb(182, 133, 17);
+            float: left;
+            margin-top: 10px;
+        }
+        .footer {
+            width: 980px;
+            height: 40px;
+            background-color: rgb(254, 96, 72);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="h-left">250*100</div>
+        <div class="h-right">150*50</div>
+        <div class="h-bottom">650*50</div>
+    </div>
+    <div class="content">
+        <div class="c-left">320*400</div>
+        <div class="c-right">
+            <div class="c-right-up">400*200</div>
+            <div class="c-right-right">240*350</div>
+            <div class="c-right-down">400*140</div>
+            <div class="c-right-bottom">650*40</div>
+        </div>
+    </div>
+    <div class="footer">980*40</div>
+</body>
+</html>

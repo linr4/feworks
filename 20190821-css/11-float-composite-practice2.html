@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+        .header {
+            width: 980px;
+            height: 100px;
+        }
+        .header .logo {
+            width: 250px;
+            height: 100px;
+            background-color: pink;
+            float: left;
+        }
+        .header .lang {
+            width: 150px;
+            height: 50px;
+            background-color: skyblue;
+            float: right;
+        }
+        .header .nav {
+            width: 650px;
+            height: 50px;
+            background-color: purple;
+            float: right;
+        }
+        .content {
+            width: 980px;
+            height: 400px;
+            margin-top: 10px;
+        }
+        .content .aside {
+            width: 320px;
+            height: 400px;
+            background-color: yellow;
+            float: left;
+        }
+        .content .article {
+            width: 650px;
+            height: 400px;
+            float: right;
+        }
+        .content .article .articleTop {
+            width: 650px;
+            height: 350px;
+        }
+        .content .article .articleBottom {
+            width: 650px;
+            height: 40px;
+            background-color: rgb(181, 133, 22);
+            margin-top: 10px;
+        }
+        .content .article .articleTop .newsLeft {
+            width: 400px;
+            height: 350px;
+            float: left;
+        }
+        .content .article .articleTop .newsLeft .news1 {
+            width: 400px;
+            height: 200px;
+            background-color: rgb(254, 31, 151);
+        }
+        .content .article .articleTop .newsLeft .news2 {
+            width: 400px;
+            height: 140px;
+            background-color: rgb(0, 187, 255);
+            margin-top: 10px;
+        }
+        .content .article .articleTop .newsRight {
+            width: 240px;
+            height: 350px;
+            background-color: yellowgreen;
+            float: right;
+        }
+        .footer {
+            width: 980px;
+            height: 40px;
+            background-color: tomato;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"></div>
+        <div class="lang"></div>
+        <div class="nav"></div>
+    </div>    
+    <div class="content">
+        <div class="aside"></div>
+        <div class="article">
+            <div class="articleTop">
+                <div class="newsLeft">
+                    <div class="news1"></div>
+                    <div class="news2"></div>
+                </div>
+                <div class="newsRight"></div>
+            </div>
+            <div class="articleBottom"></div>
+        </div>
+    </div>
+    <div class="footer"></div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box1 {
+            background-color: turquoise;
+        }
+        .box1>p {
+            background-color: yellow;
+        }
+        .box2 {
+            background-color: pink;
+        }
+        .box2>p {
+            background-color: orange;
+        }
+        p {
+            border: 1px dotted #000;
+            width: 100px;
+            float: left;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <p>para 1</p>
+        <p>para 2</p>
+        <p>para 3</p>
+    </div>
+    <div class="box2">
+        <p>para 01</p>
+        <p>para 02</p>
+        <p>para 03</p>
+    </div>    
+
+    <!-- p 浮动后，父元素 div 的高度无法被撑起、变为 0，
+        每个 p 在脱标时，均在标准流的第一行，
+        因此虽然 6 个 p 分属两个 div、在标准流中分列两行，
+        但在浮动后都贴靠在第一行中
+    -->
+</body>
+</html>
