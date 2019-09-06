@@ -12,9 +12,13 @@ Web development learning notes and case study
 
 ---
 
+###### 20190906 - Day 142
+
+- 复习 CSS - 清除浮动的几种方式 (+1h = 305.5 of 600)
+
 ###### 20190905 - Day 141
 
-- 复习 CSS - 浮动 (+4h = 304.5 of 600)
+- 复习 CSS - 浮动与清除浮动 (+4h = 304.5 of 600)
 
 ###### 20190904 - Day 140
 
