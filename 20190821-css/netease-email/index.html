@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网易邮箱</title>
+    <style>
+        /* 重置默认边距 */
+        html, body, div, ul, ol, li, input, p, span, img, button, h1 {
+            margin: 0;
+            padding: 0;
+        }
+        /* 文字全局设置 */
+        body {
+            color: #333;
+            font-size: 13px;
+            font-family: "微软雅黑";
+        }
+        div, input {
+            box-sizing: border-box;
+        }
+        a {
+            text-decoration: none;
+            color: #666;
+        }
+        .header, .content, .footer {
+            width: 960px;
+            margin: 0 auto;
+        }
+        .header {
+            height: 80px;
+            padding-top: 28px;
+        }
+        .header .logo {
+            width: 644px;
+            height: 27px;
+            background: url("images/glb_v2.png") no-repeat 0 0;
+            float: left;
+        }
+        .header .logo a {
+            display: inline-block;
+            width: 130px;
+            height: 27px;
+            text-decoration: none;
+        }
+        .header .links {
+            width: auto;
+            height: 27px;
+            color: #999;
+            font-size: 12px;
+            float: right;
+        }
+        .header .links a {
+            line-height: 27px;
+        }
+        .content {
+            height: 600px;
+        }
+        .content .top {
+            width: 100%;
+            height: 38px;
+            background: url("images/line-left.png") no-repeat 0 0,
+            url("images/line-right.png") no-repeat right top,
+            url("images/line-center.png") repeat 0 0;
+            /* 多重背景图写在前面的图会盖住后添加的，所以平铺的那张图要写在最后 */
+        }
+        .content .top h1 {
+            color: white;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 38px;
+            text-indent: 1em;
+        }
+        .content .bottom {
+            width: 100%;
+            height: 562px;
+        }
+        .content .bottom .article {
+            width: 642px;
+            height: 100%;
+            float: left;
+            padding: 50px 0 0 80px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-right: none;
+            background-color: #f9f9f9;
+        }
+        .content .bottom .article .aTop {
+            width: 560px;
+            height: 60px;
+        }
+        .content .bottom .article .aTop ul {
+            list-style: none;
+            width: 412px;
+            height: 34px;
+            background: url("images/tab.jpg") no-repeat 0 0;
+        }
+        .content .bottom .article .aTop ul li {
+            float: left;
+            width: 137px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .content .bottom .article .aTop ul .active {
+            color: white;
+        }
+        .content .bottom .article .aBottom {
+            width: 560px;
+            height: 373px;            
+        }
+        .content .bottom .article .aBottom .entry {
+            width: 413px;
+            height: 58px;
+            overflow: hidden;
+        }
+        
+        .content .bottom .article .aBottom .entry span {
+            width: 60px;
+            height: 100%;
+            line-height: 28px;
+            float: left;
+            font-size: 12px;
+            text-align: right;
+        }
+        .content .bottom .article .aBottom .entry span b {
+            font-weight: normal;
+            color: red;
+        }
+        .content .bottom .article .aBottom .entry div {
+            width: 333px;
+            height: 100%;
+            line-height: 28px;
+            float: right;
+        }
+        .content .bottom .article .aBottom .entry div p {
+            font-size: 13px;
+            line-height: 18px;
+            padding: 5px;
+        }
+        .content .bottom .article .aBottom .entry div input {
+            width: 325px;
+            height: 28px;
+            box-sizing: border-box;
+        }
+        .content .bottom .article .aBottom .entry div input.email {
+            width: 214px;
+            height: 28px;
+            box-sizing: border-box;
+        }
+        .content .bottom .article .aBottom .entry div input.vcode {
+            width: 240px;
+            height: 28px;
+            box-sizing: border-box;
+        }
+        .content .bottom .article .aBottom .entry div img {
+            height: 28px;
+            float: right;
+            padding-right: 10px;
+        }
+        .content .bottom .article .aBottom .entry div select {
+            box-sizing: border-box;
+            width: 100px;
+            height: 28px;
+        }
+        .content .bottom .article .aBottom .confirm {
+            padding-top: 10px;
+            padding-left: 80px;
+        }
+        .content .bottom .article .aBottom .confirm input[type=submit] {
+            display: block;
+            width: 119px;
+            height: 37px;
+            font-size: 20px;
+            color: white;
+            background: url("images/glb_v2.png") no-repeat -144px -360px;
+            border: none;
+            margin-top: 20px;
+        }
+        .content .bottom .aside {
+            width: 318px;
+            height: 100%;
+            float: right;
+            text-align: center;
+            padding-top: 105px;
+            background-color: rgb(245, 245, 245);
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        .footer {
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+        }
+        .footer span, .footer a {
+            margin-right: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 头部开始 -->
+    <div class="header">
+        <div class="logo">
+            <a href="" title="163 免费邮箱"></a><a href="" title="126 免费邮箱"></a><a href="" title="yeah 免费邮箱"></a>
+        </div>
+        <div class="links">
+                <a href="">了解更多</a>
+                <span>|</span>
+                <a href="">反馈意见</a>
+        </div>
+    </div>
+    <!-- 头部结束 -->
+    <!-- 内容开始 -->
+    <div class="content">
+        <div class="top">
+            <h1>欢迎注册网易无限容量邮箱</h1>
+        </div>
+        <div class="bottom">
+            <div class="article">
+                <div class="aTop">
+                    <ul>
+                        <li class="active">注册字母邮箱</li>
+                        <li>注册手机号码邮箱</li>
+                        <li>注册 VIP 邮箱</li>
+                    </ul>
+                </div>
+                <div class="aBottom">
+                    <div class="entry">
+                        <span><b class="star">* </b>邮件地址</span>
+                        <div>
+                            <input type="text" value="建议使用手机号码注册" class="email">@<select name="" id="">
+                                <option value="">163.com</option>
+                                <option value="">126.com</option>
+                                <option value="">yeah.net</option>
+                            </select>
+                            <p>6~18个字符，可使用字母、数字、下划线，以字母开头</p>
+                        </div>
+                    </div>
+                    <div class="entry">
+                        <span><b class="star">* </b>密码</span>
+                        <div>
+                            <input type="password" value="">
+                            <p>6~16个字符，区分大小写</p>
+                        </div>
+                    </div>
+                    <div class="entry">
+                        <span><b class="star">* </b>确认密码</span>
+                        <div>
+                            <input type="password" value="">
+                            <p>请再次填写密码</p>
+                        </div>
+                    </div>
+                    <div class="entry">
+                        <span><b class="star">* </b>手机号码</span>
+                        <div>
+                            <input type="number" value="">
+                            <p>忘记密码时，可以通过该手机号快捷找回密码</p>
+                        </div>
+                    </div>
+                    <div class="entry">
+                        <span><b class="star">* </b>验证码</span>
+                        <div>
+                            <input type="text" value="" class="vcode">
+                            <img src="images/vcode.jpg" alt="">
+                            <p>请填写图片中的字符，不区分大小写</p>
+                        </div>
+                    </div>
+                    <div class="confirm">
+                        <input type="checkbox" checked=unchecked>
+                        <span>同意 <a href="">“服务条款”</a> 和 <a href="">“隐私权保护和个人信息利用政策”</a> </span>        
+                        <input type="submit" value="立即注册">
+                    </div>
+                </div>
+            </div>
+            <div class="aside">
+                <img src="images/wy_right.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- 内容结束 -->
+    <!-- 尾部开始 -->
+    <div class="footer">
+        <a href="">关于网易</a>
+        <a href="">关于网易免费邮</a>
+        <a href="">邮箱官方博客</a>
+        <a href="">客户服务</a>
+        <a href="">隐私政策</a>
+        <span>|</span>
+        <span>网易公司版权所有</span>
+        <span>&copy;</span>
+        <span>1997-2016</span>
+    </div>
+    <!-- 尾部结束 -->
+</body>
+</html>
