@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 590px;
+            height: 470px;
+            box-sizing: border-box;
+            margin: 100px auto;
+            position: relative;
+        }
+        .box>span {
+            position: absolute;
+            top: 50%;
+            margin-top: -40px;
+            width: 50px;
+            line-height: 80px;
+            color: white;
+            background-color: rgba(0,0,0,0.3);
+            font-size: 50px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .box>.leftArrow {
+            left: 0;
+            border-bottom-right-radius: 25px;
+            border-top-right-radius: 25px;
+        }
+        .box>.rightArrow {
+            right: 0;
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+
+        ol {
+            list-style: none;
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+        ol>li {
+            float: left;
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
+
+            color: white;
+            background-color: rgba(255,255,255,0.5);
+            border: 1px solid white;
+            cursor: pointer;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        img {
+            -webkit-user-drag: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="jdt.webp" alt="">
+        <span class="leftArrow">&lt;</span>
+        <span class="rightArrow">&gt;</span>
+        <ol>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ol>
+    </div>
+</body>
+</html>

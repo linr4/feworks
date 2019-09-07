@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            box-sizing: border-box;
+        }
+        .box {
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid #ccc; 
+        }
+        .food {
+            width: 100%;
+            height: 180px;
+            position: relative;
+        }
+        .food>img {
+            width: 300px;
+        }
+        .food>.price {
+            width: 100px;
+            height: 76px;
+            background: url("price-tag.jpg") no-repeat 0 0;
+            background-size: contain;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            border-radius: 15px
+        }
+        .food .price .wrapper {
+            position: absolute;
+            left: 7px;
+            bottom: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .food .price .wrapper .rmb {
+            color: red;
+        }
+        .text {
+            padding: 10px;
+            line-height: 30px;
+            text-indent: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="food">
+            <img src="food-fish.jpg" alt="">
+            <div class="price">
+                <div class="wrapper">
+                        <span class="rmb">￥</span><span>88.00</span>
+                </div>
+            </div>
+        </div>
+        <div class="text">
+            <span>川味毛血旺 风味回锅肉 沙姜头鸡汤 贝壳螺肉蒸娃娃菜 凉瓜炒牛肉 金银馒头 西芹炒鲜鱿 煎鸡蛋</span>
+        </div>
+    </div>
+</body>
+</html>
