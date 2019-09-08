@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>a tag pseudo class - practice</title>
+    <style>
+
+        ul {
+            list-style: none;
+            width: 800px;
+            height: 40px;
+            background-color: yellow;
+            color: white;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 100px auto;
+            padding: 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        ul>li {
+            float: left;
+            width: 99px;
+            margin-right: 1px;
+            line-height: 40px;
+            background-color: darkturquoise;
+        }
+        ul>li>a {
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+        }
+        a:hover {
+            color: yellow;
+            background-color: paleturquoise;
+        }
+        a:active {
+            font-weight: bold;
+            background-color: orangered;
+        }
+
+    </style>
+</head>
+<body>
+
+<ul>
+
+    <li><a href="">NAV ITEM 1</a></li>
+    <li><a href="">NAV ITEM 2</a></li>
+    <li><a href="">NAV ITEM 3</a></li>
+    <li><a href="">NAV ITEM 4</a></li>
+    <li><a href="">NAV ITEM 5</a></li>
+    <li><a href="">NAV ITEM 6</a></li>
+    <li><a href="">NAV ITEM 7</a></li>
+    <li><a href="">NAV ITEM 8</a></li>
+</ul>
+
+</body>
+</html>

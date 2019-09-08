@@ -436,54 +436,61 @@
 
 
 
-###### 浮动
+### 浮动
 
 * 布局方式：浏览器对网页元素的排班方式
 
 * 三种布局方式：标准流、浮动流、定位流；
 
-* 标准流（文档流/普通流），浏览器默认排版方式
+  
 
+###### 标准流（文档流/普通流）：
+
+* 浏览器默认排版方式
   * 块级元素：垂直排版
   * 行内、行内块级元素：水平排版
 
-* 浮动流：“**半**脱离标准流” 的排版方式；“半” 的原因：元素浮动后的位置，由元素在标准流中的位置来确定。
+  
 
-  * 只能水平排版，只能左/右对齐；
-    
-    * `float: left;` 该元素要与父元素的左边对齐；`float: right;` 该元素要与父元素右对齐；
+###### 浮动流：
+
+* “**半**脱离标准流” 的排版方式；“半” 的原因：元素浮动后的位置，由元素在标准流中的位置来确定。
+
+* 只能水平排版，只能左/右对齐；
+  
+  * `float: left;` 该元素要与父元素的左边对齐；`float: right;` 该元素要与父元素右对齐；
   
 * 不区分元素类型（block / inline / inline-block 是标准流的概念，浮动流中的元素不做这个区分）均可水平排版、设置宽高，与标准流 inline-block 特性相似；
-  
-* 无法设置居中，`margin: 0 auto;` 不起作用；
-  
-  * 浮动元素脱标：元素浮动后，脱离标准流；
 
-    * 元素浮动后，看似元素从标准流中删除，不再遵循标准流排版规则；
+* 无法设置居中，`margin: 0 auto;` 不起作用；
+
+* 浮动元素脱标：元素浮动后，脱离标准流；
+
+  * 元素浮动后，看似元素从标准流中删除，不再遵循标准流排版规则；
   * 若前一个元素浮动、其后的元素没有浮动，则前一个已浮动元素脱离了标准流，空出来的位置由未浮动的后一个元素按标准流排版方式往前移动填充，已浮动的前一个元素会显示在上层、盖住后一个元素；
   
 * 浮动元素排版规则
-  
+
   * 相同方向浮动的元素，先浮动显示在前、后浮动显示在后；
-  
+
   * 不同方向浮动的元素，左浮动贴靠左浮动、右浮动贴靠右浮动；
-  
+
     * 元素浮动之后的位置，由元素在之前标准流中的位置来确定；
 
       * 元素在浮动前是在标准流第一行，浮动后也在第一行；
     * 元素在浮动前是在标准流第二行，浮动后会在第二行；
-  
+
     * 浮动元素贴靠现象：
 
       * 当父元素宽度不足以容下所有浮动子元素时，最后一个浮动元素 (n) 会往前一个元素 (n-2) 贴靠；
     * 若还是容不下，会继续往前贴靠，直至贴靠到父元素的水平方向的边界（左或右）；
-  
+
   * 浮动元素字围现象：
-  
+
     * 元素浮动后，会覆盖在标准流中未浮动的元素的上层，但被覆盖的标准流元素中的文字会绕着浮动元素排版，文字并不会被覆盖，即为“**字围现象**”；
-  
+
       * 常用于图文混排：
-  
+
         ```css
         img {
         	float: left;
@@ -494,7 +501,7 @@
       	height: 200px;
           }
         ```
-  
+
         ```html
       <img src="Takeshi.jpg">
         <p>金城武（Takeshi Kaneshiro）</p>
@@ -513,202 +520,274 @@
   * 浮动元素高度问题：
     
     * 标准流中，盒子的高度由其内容的高度撑起；
+    
     * 浮动流中，浮动元素不会撑起父元素的高度；
     
-  * 清除浮动：
-  
-    * 案例(CSS-130)：分属俩 div 的 6 个 p 在标准流中分列两行，p 浮动后，6 个 p 都贴靠在第一行；
-  
-      * 此即为浮动的负面效果，因此需要有清除浮动的操作，以消除浮动带来的负面作用；
-  
-        ```html
-        <div class="box1">
-            <p>para 1</p>
-            <p>para 2</p>
-            <p>para 3</p>
-        </div>
-        <div class="box2">
-            <p>para 01</p>
-            <p>para 02</p>
-          <p>para 03</p>
-        </div>    
-        ```
-  
+      
+    
+
+  ###### 清除浮动：
+
+  * 案例(CSS-130)：分属俩 div 的 6 个 p 在标准流中分列两行，p 浮动后，6 个 p 都贴靠在第一行；
+
+    * 此即为浮动的负面效果，因此需要有清除浮动的操作，以消除浮动带来的负面作用；
+
+      ```html
+      <div class="box1">
+          <p>para 1</p>
+          <p>para 2</p>
+          <p>para 3</p>
+      </div>
+      <div class="box2">
+          <p>para 01</p>
+          <p>para 02</p>
+        <p>para 03</p>
+      </div>    
+      ```
+
+      ```css
+      .box1 {
+          background-color: turquoise;
+      }
+      .box1>p {
+          background-color: yellow;
+      }
+      .box2 {
+          background-color: pink;
+      }
+      .box2>p {
+          background-color: orange;
+      }
+      p {
+          border: 1px dotted #000;
+          width: 100px;
+        float: left;
+    }
+      ```
+    
+  * 清除浮动方式一：给父元素设置高度；
+
+    * 如上例，给第一个 div.box1 设置高度，即可实现 p 浮动后仍分列两行；
+    
+    * 实际开发中，尽量不写高度，因此这个方式实际上用得少；
+    
+  * 清除浮动方式二：设置容器元素的 `clear` 属性（谁不想贴靠就设在谁身上，通常是后面的）；
+
+      * 给后面的 div.box2 元素添加 `clear` 属性，使其子元素 p 不贴靠到 box1 已浮动的 p 上；
+
         ```css
-        .box1 {
-            background-color: turquoise;
-        }
-        .box1>p {
-            background-color: yellow;
-        }
         .box2 {
             background-color: pink;
-        }
-        .box2>p {
-            background-color: orange;
-        }
-        p {
-            border: 1px dotted #000;
-            width: 100px;
-          float: left;
-      }
-        ```
-      
-    * 清除浮动方式一：给父元素设置高度；
-  
-      * 如上例，给第一个 div.box1 设置高度，即可实现 p 浮动后仍分列两行；
-      
-      * 实际开发中，尽量不写高度，因此这个方式实际上用得少；
-      
-    * 清除浮动方式二：设置容器元素的 `clear` 属性（谁不想贴靠就设在谁身上，通常是后面的）；
-  
-        * 给后面的 div.box2 元素添加 `clear` 属性，使其子元素 p 不贴靠到 box1 已浮动的 p 上；
-  
-          ```css
-          .box2 {
-              background-color: pink;
-            clear: both;
-          }
-          ```
-  
-    * `clear` 属性取值：
-      
-      * `none` 默认值，按浮动默认的排版规则（左浮贴靠左浮、右浮贴靠右浮）；
-      * `left` ，不要贴靠前面左浮的元素；
-      * `right` ，不要贴靠前面右浮的元素；
-      * `both` ，不要贴靠前面左浮和右浮的元素；
-      * 注意点：元素设置了 `clear` 属性后，`margin` 属性会失效；因此需要如下其它清除浮动的方式；
-      
-    * 清除浮动方式三：隔墙法；需额外添加无语义的块级元素，实际开发不常用；
-  
-      * 外墙法：在需要清除浮动的元素前额外添加一个块级元素，并设置 `clear: both;`
-  
-        * 前一个 div 的 margin-bottom 不生效，后一个 div 的 margin-top 可以生效，但通常 margin 不设在这俩 div 上，而是设置到 .external-wall 的 height 中；
-  
-        ```css
-        .external-wall {
-            clear: both;
+          clear: both;
         }
         ```
-  
-        ```html
-        <div class="float-left"></div>
-        <div class="external-wall"></div>
-        <div class="float-left">
-        ```
-  
-      * 内墙法：把额外添加的块级元素放到前一个 div 的所有子元素的最后，并设置 `clear: both;`
-  
-        * 内墙法可以让前一个 div 设 margin-bottom，也可让后一个 div 设 margin-top，还可在额外添加的 div 设置 height； 
-  
-        * 内墙法可撑起父元素高度，外墙法则不行；
-      
-          
-      
-    * 伪元素选择器：作用 - 在指定标签的内容之前或之后添加一个子元素；
-  
-        ```css
-        div::before {
-            content: 'prefix-';
-        }
-        div::after {
-            content: '-suffix';
-        }
-        ```
-  
-        * 伪元素设置了 `height: 0;` 内容仍会显示，需要设置 `visibility: hidden;` 来隐藏内容；
-  
-    * 清除浮动方式四：在前一个 div 上添加 `::after` 伪元素并设置 clear，本质上是内墙法；
-  
+
+  * `clear` 属性取值：
+    
+    * `none` 默认值，按浮动默认的排版规则（左浮贴靠左浮、右浮贴靠右浮）；
+    * `left` ，不要贴靠前面左浮的元素；
+    * `right` ，不要贴靠前面右浮的元素；
+    * `both` ，不要贴靠前面左浮和右浮的元素；
+    * 注意点：元素设置了 `clear` 属性后，`margin` 属性会失效；因此需要如下其它清除浮动的方式；
+    
+  * 清除浮动方式三：隔墙法；需额外添加无语义的块级元素，实际开发不常用；
+
+    * 外墙法：在需要清除浮动的元素前额外添加一个块级元素，并设置 `clear: both;`
+
+      * 前一个 div 的 margin-bottom 不生效，后一个 div 的 margin-top 可以生效，但通常 margin 不设在这俩 div 上，而是设置到 .external-wall 的 height 中；
+
       ```css
-      .box1::after {
-          content: '';
-          display: block;
-          height: 0;
-          visibility: hidden;
+      .external-wall {
           clear: both;
       }
-      .box1 {
-          *zoom: 1; /* 兼容 IE6 */
+      ```
+
+      ```html
+      <div class="float-left"></div>
+      <div class="external-wall"></div>
+      <div class="float-left">
+      ```
+
+    * 内墙法：把额外添加的块级元素放到前一个 div 的所有子元素的最后，并设置 `clear: both;`
+
+      * 内墙法可以让前一个 div 设 margin-bottom，也可让后一个 div 设 margin-top，还可在额外添加的 div 设置 height； 
+
+      * 内墙法可撑起父元素高度，外墙法则不行；
+    
+        
+    
+  * 伪元素选择器：作用 - 在指定标签的内容之前或之后添加一个子元素；
+
+      ```css
+      div::before {
+          content: 'prefix-';
+      }
+      div::after {
+          content: '-suffix';
       }
       ```
+
+      * 伪元素设置了 `height: 0;` 内容仍会显示，需要设置 `visibility: hidden;` 来隐藏内容；
+
+  * 清除浮动方式四：在前一个 div 上添加 `::after` 伪元素并设置 clear，本质上是内墙法；
+
+    ```css
+    .box1::after {
+        content: '';
+        display: block;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+    .box1 {
+        *zoom: 1; /* 兼容 IE6 */
+    }
+    ```
+
+  * 清除浮动方式五：
+
+    * 在前一个盒子中设置 `overflow: hidden;` ，但 IE6 无法支持，需加上 `.box1 {*zoom: 1;}`
+    * `overflow: hidden;` 的三个用处：
+      * 隐藏盒子中溢出的文字；
+      * 清除盒子的浮动，效果与伪元素内墙法一样；
+      * 两个嵌套的盒子，父元素设置了 `overflow: hidden;` 可使得子元素能够设置 `margin-top` 且父元素不会被一起顶下来 ，与父元素设置了 border 的效果一样；
+
+  * Tips
+
+    * 水平方向多个元素要顶部对齐，最快捷的方式就是让它们全部浮动；
+
+    * 多重背景图，写在前面的图片会盖住写在后面的图片，因此要显示在上层的得写在前面：
+
+      ```css
+      background: url(img1.jpg), url(img2.jgg), url(img3.jpg);
+      ```
+
+      
+
+###### 定位流
+
+* 四种定位方式：相对定位、绝对定位、固定定位、静态定位（默认）
+
+* 相对定位：`position: relative;`
+
+  * 相对于该元素在做相对定位之前在标准流中的位置做移动；
+  * 不脱离标准流，仍在标准流中占有空间；
+  * 相同方向只能设置一个位移值，若同时设置了 top, bottom 或 left, right，只有 top 和 left 生效；
+  * 相对定位区分 block / inline / inline-block，位移可以生效，但不会改变元素原有类型；
+  * 元素的 margin / padding 以其在标准流中的位置进行计算和起作用，不以相对定位后的位置为准；
+  * 应用场景：
+    * 微调元素的位置，如输入框与验证码图片之间做对齐；
+    * 与绝对定位配合实现元素精确定位、动态居中等效果；
+
+* 绝对定位：`position: absolute;`
+
+  * 相对于 body（的首屏可视区域）为参照点进行定位；
+
+  * 会脱离标准流，不设置位移的话，位置不变；
+
+  * 不区分 block / inline / inline-block，所有元素均可设置宽高；
+
+  * 定位参照点：
+
+    * 默认情况下无论有无祖先元素，均相对于网页首屏可视区域为参照点进行定位；
+    * 若祖先元素也有定位流（相对、绝对、固定），则该元素的绝对定位会以离自己最近的有定位流的祖先元素为参照点；
+    * 绝对定位元素会忽略有定位流的祖先元素的 padding；
+
+  * 应用场景：
+
+    * 子绝父相：子元素设置绝对定位、父元素设置相对定位，实现子元素相对于父元素做精确定位，且不因网页调整大小而出现偏差；
+
+    * 水平居中：
+
+      ```css
+      position: absolute;
+      left: 50%;
+      margin-left: -eleWidth/2;
+      /* 或 */ transform: translateX(-50%);
+      ```
+
+* 固定定位：`position: fixed;`  --- IE 6 不支持；
+
+  * 与背景关联方式 `background-attachment: fixed` 类似；
+    * 背景关联方式位使得背景图片不随页面滚动；
+    * 固定定位使得该元素不随网页滚动；
+  * 大部分特性与绝对定位相同：
+    * 开启固定定位后，会脱离标准流、不占用标准流的空间；
+    * 不区分 block / inline / inline-block，开启后以 block 的方式处理元素；
+  * 应用场景：顶部导航条，侧边广告，“返回顶部” 按钮 ……
+
+* `z-index` 属性：
+
+  * 控制定位流元素（标准流元素设置 z-index 无效）的 z 轴层级（覆盖关系），默认值 0 ；
+  * 默认情况下，定位流元素会覆盖标准流元素；
+  * 对于定位流元素，写在后面的会覆盖写在前面的；
+  * 设置了 z-index 的元素，z-index 值大的元素显示在上层；
+  * 从父现象：父元素若设置了 z-index，则子元素的 z-index 会失效；
+
+
+
+### CSS3 新特性
+
+* 转换模块、过渡模块、动画模块
+
   
-    * 清除浮动方式五：
+
+###### 前置知识 - `<a>` 标签伪类选择器
+
+* `<a>` 标签伪类选择器：用于修改 `<a>` 标签各种状态之下的样式
+* `<a>` 标签的三种状态：
+  * 未访问过 `a:link {}`
+  * 已访问过 `a:visited {}`
+  * 鼠标悬停 `a:hover {}`
+  * 鼠标长按 `a:active {}`
+* 若伪类一起出现，需要按 <font color=red>L</font>ink -> <font color=red>V</font>isited -> <font color=red>H</font>over -> <font color=red>A</font>ctive 的顺序编写 `LoVe & HAte`
+* 若 `a:link {}` 和 `a:visited {}` 的样式相同，可以简写为 `a {}`
+* 写代码 Tips：
+  * `a {}` 写在前面、`a:link {}; a:visited {}; a:hover {}; a:active {}` 写在后面；
+  * 盒子相关的属性（显示模式、宽高、边距等）写在 `a {}` 中，文字、背景等相关属性写在伪类中；
+
+
+
+###### 过渡模块 `transition`
+
+* 过渡三要素：
+  * 必须有属性发生变化，如：通过 hover 改变元素属性，`div:hover {width:30px, bgc:red}`；
+  * 指明哪个属性需要执行过渡效果，如：`transition-property: width, background-color;`
+  * 指明过渡时长，如：`div {transition-duration: 5s, 3s;}`
+* 其他属性：
+  * `transition-timing-function` 过渡效果执行的时间曲线，默认 ease；
+    * `linear` 匀速，等于 `cubic-bezier(0,0,1,1)`
+    * `ease` 慢-快-慢（逐渐慢下来），等于 `cubic-bezier(0.25,0.1,0.25,1)`
+    * `ease-in` 慢速开始（加速），等于 `cubic-bezier(0.42,0,1,1)`
+    * `ease-out` 慢速结束（减速），等于 `cubic-bezier(0,0,0.58,1)`
+    * `ease-in-out` 慢速开始+慢速结束（先加速在减速），等于 `cubic-bezier(0.42,0,0.58,1)`
+    * `cubic-bezier(n,n,n,n)` 在该函数中自定义，取值 0 ~ 1；
+  * `transition-delay` 过渡效果延迟多久开始，默认 0；
+* 简写形式：
+  * `transition: property duration [timing-function] [delay];` 后两个可省略
+  * `transition: prop1 dur1 tf1 delay1, prop2 dur2 tf2 delay2...`
+  * `transition: all 2s;`    所有有变化的属性都要做过渡效果；
+
+* 编写套路：
+  * 不管过渡，先写基本样式
+  * 再编写需要修改的属性的样式（如 hover）
+  * 最后给被修改的属性添加过渡效果
+
+* 案例：手风琴效果
+
+  * 实现的关键点在于设置如下两个样式：
+
+  ```css
+  /* 鼠标悬停于整个 ul 时，缩小所有 li 的宽度 */
+  ul:hover li {
+      width: 126px;
+  }
   
-      * 在前一个盒子中设置 `overflow: hidden;` ，但 IE6 无法支持，需加上 `.box1 {*zoom: 1;}`
-      * `overflow: hidden;` 的三个用处：
-        * 隐藏盒子中溢出的文字；
-        * 清除盒子的浮动，效果与伪元素内墙法一样；
-        * 两个嵌套的盒子，父元素设置了 `overflow: hidden;` 可使得子元素能够设置 `margin-top` 且父元素不会被一起顶下来 ，与父元素设置了 border 的效果一样；
+  /* 鼠标悬停时，增加所在的 li 的宽度；
+  这个样式监听了 li:hover，优先于 ul:hover，因此实现了其它 li 缩小、当前 li 加宽的效果 */
+  ul li:hover {
+      width: 295px;
+  }
+  ```
+
   
-    * Tips
-  
-      * 水平方向多个元素要顶部对齐，最快捷的方式就是让它们全部浮动；
-  
-      * 多重背景图，写在前面的图片会盖住写在后面的图片，因此要显示在上层的得写在前面：
-  
-        ```css
-        background: url(img1.jpg), url(img2.jgg), url(img3.jpg);
-        ```
-  
-        
-  
-* 定位流
-
-  * 四种定位方式：相对定位、绝对定位、固定定位、静态定位（默认）
-
-  * 相对定位：`position: relative;`
-
-    * 相对于该元素在做相对定位之前在标准流中的位置做移动；
-    * 不脱离标准流，仍在标准流中占有空间；
-    * 相同方向只能设置一个位移值，若同时设置了 top, bottom 或 left, right，只有 top 和 left 生效；
-    * 相对定位区分 block / inline / inline-block，位移可以生效，但不会改变元素原有类型；
-    * 元素的 margin / padding 以其在标准流中的位置进行计算和起作用，不以相对定位后的位置为准；
-    * 应用场景：
-      * 微调元素的位置，如输入框与验证码图片之间做对齐；
-      * 与绝对定位配合实现元素精确定位、动态居中等效果；
-
-  * 绝对定位：`position: absolute;`
-
-    * 相对于 body（的首屏可视区域）为参照点进行定位；
-
-    * 会脱离标准流，不设置位移的话，位置不变；
-
-    * 不区分 block / inline / inline-block，所有元素均可设置宽高；
-
-    * 定位参照点：
-
-      * 默认情况下无论有无祖先元素，均相对于网页首屏可视区域为参照点进行定位；
-      * 若祖先元素也有定位流（相对、绝对、固定），则该元素的绝对定位会以离自己最近的有定位流的祖先元素为参照点；
-      * 绝对定位元素会忽略有定位流的祖先元素的 padding；
-
-    * 应用场景：
-
-      * 子绝父相：子元素设置绝对定位、父元素设置相对定位，实现子元素相对于父元素做精确定位，且不因网页调整大小而出现偏差；
-
-      * 水平居中：
-
-        ```css
-        position: absolute;
-        left: 50%;
-        margin-left: -eleWidth/2;
-        /* 或 */ transform: translateX(-50%);
-        ```
-
-  * 固定定位：`position: fixed;`  --- IE 6 不支持；
-
-    * 与背景关联方式 `background-attachment: fixed` 类似；
-      * 背景关联方式位使得背景图片不随页面滚动；
-      * 固定定位使得该元素不随网页滚动；
-    * 大部分特性与绝对定位相同：
-      * 开启固定定位后，会脱离标准流、不占用标准流的空间；
-      * 不区分 block / inline / inline-block，开启后以 block 的方式处理元素；
-    * 应用场景：顶部导航条，侧边广告，“返回顶部” 按钮 ……
-
-  * `z-index` 属性：
-
-    * 控制定位流元素（标准流元素设置 z-index 无效）的 z 轴层级（覆盖关系），默认值 0 ；
-    * 默认情况下，定位流元素会覆盖标准流元素；
-    * 对于定位流元素，写在后面的会覆盖写在前面的；
-    * 设置了 z-index 的元素，z-index 值大的元素显示在上层；
-    * 从父现象：父元素若设置了 z-index，则子元素的 z-index 会失效；

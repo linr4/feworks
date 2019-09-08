@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴效果</title>
+    <style>
+        div, ul, li, img {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .box {
+            width: 1195px;
+            height: 235px;
+            margin: 100px auto;
+
+        }
+        ul {
+            list-style: none;
+            width: 1050px;
+            height: 235px;
+            overflow: hidden;
+        }
+        li {
+            width: 150px;
+            height: 235px;
+            float: left;
+            overflow: hidden;
+            transition: all 1s;
+        }
+        img {
+            width: 295px;
+        }
+
+        ul:hover li {
+            width: 126px;
+        }
+        ul li:hover {
+            width: 295px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="https://img20.360buyimg.com/babel/s1180x940_jfs/t1/62105/10/9356/97674/5d71fcfbE56b2ac53/1cf2b507b75c02df.jpg.webp" alt="image"></li>
+            <li><img src="https://img10.360buyimg.com/pop/s1180x940_jfs/t1/73861/8/7311/133024/5d562902E29c956c1/da390c8c345c48e0.jpg.webp" alt="image"></li>
+            <li><img src="https://img30.360buyimg.com/pop/s1180x940_jfs/t1/78845/38/7332/206013/5d564eadEd1991871/df631daceb832168.jpg.webp" alt="image"></li>
+            <li><img src="https://img14.360buyimg.com/pop/s1180x940_jfs/t1/74727/19/9141/109544/5d6cd98aE18546896/778ddf185890ac6b.jpg.webp" alt="image"></li>
+            <li><img src="https://img30.360buyimg.com/pop/s1180x940_jfs/t1/71447/25/9318/99904/5d720f00Ee6cbf055/6b1bebabed71ed6d.jpg.webp" alt="image"></li>
+            <li><img src="https://img14.360buyimg.com/pop/s1180x940_jfs/t1/44106/29/14062/96986/5d70b454Eb9568d5e/6b7dda72cee9f1c4.jpg.webp" alt="image"></li>
+<!--            <li><img src="https://img13.360buyimg.com/pop/s1180x940_jfs/t1/57143/37/9031/58430/5d678cfbEacb99f4f/c3b3c74731496e80.jpg.webp" alt="image"></li>-->
+        </ul>
+    </div>
+</body>
+</html>
