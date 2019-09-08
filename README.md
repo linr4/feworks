@@ -15,7 +15,8 @@ Web development learning notes and case study
 ###### 20190908 - Day 144
 
 - 复习 `<a>` 标签的伪类选择器 (+1h = 308.5 of 600)
-- 复习 CSS - 过渡模块 transition 的使用 (+2h = 310.5 of 600)
+- 复习 CSS - 过渡模块 transition (+2h = 310.5 of 600)
+- 复习 CSS - 过渡模块 transform (+2h = 312.5 of 600)
 
 ###### 20190907 - Day 143
 
