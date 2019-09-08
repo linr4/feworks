@@ -790,4 +790,31 @@
   }
   ```
 
-  
+
+
+
+###### 2D 转换模块
+
+* 格式：`transform: translate(x, y) rotate(45deg) scale(x, [y])`
+* 转换会修改坐标系，如旋转之后，做 translate() 就不是水平或垂直平移，而是按坐标系倾斜的方向移动；
+* `scale(x,[y])` 中的 y 可省略，默认 y = x ；
+* 形变中心点：`transform-origin` 
+  * 元素默认以自己的中心点为圆心做旋转，`transform-orgin` 用于修改旋转圆心的位置；
+  * 格式：`transform-origin: x y;` 坐标 (0, 0) 左上角，(50%, 50%) 或 (center center) 中心点；
+  * 坐标值可以是：像素、百分比、关键字（left, center, right, top, bottom）；
+
+* 旋转轴向：元素旋转轴，x / y / z
+
+  * `rotate()` 默认 Z 轴，与 `rotateZ()` 一样；
+
+  * `rotateX()` 、`rotateY()`，与 `perspective: length;` 配合才有明显效果；
+
+  * `perspective: length;` 透视效果
+
+    * 近大远小，length 表示与物体的距离，越小越明显；
+
+    * 需添加到做转换的元素的父元素或祖先元素上；
+
+      
+
+* Other Tips：`<li>` 要横向排列，除了 `float: left;` 之外，也可 `display: inline-block;` 同样效果；

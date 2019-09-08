@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poker</title>
+    <style>
+        div {
+            width: 240px;
+            height: 340px;
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid #000;
+            perspective: 200px;
+            background-color: #ccc;
+            margin: 0 auto;
+        }
+        div:hover img {
+            transform: rotateX(45deg);
+        }
+        img {
+            width: 235px;
+            height: 333px;
+            border-radius: 15px;
+            transition: transform 2s;
+            transform-origin: center bottom;
+        }
+
+        ul {
+            list-style: none;
+            width: 500px;
+            height: 200px;
+            margin: 30px auto;
+            border: 1px solid #000;
+        }
+        li {
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+            background-color: seagreen;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="images/poker10.jpg" alt="">
+    </div>
+
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>

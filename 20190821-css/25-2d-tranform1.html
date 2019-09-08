@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+            width: 800px;
+            height: 500px;
+            border: 1px solid #000;
+            margin: 100px auto;
+        }
+        li {
+            width: 150px;
+            height: 50px;
+            margin: 30px auto;
+            background-color: turquoise;
+            border: 1px solid green;
+        }
+        li:nth-of-type(2) {
+            transform: rotate(45deg);
+        }
+        li:nth-of-type(3) {
+            transform: translate(250px, 50px);
+        }
+        li:nth-of-type(4) {
+            transform: scale(1.5, 2);
+        }
+        li:last-of-type {
+            transform: translate(-10px, -20px)  scale(1.2, 1.3);
+        }
+
+    </style>
+</head>
+<body>
+<ul>
+    <li>normal</li>
+    <li>rotate 45 deg</li>
+    <li>translate(250px, 50px)</li>
+    <li>scale(1.5, 2)</li>
+    <li></li>
+</ul>
+</body>
+</html>

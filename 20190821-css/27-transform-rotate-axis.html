@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rotate axis</title>
+    <style>
+
+        ul {
+            list-style: none;
+            width: 300px;
+            height: 400px;
+            border: 1px solid #000;
+            margin: 100px auto;
+        }
+        li {
+            width: 180px;
+            height: 100px;
+            border: 1px solid #000;
+            margin: 20px auto;
+            perspective: 100px;
+        }
+        img {
+            width: 180px;
+            height: 100px;
+        }
+        li:first-child img {
+            transform: rotateZ(30deg);
+        }
+        li:nth-of-type(2) img {
+            transform: rotateX(30deg);
+        }
+        li:last-of-type img {
+            transform: rotateY(30deg);
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><img src="https://oimagec2.ydstatic.com/image?url=http://cms-bucket.ws.126.net/2019/09/02/88b58dd0a0644bcfaf5e2b7f3f563ce9.jpeg&w=180&h=100&cw=180&ch=100&fill=0&sbc=0&quality=95&cgra=TOP_CENTER&product=open" alt=""></li>
+    <li><img src="https://oimagec2.ydstatic.com/image?url=http://cms-bucket.ws.126.net/2019/09/05/118f3834e36f42ad95fcec2b1299e7b2.jpeg&w=180&h=100&cw=180&ch=100&fill=0&sbc=0&quality=95&cgra=TOP_CENTER&product=open" alt=""></li>
+    <li><img src="https://oimagec2.ydstatic.com/image?url=http://cms-bucket.ws.126.net/2019/08/30/17993c819b7c464bb54a37ca097153c6.jpeg&w=180&h=100&cw=180&ch=100&fill=0&sbc=0&quality=95&cgra=TOP_CENTER&product=open" alt=""></li>
+</ul>
+</body>
+</html>
