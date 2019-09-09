@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190909 - Day 145
+
+- 复习 CSS - 2D 转换模块、动画模块 (+3.5h = 316 of 600)
+
 ###### 20190908 - Day 144
 
 - 复习 `<a>` 标签的伪类选择器 (+1h = 308.5 of 600)
