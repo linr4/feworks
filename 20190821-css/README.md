@@ -521,7 +521,7 @@
     
     * 标准流中，盒子的高度由其内容的高度撑起；
     
-    * 浮动流中，浮动元素不会撑起父元素的高度；
+    * 浮动流中，<font color=red>浮动元素不会撑起父元素的高度</font>；若要设置父元素位置，需要指定其宽高；
     
       
     
@@ -750,10 +750,10 @@
 
 ###### 过渡模块 `transition`
 
-* 过渡三要素：
-  * 必须有属性发生变化，如：通过 hover 改变元素属性，`div:hover {width:30px, bgc:red}`；
-  * 指明哪个属性需要执行过渡效果，如：`transition-property: width, background-color;`
-  * 指明过渡时长，如：`div {transition-duration: 5s, 3s;}`
+* 三要素：
+  * 创建：通过元素的伪类设置属性的变化，如：`div:hover {width:30px, bgc:red}`；
+  * 绑定：在元素样式中指明要执行过渡的属性，如：`div {transition-property: width, bgc;}`
+  * 时长：在元素样式中指明过渡的执行时长，如：`div {transition-duration: 5s, 3s;}`
 * 其他属性：
   * `transition-timing-function` 过渡效果执行的时间曲线，默认 ease；
     * `linear` 匀速，等于 `cubic-bezier(0,0,1,1)`
@@ -796,8 +796,11 @@
 ###### 2D 转换模块
 
 * 格式：`transform: translate(x, y) rotate(45deg) scale(x, [y])`
+
 * 转换会修改坐标系，如旋转之后，做 translate() 就不是水平或垂直平移，而是按坐标系倾斜的方向移动；
+
 * `scale(x,[y])` 中的 y 可省略，默认 y = x ；
+
 * 形变中心点：`transform-origin` 
   * 元素默认以自己的中心点为圆心做旋转，`transform-orgin` 用于修改旋转圆心的位置；
   * 格式：`transform-origin: x y;` 坐标 (0, 0) 左上角，(50%, 50%) 或 (center center) 中心点；
@@ -818,3 +821,95 @@
       
 
 * Other Tips：`<li>` 要横向排列，除了 `float: left;` 之外，也可 `display: inline-block;` 同样效果；
+
+
+
+###### 阴影
+- 盒子阴影
+	- `box-shadow: <h-shadow> <v-shadow> [blur] [spread] [color] [inset];`
+	- `h-shadow`：水平偏移，像素，可为负值；
+	- `v-shadow`：垂直偏移，像素；
+	- `blur`：模糊度，像素；
+	- `spread`：阴影扩展，像素；类似光晕，就像水滴在纸上之后往外渗；
+	- `color`：阴影颜色
+	- `inset`：内阴影（默认 outset 外阴影）；
+	- 通常只需指定三个参数：`box-shadow: 10px 10px 10px;` 
+		- 阴影颜色默认跟随盒子内容的颜色；
+	
+- 文字阴影
+	- `text-shadow: h-shadow v-shadow [blur] [color]`，没有 `spread` 和 `inset`；
+	- 颜色也可省略，默认和文字同色；
+
+
+
+###### 动画模块
+
+* 与过渡（Transition）的区别：过渡模块需要人为触发，动画模块可以自动执行；
+* 三要素：(CBD - Create, Bind, Duration)
+  * **创建**动画模块：`@keyframes aniMoveEl {from {margin-left: 0;} to {margin-left: 100px;}}`
+  * **绑定**动画模块到元素：`div {animation-name: aniMoveEl;}`
+  * 指定动画的执行**时长**：`div {animation-duration: 2s;}`
+* `animation` 的其它属性：
+  * `animation-delay` 延迟执行开始时间，默认 0；
+  * `animation-timing-function` 执行的速度曲线，默认 ease；
+  * `animation-iteration-count` 动画播放次数，默认 1；无限次 infinite；
+  * `animation-direction` 规定动画是否在下一个周期逆向执行
+    * 默认 normal，每次都原始位置开始；
+    * alternate，原路返回、往复运动；
+  * `animation-play-state` 规定动画播放或暂停，默认 running；暂停 paused；
+  * `animation-fill-mode`  规定动画在执行之前和之后的样式（状态）；
+    * `none` 默认，不改变行为；
+    * `forwards` 动画完成后，保持在最后一帧的属性值；
+    * `backwards` 在 `animation-delay` 指定的时间内、动画执行前，应用第一帧的起始属性值；
+    * `both` 上述两者皆生效；
+
+* 创建动画的两种方式：
+  * `@keyframes aniName {from { } to { }}`
+  * `@keyframes aniNmae {0% { } 10% { } 20% { } ... 100% { }}`
+
+- 连写：`animation: name duration timing-function delay iteration-count direction fill-mode`
+  - 可以简写为 `animation: name duration`，其余可以选择使用或省略；
+  - `delay` 即使为 0 也要加上单位 0s 或 0ms，否则整个语句不能生效；
+
+- 案例总结：
+
+  - 图片无限滚动轮播：
+
+    - HTML 结构：`div>ul>li*n>img` ，最外层套一个 `div` 的目的，是让 `div` 限定可视图片区域，同时还让 `ul` 可以设置一个足够宽的宽度以便容下所有 `li` 横排；如果把可视区域直接设在 `ul` 上的话， `li` 无论采用何种方式（`dib`, `fl`, `poa`, etc.）都无法全部横排、也就无法实现跑马灯的效果；
+
+    - 图片总数为 M、可视区域显示的图片数量为 N 时，则需要在 `li` 中嵌入的图片数量为 M+N，最前面的 N 张重复放在最后面，以便在动画播放完一个周期之后跳转到第一个 `li` 时不会有明显的跳动；
+
+      ```html
+      <!-- 可视区域初始状态展示2张图片，共有4张图片；需把前2张图重复放到最后，以便完成一个播放周期之后、ul 跳转到起始位置时，出现明显的视觉跳动 -->
+      
+      <div>
+          <ul>
+              <li><img src="images/1.jpg" alt=""></li>
+              <li><img src="images/2.jpg" alt=""></li>
+              <li><img src="images/3.jpg" alt=""></li>
+              <li><img src="images/4.jpg" alt=""></li>
+              <li><img src="images/1.jpg" alt=""></li>
+              <li><img src="images/2.jpg" alt=""></li>
+          </ul>
+      </div>
+      ```
+
+    - 鼠标悬停在图片上时，实现当前图片正常显示、其余图片出现蒙版效果的方法：
+
+      ```css
+      ul>li {
+          background-color: black; /* 先设置 li 背景色为黑色 */
+      }
+       
+      ul:hover {
+          animation-play-state: paused; /* 鼠标悬停时，暂停播放动画 */
+      }
+      ul:hover>li>img {
+          opacity: .5;   /* 鼠标悬停时，设置所有图片为半透明，露出 li 部分底色，实现蒙版效果 */
+      }
+      ul:hover>li>img:hover {
+          opacity: 1;    /* 鼠标悬停时，设置当前图片为不透明，该设置具体到某张图片、priority 高于上一条、因此 override 上一条的设置，图片仍正常显示 */
+      }
+      ```
+
+      

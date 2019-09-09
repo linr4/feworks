@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+            box-sizing: border-box;
+            background-color: #eee;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .wrapper {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            border-left: 1px solid #ccc;
+            box-shadow: 1px 1px 1px gray;
+        }
+
+        .menu1 {
+            width: 400px;
+            line-height: 25px;
+            text-align: center;
+        }
+
+        .menu1>li {
+            display: inline-block;
+            width: 97px;
+            box-shadow: 1px 1px 1px gray;
+            position: relative;
+
+        }
+
+        .menu1>li:hover .menu2 {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .menu1>li:hover .menu2>li {
+            transform: none;
+        }
+
+        .menu2 {
+            width: 94px;
+            position: absolute;
+            left: 2px;
+            top: 28px;
+            box-shadow: 1px 1px 1px gray;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 1s;
+        }
+
+        .menu2>li {
+            line-height: 25px;
+            border-bottom: 1px solid #ccc;
+            transform: rotateY(180deg);
+            transition: all 1s;
+        }
+
+        .menu2>li:nth-of-type(5) {
+            transition-delay: 0ms;
+        }
+
+        .menu2>li:nth-of-type(4) {
+            transition-delay: 100ms;
+        }
+
+        .menu2>li:nth-of-type(3) {
+            transition-delay: 200ms;
+        }
+
+        .menu2>li:nth-of-type(2) {
+            transition-delay: 300ms;
+        }
+
+        .menu2>li:nth-of-type(1) {
+            transition-delay: 400ms;
+        }
+
+        .menu1>li:hover .menu2>li:nth-of-type(1) {
+            transition-delay: 0ms;
+        }
+
+        .menu1>li:hover .menu2>li:nth-of-type(2) {
+            transition-delay: 100ms;
+        }
+
+        .menu1>li:hover .menu2>li:nth-of-type(3) {
+            transition-delay: 200ms;
+        }
+
+        .menu1>li:hover .menu2>li:nth-of-type(4) {
+            transition-delay: 300ms;
+        }
+
+        .menu1>li:hover .menu2>li:nth-of-type(5) {
+            transition-delay: 400ms;
+        }
+
+        .cont {
+            line-height: 22px;
+            padding: 15px;
+            text-indent: 2em;
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <ul class="menu1">
+            <li class="mi1">
+                <span>file</span>
+                <ul class="menu2">
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                </ul>
+            </li>
+            <li class="mi1">
+                <span>view</span>
+                <ul class="menu2">
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                </ul>
+            </li>
+            <li class="mi1">
+                <span>options</span>
+                <ul class="menu2">
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                </ul>
+            </li>
+            <li class="mi1">
+                <span>help</span>
+                <ul class="menu2">
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                    <li class="mi2">menu item</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="cont">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde illo, optio necessitatibus perferendis doloremque repellat totam! Ex aut at error, esse sit aliquid quis itaque perferendis molestias voluptates quas commodi.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde illo, optio necessitatibus perferendis doloremque repellat totam! Ex aut at error, esse sit aliquid quis itaque perferendis molestias voluptates quas commodi.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde illo, optio necessitatibus perferendis doloremque repellat totam! Ex aut at error, esse sit aliquid quis itaque perferendis molestias voluptates quas commodi.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde illo, optio necessitatibus perferendis doloremque repellat totam! Ex aut at error, esse sit aliquid quis itaque perferendis molestias voluptates quas commodi.
+        </div>
+    </div>
+</body>
+
+</html>

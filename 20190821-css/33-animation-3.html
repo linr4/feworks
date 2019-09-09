@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>无限轮播图</title>
+    <style>
+        div,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        div {
+            width: 600px;
+            height: 188px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+        ul {
+            list-style: none;
+            width: 1800px;
+            height: 188px;
+            animation: move 8s linear infinite;
+        }
+
+        ul>li {
+            float: left;
+            width: 299px;
+            height: 188px;
+            line-height: 188px;
+            text-align: center;
+            font-size: 60px;
+            background-color: black;
+        }
+
+        @keyframes move {
+            from {
+                margin-left: 0;
+            }
+            to {
+                margin-left: -1200px;
+            }
+        }
+        ul:hover {
+            animation-play-state: paused;
+        }
+         ul:hover>li>img {
+            opacity: .5;
+        }
+        ul:hover>li>img:hover {
+            opacity: 1;
+        }
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><img src="images/lbb.jpg" alt=""></li>
+            <li><img src="images/reba.jpg" alt=""></li>
+            <li><img src="images/dwayne.jpg" alt=""></li>
+            <li><img src="images/JB007.jpg" alt=""></li>
+            <li><img src="images/lbb.jpg" alt=""></li>
+            <li><img src="images/reba.jpg" alt=""></li>
+        </ul>
+    </div>
+</body>
+
+</html>

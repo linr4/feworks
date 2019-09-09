@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Picture Wall</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            box-sizing: border-box;
+            width: 1350px;
+            height: 550px;
+            margin: 100px auto;
+            padding: 0 50px;
+            list-style: none;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 10px 10px 10px gray;
+            position: relative;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        li {
+            width: 228px;
+            height: 379px;
+            
+            text-align: center;
+            background-color: white;
+            transition: all 1s;
+            box-sizing: border-box;
+            border-radius: 15px;
+            box-shadow: 5px 5px 5px gray;
+        }
+        img {
+            width: 100%;
+            border-radius: 15px;
+        }
+        li:nth-of-type(1) {
+            transform: rotate(10deg);
+        }
+        li:nth-of-type(2) {
+            transform: rotate(-30deg);
+        }
+        li:nth-of-type(3) {
+            transform: rotate(30deg);
+        }
+        li:nth-of-type(4) {
+            transform: rotate(-20deg);
+        }
+
+        li:hover {
+            z-index: 99;
+            transform: scale(1.2);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="wall">
+        <ul>
+            <li><img src="images/JB007.jpg" alt="">Daniel Craig "James Bond"</li>
+            <li><img src="images/reba.jpg" alt="">Diliraba Dilmurat</li>
+            <li><img src="images/lbb.jpg" alt="">Li Bing-bing</li>
+            <li><img src="images/dwayne.jpg" alt="">Dwayne Johnson the Rock</li>
+        </ul>
+    </div>
+</body>
+</html>
