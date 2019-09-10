@@ -12,6 +12,11 @@ Web development learning notes and case study
 
 ---
 
+###### 20190910 - Day 146
+
+- 复习 CSS -  3D 模块、背景属性 (+4h = 320 of 600)
+- 练习 CSS - 综合网站 demo (+3h = 323 of 600)
+
 ###### 20190909 - Day 145
 
 - 复习 CSS - 2D 转换模块、动画模块 (+3.5h = 316 of 600)

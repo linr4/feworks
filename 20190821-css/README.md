@@ -868,8 +868,25 @@
   * `@keyframes aniNmae {0% { } 10% { } 20% { } ... 100% { }}`
 
 - 连写：`animation: name duration timing-function delay iteration-count direction fill-mode`
+
   - 可以简写为 `animation: name duration`，其余可以选择使用或省略；
   - `delay` 即使为 0 也要加上单位 0s 或 0ms，否则整个语句不能生效；
+
+- Tips：
+
+  - `@keyframes` 中设置的属性会覆盖的元素样式中写的属性，若有重复，需一并写在`@keyframes` 中；
+  - 动画中不变的属性写在前面、有变化的写在后面；否则达不到预期效果；
+
+  ```css
+  @keyframe rotate-box {
+      from {
+          transform: rotateX(-10deg) rotateY(0deg); /* rotateX() 始终不变，写在前面 */
+      }
+      to {
+          transform: rotateX(-10deg) rotateY(360deg);
+      }
+  }
+  ```
 
 - 案例总结：
 
@@ -917,5 +934,122 @@
 ###### 3D 转换模块
 
 * 启用 3D 效果：父元素添加 `transform-style: preserve-3d` 属性；
-* 正方体：`ul>li*6`，通过 `transform: rotateZ() translateX()` 做转换，每个面不同参数；
-* 长方体：先做出正方体，再通过 `transorm: scale()` 拉伸 “前后上下” 四个面的长度即可；
+
+* 正方体：`ul>li*6`，通过 `transform: rotateX() translateZ()` 做转换，每个面旋转角度+90；
+
+* 长方体：先做出正方体，再添加 `transorm: scale()` 拉伸 “前后上下” 四个面的长度即可；
+
+  ```css
+  ul {
+      position: relative;
+      transform-style: preserve-3d;
+  }
+  ul>li {
+      position: absolute;
+      left: 0;
+      padding: 0;
+  }
+  ul>li:nth-child(1) {
+      background: tomato url('images/1.jpg') no-repeat 0 0;
+      transform: rotateX(90deg) translateZ(100px) scale(2, 1);
+  }
+  ul>li:nth-child(2) {
+      background: skyblue url('images/2.jpg') no-repeat 0 0 ;
+      transform: rotateX(180deg) translateZ(100px) scale(2, 1);
+  }
+  ul>li:nth-child(3) {
+      background: yellowgreen url('images/3.jpg') no-repeat 0 0;            
+      transform: rotateX(270deg) translateZ(100px) scale(2, 1);
+  }
+  ul>li:nth-child(4) {
+      background: seagreen url('images/4.jpg') no-repeat 0 0;            
+      transform: rotate(360deg) translateZ(100px) scale(2, 1);
+  }
+  ul>li:nth-child(5) {
+      background-color: turquoise;
+      transform: rotateY(-90deg) translateZ(200px);
+  }
+  ul>li:nth-child(6) {
+      background-color: pink;
+      transform: rotateY(90deg) translateZ(200px);
+  }
+  ```
+
+  
+
+###### 背景属性
+
+* 背景图片尺寸属性：`background-size` ，规定背景图片的大小；
+
+  * 取值：
+
+    * 默认：图片实际大小；
+
+    * 像素：`background-size: 100px 100px;` 或 `background-size: 100px;` 
+
+    * 百分比：`background-size: 50% 50%;` 或 `background-size: 50%;` 
+
+    * 宽度等比拉伸：`background-size: auto 200px;` 或 `bgz: 200px;` ，另一个默认 `auto`；
+
+    * 高度等比拉伸：`background-size: 200% auto;` 或 `bgz: 200%;` ，另一个默认 `auto`；
+
+    * cover：等比拉伸，宽或高较短的一边也需填满元素；
+
+    * contain：等比拉伸，宽或高有一边填满元素即可；
+
+      
+
+* 背景定位图片定位区域属性：`background-origin`，规定背景图片在什么位置开始显示；
+
+  * 取值：
+
+    * `padding-box`：从 `pedding` 区域开始显示，默认；
+
+    * `content-box`：从 `content` 区域开始显示；
+
+    * `border`：从 `border` 区域开显示；
+
+      
+
+* 背景颜色绘制区域属性：`background-clip`，规定背景颜色从哪里 (border, padding, content) 开始填充；
+  * 取值：
+    * `border`：从 `border` 区域开绘制，默认
+    * `pedding-box`：从 `pedding` 区域开始绘制
+    * `content-box`：从 `content` 区域开始绘制
+
+
+
+* 多重背景图片：
+
+  * 格式：`background-image: url(pic1.png), url(pic2.png), ...`
+
+  * 连写：`background: url(1.jpg) no-repeat 0 0, url(2.jpg) no-repeat right top;`
+
+  * 图片多的话，可拆开写：
+
+    ```css
+    background-image: url(1.jpg), url(2.jpg), url(3.jpg), ...
+    background-repeat: no-repeat, no-repeat, no-repeat, ...
+    background-position: 0 0, left bottom, right top, ...
+    ```
+
+    
+
+###### CSS 代码引入方式
+
+* 四个引入 CSS 代码的方式
+  * 行内样式：`<div style="color=red"> This is a div </div>`
+  * 嵌入样式：`<head><style> div {color: red} </style></head>`
+  * 外链样式：`<head><link rel="stylesheet" href="css/style.css"></head>`
+  * 导入样式：`<head><style> @import "css/style.css" </style></head>`
+* **外链**样式在实际开发中常用，与嵌入和行内相比，结构与样式分离，便于维护；
+* **导入**样式在 CSS 2.1 推出，不兼容早期浏览器；
+* **导入**样式会先加载 HTML 再加载 CSS，而外链样式则先加载 CSS 再加载 HTML，导入样式的用户体验稍差；
+
+
+
+###### 编写新站点的步骤
+
+* 创建站点文件夹，下面再创建 `index.html, images/, css/base.css, js/` ；
+* 重置默认样式（参考 YUI CSS Reset），设置全局样式；
+* 确定网页结构，顶部、导航、广告、商品内容、底部等；
