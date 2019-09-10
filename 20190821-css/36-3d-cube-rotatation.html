@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Cube - auto rotate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            perspective: 300px;
+        }
+        span {
+            display: block;
+            text-align: center;
+            padding-top: 50px;
+        }
+        ul {
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-10deg) rotateY(-10deg);
+            animation: rotate 5s linear 0s infinite normal both;
+        }
+        ul>li {
+            list-style: none;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 0;
+            padding: 0;
+            color: white;
+            font-size: 60px;
+            text-align: center;
+            line-height: 200px;
+            user-select: none;
+        }
+        ul>li:nth-child(1) {
+            background: tomato url('images/reba.jpg') no-repeat 0 0 ;
+            transform: rotateX(90deg) translateZ(100px) scale(2, 1);
+        }
+        ul>li:nth-child(2) {
+            background: skyblue url('images/lbb.jpg') no-repeat 0 0 ;
+            transform: rotateX(180deg) translateZ(100px) scale(2, 1);
+        }
+        ul>li:nth-child(3) {
+            background: yellowgreen url('images/jb007.jpg') no-repeat 0 0 ;            
+            transform: rotateX(270deg) translateZ(100px) scale(2, 1);
+        }
+        ul>li:nth-child(4) {
+            background: seagreen url('images/dwayne.jpg') no-repeat 0 0 ;            
+            transform: rotate(360deg) translateZ(100px) scale(2, 1);
+        }
+        ul>li:nth-child(5) {
+            background-color: turquoise;
+            transform: rotateY(-90deg) translateZ(200px);
+        }
+        ul>li:nth-child(6) {
+            background-color: pink;
+            transform: rotateY(90deg) translateZ(200px);
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateX(0deg);
+            }
+            to {
+                transform: rotateX(-360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <span>Drag to rotate the cube</span>
+    <ul>
+        <li>1-top</li>
+        <li>2-rear</li>
+        <li>3-btm</li> 
+        <li>4-front</li>
+        <li>5-left</li>
+        <li>6-right</li>
+    </ul>
+
+
+</body>
+</html>

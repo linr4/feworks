@@ -917,4 +917,5 @@
 ###### 3D 转换模块
 
 * 启用 3D 效果：父元素添加 `transform-style: preserve-3d` 属性；
-
+* 正方体：`ul>li*6`，通过 `transform: rotateZ() translateX()` 做转换，每个面不同参数；
+* 长方体：先做出正方体，再通过 `transorm: scale()` 拉伸 “前后上下” 四个面的长度即可；
