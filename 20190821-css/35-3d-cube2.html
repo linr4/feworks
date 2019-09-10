@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Cube - a better solution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        span {
+            display: block;
+            text-align: center;
+            padding-top: 50px;
+        }
+        ul {
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-10deg) rotateY(-10deg);
+        }
+        ul>li {
+            list-style: none;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 0;
+            padding: 0;
+            color: white;
+            font-size: 60px;
+            text-align: center;
+            line-height: 200px;
+            user-select: none;
+        }
+        ul>li:nth-child(1) {
+            background-color: tomato;
+            transform: rotateX(90deg) translateZ(100px);
+        }
+        ul>li:nth-child(2) {
+            background-color: skyblue;
+            transform: rotateX(180deg) translateZ(100px);
+        }
+        ul>li:nth-child(3) {
+            background-color: yellowgreen;
+            transform: rotateX(270deg) translateZ(100px);
+        }
+        ul>li:nth-child(4) {
+            background-color: seagreen;
+            transform: rotate(360deg) translateZ(100px);
+        }
+        ul>li:nth-child(5) {
+            background-color: turquoise;
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+        ul>li:nth-child(6) {
+            background-color: pink;
+            transform: rotateY(90deg) translateZ(100px);
+        }
+    </style>
+</head>
+<body>
+    <span>Drag to rotate the cube</span>
+    <ul>
+        <li>1-top</li>
+        <li>2-rear</li>
+        <li>3-btm</li> 
+        <li>4-front</li>
+        <li>5-left</li>
+        <li>6-right</li>
+    </ul>
+
+    <script>
+        let cubeEl = document.querySelector('ul');
+
+        document.onmousedown = function (ev) {
+            let curX = ev.pageX;
+            let curY = ev.pageY;
+            document.onmousemove = function (e) {
+                let newX = e.pageX - curX -10;
+                let newY = e.pageY - curY +10;
+                cubeEl.style.transform = `rotateX(${-newY}deg) rotateY(${newX}deg)`;
+            }
+        }
+
+        document.onmouseup = function () {
+            document.onmousemove = null;
+            console.log('mouseup')
+        }
+    </script>
+</body>
+</html>
