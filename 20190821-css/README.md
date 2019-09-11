@@ -1053,3 +1053,33 @@
 * 创建站点文件夹，下面再创建 `index.html, images/, css/base.css, js/` ；
 * 重置默认样式（参考 YUI CSS Reset），设置全局样式；
 * 确定网页结构，顶部、导航、广告、商品内容、底部等；
+
+
+
+###### More Tips
+
+* 超宽图片（如：banner）的居中方法：
+
+  1. 父元素 `text-align: center;`
+  2. 图片 `height: 100%;`
+  3. 图片 `margin: 0 -100%;`
+
+  ```html
+  <div>
+      <img src="images/banner.jpg">
+  </div>
+  ```
+
+  ```css
+  div {
+      width: 100%;
+      height: 600px;
+      text-align: center; /* 关键点：容器要设置(inline)子元素水平居中对齐 */
+  }
+  div img {
+      height: 100%;      /* 设置高度为图片本身的高度 */
+      margin: 0 -100%;   /* 关键点：左右 margin 为 -100%， */
+  }
+  ```
+
+  

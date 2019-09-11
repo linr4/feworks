@@ -1,0 +1,69 @@
+.header {
+    width: 100%;
+    height: 60px;
+    background-color: #000;
+}
+.header .header__in {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+.header .header__logo {
+    float: left;
+    width: 190px;
+    height: 100%;
+}
+.header .header__logo h1 {
+    width: 100%;
+    height: 100%;
+}
+.header .header__logo h1 a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: url("../images/nubia-logo.png") no-repeat;
+}
+.header .header__navbar {
+    float: right;
+    width: 740px;
+    height: 100%;
+}
+
+.header .header__navbar .menu__list {
+    float: left;
+    width: 550px;
+    height: 100%;
+}
+.header .header__navbar .menu__list li {
+    float: left;
+    line-height: 60px;
+    margin-left: 40px;
+}
+.header .header__navbar .menu__list li a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+.header .header__navbar .reg__login {
+    float: right;
+    width: 150px;
+    height: 100%;
+}
+.header .header__navbar .reg__login li {
+    float: right;
+    line-height: 60px;
+    margin-right: 10px;
+}
+.header .header__navbar .reg__login li a {
+    color: #ccc;
+}
+.header .header__navbar .reg__login li:nth-of-type(3) {
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    background: url("../images/nubia-syb-all.png") no-repeat;
+}
+header > div > div.header__navbar > ul.menu__list > li > a:hover,
+header > div > div.header__navbar > ul.reg__login > li > a:hover {
+    color: #e82c07;
+}

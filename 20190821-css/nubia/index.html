@@ -1,54 +1,276 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <title>Nubia</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
-    <!-- 顶部开始 -->
-    <div class="top">
-        <div class="top_inner">
-            <div class="top_left">
-                <h1><a href="" title="努比亚"></a></h1>
+    <!-- 头部开始 -->
+    <header class="header clearfix">
+        <div class="hd__wrapper">
+            <div class="hd__logo">
+                <h1><a href=""></a></h1>
             </div>
-            <div class="top_right">
-                <ul class="top_nav">
-                    <li><a href="">首页</a></li>
-                    <li><a href="">商城</a></li>
-                    <li><a href="">产品</a></li>
-                    <li><a href="">应用</a></li>
-                    <li><a href="">服务</a></li>
-                    <li><a href="">体验店</a></li>
-                    <li><a href="">社区</a></li>
+            <div class="hd__nav">
+                <ul class="hd__menu">
+                    <li><a href="" class="menu__link hover_color">首页</a></li>
+                    <li><a href="" class="menu__link hover_color">商城</a></li>
+                    <li><a href="" class="menu__link hover_color">产品</a></li>
+                    <li><a href="" class="menu__link hover_color">应用</a></li>
+                    <li><a href="" class="menu__link hover_color">服务</a></li>
+                    <li><a href="" class="menu__link hover_color">体验店</a></li>
+                    <li><a href="" class="menu__link hover_color">社区</a></li>
                 </ul>
-                <ul class="top_login">
-                        <li><a href="">登录</a></li>
-                        <li><a href="">注册</a></li>
-                        <li></li>
+                <ul class="hd__user">
+                    <li><a href="" class="user__link hover_color">登录</a></li>
+                    <li><a href="" class="user__link hover_color">注册</a></li>
+                    <li><i class="user__icon"></i></li>
                 </ul>
             </div>
         </div>
-    </div>
-    <!-- 顶部结束 -->
+    </header>
+    <!-- 头部结束 -->
 
-    <!-- 广告开始 -->
+    <!-- banner begins -->
+
     <div class="banner">
+        <div class="banner__carrousel">
+            <img src="images/banner.jpg" alt="" class="banner__img">
+            <ol class="banner__indicators">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
+        </div>
+        <div class="banner__phonelist_wrapper">
+            <div class="banner__phonelist">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <img src="images/nav-phone1.png" alt="">
+                            <p>Z11 miniS <span style="color: red">新款</span></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/nav-phone2.png" alt="">
+                            <p>Z11</span></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/nav-phone3.png" alt="">
+                            <p>Z11 Max</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/nav-phone4.png" alt="">
+                            <p>Z11 mini</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/nav-phone5.png" alt="">
+                            <p>N1</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/nav-phone6.png" alt="">
+                            <p>布拉格S</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/nav-phone7.png" alt="">
+                            <p>My 布拉格</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
+
+        <div class="banner__videos">
+            <ul>
+                <li><img src="images/video1.jpg" alt="">
+                    <div class="video__playbtn">
+                        <img src="images/nb-pro-video-ico-s.png" alt="">
+                        <h3>Z11 黑金版</h3>
+                        <p>产品视频</p>
+                    </div>
+                </li>
+                <li><img src="images/video2.jpg" alt="">
+                    <div class="video__playbtn">
+                        <img src="images/nb-pro-video-ico-s.png" alt="">
+                        <h3>Z11 黑金版</h3>
+                        <p>产品视频</p>
+                    </div>
+                </li>
+                <li><img src="images/video3.jpg" alt="">
+                    <div class="video__playbtn">
+                        <img src="images/nb-pro-video-ico-s.png" alt="">
+                        <h3>Z11 黑金版</h3>
+                        <p>产品视频</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-    <!-- 广告结束 -->
-    
-    <!-- 内容开始 -->
+
+    <!-- banner ends -->
+
+    <!-- content begins -->
     <div class="content">
+        <dl>
+            <dt>
+                <h3>最新产品</h3>
+                <p>查看全部手机 &gt;</p>
+            </dt>
+            <dd>
+                <ul class="content__products">
+                    <li><img src="images/con-phone1.jpg" alt="" class="img_slide img_slide_right">
+                        <div class="content__phone_desc">
+                            <h3>Z11极光蓝</h3>
+                            <p>极光蓝</p>
+                            <span>一探究竟</span>
+                        </div>
+                    </li>
+                    <li><img src="images/con-phone2.jpg" alt="" class="img_magnify">
+                        <div class="content__phone_desc">
+                            <h3>Z11极光蓝</h3>
+                            <p>极光蓝</p>
+                            <span>一探究竟</span>
+                        </div>
+                    </li>
+                    <li><img src="images/con-phone3.jpg" alt="" class="img_slide img_slide_left">
+                        <div class="content__phone_desc">
+                            <h3>Z11极光蓝</h3>
+                            <p>极光蓝</p>
+                            <span>一探究竟</span>
+                        </div>
+                    </li>
+                    <li><img src="images/con-phone4.jpg" alt="" class="img_magnify">
+                        <div class="content__phone_desc">
+                            <h3>Z11极光蓝</h3>
+                            <p>极光蓝</p>
+                        </div>
+                    </li>
+                    <li><img src="images/con-phone5.jpg" alt="" class="img_magnify">
+                        <div class="content__phone_desc">
+                            <h3>Z11极光蓝</h3>
+                            <p>极光蓝</p>
+                        </div>
+                    </li>
+                </ul>
+            </dd>
+            <dt>
+                <h3>精选配件</h3>
+                <p>查看全部配件 &gt;</p>
+            </dt>
+            <dd>
+                <ul class="content__accessories">
+                    <li><img src="" alt="">
+                        <img src="images/accessories1.jpg" alt="">
+                        <p>努比亚快充移动电源</p>
+                    </li>
+                    <li><img src="" alt="">
+                        <img src="images/accessories2.jpg" alt="">
+                        <p>努比亚快充移动电源</p>
+                    </li>
+                    <li><img src="" alt="">
+                        <img src="images/accessories3.jpg" alt="">
+                        <p>努比亚快充移动电源</p>
+                    </li>
+                    <li><img src="" alt="">
+                        <img src="images/accessories4.jpg" alt="">
+                        <p>努比亚快充移动电源</p>
+                    </li>
 
+                </ul>
+            </dd>
+        </dl>
     </div>
-    <!-- 内容结束 -->
-    
-    <!-- 底部开始 -->
+
+    <!-- content ends -->
+
+    <!-- footer begins -->
     <div class="footer">
+        <div class="footer__wrapper">
+            <div>
+                <a href=""><img src="images/nb-pro-ft-logo-x2.jpg" alt="" class="footer__magnifier">
+                <span>&gt; 全部机型</span></a>
+            </div>
+            <div class="clearfix">
+                <dl>
+                    <dt>
+                        <h3><a href="">Z系列</a></h3>
+                    </dt>
+                    <dd><a href="">nubia Z11</a></dd>
+                    <dd><a href="">nubia Z11 Max</a></dd>
+                    <dd><a href="">nubia Z11 mini</a></dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <h3><a href="">M系列</a></h3>
+                    </dt>
+                    <dd><a href="">nubia 布拉格S</a></dd>
+                    <dd><a href="">nubia My 布拉格</a></dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <h3><a href="">配件</a></h3>
+                    </dt>
+                    <dd><a href="">保护壳</a></dd>
+                    <dd><a href="">皮套</a></dd>
+                    <dd><a href="">贴膜</a></dd>
+                    <dd><a href="">耳机</a></dd>
+                    <dd><a href="">数据线/充电器</a></dd>
+                    <dd><a href="">周边产品</a></dd>
+                </dl>
+            </div>
 
+            <div class="footer__links_and_contacts">
+                <ul class="footer__links">
+                        <li><a href="">关于我们</a> <span>|</span> </li>
+                        <li><a href="">联系我们</a> <span>|</span> </li>
+                        <li><a href="">新闻中心</a> <span>|</span> </li>
+                        <li><a href="">加入我们</a> <span>|</span> </li>
+                        <li><a href="">合作注册</a> <span>|</span> </li>
+                        <li><a href="">公益</a> <span>|</span> </li>
+                        <li><a href="">以旧换新</a> <span>|</span> </li>
+                        <li><a href="">问题反馈</a> <span>|</span> </li>
+                        <li><a href="">简体中文</a>  </li>
+                </ul>
+                <ul class="footer__contacts">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <span class="contact__hotline">服务热线：400-700-6600</span>
+            </div>
+            <div class="footer__info">
+                <span>2012-2017</span>
+                <span>努比亚技术有限公司</span>
+                <span>版权所有</span>
+                <span>粤ICP备10006213号-2</span>
+                <a href="#"> <img src="images/gs.jpg" alt=""> </a>
+                <span>深圳市市场监督管理局企业主体身份公示</span>
+                <span>ICP经营许可证编号：粤B2-20120688</span>
+                <a href="#"><img src="images/gh.png" alt=""></a>
+                <span>粤公网安备 44030502000309号</span>
+            </div>
+        </div>
     </div>
-    <!-- 底部结束 -->
+    <!-- footer ends -->
 </body>
+
 </html>

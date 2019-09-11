@@ -12,10 +12,14 @@ Web development learning notes and case study
 
 ---
 
+###### 20190911 - Day 147
+
+- 综合练习编写页面 - [某电商网站首页](20190821-css/nubia) (+7h = 327 of 600)
+
 ###### 20190910 - Day 146
 
 - 复习 CSS -  3D 模块、背景属性 (+4h = 320 of 600)
-- 练习 CSS - 综合网站 demo (+3h = 323 of 600)
+- 练习 CSS - 综合练习编写电商网站 demo (+3h = 323 of 600)
 
 ###### 20190909 - Day 145
 

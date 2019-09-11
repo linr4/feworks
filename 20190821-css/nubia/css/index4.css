@@ -1,0 +1,69 @@
+.nav {
+    width: 100%;
+    height: 60px;
+    background-color: #000;
+}
+.nav__wrapper {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+.nav__logo {
+    float: left;
+    width: 190px;
+    height: 100%;
+}
+.logo__h1 {
+    width: 100%;
+    height: 100%;
+}
+.logo__link {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: url('../images/nubia-logo.png') no-repeat;
+}
+.nav__menu {
+    float: right;
+    width: 740px;
+    height: 100%;
+}
+.menu__list {
+    float: left;
+    width: 550px;
+    height: 100%;
+}
+.menu__item {
+    float: left;
+    line-height: 60px;
+    margin-left: 40px;
+}
+.menu__link {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+.link__hover:hover {
+    color: #e82c07;
+}
+.menu__login {
+    float: right;
+    width: 150px;
+    height: 100%;
+}
+.login__item {
+    float: right;
+    line-height: 60px;
+    margin-right: 10px;
+    color: #ccc;
+}
+.login__link, .reg__link {
+    color: #ccc;
+}
+.login__icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    background: url("../images/nubia-syb-all.png") no-repeat;
+}
