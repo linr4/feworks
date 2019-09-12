@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190912 - Day 148
+
+- 复习 CSS - 边框圆角属性 (+.5h = 327.5 of 600)
+
 ###### 20190911 - Day 147
 
 - 综合练习编写页面 - [某电商网站首页](20190821-css/nubia) (+7h = 327 of 600)
