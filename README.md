@@ -14,7 +14,7 @@ Web development learning notes and case study
 
 ###### 20190915 - Day 149
 
-
+* 复习 CSS - 边框圆角的应用，渐变，边框图片，垂直居中，弹性布局 (+5.5h = 333 of 600)
 
 ###### 20190912 - Day 148
 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制半圆与椭圆</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 200px;
+            height: 200px;
+            box-sizing: border-box;
+            background-color: turquoise;
+            margin: 100px auto;
+        }
+        .semi-circle {
+            border-top-left-radius: 100px 100px;
+            border-top-right-radius: 100px;
+            height: 100px;
+        }
+        .ellipse {
+            height: 400px;
+            border-top-left-radius: 100px 200px;
+            border-top-right-radius: 100px 200px;
+            border-bottom-left-radius: 100px 200px;
+            border-bottom-right-radius: 100px 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="semi-circle"></div>
+    <div class="ellipse"></div>
+</body>
+</html>

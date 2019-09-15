@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beating Heart</title>
+    <style>
+        div {
+            margin: 0;
+            padding: 0;
+            background-color: red;
+            box-sizing: border-box;
+
+        }
+        .wrapper {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            background-color: #fff;
+            /* border: 1px solid #ccc; */
+            position: relative;
+            animation: beating 1s ease-in-out 0s infinite both;
+        }
+
+        .circle {
+            width: 55%;
+            height: 55%;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .left-circle {
+            top: 0;
+            left: 0;
+            z-index: 99;
+            
+        }
+        .right-circle {
+            top: 0;
+            right: 0;
+        }
+        .bottom-tip {
+            width: 65%;
+            height: 65%;
+            background-color: red;
+            border-top-left-radius: 100%;
+            border-bottom-left-radius: 100px 10px;
+            border-top-right-radius: 10px 100px;
+            position: absolute;
+            top: 12%;
+            left: 50%;
+            transform: translateX(-50%) rotateZ(45deg);
+            z-index: 100;
+        }
+
+        @keyframes beating {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="corazon circle left-circle"></div>
+        <div class="corazon circle right-circle"></div>
+        <div class="corazon bottom-tip"></div>
+    </div>
+</body>
+</html>

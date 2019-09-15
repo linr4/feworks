@@ -1093,3 +1093,101 @@
 * 省略了某一个角后，会参考对角的设置；只设置一个值，则其余三个参考它的值；
 * radius 值 > border 宽度时，内外边框都变为圆角；radius <= border 时，边框外圆内方；
 
+
+
+###### 边框图片
+
+* `border-image: image-source image-height image-width image-repeat`
+* Refer to [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/border-image)
+* 应用场景：替代滑动门（3 张背景图拼成边框）来做边框背景；
+  * `border-image: url('nav.jpg') 20 fill repeat;`
+
+
+
+###### vertical-align
+
+* 作用：设置行内元素的垂直对齐方式；
+* 六条线：
+  * 基线 `baseline`：一行文字中高度最小的字符的底部（如：x）；
+  * 中线 `middle`：x 的中间（不是文字顶部和底部之间的中线，而是最矮文字 x 的中线）；
+  * 文字顶部 `text-top`：一行文字当中，高度最高的文字的顶部；
+  * 文字底部 `text-bottom`：一行文字当中，高度最高的文字的底部；
+  * 盒子顶部 `top`：文字内容撑起、或 `line-height` 撑起的盒子的顶部；
+  * 盒子底部 `bottom` ：参考顶部的定义；
+* 特点：
+  * `text-align` 在父元素上设置、对子元素生效，而 `vertical-align` 设置在需要对齐的元素本身；
+  * `vertical-align` 只对行内元素有效；
+* 六种对齐的情况：
+  *  `img {vertical-align: baseline;}`：图片与同一行文字的基线对齐，默认；
+  * `img {vertical-align: top;}` 与盒子顶部对齐；
+  * `img {vertical-align: bottom;}` 与盒子底部对齐；
+  * `img {vertical-align: text-top;}` 与文字顶部对齐；
+  * `img {vertical-align: text-bottom;}` 与文字底部对齐；
+  * `img {vertical-align: middle;}` 与中线对齐；
+
+
+
+###### 颜色渐变
+
+* 线性渐变：`linear-gradient([to direction] | [deg], color1, color2, color3, ... colorN)`
+
+  ```css
+  /* 渐变方向的两种写法 */
+  background: linear-gradient(to left top, orange, blue);
+  background: linear-gradient(45deg, red, purple);
+  ```
+
+  * 颜色至少 2 个，没有上限；
+  * 纯色范围由 CSS 自动计算，亦可手动指定，如 `red 100px`
+  * 渐变色的范围也可指定，即在第二个颜色后面加上渐变色的范围 `red 100px, blue 50px`；除了第一个颜色之后指定的是纯色范围，其余的颜色后面指定的均为渐变色范围；
+  * `-webkit-background-clip: text;` 把背景裁剪为文字的形状，私有属性，chrome/safari 才有；
+
+* 径向渐变：`radial-gradient([100px][at top left] | [at 10px, 20px], color1, color2, ...)`
+
+
+
+### 弹性布局
+
+* 概念：
+  * flex container：设置 display: flex 的容器元素；
+  * flex items：容器里的子元素；
+  * main axis：主轴，默认为横向；
+  * cross axis：交叉轴（侧轴），默认为竖向；
+  * flex-start / flex-end：主轴/交叉轴的起点和终点，默认为 左/上 和 右 / 下；
+
+* `flex-direction: row(默认) | row-reverse | column | column-reverse;` 主轴的方向；
+* `justify-content: flex-start(默认)|flex-end|center|space-between|space-around;` 项目在主轴方向的排版方式；
+  * `space-between`：两端对齐，项目之间的间隔都相等；
+  * `space-around`：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍；
+
+* `align-items: flex-start(默认)|flex-end|center|baseline|stretch;` 在交叉轴上的对齐方式；
+  * 没有两端对齐 `space-between` 和环绕对齐 `space-around`；
+  * `baseline` 为第一个 item 中的文字的基线；
+  * `stretch` 拉伸 item 的高度使其等于交叉轴的高度；item 不能设置高度，否则 stretch 失效；
+* `align-self:` 单独设置某个 item 的在交叉轴上的对齐方式；取值与 `align-items` 一样；
+
+* `flex-wrap: wrap|wrap-reverse|nowrap(默认)`  默认不换行，即使 item 设置了宽度也会被等比压缩放在同一行；
+* `align-content:flext-start|flex-end|center|space-between|space-around|stretch(默认)` 换行之后的对齐方式；
+  * `flex-start` 整体（多行）与交叉轴起点对齐；其它选项同理；
+  * `stretch` 拉伸各行的行高，使其填满整个 flex container；
+
+* `order: 0(默认)` 调整 item 的排列位置，数字越小也靠前；
+* `flex-grow: 0(默认不扩充)` 当 item 宽度总和小于 container 时，设置 item 宽度的扩充方式；前提是 flex-container 足够宽才有效；
+  * flex container width - items' total width = width left
+  * width left / items 份数 = 每份的宽度；
+  * item 原有宽度 + 每份宽度 x 份数 = item 最终宽度
+
+* `flex-shrink: 1(默认等比缩小)` 当 item 宽度总和大于 container 时，设置缩小 item 的方式；前提是 item 宽度总和大于 flex-container 才有效；0 不缩小；
+  * 溢出宽度 = total items width - container width
+  * 权重 = 份数 x item1 width + ...... 所有 item 份数和其宽度相乘之后的总和
+  * 每个 item 需要缩小的数值 = 溢出宽度 * item 宽度 * 份数 / 权重；份数数字越大、缩小得越多；
+  * 以上提及的 “宽度” 实际上为主轴上的值；主轴的方向若为 column 则该值就是 “高度”；
+
+* `flex-basis`  设置 item 的宽度；
+  * flex 布局中 width 若为设置则其宽度由内容撑开；
+  * flex-basis 优先于 width 设置，同时设置的话则以 flex-basis 为准；
+  * 取值与 width 一样（auto, px, %），默认为 auto，此时若 width 有设置具体值则以 width 为准；
+
+* `flex: flex-grow flex-shrink flex-basis ` 三个属性的简写形式，
+  * 默认 `flex: 0 1 auto`；
+  * 快捷值：`flex: auto` = `flex: 1 1 auto`，`flex: none` = `flex 0 0 auto`；
