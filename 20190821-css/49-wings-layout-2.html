@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双飞翼布局</title>
+    <style>
+        div {
+            height: 800px;
+        }
+        .content, .navi, .aside {
+            float: left;
+        }
+        .content {
+            width: 100%;
+            background-color: #ccc;
+        }
+        .content > .content-inner {
+            margin: 0 200px;
+            background-color: yellow;
+        }
+        .navi {
+            width: 200px;
+            margin-left: -100%;
+            background-color: green;
+        }
+        .aside {
+            width: 200px;
+            margin-left: -200px;
+            background-color: orange;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <div class="content-inner">content</div>
+        </div>
+        <div class="navi">navigation</div>
+        <div class="aside">right aside</div>
+    </div>
+</body>
+</html>

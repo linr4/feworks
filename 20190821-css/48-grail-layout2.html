@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圣杯布局</title>
+    <style>
+        div {
+            height: 600px;
+        }
+        .grail {
+            min-width: 480px;
+            padding: 0 200px;
+            background-color: #ccc;
+        }
+        .center, .left, .right {
+            float: left;
+        }
+        .center {
+            width: 100%;
+            background-color: pink;
+        }
+        .left {
+            width: 200px;
+            margin-left: -100%;
+            background-color: yellowgreen;
+            position: relative;
+            left: -200px;
+        }
+        .right {
+            width: 200px;
+            margin-left: -200px;
+            background-color: orange;
+            position: relative;
+            right: -200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grail">
+        <div class="center">中间内容</div>
+        <div class="left">左侧边栏</div>
+        <div class="right">右侧边栏</div>
+    </div>
+</body>
+</html>

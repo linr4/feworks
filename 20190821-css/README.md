@@ -1190,4 +1190,117 @@
 
 * `flex: flex-grow flex-shrink flex-basis ` 三个属性的简写形式，
   * 默认 `flex: 0 1 auto`；
+  
   * 快捷值：`flex: auto` = `flex: 1 1 auto`，`flex: none` = `flex 0 0 auto`；
+  
+    ```css
+    /* flex-grow: 1;   /* 等比放大 */
+    /* flex-shrink: 1; /* 等比缩小 */
+    /* flex-basis: 0%; /* 宽度平分 */
+    
+    flex: 1;  /* 等于上面三条的缩写 */
+    ```
+  
+    
+
+
+
+### 常用布局
+
+###### 圣杯布局
+
+* 纵向三栏布局，左右两栏固定宽度，中间一栏随父容器的宽度变化；
+
+  * 创建圣杯布局的步骤：
+    * 创建一个容器，包含 3 个子元素盒子： `div.box>div*3`
+    * 设置两侧盒子为固定宽度：`width: 200px`；
+    * 设置中间盒子宽度等于父容器宽度：`width: 100%`；
+    * 设置父容器左右内边距等于两侧盒子宽度：`padding: 0 200px`；
+    * 设置3个小盒子在同一方向上浮动；
+    * 设置左边盒子：`margin-left: -100%` 把它拉回第一行，left 与中间盒子重叠；
+    * 通过定位左移左边盒子，使其不要盖住中间盒子：`position: relative; left: -200px`；
+    * 设置右边盒子左边距=自身宽度：`margin-left: -200px`  把它拉回第一行，right 与中间盒子重叠；
+    * 通过定位右移右边盒子，使其不要盖住中间盒子：`position: relative; right: -200px`；
+    * 设置父容器的最小宽度，使其在窗口缩小时，布局不变形：`min-width: 400px`；
+
+  ```html
+  <div class="grail">
+      <div class="cont">中间内容</div>
+      <div class="navi">左侧导航</div>
+      <div class="aside">右侧边栏</div>
+  </div>
+  ```
+
+  ```css
+  div {
+      width: 600px;
+  }
+  .grail {
+      min-width: 400px;
+      padding: 0 200px;
+  }
+  .cont, .navi, .aside {
+      float: left;
+  }
+  .cont {
+      width: 100%;
+  }
+  .navi {
+      width: 200px;
+      margin-left: -100%;
+      position: relative;
+      left: -200px;
+  }
+  .aside {
+      width: 200px;
+      margin-left: -200px;
+      position: relative;
+      right: -200px;
+  }
+  ```
+
+  * 内容区域放在前面，是因为内容区域包含图片等较多内容，放前面可以优化加载表现，提升用户体验；
+
+    
+
+###### 双飞翼布局
+
+* 圣杯布局的升级版，也是两侧固定宽度、中间活动宽度的三栏布局；
+
+* 区别在于实现方法上做了优化，不再需要通过定位去调整两侧盒子的位置，而是通过中间盒子再套一个小盒子撑出两个侧边栏的位置，代码更简洁；
+
+  ```html
+  <div class="wrapper">
+      <div class="content">
+          <div class="content-inner"></div>
+      </div>
+      <div class="navi"></div>
+      <div class="aside"></div>
+  </div>
+  ```
+
+  ```css
+  div {
+      height: 500px;
+  }
+  
+  .content {
+      width: 100%;
+  }
+  .content-inner {
+      margin: 0 200px;
+  }
+  .navi {
+      width: 200px;
+      margin-left: -100%;
+  }
+  .aside {
+      width: 200px;
+      margin-left: -200px;
+  }
+  .content, .navi, .aside {
+      float: left;
+  }
+  ```
+
+  
