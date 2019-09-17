@@ -14,6 +14,10 @@ Web development learning notes and case study
 
 ###### 20190916 - Day 150
 
+* iconfont; node.js Basics (+1.5h = 338.5 of 600)
+
+###### 20190916 - Day 150
+
 * 学习、练习圣杯布局、双飞翼布局 (+1.5h = 334.5 of 600)
 
 - 弹性布局练习 - 去哪儿移动端主页 (+2.5h = 337 of 600)
