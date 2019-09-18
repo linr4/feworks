@@ -12,7 +12,11 @@ Web development learning notes and case study
 
 ---
 
-###### 20190916 - Day 150
+###### 20190918 - Day 152
+
+- node.js - Buffer, Path (+0.5h = 339 of 600)
+
+###### 20190917 - Day 151
 
 * iconfont; node.js Basics (+1.5h = 338.5 of 600)
 
