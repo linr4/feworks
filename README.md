@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190919 - Day 153
+
+- node.js - fs, http, etc. (+2h = 341 of 600)
+
 ###### 20190918 - Day 152
 
 - node.js - Buffer, Path (+0.5h = 339 of 600)
