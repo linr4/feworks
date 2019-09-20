@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190921 - Day 154
+
+* 
+
 ###### 20190919 - Day 153
 
 - node.js - fs, http, etc. (+2h = 341 of 600)
