@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5482930",
+      "name": "骆驼",
+      "font_class": "luotuo",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "7256714",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "7463951",
+      "name": "订单",
+      "font_class": "dingdan",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    }
+  ]
+}

@@ -7,7 +7,7 @@ html {
 }
 body {
     min-width: 320px;
-    max-width: 750px;
+    max-height: 750px;
     height: 1000px;
     margin: 0 auto;
 }
@@ -158,4 +158,9 @@ div.contact {
 div.contact > a {
     flex: 1;
     text-decoration: none;
+}
+
+.iconfont {
+    font-size: 24px;
+    line-height: 24px;
 }
