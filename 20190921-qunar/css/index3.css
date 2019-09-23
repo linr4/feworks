@@ -1,0 +1,199 @@
+a, abbr, address, article, aside, audio, b, blockquote, body, caption, cite, code, dd, del, dfn, dialog, div, dl, dt, em, fieldset, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, samp, section, small, span, strong, sub, sup, tfoot, th, thead, time, tr, ul, var, video {
+    border: 0;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 100%;
+    font-weight: normal;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    -webkit-font-smoothing: antialiased;
+    list-style: none;
+}
+body {
+    width: 100%;
+    height: 100%;
+    min-width: 320px;
+    min-height: 480px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: arial,sans-serif;
+}
+a {
+    text-decoration: none;
+}
+.header {
+    width: 100%;
+    margin: 0 auto;
+}
+.header .banner {
+    width: 100%;
+}
+.main {
+    width: 100%;
+    margin: 0 auto;
+}
+.main-content {
+    padding: 5px;
+    overflow: hidden;
+}
+.main-content a {
+    color: #fff;
+}
+.main-content a p {
+    font-weight: bold;
+}
+.main-content ul {
+    height: 96px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+.main-content ul li {
+    width: 33%;
+    float: left;
+}
+
+.main-content .row a {
+    display: inline-block;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    box-shadow: 0 0 1px inset;
+}
+.main-content .row li:first-of-type a {
+    box-shadow: none;
+} 
+.main-content .row img {
+    height: 48px;
+}
+
+.main-content .row1 {
+    background-color: rgb(255, 85, 85);
+}
+.main-content .row2 {
+    background-color: rgb(0, 167, 247);
+}
+.main-content .row3 {
+    background-color: rgb(124, 184, 50);
+}
+.main-content .row4 {
+    height: 48px;
+    margin-bottom: 2px;
+    background-color: rgb(255, 153, 0);
+}
+
+.sub-content {
+    width: 100%;
+    height: 158px;
+    padding-top: 12px;
+    background-color: rgb(238, 238, 238);
+}
+.sub-content ul {
+    height: 69px;
+    padding: 0 15px;
+    background-color: #fff;
+
+    overflow: hidden;
+}
+.sub-content ul li {
+    float: left;
+    width: 25%;
+    height: 69px;
+    padding-top: 10px;
+    text-align: center;
+}
+.sub-content ul li a {
+    font-size: 12px;
+    color: #333;
+}
+.sub-content ul li a .icon {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    background-color: #ccc;
+    background: url("../images/entrances.png") no-repeat;
+    background-size: 374px 130px;
+}
+.sub-content ul:nth-of-type(1) li:nth-of-type(1) a .icon {
+    background-position: -35px -12px;
+}
+.sub-content ul:nth-of-type(1) li:nth-of-type(2) a .icon {
+    background-position: -124px -12px;
+}
+.sub-content ul:nth-of-type(1) li:nth-of-type(3) a .icon {
+    background-position: -212px -12px;
+}
+.sub-content ul:nth-of-type(1) li:nth-of-type(4) a .icon {
+    background-position: -300px -79px;
+}
+
+.sub-content ul:nth-of-type(2) li:nth-of-type(1) a .icon {
+    background-position: -35px -79px;
+}
+.sub-content ul:nth-of-type(2) li:nth-of-type(2) a .icon {
+    background-position: -124px -79px;
+}
+.sub-content ul:nth-of-type(2) li:nth-of-type(3) a .icon {
+    background-position: -212px -79px;
+}
+.sub-content ul:nth-of-type(2) li:nth-of-type(4) a .icon {
+    background-position: -300px -12px;
+}
+
+
+.footer {
+    padding-top: 3px;
+    background-color: rgb(238, 238, 238);
+}
+.footer__nav {
+    height: 82px;
+    overflow: hidden;
+    background-color: #fff;
+}
+.footer__nav li {
+    width: 33.33%;
+    padding-top: 10px;
+    float: left;
+    text-align: center;
+}
+.footer__nav li a {
+    color: #333;
+}
+.footer__nav li a i {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    font-size: 24px;
+}
+.footer__nav li a p {
+    padding-top: 5px;
+    font-size: 12px;
+}
+.footer__bot {
+    width: 100%;
+    height: 54px;
+}
+.footer__bot p {
+    float: left;
+    height: 100%;
+    line-height: 54px;
+    font-size: 12px;
+}
+.footer__bot p {
+    width: 103px;
+    text-align: center;
+}
+.footer__bot p.icp {
+    margin-left: 15px;
+    width: 135px;
+    color: #8c8c8c;
+}
+.footer__bot p.aboutus {
+    color: #333;
+}
+.footer__bot p.navToPC {
+    color: #3dadc1;
+}

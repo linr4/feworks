@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20190922 - Day 157
+
+- 再练习两次“去哪儿网”移动首页 (+3h = 349 of 600)
+
 ###### 20190922 - Day 156
 
 - 再练习一次“去哪儿网”移动首页 (+1.5h = 346 of 600)
