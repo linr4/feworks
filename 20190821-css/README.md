@@ -1321,4 +1321,5 @@
 
 * 自定义的全局样式写在 base.css 中，如浮动、清除浮动、字体、颜色等；
 
-* `object-fit: cover;` 把视频等比拉伸填满父元素，与 `background-size: cover;` 类似；
+* `object-fit: cover;` 把视频等比拉伸填满父元素，与 `background-size: cover;` 类似；用于动态视频背景填满整个窗口；
+
