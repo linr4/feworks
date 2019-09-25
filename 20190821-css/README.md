@@ -1303,4 +1303,22 @@
   }
   ```
 
-  
+
+
+
+#### 综合练习中的 Tips
+
+* 快捷图标（收藏图标）favicon.ico 通常在网站根目录下，通过 link 标签引入：
+
+  ```html
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  ```
+
+* 初始化 CSS 样式表的两个常用模板：
+
+  * YUI reset.css：一刀切地清除系统默认样式
+  * normalize.css：保留有价值的系统默认样式，修复不同浏览器的兼容性/一致性的 bug
+
+* 自定义的全局样式写在 base.css 中，如浮动、清除浮动、字体、颜色等；
+
+* `object-fit: cover;` 把视频等比拉伸填满父元素，与 `background-size: cover;` 类似；
