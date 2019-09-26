@@ -15,3 +15,6 @@
 a {
     text-decoration: none;
 }
+div, ul, ol, li, a, span, h1, h3, img {
+    box-sizing: border-box;
+}

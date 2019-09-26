@@ -1323,3 +1323,5 @@
 
 * `object-fit: cover;` 把视频等比拉伸填满父元素，与 `background-size: cover;` 类似；用于动态视频背景填满整个窗口；
 
+* 左浮动的元素不要设置 `margin-left`，可以设置 `margin-right`；
+* 图片标签 `<img>` 默认顶部对齐 `vertical-align: top` ，会导致其容器的底部有 1px 间隙，将图片设置一下 `vetical-align: bottom` 即可修正；
