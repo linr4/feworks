@@ -1,0 +1,21 @@
+html, body, div, header, main, section, footer, ol, ul, li, h1 {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Avenir Next ST","PingFang SC","Microsoft YaHei",sans-serif;
+}
+ol, ul {
+    list-style: none;
+}
+a {
+    color: #ccc;
+    text-decoration: none;
+}
+.clearfix::before,
+.clearfix::after {
+    display: block;
+    content: "";
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
