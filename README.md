@@ -14,7 +14,7 @@ Web development learning notes and case study
 
 ###### 20190927 - Day 160
 
-- 练习 vivo 首页 - 响应式 (+1h = 354 of 600)
+- 练习 vivo 首页 - 响应式 (+3h = 356 of 600)
 
 ###### 20190926 - Day 159
 

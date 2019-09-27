@@ -1,8 +1,14 @@
-html, body, div, header, main, section, footer, ol, ul, li, h1 {
+html, body {
+    width: 100%;
+    height: 100%;
+}
+body {
+    font-family: "Avenir Next ST","PingFang SC","Microsoft YaHei",sans-serif;
+}
+html, body, div, header, main, section, footer, ol, ul, li, dl, dt, dd, h1, a, p {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Avenir Next ST","PingFang SC","Microsoft YaHei",sans-serif;
 }
 ol, ul {
     list-style: none;
@@ -18,4 +24,10 @@ a {
     height: 0;
     visibility: hidden;
     clear: both;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
 }
