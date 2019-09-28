@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>vivo 智能手机网站</title>
     <link rel="stylesheet" href="font/iconfont.css">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index-pad.css" media="screen and (max-width: 1199px)">
 </head>
 
 <body>
@@ -30,9 +32,9 @@
             </ul>
         </section>
         <section class="header__bot">
-            <div class="header__bot-warp">
+            <div class="header__bot-wrap">
                 <h1 class="logo"><a href="#" class="iconfont icon-vivo"></a></h1>
-                <ul class="header__bot__navbar clearfix">
+                <ul class="header__bot__navbar clearfix navbar-pc">
                     <li><a href="">iQOO 专区</a></li>
                     <li><a href="">NEX 系列</a></li>
                     <li><a href="">X 系列</a></li>
@@ -42,6 +44,16 @@
                     <li><a href="">商城</a></li>
                     <li><a href="">服务</a></li>
                 </ul>
+                <ul class="header__bot__navbar clearfix navbar-pad">
+                        <li><a href="">iQOO</a></li>
+                        <li><a href="">NEX</a></li>
+                        <li><a href="">X</a></li>
+                        <li><a href="">Z</a></li>
+                        <li><a href="">Y</a></li>
+                        <li><a href="">U</a></li>
+                        <li><a href="">商城</a></li>
+                        <li><a href="">服务</a></li>
+                    </ul>
                 <div class="header__bot__search">
                     <a href="#" class="iconfont icon-icon-"></a>
                 </div>
@@ -165,6 +177,10 @@
                 </div>
             </section>
             <section class="footer__bot clearfix">
+                <div class="footer__bot-right fr">
+                    <a href="">关于vivo </a>
+                    <a href="" class="iconfont icon-wanggediqiu"> 中国</a>
+                </div>
                 <div class="footer__bot-left fl">
                     Copyright ©2011-2019 维沃移动通信有限公司 版权所有 保留一切权利 
                     | 
@@ -177,10 +193,7 @@
                     <a href="">粤ICP备17035209号-2</a>
                     <img src="images/gssw-icon.png" alt="">
                 </div>
-                <div class="footer__bot-right fr">
-                    <a href="">关于vivo </a>
-                    <a href="" class="iconfont icon-wanggediqiu"> 中国</a>
-                </div>
+                
             </section>
         </div>
     </footer>

@@ -38,11 +38,11 @@
 .header__bot {
     width: 100%;
 }
-.header__bot-warp {
+.header__bot-wrap {
     width: 1200px;
     height: 60px;
     margin: 0 auto;
-
+    padding: 0 40px;
     display: flex;
     justify-content: space-between;
 }
@@ -162,16 +162,16 @@
 }
 .main__bot {
     width: 100%;
-    height: 300px;
-    margin-top: 5px;
 }
 .main__bot__wrap {
     width: 100%;
-    height: 100%;
     display: flex;
 }
 .main__bot__wrap li {
     flex: 1;
+    height: 300px;
+    margin-top: 5px;
+
     overflow: hidden; /* 不加上 oh 就只能显示3个图片 */
     position: relative;
     transition: .5s flex-basis;
@@ -203,6 +203,7 @@
 .main__bot__wrap .promo-title h2 {
     height: 21px;
     line-height: 21px;
+    width: 200px;
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 10px;
@@ -228,7 +229,7 @@
     width: 1200px;
     height: 100%;
     margin: 0 auto;
-    padding-top: 80px;
+    padding: 80px 20px 0;
 }
 .footer__top {
     width: 100%;
@@ -292,3 +293,12 @@
     padding-left: 20px;
 }
 /* 底部结束 */
+
+/* 响应式兼容代码 - 开始 */
+.navbar-pc {
+    display: block;
+}
+.navbar-pad {
+    display: none;
+}
+/* 响应式兼容代码 - 结束 */

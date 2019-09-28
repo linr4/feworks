@@ -1324,4 +1324,76 @@
 * `object-fit: cover;` 把视频等比拉伸填满父元素，与 `background-size: cover;` 类似；用于动态视频背景填满整个窗口；
 
 * 左浮动的元素不要设置 `margin-left`，可以设置 `margin-right`；
+
 * 图片标签 `<img>` 默认顶部对齐 `vertical-align: top` ，会导致其容器的底部有 1px 间隙，将图片设置一下 `vetical-align: bottom` 即可修正；
+
+* flex 布局，ul>(li>img)*4 结构中的 img 若宽度比较大，会导致即使 li 设置了 flex:1 也只能显示 3 个 li，最后一个超出可视区域的右侧；此时需要设置 li {overflow: hidden}，即可使得 4 个 li>img 显示在可视区域；
+
+
+
+### CSS3 媒体查询
+
+* 根据浏览器宽度设置相应样式，实现响应式页面
+
+* 常用于结构较简单的页面，若页面复杂则需要调整的元素太多，通常不会这么用；
+
+* 格式：
+
+  * 内联格式：@media 条件 { }，逻辑上类似于 if ( ) { }
+
+    ```css
+    /* screen 表示电脑、平板、手机等显示设备 */
+    @media screen and (min-width: 1200px) {
+        div {
+            width: 1000px;
+            height: 500px;
+            background-color: red;
+        }
+    }
+    @media screen and (max-width: 1199px) {
+        div {
+            width: 768px;
+            height: 400px;
+            background-color: turquoise;
+        }
+    }
+    ```
+
+    
+
+  * 外链格式：`<link rel="stylesheet" href="css/xxx.css" media="条件">`
+
+    * 宽度只供参考，实际开发中需根据实际需求来确定；
+    * 通常在引用 PC 版本的 CSS 文件时，不写媒体查询，以便相同样式的代码可以在平板和手机上复用；如果写了媒体查询，当条件不满足时，所有样式都不生效，用户看到的是没有样式的HTML；
+    * CSS 引入的顺序必须为 电脑、平板、手机，以便跨设备相同的代码可以复用，而平板和手机的不同代码可以覆盖，否则达不到效果；
+
+    ```html
+    <!-- 不同设备引用不同的 CSS 文件 -->
+    
+    <!-- 电脑 -->
+    <link rel="stylesheet" href="css/index-pc.css" media="screen and (min-width=1200px)">
+    <!-- 电脑版本的通常不写媒体查询语句、以便代码可以在平板和手机上复用，不必再写一次相同代码 -->
+    <link rel="stylesheet" href="css/index.css">
+    
+    <!-- 平板 -->
+    <link rel="stylesheet" href="css/index-pad.css" media="screen and (max-width=1199px)">
+    <!-- 手机 -->
+    <link rel="stylesheet" href="css/index-phone.css" media="screen and (max-width=768px)">
+    ```
+
+* 实际开发中编写响应式页面的步骤：
+
+  * 编写电脑版本的CSS；
+  * 再编写平板版本的CSS，通过相同的选择器覆盖不同的样式；
+  * 最后编写手机版本的CSS，也是通过相同的选择器覆盖掉不同的样式；
+
+* 注意点：
+
+  * 覆盖样式时，最好通过源码或浏览器 inspect > element > style 获取一模一样的选择器名称，以防因为优先级/权重问题导致后面写的选择器无法生效；
+  * <font color=red>最底部左侧版权/法律声明版块及右侧 "关于vivo/中国" 版块的处理：</font>
+    * 处理目的：在页面收窄的过程中，左侧版权声明版块的文字在宽度不够时会自动换行，右侧则始终保持在第一行；
+    * 处理方法：
+      * 在 HTML 中，把右侧版块的代码放在左侧版块的上面；如果右侧版块代码放在下面，则会在版面收窄、宽度不够之后自动换到第二行，无法实现始终保持在第一行的目的；
+      * 在 CSS-PC 中，左侧版块左浮、右侧版块右浮；
+      * 在 CSS-PAD 中，左侧版块取消浮动 `float: none`，右侧仍保持右浮；如此，由于字围现象（浮动元素不会覆盖标准流中的文字和图片），左侧的文字图片在宽度不够时自动换行，且不会被右侧版块所覆盖。
+
