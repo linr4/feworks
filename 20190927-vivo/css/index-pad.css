@@ -1,9 +1,10 @@
 /* 头部开始 */
-.navbar-pc {
-    display: none;
+.header__bot .navbar-pad {
+    display: flex;
+    justify-content: space-between;
 }
-.navbar-pad {
-    display: block;
+.header__bot .navbar-pc {
+    display: none;
 }
 .header__bot-wrap {
     width: 100%;

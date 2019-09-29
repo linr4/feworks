@@ -1,0 +1,130 @@
+.header__top,
+.header__bot {
+    display: none;
+}
+.header__phone {
+    display: block;
+}
+.header__phone ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+.header__phone ul li a {
+    font-size: 32px;
+    line-height: 80px;
+    font-weight: 400;
+    color: #fff;
+}
+.header__phone ul li:nth-of-type(2) a {
+    font-size: 80px;
+}
+
+.main__top__banner li:nth-of-type(1) a img {
+    display: none;
+}
+.main__top__banner li:nth-of-type(2) a img {
+    width: 100%;
+    display: block;
+}
+.main__top__poster {
+    display: none;
+}
+.main__bot__wrap li {
+    width: 100%;
+}
+.main__bot__wrap li a img {
+    width: 100%;
+}
+.footer__top {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.footer .footer__inner {
+    padding: 0;
+}
+.footer__top-left,
+.footer__top-right {
+    float: none;
+}
+.footer__top-left {
+    flex-direction: column;
+    margin-left: 30px;
+}
+.footer__top-left dl dd {
+    display: none;
+}
+.footer__top-left dl dt {
+    width: 100%;
+    font-size: 26px;
+    line-height: 26px;
+    font-weight: normal;
+    margin: 20px 50px 0;
+    color: rgb(101, 101, 101);
+}
+.footer__top-left dl dt::after {
+    content: '';
+    float: right;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background: url("../images/add.png") no-repeat center center;
+}
+.footer__top-right {
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1.3px solid #f2f2f2;
+    border-left: none;
+    border-right: none;
+    margin-bottom: 3px;
+}
+.footer__top-right a {
+    width: 60%;
+    height: 100%;
+    font-size: 30px;
+    line-height: 60px;
+    color: #415fff;
+    text-align-last: left;
+    font-weight: 700;
+}
+.footer__top-right div {
+    width: 40%;
+    height: 100%;
+    text-align: left;
+}
+.footer__top-right p {
+    line-height: 36px;
+}
+.footer__top-right p:nth-of-type(1){
+    font-size: 24px;
+}
+.footer__top-right p:nth-of-type(2){
+    font-size: 20px;
+    color: #888;
+}
+
+footer > div > section.footer__bot > div.footer__bot-left,
+footer > div > section.footer__bot > div.footer__bot-right {
+    float: none;
+    margin: 10px 40px;
+}
+footer > div > section.footer__bot > div.footer__bot-left,
+footer > div > section.footer__bot > div.footer__bot-left > a {
+    font-size: 17px;
+    line-height: 28px;
+    padding: 0;
+}
+footer > div > section.footer__bot > div.footer__bot-right {
+    display: flex;
+    justify-content: space-between;
+}
+footer > div > section.footer__bot > div.footer__bot-right > a,
+footer > div > section.footer__bot > div.footer__bot-right > a.iconfont {
+    font-size: 24px;
+    font-weight: normal;
+    padding: 0;
+}

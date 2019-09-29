@@ -46,6 +46,13 @@
     display: flex;
     justify-content: space-between;
 }
+.header__bot .navbar-pc {
+    display: flex;
+    justify-content: space-between;
+}
+.header__bot .navbar-pad {
+    display: none;
+}
 .header__bot h1.logo a{
     display: inline-block;
     line-height: 60px;
@@ -53,16 +60,16 @@
     font-weight: normal;
 }
 .header__bot__navbar {
-    
+    width: 100%;
 }
 .header__bot__navbar li {
-    float: left;
+    width: 12%;
     line-height: 60px;
+    text-align: center;
 }
 .header__bot__navbar li a {
     font-size: 16px;
     color: #ddd;
-    margin: 0 28px;
 }
 .header__bot__search {
 
@@ -74,6 +81,9 @@
     font-size: 28px;
     text-align: center;
     color: #fff;
+}
+.header__phone {
+    display: none;
 }
 
 /* 头部结束 */
@@ -87,10 +97,13 @@
     width: 100%;
     position: relative;
 }
-.main__top__banner li a img {
+.main__top__banner li:nth-of-type(1) a img {
     width: 100%;
     margin-top: 32px;
     vertical-align: bottom;
+}
+.main__top__banner li:nth-of-type(2) a img {
+    display: none;
 }
 
 .main__top__indicator {

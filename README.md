@@ -12,6 +12,14 @@ Web development learning notes and case study
 
 ---
 
+###### 20190929 - Day 162
+
+- 练习 vivo 首页 - 响应式，手机适配 (+2h = 360 of 600)
+
+###### 20190928 - Day 161
+
+- 练习 vivo 首页 - 响应式、媒体查询，平板适配 (+2h = 358 of 600)
+
 ###### 20190927 - Day 160
 
 - 练习 vivo 首页 - 响应式 (+3h = 356 of 600)
