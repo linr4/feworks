@@ -1,0 +1,24 @@
+/* float and clearfix */
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clearfix::before,
+.clearfix::after {
+    display: block;
+    content: '';
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+.clearfix {
+    /* for IE6 compatibility */
+    *zoom: 1;
+}
+
+/* colors */
+.clr-f60 {
+    color: #f60 !important;
+}
