@@ -1,5 +1,5 @@
 body {
-    font: 12px/1.5em "Microsoft Yahei", Tahoma, Arial, "Hiragino Sans GB";
+    font: 12px/1.5 "Microsoft Yahei",tahoma,arial,"Hiragino Sans GB";
     color: #999;
     background-color: #f2f2f2;
 }
@@ -10,12 +10,6 @@ body {
     height: 36px;
     line-height: 36px;
     background-color: #f5f5f5;
-}
-.topbar__inner {
-    width: 1190px;
-    height: 100%;
-    margin: 0 auto;
-    background-color: skyblue;
 }
 .topbar ul {
     height: 100%;
@@ -33,7 +27,194 @@ body {
 }
 .topbar ul > li > a {
     color: #666;
-    text-decoration: none;
+}
+.topbar ul > li > a > i {
+    display: inline-block;
+    transition: all .3s;
+}
+.topbar ul > li > a:hover > i {
+    transform: rotateZ(-180deg);
+}
+/* 顶部工具条结束 */
+
+/* 头部开始 */
+.header {
+    width: 100%;
+    height: 148px;
+    background-color: #fff;
+}
+.header__top {
+    width: 100%;
+    height: 110px;
+    padding-top: 5px;
+    overflow: hidden;
+}
+.header__top__logo a img {
+    width: 190px;
+    height: 90px;
+}
+.header__top__ad img {
+    display: inline-block;
+    width: 160px;
+    height: 100px;
+}
+.header__top__search form {
+    margin-top: 30px;
+    position: relative;
+}
+.header__top__search i.icon-sousuo {
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    font-size: 20px;
+    color: #ccc;
+}
+.header__top__search input {
+    height: 44px;
+    outline: none;
+    border: 2px solid #f90;
+    box-sizing: border-box;
+}
+.header__top__search input[type=text] {
+    width: 420px;
+    padding-left: 28px;
+}
+.header__top__search input[type=text]::placeholder {
+    color: rgb(204, 204, 204);
+}
+.header__top__search input[type=submit] {
+    width: 120px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f90;
+} 
+.header__top__search ul li {
+    float: left;
+    margin: 5px 5px 0;
+    color: rgb(204, 204, 204);
 }
 
-/* 顶部工具条结束 */
+.header__bot {
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+}
+.header__bot__all-commodity {
+    width: 190px;
+    height: 100%;
+    background-color: #f90;
+}
+.header__bot__all-commodity:hover {
+    background-color: #f80;
+}
+.header__bot__all-commodity a {
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+}
+.header__bot__all-commodity a i {
+    margin-left: 7px;
+    vertical-align: bottom;
+}
+.header__bot__navbar {
+    padding-left: 10px;
+    overflow: hidden;
+}
+.header__bot__navbar li {
+    float: left;
+    margin: 0 13px;
+    position: relative;
+}
+.header__bot__navbar li a {
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+}
+.header__bot__navbar li:hover a {
+    color: #f60;
+}
+.header__bot__navbar li i.hot {
+    display: inline-block;
+    width: 14px;
+    height: 17px;
+    background: url("../images/icons.png") no-repeat;
+    background-position: -345px -213px;
+    position: absolute;
+    top: 0;
+    right: -15px;
+}
+.header__bot__navbar li span {
+    display: inline-block;
+    width: 25px;
+    height: 8px;
+    background: url("../images/icons.png") no-repeat;
+    background-position: -37px 0;
+
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);   
+
+    transition: all .3s;
+}
+.header__bot__navbar li:hover span {
+    bottom: 0;
+}
+.header__bot__notice {
+    float: right;
+    width: 170px;
+    height: 38px;
+}
+.header__bot__notice img {
+    height: 100%;
+}
+/* 头部结束 */
+
+/* banner 开始 */
+.banner {
+    width: 100%;
+    height: 482px;
+    background-color: #f90;
+}
+.banner > .wrapper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.banner__left {
+    width: 190px;
+    height: 100%;
+    background-color: #222;
+}
+
+.banner__left ul li {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 8px 0 10px;    
+}
+.banner__left ul li:hover {
+    background-color: #fff;
+}
+.banner__left ul li:hover a {
+    color: #333;
+}
+.banner__left ul li a {
+    color: #fff;
+    font-size: 13px;
+    vertical-align: middle;
+}
+.banner__left ul li a:hover {
+    color: #f60;
+}
+.banner__center {
+    flex: 1;
+    height: 100%;
+    background-color: greenyellow;
+}
+.banner__right {
+    width: 170px;
+    height: 100%;
+    background-color: turquoise;
+}
+/* banner 结束 */

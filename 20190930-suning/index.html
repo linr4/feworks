@@ -8,6 +8,7 @@
     <meta name="description"
         content="苏宁易购-综合网上购物平台，商品涵盖家电、手机、电脑、超市、母婴、服装、百货、海外购等品类。送货更准时、价格更超值、上新货更快，正品行货、全国联保、可门店自提，全网更低价，让您放心去喜欢！">
     <title>苏宁易购(Suning.com) - 送货更准时、价格更便宜、上新货更快</title>
+    <link rel="stylesheet" href="font/iconfont.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/index.css">
@@ -16,28 +17,231 @@
 <body>
     <!-- 顶部工具条开始 -->
     <div class="topbar">
-        <div class="topbar__inner clearfix">
+        <div class="wrapper clearfix">
             <ul class="topbar__left fl">
-                <li><a href="#">网站导航</a></li>
-                <li><a href="#">商家入驻</a></li>
-                <li><a href="#">客户服务</a></li>
-                <li><a href="#">深圳</a></li>
+                <li><a href="#">网站导航 <i class="iconfont icon-jiantou"></i> </a></li>
+                <li><a href="#">商家入驻 <i class="iconfont icon-jiantou"></i> </a></li>
+                <li><a href="#">客户服务 <i class="iconfont icon-jiantou"></i> </a></li>
+                <li><a href="#"><b class="iconfont icon-weizhi clr-f60"></b> 深圳 <i class="iconfont icon-jiantou"></i>
+                    </a></li>
             </ul>
             <ul class="topbar__right fr">
                 <li><a href="#">请登录</a></li>
-                <li><a href="#">注册有礼</a></li>
-                <li><a href="#">我的订单</a></li>
-                <li><a href="#">我的易购</a></li>
+                <li><a href="#" class=" clr-f60">注册有礼</a></li>
+                <li><a href="#">我的订单 <i class="iconfont icon-jiantou"></i> </a></li>
+                <li><a href="#">我的易购 <i class="iconfont icon-jiantou"></i> </a></li>
                 <li><a href="#">会员</a></li>
-                <li><a href="#">购物车</a></li>
+                <li><a href="#" class=" clr-f60"><b class="iconfont icon-gouwuche"></b> 购物车 0 <i
+                            class="iconfont icon-jiantou"></i> </a></li>
                 <li><a href="#">易付宝</a></li>
                 <li><a href="#">企业采购</a></li>
-                <li><a href="#">手机苏宁</a></li>
+                <li><a href="#">手机苏宁 <i class="iconfont icon-jiantou"></i> </a></li>
             </ul>
         </div>
     </div>
     <!-- 顶部工具条结束 -->
 
+    <!-- 头部开始 -->
+    <header class="header">
+        <div class="wrapper">
+            <div class="header__top clearfix">
+                <h1 class="header__top__logo fl">
+                    <a href="#">
+                        <img src="images/logo.png" alt="">
+                    </a>
+                </h1>
+                <a href="#" class="header__top__ad fl">
+                    <img src="images/ad.gif" alt="">
+                </a>
+                <div class="header__top__search fl">
+                    <form action="">
+                        <input type="text" placeholder="生鲜超品 168 打五折" class="fl">
+                        <input type="submit" value="搜索" class="fl">
+                        <i class="iconfont icon-sousuo"></i>
+                    </form>
+                    <ul>
+                        <li><a href="#">微波炉</a></li>
+                        <li>|</li>
+                        <li><a href="#" class="clr-f60">生鲜5折抢</a></li>
+                        <li>|</li>
+                        <li><a href="#">手机</a></li>
+                        <li>|</li>
+                        <li><a href="#" class="clr-f60">喜临门超品日</a></li>
+                        <li>|</li>
+                        <li><a href="#" class="clr-f60">爆款空调5折</a></li>
+                        <li>|</li>
+                        <li><a href="#">洗衣机</a></li>
+                        <li>|</li>
+                        <li><a href="#">空调</a></li>
+                        <li>|</li>
+                        <li><a href="#">电视</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="header__bot clearfix">
+                <p class="header__bot__all-commodity fl">
+                    <a href="#">
+                        <i class="iconfont icon-caidan"></i>
+                        全部商品分类
+                    </a>
+                </p>
+                <ul class="header__bot__navbar fl">
+
+                    <li><a href="">限时抢购</a><span></span></li>
+                    <li><a href="">红孩子</a><span></span></li>
+                    <li><a href="">苏宁超市</a> <i class="hot"></i> <span></span></li>
+                    <li><a href="">电器城</a><span></span></li>
+                    <li><a href="">生活家电</a><span></span></li>
+                    <li><a href="">时尚服饰</a><span></span></li>
+                    <li><a href="">苏宁国际</a><span></span></li>
+                    <li><a href="">苏宁Outlets</a><span></span></li>
+                    <li><a href="">金融</a><span></span></li>
+                    <li><a href="">直播</a><span></span></li>
+                </ul>
+                <a href="#" class="header__bot__notice"><img src="images/header-right.png" alt=""></a>
+            </div>
+        </div>
+    </header>
+    <!-- 头部结束 -->
+
+    <!-- banner 开始 -->
+    <div class="banner">
+        <div class="wrapper bgc-f80 clearfix">
+            <div class="banner__left ">
+                <ul>
+                    <li>
+                        <a href="#">手机</a>
+                        <span>|</span>
+                        <a href="#">运营商</a>
+                        <span>|</span>
+                        <a href="#">智能数码</a>
+                    </li>
+                    <li>
+                        <a href="#">空调</a>
+                        <span>|</span>
+                        <a href="#">电视</a>
+                        <span>|</span>
+                        <a href="#">冰箱</a>
+                        <span>|</span>
+                        <a href="#">洗衣机</a>
+                    </li>
+                    <li>
+                        <a href="#">厨卫大电</a>
+                        <span>|</span>
+                        <a href="#">生活家电</a>
+                        <span>|</span>
+                        <a href="#">厨具</a>
+                    </li>
+                    <li>
+                        <a href="#">电脑办公</a>
+                        <span>|</span>
+                        <a href="#">相机</a>
+                        <span>|</span>
+                        <a href="#">DIY</a>
+                    </li>
+                    <li>
+                        <a href="#">家居</a>
+                        <span>|</span>
+                        <a href="#">家具</a>
+                        <span>|</span>
+                        <a href="#">家装</a>
+                        <span>|</span>
+                        <a href="#">家纺</a>
+                    </li>
+                    <li>
+                        <a href="#">食品</a>
+                        <span>|</span>
+                        <a href="#">酒水</a>
+                        <span>|</span>
+                        <a href="#">生鲜</a>
+                        <span>|</span>
+                        <a href="#">特产</a>
+                    </li>
+                    <li>
+                        <a href="#">美妆</a>
+                        <span>|</span>
+                        <a href="#">个护</a>
+                        <span>|</span>
+                        <a href="#">清洁</a>
+                        <span>|</span>
+                        <a href="#">宠物</a>
+                    </li>
+                    <li>
+                        <a href="#">母婴</a>
+                        <span>|</span>
+                        <a href="#">玩具</a>
+                        <span>|</span>
+                        <a href="#">车床</a>
+                        <span>|</span>
+                        <a href="#">童装</a>
+                    </li>
+                    <li>
+                        <a href="#">运动</a>
+                        <span>|</span>
+                        <a href="#">户外</a>
+                        <span>|</span>
+                        <a href="#">足球</a>
+                        <span>|</span>
+                        <a href="#">跑步机</a>
+                    </li>
+                    <li>
+                        <a href="#">男装</a>
+                        <span>|</span>
+                        <a href="#">女装</a>
+                        <span>|</span>
+                        <a href="#">内衣</a>
+                        <span>|</span>
+                        <a href="#">鞋靴</a>
+                    </li>
+                    <li>
+                        <a href="#">箱包</a>
+                        <span>|</span>
+                        <a href="#">钟表</a>
+                        <span>|</span>
+                        <a href="#">珠宝</a>
+                        <span>|</span>
+                        <a href="#">艺术</a>
+                    </li>
+                    <li>
+                        <a href="#">汽摩</a>
+                        <span>|</span>
+                        <a href="#">二手车</a>
+                        <span>|</span>
+                        <a href="#">汽车用品</a>
+                    </li>
+                    <li>
+                        <a href="#">图书</a>
+                        <span>|</span>
+                        <a href="#">童书</a>
+                        <span>|</span>
+                        <a href="#">教辅教材</a>
+                    </li>
+                    <li>
+                        <a href="#">医药健康</a>
+                        <span>|</span>
+                        <a href="#">计生情趣</a>
+                    </li>
+                    <li>
+                        <a href="#">理财</a>
+                        <span>|</span>
+                        <a href="#">分期</a>
+                        <span>|</span>
+                        <a href="#">保险</a>
+                        <span>|</span>
+                        <a href="#">房产</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="banner__center ">
+
+            </div>
+            <div class="banner__right ">
+
+            </div>
+        </div>
+    </div>
+    <!-- banner 结束 -->
 </body>
 
 </html>

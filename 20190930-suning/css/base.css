@@ -1,4 +1,13 @@
 /* float and clearfix */
+a {
+    text-decoration: none;
+    color: #ccc;
+}
+div, ul, ol, dl, li, dt, dd, form, h1, header, main, section, footer, a {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .fl {
     float: left;
 }
@@ -21,4 +30,27 @@
 /* colors */
 .clr-f60 {
     color: #f60 !important;
+}
+.clr-f80 {
+    color: #f80 !important;
+}
+.clr-f90 {
+    color: #f90 !important;
+}
+/* background colors */
+.bgc-f60 {
+    background-color: #f60 !important;
+}
+.bgc-f80 {
+    background-color: #f80 !important;
+}
+.bgc-f90 {
+    background-color: #f90 !important;
+}
+
+/* 版心 */
+.wrapper {
+    width: 1190px;
+    height: 100%;
+    margin: 0 auto;
 }

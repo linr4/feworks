@@ -12,6 +12,14 @@ Web development learning notes and case study
 
 ---
 
+###### 20191001 - Day 164
+
+- 练习 suning 首页 - header, navbar (+3h = 364.5 of 600)
+
+###### 20190930 - Day 163
+
+- 练习 suning 首页 - meta, topbar (+1.5h = 361.5 of 600)
+
 ###### 20190929 - Day 162
 
 - 练习 vivo 首页 - 响应式，手机适配 (+2h = 360 of 600)

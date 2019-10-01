@@ -41,8 +41,9 @@
 
 * 导入 CSS 样式重置文件，如 reset.css 、normalize.css 等，以保持各种浏览器渲染的一致性；
 * 在 body 标签上设置全局通用的样式，如：字体、行高、颜色等；
-  * `body { font: 12px/1.5em "Microsoft Yahei", tahoma; } ` 12px 字体大小、1.5em 行高；
-
+  
+* `body { font: 12px/1.5em "Microsoft Yahei", tahoma; } ` 12px 字体大小、1.5em 行高；
+  
 * 兼容性策略的确定：“优雅降级” 还是 “渐进增强”
   * 渐进增强：针对低版本浏览器进行页面构建，保证最基本的功能，在针对现代浏览器进行效果和交互的改进，以及追加功能以达到更好的用户体验；
   * 优雅降级：在现代浏览器上构建完整功能，再针对低版本浏览器进行兼容，实现基本功能；
@@ -57,3 +58,15 @@
 #### Tips:
 
 * 给行内元素（inline elements）添加形变属性（transform）是无效的，需转换成 block / inline-block 方可；
+
+* 整站的版心样式大部分一样，可以提取为公共类，把 CSS 类直接加在 HTML 容器标签上，优化代码结构：
+
+  ```css
+  .wrapper {
+      width: 1190px;
+      height: 100%;
+      margin: 0 auto;
+  }
+  ```
+
+  
