@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20191004 - Day 165
+
+- 练习 suning 首页 - banner (+2h = 366.5 of 600)
+
 ###### 20191001 - Day 164
 
 - 练习 suning 首页 - header, navbar (+3h = 364.5 of 600)

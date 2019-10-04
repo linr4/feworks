@@ -210,11 +210,187 @@ body {
 .banner__center {
     flex: 1;
     height: 100%;
-    background-color: greenyellow;
+    position: relative;
+}
+
+.banner__center__bg img {
+    vertical-align: bottom;
+}
+.banner__center__bg p.arrows {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.banner__center__bg p.arrows a {
+    display: inline-block;
+    width: 30px;
+    height: 64px;
+    background: url("../images/icons.png") no-repeat -82px -145px;
+}
+.banner__center__bg p.arrows a:last-of-type {
+    background-position: -120px -145px;
+}
+
+.banner__center__bg ol.indicator {
+    position: absolute;
+    bottom: 135px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.banner__center__bg ol.indicator li {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 0 4px;
+    background: url("../images/icons.png") no-repeat 0 -100px;
+}
+.banner__center__bg ol.indicator li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.banner__center__bg ol.indicator li:first-of-type {
+    background-position: -26px -100px;
+}
+
+.banner__center__fg {
+    width: 816px;
+    height: 122px;
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+}
+.banner__center__fg li {
+    width: 202px;
+    height: 100%;
+    padding: 10px;
+    float: left;
+    background-color: #fff;
+}
+.banner__center__fg li a {
+    font-size: 17px;
+    font-weight: bold;
+    color: #EF4124;
+}
+.banner__center__fg li:nth-of-type(2) a {
+    color: #9837ee;
+}
+.banner__center__fg li:nth-of-type(3) a {
+    color: #44b171;
+}
+.banner__center__fg li p {
+    color: #999;
+}
+.banner__center__fg li img {
+    float: right;
+    margin-top: -12px;
 }
 .banner__right {
     width: 170px;
+    height: 101%;
+    margin-top: -1px;
+    background-color: #fff;
+}
+.banner__right__top {
+    width: 100%;
+    height: 169px;
+    text-align: center;
+}
+.banner__right__top .avatar {
+    display: inline-block;
+    font-style: normal;
+    width: 53px;
+    height: 53px;
+    background: url("../images/icons.png") no-repeat -93px -23px;
+    margin-top: 10px;
+}
+.banner__right__top p {
+    margin-bottom: 13px;
+}
+.banner__right__top p span {
+    display: inline-block;
+    width: 72px;
+    height: 24px;
+    line-height: 24px;
+    margin: 0 4px;
+    border: 1px solid #f60;
+    color: #f60;
+    vertical-align: middle;
+    box-sizing: border-box;
+    background: url("../images/icons.png") no-repeat;
+}
+.banner__right__top p:nth-of-type(2) span:nth-of-type(1) {
+    background: none;
+}
+.banner__right__top p:nth-of-type(2) span:nth-of-type(2) {
+    background-position: -295px -251px;
+}
+.banner__right__top p:nth-of-type(3) span:nth-of-type(1) {
+    margin-top: 5px;
+    border: none;
+    background-position: -670px -256px;
+}
+.banner__right__top p:nth-of-type(3) span:nth-of-type(2) {
+    margin-top: 5px;
+    border: none;
+    background-position: -670px -288px;
+}
+.banner__right__mid {
+    width: 100%;
+    height: 166px;
+}
+.banner__right__mid ul {
+    width: 171px;
     height: 100%;
-    background-color: turquoise;
+    padding: 10px;
+}
+.banner__right__mid ul li {
+    padding-top: 10px;
+}
+.banner__right__mid ul li a {
+    color: #333;
+}
+.banner__right__mid ul li a span {
+    color: #f60;
+}
+.banner__right__bot {
+    width: 100%;
+    height: 147px;
+    overflow: hidden;
+}
+.banner__right__bot ul {
+    width: 171px;
+}
+.banner__right__bot ul li {
+    float: left;
+    width: 57px;
+    height: 74px;
+    border-top: 1px solid #eee;
+    border-right: 1px solid #eee;
+    text-align: center;
+    
+}
+.banner__right__bot ul li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 24px;
+    margin-top: 10px;
+    color: #333;
+}
+.banner__right__bot ul li a:hover {
+    color: #f60;
+}
+.banner__right__bot ul li a i {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    font-style: normal;
+    color: #f60;
 }
 /* banner 结束 */
