@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20191005 - Day 166
+
+- 练习 suning 首页 - 限时抢购板块(+1.5h = 368 of 600)
+
 ###### 20191004 - Day 165
 
 - 练习 suning 首页 - banner (+2h = 366.5 of 600)

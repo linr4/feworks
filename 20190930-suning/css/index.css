@@ -176,6 +176,7 @@ body {
     width: 100%;
     height: 482px;
     background-color: #f90;
+    overflow: hidden;
 }
 .banner > .wrapper {
     display: flex;
@@ -394,3 +395,127 @@ body {
     color: #f60;
 }
 /* banner 结束 */
+
+/* 抢购 开始 */
+.rushbuy {
+    width: 100%;
+    height: 307px;
+    margin: 20px 0;
+}
+.rushbuy__wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+}
+.rushbuy__top {
+    width: 100%;
+    height: 47px;
+    border-bottom: 1px solid #eee;
+}
+.rushbuy__top > img.qg {
+    margin: 13px 20px 0;
+}
+.rushbuy__top > p {
+    line-height: 48px;
+    margin-right: 15px;
+    color: #333;
+}
+.rushbuy__top > p > span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #000;
+}
+.rushbuy__top > ul {
+    margin: 11px 0 0 20px;
+}
+.rushbuy__top > ul > li {
+    float: left;
+    width: 133px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #333;
+}
+.rushbuy__top > ul > li:first-of-type {
+    color: #fff;
+    background: url("../images/icons.png") no-repeat -561px 0;
+}
+
+.rushbuy__top > a {
+    color: #333;
+    line-height: 48px;
+    padding-right: 10px;
+}
+.rushbuy__top > a > i {
+    vertical-align: middle;
+}
+
+.rushbuy__bot {
+    width: 100%;
+    height: 260px;
+    padding: 10px 10px 0 0;
+}
+.rushbuy__bot ul {
+    width: 1000px;
+    height: 240px;
+}
+.rushbuy__bot ul li {
+    float: left;
+    width: 200px;
+    height: 100%;
+    text-align: center;
+    padding: 0 10px;
+    border-right: 1px solid #eee;
+}
+.rushbuy__bot ul li a img {
+    width: 159px;
+    height: 159px;
+}
+.rushbuy__bot ul li a {
+    text-align: left;
+}
+.rushbuy__bot ul li a h3 {
+    color: #333;
+    height: 20px;
+    overflow: hidden;
+}
+.rushbuy__bot ul li a p.price em {
+    font-size: 16px;
+    font-weight: bold;
+    color: #f60;
+}
+.rushbuy__bot ul li a p.price i {
+    font-style: normal;
+    margin-left: 10px;
+}
+.rushbuy__bot ul li a p.progress {
+    position: relative;
+    overflow: hidden;
+    color: #333;
+    margin-left: 5px;
+}
+.rushbuy__bot ul li a p.progress b, 
+.rushbuy__bot ul li a p.progress b i {
+    display: inline-block;
+    width: 100px;
+    height: 6px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: url("../images/icons.png") no-repeat -561px -74px;
+    position: absolute;
+    top: 5px;
+    left: 0;
+}
+.rushbuy__bot ul li a p.progress b i {
+    background-position: -561px -94px;
+    position: absolute;
+    top: 0;
+    left: -50%;
+}
+/* 抢购 结束 */
