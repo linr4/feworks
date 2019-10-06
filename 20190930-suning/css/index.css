@@ -120,6 +120,7 @@ body {
 .header__bot__navbar {
     padding-left: 10px;
     overflow: hidden;
+    height: 100%;
 }
 .header__bot__navbar li {
     float: left;
@@ -168,6 +169,7 @@ body {
 }
 .header__bot__notice img {
     height: 100%;
+    vertical-align: bottom;
 }
 /* 头部结束 */
 
@@ -289,11 +291,11 @@ body {
 .banner__center__fg li img {
     float: right;
     margin-top: -12px;
+    vertical-align: top;
 }
 .banner__right {
     width: 170px;
     height: 101%;
-    margin-top: -1px;
     background-color: #fff;
 }
 .banner__right__top {
@@ -819,6 +821,7 @@ body {
     height: 30px;
     line-height: 30px;
     text-align: center;
+    color: #fc0;
 }
 .sidebar a:hover {
     color: #fff;
@@ -829,7 +832,8 @@ body {
     border: 1px solid #666;
     border-left: none;
     border-right: none;
-    margin-top: 10px;
+    margin: 10px 0;
+    padding: 10px 0;
 }
 .sidebar__top div.cart a {
     width: 100%;

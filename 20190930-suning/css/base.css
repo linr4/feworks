@@ -3,7 +3,7 @@ a {
     text-decoration: none;
     color: #ccc;
 }
-div, ul, ol, dl, li, dt, dd, form, h1, header, main, section, footer, a {
+div, ul, ol, dl, li, dt, dd, form, h1, header, main, section, footer, a, p {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
