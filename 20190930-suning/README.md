@@ -1,19 +1,24 @@
-# 苏宁商城 - 练习案例
+# 苏宁商城 - 练习
 
 #### 创建网站项目的步骤：
 
-* 新建目录结构和必要的文件：
+* 新建目录结构，引入必要的文件：
 
   ```
   css/
+  	--/reset.css
+  	--/normalize.css
+  	--/base.css   /* 自定义的全局样式和公共类 */
+  	--/index.css
   images/
   js/
   index.html
+  favicon.ico
   ```
 
 * 设置 favicon.ico 图标：
 
-  * 可以用其它格式的图片来生成 favicon.ico 图标文件：比特虫 [bitbug.net](https://www.bitbug.net/)
+  * 可以用其它格式的图片在工具网站上生成 favicon.ico 图标文件，如：比特虫 [bitbug.net](https://www.bitbug.net/)
   * 在 head 中添加 `<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">`
 
 * 添加 **SEO 三大标签**
@@ -47,7 +52,7 @@
 * 兼容性策略的确定：“优雅降级” 还是 “渐进增强”
   * 渐进增强：针对低版本浏览器进行页面构建，保证最基本的功能，在针对现代浏览器进行效果和交互的改进，以及追加功能以达到更好的用户体验；
   * 优雅降级：在现代浏览器上构建完整功能，再针对低版本浏览器进行兼容，实现基本功能；
-  * 根据站点的用户群体使用浏览器类型确定；大趋势是低版本浏览器逐渐淘汰，微软亦已放弃 IE，多数情况下选择优雅降级策略；
+  * 根据站点的用户群体使用浏览器类型确定；大趋势是低版本浏览器在逐渐淘汰中，微软亦已放弃 IE，多数情况下可选择优雅降级策略；
   * 优雅降级常见做法：为低版本浏览器单独制作跳转页面，提示用户使用现代浏览器访问；
     * 测试工具：IETester；
 
@@ -69,4 +74,35 @@
   }
   ```
 
-* 底部五个【小图标+小标题+说明文字】区块可以使用 `dl>(dt>a>img)+(dd>a)+dd{text}` 的结构，`dt` 左浮使得其右侧的文字自动环绕即可；
+* 底部五个【小图标+小标题+说明文字】区块可以使用 `dl>(dt>a>img)+(dd>a)+dd{text}` 的结构，`dt` 左浮使得其右侧的文字自动环绕；
+
+  ```html
+  <dl>
+      <dt><a href="#"><img src="icon1.jpg" class="float-left"></a></dt>
+      <dd><a href="#">正品保障</a></dd>
+      <dd>正品保障 提供发票</dd>
+  </dl>
+  ```
+
+* 容器标签即使没有其它样式需要设置，也最好显式设定一下宽高为 100%，否则有可能被子元素撑变形而出现偏差，如下案例：
+
+  ```css
+  ul.header__bottom__navbar {
+      padding-left: 10px;
+      overflow: hidden;
+      height: 100%;	/* 继承的高度为 38px，若未显式设置为 100%，
+      				   则 ul 会被子元素撑高为 39.8px，
+      				   与下方的 banner 会有约 1px 的间隙 */
+  }
+  ```
+
+  ```html
+  <ul class="header__bottom__navbar">
+      <li><a href="">限时抢购</a><span></span></li> <!--span中引入精灵图，当前位置指示图标-->
+      <li><a href="">生活家电</a><span></span></li>
+      <li><a href="">苏宁超市</a> <i class="hot"></i> <span></span></li>
+      ...
+  </ul>
+  ```
+
+  
