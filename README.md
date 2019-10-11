@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20191011 - Day 168
+
+- 学习 Bootstrap (+.5h = 373 of 600)
+
 ###### 20191006 - Day 167
 
 - 练习 suning 首页 - 商铺橱窗，页脚，侧边栏 (+4.5h = 372.5 of 600)
