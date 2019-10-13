@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bs4/css/bootstrap.min.css">
+    <title>Document</title>
+    <style>
+        div {
+            height: 100px;
+            line-height: 100px;
+            margin-bottom: 10px;
+            background-color: turquoise;
+
+            text-align: center;
+            font-size: 60px;
+        }
+        p {
+            font-size: 60px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <p>container</p>
+    <div class="container"></div>
+    <p>container-fluid</p>
+    <div class="container-fluid"></div>
+
+    <script>
+        let divEls = document.querySelectorAll('div');
+        window.onload = function () {
+            resize();
+        }
+        window.onresize = resize;
+        
+        function resize () {
+            divEls[0].innerText =  getComputedStyle(divEls[0]).width;
+            divEls[1].innerText =  getComputedStyle(divEls[1]).width;
+        }
+    </script>
+</body>
+</html>

@@ -12,9 +12,13 @@ Web development learning notes and case study
 
 ---
 
+###### 20191013 - Day 169
+
+- 学习 Bootstrap - container (+1h = 374 of 600)
+
 ###### 20191011 - Day 168
 
-- 学习 Bootstrap (+.5h = 373 of 600)
+- 学习 Bootstrap - intro (+.5h = 373 of 600)
 
 ###### 20191006 - Day 167
 
