@@ -209,4 +209,93 @@
 
     
 
-下一次：课时7，栅格系统
+###### Bootstrap 栅格系统
+
+* 概念：
+
+  * Bootstrap 栅格系统使用一系列 ”行“ 和 ”列“ 来实现复杂的响应布局；
+  * 栅格系统默认将一行等分为12份；
+  * 通过绑定类名来指定一行中的每一列占多少份的 1/12；
+
+* 格式：三层结构
+
+  ```html
+  <div class="container">
+      <div class="row">
+          <span class="col col-6">column 1</span>
+          <span class="col col-4">column 2</span>
+          <span class="col col-2">column 3</span> <!--宽度份数总和超过12的话会自动换行-->
+      </div>
+  </div>
+  ```
+
+* BS 4 栅格实现原理：
+
+  ```css
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  
+  .col {
+    flex-basis: 0; /* 相当于 width: 0 */
+    flex-grow: 1;  /* 允许 grow，有3列的话，就将父容器的宽度等分为3份 */
+    max-width: 100%;
+  }
+  
+  .col-6 {
+    flex: 0 0 50%;		/* grow: 0, shrink: 0, basis: 50% */
+    max-width: 50%;
+  }
+  ```
+
+* BS 3 的栅格则是将列设为浮动，再设置列的宽度为父容器的百分比；
+
+  ```css
+  .col-xs-9,
+  .col-xs-10,
+  .col-xs-11,
+  .col-xs-12 {
+    float: left;
+  }
+  .col-xs-12 {
+    width: 100%;
+  }
+  .col-xs-11 {
+    width: 91.66666667%;
+  }
+  .col-xs-10 {
+    width: 83.33333333%;
+  }
+  .col-xs-9 {
+    width: 75%;
+  }
+  ```
+
+* 列的宽度设置：
+
+| CSS 类名前缀 | 备注                                                         |
+| ------------ | ------------------------------------------------------------ |
+| `col-*`      | 设置超小屏幕                                                 |
+| `col-sm-*`   | 设置小屏幕                                                   |
+| `col-md-*`   | 设置中等屏幕                                                 |
+| `col-lg-*`   | 设置大屏幕                                                   |
+| `col-xl-*`   | 设置超大屏幕（只适用于超大屏幕，其它尺寸的屏幕会自动把宽度设为 100%） |
+
+* 如果只设置了小屏幕的类，则大屏幕也会采用小屏幕的设置；
+
+* 如果只设置了大屏幕的类，则小屏幕默认为 100%；
+
+* 如果大小屏幕都设置了类，则在什么屏幕就显示什么尺寸；
+
+  ```html
+  <!-- 这样设置的话，在不同大小的屏幕上，各个列的宽度会有变化 -->
+  <div class="col-lg-2 col-xl-6"> col 1 </div>
+  <div class="col-lg-4 col-xl-2"> col 1 </div>
+  <div class="col-lg-6 col-xl-4"> col 1 </div>
+  ```
+
+  
+
