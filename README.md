@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20191016 - Day 171
+
+- 学习 Bootstrap - gutters, alignment, offset, order, pub style, components (+1.5h = 376.5 of 600)
+
 ###### 20191014 - Day 170
 
 - 学习 Bootstrap - grid (+1h = 375 of 600)

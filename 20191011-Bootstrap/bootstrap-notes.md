@@ -299,3 +299,161 @@
 
   
 
+* 沟槽（gutters）
+
+  * BS 默认栅格和列，左右有 15px 的 margin 或 padding，即沟槽；
+
+  * 可以在 row 上添加 `no-gutters` 类、在 container 上添加 `px-0` 类来消除；
+
+  * 也可手工设置 margin / padding 消除；
+
+    ```html
+    <div class="container px-0">
+        <div class="row no-gutters">
+            <div class="col-3">col 3</div>
+            <div class="col-5">col 5</div>
+            <div class="col-4">col 4</div>
+        </div>
+    </div>
+    ```
+
+    
+
+* 对齐
+
+  * 在 row 上面添加 `justify-content-start`, `justify-content-end`, `justify-content-between`, `align-items-center` 等来实现对齐方式的调整；
+
+    ```html
+    <div class="container">
+        <div class="row align-items-center justify-content-around">
+            <div class="col-2">col 2</div>
+            <div class="col-2">col 2</div>
+            <div class="col-2">col 2</div>
+        </div>
+    </div>
+    ```
+
+    
+
+* 偏移和排序
+
+  * 给列添加 `offset-n` 使得其起点偏移 n/12 份，也可以实现居中对齐、两端对齐等效果
+
+    ```html
+    <div class="container">
+        <div class="row">
+            <div class="col-2 offset-3">col 2</div>
+            <div class="col-2">col 2</div>
+            <div class="col-2">col 2</div>
+        </div>
+    </div>
+    ```
+
+    
+
+  * 给列添加 `order-n`  类，即可调整各个列的排序；注意：没有添加 `order-n` 类的列不参与排序，优先于设置了 `order-n` 的列、排在前面；
+
+    ```html
+    <div class="container">
+        <div class="row">
+            <div class="col-2 order-2">col 3</div>
+            <div class="col-2 order-1">col 5</div>
+            <div class="col-2 ">col 4</div>
+        </div>
+    </div>
+    ```
+
+    
+
+* 公共样式类
+
+  * 文字颜色（需注意：.text-white 和 .text-white 不支持用在链接上）
+
+    ```html
+    text-muted
+    text-primary
+    text-secondary
+    ...
+    ```
+
+  * 背景颜色
+
+    ```html
+    bg-primary
+    bg-success
+    bg-danger
+    bg-warning
+    bg-info
+    bg-dark
+    ...
+    ```
+
+  * 边框
+
+    ```html
+    border / border-top ...		快速添加边框
+    border-0 / border-top-0 ... 取消边框
+    border-info ...				添加边框颜色
+    rounded / rounded-top ...	添加边框圆角
+    ```
+
+  * 浮动
+
+    ```html
+    float-left
+    float-right
+    float-md-left
+    float-md-left
+    clearfix
+    ...
+    ```
+
+  * 定位
+
+    ```html
+    position-relative
+    position-absolution
+    position-fixed
+    ...
+    ```
+
+  * 边距
+
+    ```html
+    m-* / p-*
+    m-1		// margin: 1rem
+    mt-1	// margin-top: 1rem
+    mt-sm-1 // 根据VP添加
+    m-0		// 清除margin
+    m-auto	// 水平居中
+    
+    ```
+
+  * 项目符号
+
+    ```html
+    <ul class="list-unstyled">
+    ```
+
+  * 图片相关
+
+    ```
+    <img src="1.jpg" class="img-fluid">		// 等比拉伸 （width/height:100%）
+    <img src="1.jpg" class="img-thumbnail">	// 相册/缩略图效果（添加圆角、边框、内边距）
+    ```
+
+    
+
+* 组件 - 对特定功能的封装
+
+  * 提示框 
+
+    ```html
+    <div class="alert alert-success" role="alert">
+        <!-- role 用于增强语义 -->
+    </div>
+    ```
+
+    * `role` 属性可选，用于增强 div 的语义，明确此 div 的用途，利于识别代码和 SEO；
+    * `aria-xxx`：aria 即 Accessible Rich Internet Applications，是w3c和Apple制定的为残障人士无障碍使用网站的协议；在某些阅读器上可以指明元素的类型（如关闭按钮）；
+    * `aria-hidden` 避免屏幕识读设备输出对盲人无意义的内容，可以设置此属性，对识读设备隐藏此部分的内容；
