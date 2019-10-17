@@ -446,7 +446,7 @@
 
 * 组件 - 对特定功能的封装
 
-  * 提示框 
+  * 提示框：添加 `alert alert-xxx` 类
 
     ```html
     <div class="alert alert-success" role="alert">
@@ -457,3 +457,69 @@
     * `role` 属性可选，用于增强 div 的语义，明确此 div 的用途，利于识别代码和 SEO；
     * `aria-xxx`：aria 即 Accessible Rich Internet Applications，是w3c和Apple制定的为残障人士无障碍使用网站的协议；在某些阅读器上可以指明元素的类型（如关闭按钮）；
     * `aria-hidden` 避免屏幕识读设备输出对盲人无意义的内容，可以设置此属性，对识读设备隐藏此部分的内容；
+    
+  * 按钮：添加 `btn btn-xxx` 类
+  
+    ```html
+    <button type="button" class="btn btn-primary"> button 1 </button>
+    <input type="button" value="button 2" class="btn btn-success">
+    <a href="#" class="btn btn-danger">button 3</a>
+    ```
+  
+  * 按钮组：按钮包裹一层容器 `btn-group`，常用于分页的索引链接；
+  
+    ```html
+    <div class="btn-group">
+        <button class="btn btn-secondary">1</button>
+        <button class="btn btn-secondary">2</button>
+        <button class="btn btn-secondary">3</button>
+    </div>
+    ```
+  
+    
+  
+  * 卡片组件：`.card`，常用于封装小区块，如展示单一主题的内容、单个商品的信息等；
+  
+    ```html
+    <div class="card">
+        <img src="images/canon.jpg" style="width: 200px" class="card-img-top">
+        <div class="card-body">
+            佳能（Canon）EOS 77D
+        </div>
+    </div>
+    ```
+  
+  * 轮播图组件
+  
+    * 最外层容器 `class="carousel slide"`  定义轮播图组件；
+    * 最外层容器加上自定义属性 `data-ride="carousel"` 表示自动开始轮播，默认 5 秒；
+    * 里层 `ol.carousel-indicators>li` 创建指示器；
+    * `div.carousel-inner>div.carousel-item>img` 创建需轮播的图片；
+    * [Reference](http://code.z01.com/v4/components/carousel.html)
+  
+    ```html
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="..." class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="...">
+        </div>
+      </div>
+    </div>
+    ```
+  
+  * 折叠面板
+  
+    ```html
+    <a href="#collapseExample" class="btn btn-primary" data-toggle="collapse">show collapsed panel </a>
+    <div class="collapse" id="collapseExample"> 
+        <p>contents</p>
+    </div>
+    ```
+  
+     
