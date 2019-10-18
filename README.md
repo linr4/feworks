@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20191018 - Day 173
+
+- 学习 Bootstrap - components (+.5h = 378 of 600)
+
 ###### 20191017 - Day 172
 
 - 学习 Bootstrap - components (+1h = 377.5 of 600)
