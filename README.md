@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20191024 - Day 174
+
+- 学习 Bootstrap - Huawei (+1h = 379 of 600)
+
 ###### 20191018 - Day 173
 
 - 学习 Bootstrap - components (+.5h = 378 of 600)
