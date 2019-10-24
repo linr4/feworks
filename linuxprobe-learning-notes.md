@@ -640,3 +640,110 @@ yum groupinfo	pkggroup	# 查看软件包组的信息
 
 * 4.2 编写 Shell 脚本
 
+  * 基本知识
+
+  ```sh
+  #!/bin/bash		# 第一行为脚本声明，告知系统使用何种解释器
+  ```
+
+  ```sh
+  bash example.sh			# 执行脚本，脚本文件无需拥有执行权限 (x)、无需指定路径
+  chmod g+x example.sh	# 给脚本文件添加执行权限，在“group”上
+  chmod u+x example.sh	# 给脚本文件添加执行权限，在“user”上
+  chmod o+x example.sh	# 给脚本文件添加执行权限，在“other”上
+  chmod +x example.sh		# 一次性给3个角色都加上执行权限
+  ./example.sh			# 需要指定绝对或相对路径
+  ```
+  * 用户参数和内置变量
+  
+  ```sh
+  #!/bin/bash
+  echo "file name of the script: $0"
+  echo "there is(are) $# parameter(s), they are: $*"
+  echo "parameter #1 is: $1"
+  echo "return value of last cmd: $?"
+  
+  接收参数的内置变量：
+  $0 为脚本文件的文件名
+  $1 为第一个用户参数，依此类推
+  $# 用户参数的个数
+  $* 用户参数的值
+  $? 上一个命令的返回值
+  ```
+  
+  * 判断用户参数 - 条件测试语句
+  
+    * 格式：`[ condition expression ]` 中括号与`条件表达式`之间有<font color=red>空格</font>！条件成立则返回0，否则非0
+  
+    * 文件测试语句：判断文件是否存在、权限是否满足等
+  
+      | 运算符 | 作用                   |
+      | ------ | ---------------------- |
+      | `-d`   | 是否为目录             |
+      | `-e`   | 文件是否存在           |
+      | `-f`   | 是否为一般文件         |
+      | `-r`   | 当前用户是否有读的权限 |
+      | `-w`   | 当前用户是否有写的权限 |
+      | `-x`   | 当前用户是否有执行权限 |
+  
+      ```sh
+      [linr4@station /]$ [ -d /etc/fstab ]	# 判断 /etc/fstab 是否为目录
+      [linr4@station /]$ echo $?				# 显示上一条命令的结果
+      1										# 非 0 代表条件不成立，false
+      [linr4@station /]$ [ -f /etc/fstab ]	# 判断 /etc/fstab 是否为一般文件
+      [linr4@station /]$ echo $?
+      0										# 返回 0 代表条件成立，true
+      
+      
+      ```
+  
+    * 逻辑测试语句；
+  
+      ```sh
+      # 逻辑“与”运算符 &&，前面的条件测试语句成立，才会执行后面的语句
+      [ -e /dev/cdrom ] && echo "cdrom exist"	# && 与运算符，
+      cdrom exist
+      
+      # 逻辑“或”运算符 ||，前面的条件测试语句不成立，才会执行后面的语句
+      [linr4@station /]$ [ $USER = root ] || echo $USER
+      linr4									# 当前用户非 root，因此执行 echo
+      
+      [linr4@station /]$ su -
+      [root@station ~]# [ $USER = root ] || echo $USER
+      										# 当前用于为 root，不执行 echo
+      
+      # 逻辑“非”运算符 !，结果取反，后面要有空格
+      [root@station ~]# [ ! $USER=root ] || echo "admin"
+      admin
+      [root@station ~]# [ ! $USER=root ] && echo "admin"
+      [root@station ~]#
+      ```
+  
+      
+  
+      留意比较运算符 " = " 前后要有空格！否则如下例运算结果不对：
+  
+      ```sh
+      [root@station ~]# [ ! $USER=root ] && echo "user" || echo "root"
+      root
+      [root@station ~]# exit
+      logout
+      
+      # 虽当前用户非 root 仍显示 root，因比较的等号前后无空格
+      [linr4@station /]$ [ ! $USER=root ] && echo "user" || echo "root"
+      root		
+      [linr4@station /]$ echo $USER
+      linr4
+      
+      # 加上空格之后输出结果就与预期相同
+      [linr4@station /]$ [ ! $USER = root ] && echo "user" || echo "root"
+      user
+      [linr4@station /]$
+      ```
+  
+      
+  
+    * 整数值比较语句；
+  
+    * 字符串比较语句；
+
