@@ -1015,7 +1015,7 @@ Filename                                Type            Size    Used    Priority
 在 system1 和 system2 上要求 SELinux 的工作模式为 enforcing，要求系统重启后依然生效。
 
 ```sh
-vi /etc/selinux/config
+[root@desktop ~]# vi /etc/selinux/config
   SELINUX=enforcing
 ```
 
@@ -1034,7 +1034,7 @@ vi /etc/selinux/config
 * 备注： my133t.org 是在 172.13.8.0/24 网络。
 
 ```sh
-firewall-config		# invoke GUI F/W config tool
+[root@desktop ~]# firewall-config		# invoke GUI to configure firwall
 ```
 
 1) Change `Configuration` to be `Permanent` ;
@@ -1067,6 +1067,8 @@ firewall-config		# invoke GUI F/W config tool
 5) Click menu item `Options` -> `Reload Firewalld`
 
 DONE.
+
+![image-20191030115139377](image-20191030115139377.png)
 
 
 
@@ -1103,5 +1105,490 @@ DONE.
 
 
 
+## 第4题
 
- 
+###### 配置端口转发
+
+在系统 system1 设定端口转发，要求：
+
+* 在172.24.8.0/24 网络中的系统，访问system1的本地端口 5423 将被转发到 80
+
+* 此设置必须永久有效
+
+  
+
+```sh
+[root@desktop ~]# firewall-config	# 启动防火墙配置工具
+```
+
+* 左上角 `Configuration` 选择 `Permanment`
+* 点击 `Rich Rules` 选项卡，点击左下角 `Add` 添加一条新记录
+* 上方 `Family` 选择 `ipv4`
+* 勾选 `Element`，选择 `forward-port`，点击其右侧 dropbox 打开 `Port Forwarding` 窗口
+* `Protocol` 默认选择 `tcp`，`Port / Port` Range 输入 5423
+* 去掉 `Local forwarding`，选中 `Forward to another port`
+* `IP address` 填入 172.24.8.11，`Port / Port Range` 填入 80
+* 点击 `OK` 保存退出
+* 点击 `Source` 输入框，弹出 `Address` 窗口中填入 172.24.8.0/24
+* 再次点击 `Add` 添加新记录，除了 `Protocol` 选择 `udp` 之外、其余都一样；
+* 最后点击菜单 `Options`，点击菜单项 `Reload Firewalld` 即可。
+
+![image-20191030115520511](image-20191030115520511.png)
+
+
+
+
+
+## 第5题
+
+###### 配置链路聚合
+
+在 system1 和 system2 之间按以下要求设定一个链路：
+
+* 此链路使用接口 eth1 和 eth2
+* 此链路在一个接口失效时仍然能工作
+* 此链路在 system1 使用下面的地址172.16.3.40/255.255.255.0
+* 此链路在 system2 使用下面的地址172.16.3.45/255.255.255.0
+* 此链路在系统重启之后依然保持正常状态
+
+
+
+###### 解题方法
+
+```sh
+[root@system1 Desktop]# nm-connection-editor		# 打开网络管理器
+# ... 
+# 在图形界面进行添加 team connection 的操作
+```
+
+* 打开 `nm-connection-editor`
+
+* 点击左上角 `Add` 添加新的连接，类型选择 `Team`，点击 `Create...`
+
+![image-20191030125938708](image-20191030125938708.png)
+
+
+
+* 在 `Editing Team Connection` 窗口中点击 `Add` 添加网卡，类型按默认的 `Ethernet`，点击 `Create`：
+
+![image-20191030130115904](image-20191030130115904.png)
+
+![image-20191030130249619](image-20191030130249619.png)
+
+
+
+* 在弹出的窗口的 `Ethernet`  -> `Device MAC address`中选择 `eth1`，切换到 `General` 勾选 `Auto connect when avail`，点击 `Save` 保存退出：
+
+![image-20191030130608294](image-20191030130608294.png)
+
+
+
+![image-20191030130538828](image-20191030130538828.png)
+
+
+
+* 以同样的方法添加 `eth2`；在 `JSON Config` 中填入 `{"runner":{"name":"activebackup"}}` 
+
+![image-20191030141939228](image-20191030141939228.png)
+
+
+
+* 切换到 `IPv4 Settings` 选项卡，选择 `Method` 为 `Manual`，点击 `Add` 添加 IP 信息，点击 `Save` 保存；
+
+  ![image-20191030131230077](image-20191030131230077.png)
+
+  
+
+* 重启网络服务，测试 IP 的连通性：
+
+```sh
+[root@system1 Desktop]# systemctl restart network
+
+[root@system1 Desktop]# ping 172.16.3.40
+PING 172.16.3.45 (172.16.3.45) 56(84) bytes of data.
+64 bytes from 172.16.3.45: icmp_seq=1 ttl=64 time=3.96 ms
+...
+```
+
+
+
+## 第6题
+
+###### 配置IPV6地址
+
+在考试系统上设定接口eth0使用下列IPV6地址：
+
+* system1 上的地址应该是 2003:ac18::305/64
+
+- system2 上的地址应该是 2003:ac18::30a/64
+
+- 两个系统必须能与网络 2003:ac18/64 内的系统通信
+
+- 地址必须在重启后依然生效
+
+- 两个系统必须保持当前的 IPv4 地址并能通信
+
+
+
+###### 解题方法：
+
+* 打开网络管理器，在 GUI 中进行配置；
+
+```sh
+[root@system1 Desktop]# nm-connection-editor	# 启动网络管理器
+```
+
+* 在 `Network Connections` 窗口中选中 `eth0`，点击 `Edit...` 进行编辑；
+* 在 `Editing eth0` 窗口中，点击 `IPv6 Settings` 选项卡；
+* 选择 `Method` 为 `Manual`，点击 `Add` 添加新地址：完成后点击 `Save...` 保存退出；
+
+![image-20191030144143528](image-20191030144143528.png) 
+
+
+
+* 重启网络服务，并使用 `ping6` 测试连通性：
+
+```sh
+[root@system1 Desktop]# systemctl restart network
+
+[root@system1 Desktop]# ping6 2003:ac18::305
+PING 2003:ac18::305(2003:ac18::305) 56 data bytes
+64 bytes from 2003:ac18::305: icmp_seq=1 ttl=64 time=0.345 ms
+64 bytes from 2003:ac18::305: icmp_seq=2 ttl=64 time=0.060 ms
+...
+
+[root@system1 Desktop]# ping6 2003:ac18::30a
+PING 2003:ac18::30a(2003:ac18::30a) 56 data bytes
+64 bytes from 2003:ac18::30a: icmp_seq=1 ttl=64 time=153 ms
+64 bytes from 2003:ac18::30a: icmp_seq=2 ttl=64 time=70.1 ms
+...
+```
+
+
+
+
+
+## 第7题
+
+###### 配置本地邮件服务
+
+在系统 system2 和 system1 上配置邮件服务，要求：
+
+- 这些系统不接受外部发送来的邮件
+
+- 在这些系统上本地发送的任何邮件都会自动路由到 mail.group8.example.com
+
+- 从这些系统上发送的邮件显示来自于 server.group8.example.com
+
+可以通过发送邮件到本地用户 dave 来测试配置，系统 server.group8.example.com 已经配置把此用户的邮件转到 `http://server.group8.example.com/pub/received_mail/8`
+
+
+
+```sh
+# 编辑邮件配置文件
+[root@system1 Desktop]# vim /etc/postfix/main.cf		
+
+# 大概在100行处，添加两条记录
+101 local_transport = error:local			# 仅接受本地邮件
+102 myorigin = server.group8.example.com	# 邮件显示来自 server.group8.example.com
+
+# 大概在116行处，添加一条记录（注释掉原 inet_interfaces = localhost 那条）
+118 inet_interfaces = loopback-only
+
+# 大概在315行处，添加一条记录
+316 relayhost = [mail.group8.example.com]	# 邮件自动路由到 mail.group8.example.com
+
+# 防火墙允许 SMTP 服务
+[root@system1 Desktop]# firewall-cmd --permanent --add-service=smtp
+success
+[root@system1 Desktop]# firewall-cmd --reload 
+success
+
+# 重启邮件服务，并设置自动启动
+[root@system1 Desktop]# systemctl restart postfix
+[root@system1 Desktop]# systemctl enable postfix
+
+# 测试邮件服务
+[root@system1 Desktop]# echo "Here is mail body" | mail -s "mail subject" dave
+
+# 查看发送结果
+[root@system1 Desktop]# curl http://server.group8.example.com/pub/received_mail/8
+
+From root@server.group8.example.com  Wed Oct 30 15:12:27 2019
+Return-Path: <root@server.group8.example.com>
+X-Original-To: dave@server.group8.example.com
+Delivered-To: dave@server.group8.example.com
+Received: from system1.group8.example.com (system1.group8.example.com [172.24.8.11])
+	by server.group8.example.com (Postfix) with ESMTP id B741F308B543
+	for <dave@server.group8.example.com>; Wed, 30 Oct 2019 15:12:27 +0800 (CST)
+Received: by system1.group8.example.com (Postfix, from userid 0)
+	id 9878922EDCB7; Wed, 30 Oct 2019 15:12:27 +0800 (CST)
+Date: Wed, 30 Oct 2019 15:12:27 +0800
+To: dave@server.group8.example.com
+Subject: This is mail subject
+User-Agent: Heirloom mailx 12.5 7/5/10
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Message-Id: <20191030071227.9878922EDCB7@system1.group8.example.com>
+From: root@server.group8.example.com (root)
+
+This is mail body
+
+[root@system1 Desktop]#
+```
+
+
+
+## 第8题
+
+###### 通过 SMB 共享目录
+
+在 system1 上配置 SMB 服务 ，要求：
+
+- 您的 SMB 服务器必须是 STAFF 工作组的一个成员
+
+- 共享 /common 目录，共享名必须为 common
+
+- 只有 group8.example.com 域内的客户端可以访问 common 共享
+
+- common 必须是可以浏览的
+
+- 用户 andy 必须能够读取共享中的内容，如果需要的话，验证密码是 redhat
+
+
+
+```sh
+[root@system1 ~]# yum install -y samba samba-client
+[root@system1 ~]# mkdir /common
+[root@system1 ~]# chcon -R -t samba_share_t /common
+
+[root@system1 ~]# vim /etc/samba/smb.conf
+
+# 修改 89 行的 workgroup 值为 STAFF
+89         workgroup = STAFF	
+
+# 在 320 行（文件末尾）添加如下：
+321 [common]					
+322         path = /common
+323         hosts allow = 172.24.8.
+324         browseable = yes
+
+#####
+
+# 设置防火墙允许 SMB 相关服务
+[root@system1 ~]# firewall-cmd --permanent --add-service=samba
+[root@system1 ~]# firewall-cmd --permanent --add-service=mountd
+[root@system1 ~]# firewall-cmd --reload
+
+# 重启 SMB 相关服务，并设置自动启动
+[root@system1 ~]# systemctl restart smb nmb
+[root@system1 ~]# systemctl enable smb nmb
+
+# 添加 SMB 用户，设置密码 redhat
+[root@system1 ~]# smbpasswd -a andy
+New SMB password:
+Retype new SMB password:
+Added user andy.
+
+###################### system2 ######################
+
+[root@system2 ~]# yum install -y samba-client cifs-utils
+
+[root@system2 ~]# smbclient -L //172.24.8.11/ -U andy
+Enter andy's password: 
+Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	common          Disk      
+	IPC$            IPC       IPC Service (Samba Server Version 4.2.3)
+	andy            Disk      Home Directories
+Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
+
+	Server               Comment
+	---------            -------
+	SYSTEM1              Samba Server Version 4.2.3
+
+	Workgroup            Master
+	---------            -------
+	STAFF                SYSTEM1
+
+```
+
+
+
+## 第9题
+
+###### 配置多用户SMB挂载
+
+在 system1 通过 SMB 共享目录 /devops，并满足下列要求：
+
+- 共享名为 devops
+
+- 共享目录 devops 只能 group8.example.com 域中的客户端使用
+
+- 共享目录 devops 必须可以被浏览
+
+- 用户 silene 必须能以**只读**的方式访问此共享，访问密码是 redhat
+
+- 用户 akira 必须能以**读写**的方式访问此共享，访问密码是 redhat
+
+- 此共享目录永久挂载在 system2.group8.example.com 上的 /mnt/dev 目录，并用 silene 作为认证用户
+- 任何用户都可以通过 akira 来临时获取写的权限
+
+
+
+```sh
+[root@system1 ~]# mkdir /devops
+[root@system1 ~]# chcon -R -t samba_share_t /devops		# 修改目录的 SELinux 上下文安全域
+[root@system1 ~]# chmod o+w /devops
+# 或者：
+[root@system1 ~]# setfacl -m u:akira:rwx /devops/
+# 如上两条命令之一均可使得 akira 获取该目录的 写 权限
+
+[root@system1 ~]# ll -d /devops
+drwxr-xrwx. 2 root root 6 Oct 30 16:23 /devops
+
+[root@system1 ~]# vim /etc/samba/smb.conf 
+# 在文件的末尾添加如下内容：
+[devops]
+        path = /devops
+        hosts allow = 172.24.8.	# 只能 group8.example.com 域中的客户端使用
+        browseable = yes		# 使得共享目录可以被浏览
+        writable = no			# 以只读的方式访问此共享
+        write list = akira		# arkira 可以读写该共享目录
+
+# 设置防火墙，重启SMB相关服务
+[root@system1 ~]# firewall-cmd --permanent --add-service=samba		# 第8题已经设置
+[root@system1 ~]# firewall-cmd --permanent --add-service=mountd		# 第8题已经设置
+[root@system1 ~]# firewall-cmd --reload
+
+[root@system1 ~]# systemctl restart smb nmb
+[root@system1 ~]# systemctl enable smb nmb
+
+# 创建SMB用户
+[root@system1 ~]# smbpasswd -a silene
+New SMB password:
+Retype new SMB password:
+Added user silene.
+
+[root@system1 ~]# smbpasswd -a akira
+New SMB password:
+Retype new SMB password:
+Added user akira.
+
+
+###################### system2 ######################
+
+[root@system2 ~]# yum install -y samba-client cifs-utils		# 在第8题中已经安装
+
+[root@system2 ~]# smbclient -L //172.24.8.11 -U silene			# 查看system1的共享目录
+Enter silene's password: 
+
+Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	common          Disk      
+	devops          Disk      
+	IPC$            IPC       IPC Service (Samba Server Version 4.2.3)
+	silene          Disk      Home Directories
+Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
+
+	Server               Comment
+	---------            -------
+	SYSTEM1              Samba Server Version 4.2.3
+
+	Workgroup            Master
+	---------            -------
+	STAFF                SYSTEM1
+
+
+[root@system2 ~]# smbclient -L //172.24.8.11 -U akira			# 查看system1的共享目录
+Enter akira's password: 
+Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	common          Disk      
+	devops          Disk      
+	IPC$            IPC       IPC Service (Samba Server Version 4.2.3)
+	akira           Disk      Home Directories
+Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
+
+	Server               Comment
+	---------            -------
+	SYSTEM1              Samba Server Version 4.2.3
+
+	Workgroup            Master
+	---------            -------
+	STAFF                SYSTEM1
+
+
+#######################
+
+# 将 system1 共享目录 /devops 永久挂载在 system2 的 /mnt/dev 目录上，使用 silene 作为认证用户
+# 可通过用户 akira 来临时获取写的权限
+
+[root@system2 ~]# mkdir /mnt/dev		# 创建挂载点
+[root@system2 ~]# chmod o+w /mnt/dev	# 使得 akira 有写的权限
+
+[root@system2 ~]# vim /etc/fstab		# 设置自动挂载
+# 在 fstab 中添加一条记录：
+//172.24.8.11/devops /mnt/dev cifs defaults,multiuser,username=silene,password=redhat,sec=ntlmssp  0 0
+
+[root@system2 ~]# mount -a
+[root@system2 ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda1             9.8G  3.2G  6.7G  33% /
+devtmpfs              765M     0  765M   0% /dev
+tmpfs                 773M  140K  773M   1% /dev/shm
+tmpfs                 773M  8.8M  765M   2% /run
+tmpfs                 773M     0  773M   0% /sys/fs/cgroup
+//172.24.8.11/devops  9.8G  3.2G  6.7G  33% /mnt/dev
+
+
+# 测试两个 SMB 用户的访问权限
+
+[root@system2 ~]# su - akira
+su: warning: cannot change directory to /home/ldap/akira: No such file or directory
+mkdir: cannot create directory '/home/ldap': Permission denied
+ABRT has detected 1 problem(s). For more info run: abrt-cli list
+
+-bash-4.2$ cd /mnt/dev
+-bash-4.2$ cifscreds add 172.24.8.11
+Password: 
+
+-bash-4.2$ ll -d /mnt/dev
+drwxrwxrwx+ 2 root root 0 Oct 30 21:34 /mnt/dev		# akira 有读写权限
+
+-bash-4.2$ touch akira.txt				
+-bash-4.2$ echo "I am akira" > akira.txt	
+-bash-4.2$ exit
+logout
+
+[root@system2 ~]# su - silene
+Last login: Wed Oct 30 20:05:01 CST 2019 on pts/0
+su: warning: cannot change directory to /home/ldap/silene: No such file or directory
+mkdir: cannot create directory '/home/ldap': Permission denied
+ABRT has detected 1 problem(s). For more info run: abrt-cli list
+-bash-4.2$ cd /mnt/dev
+-bash-4.2$ cifscreds add 172.24.8.11
+Password: 
+-bash-4.2$ ll
+total 4
+-rw-r--r--. 1 akira akira 11 Oct 30 20:06 akira.txt
+-bash-4.2$ cat akira.txt 
+I am akira
+
+-bash-4.2$ ll /mnt/dev
+total 0
+-rw-r--r--. 1 akira akira 0 Oct 30 21:42 akira.txt	# silene 仅有只读权限
+
+-bash-4.2$ touch silene.txt
+touch: cannot touch ‘silene.txt’: Permission denied		
+-bash-4.2$ exit
+logout
+```
+
