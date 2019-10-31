@@ -2029,19 +2029,9 @@ httpd_read_user_content --> on
 
 
 ```sh
-[root@system1 html]# cd ~
-[root@system1 ~]# pwd
-/root
-[root@system1 ~]# vim script
-[root@system1 ~]# chmod a+x script 
-[root@system1 ~]# ./script 
-/root/script foo|bar
-[root@system1 ~]# ./script foo
-bar
-[root@system1 ~]# ./script bar
-foo
-
-[root@system1 ~]# cat ./script 
+[root@system1 ~]# cd /root
+[root@system1 ~]# vim foo.sh
+[root@system1 ~]# cat ./foo.sh 
 #!/bin/bash
 case $1 in
   redhat)
@@ -2051,11 +2041,20 @@ case $1 in
     echo redhat
     ;;
   *)
-    echo '/root/script redhat|fedora'
+    echo '/root/foo.sh redhat|fedora'
     ;;
 esac
-[root@system1 ~]# 
 
+[root@system1 ~]# chmod 755 foo.sh
+
+[root@system1 ~]# ./foo.sh 
+/root/script foo|bar
+[root@system1 ~]# ./foo.sh redhat
+fedora
+[root@system1 ~]# ./foo.sh fedora
+redhat
+[root@system1 ~]# ./foo.sh 
+/root/foo.sh redhat|fedora
 ```
 
 
@@ -2081,6 +2080,7 @@ esac
 
 
 ```sh
+[root@system1 ~]# wget http://server.group8.example.com/pub/userlist
 [root@system1 ~]# vim batchusers 
 [root@system1 ~]# cat batchusers 
 #!/bin/bash
@@ -2126,7 +2126,6 @@ user5:x:1005:1005::/home/user5:/bin/false
 user6:x:1006:1006::/home/user6:/bin/false
 user7:x:1007:1007::/home/user7:/bin/false
 user8:x:1008:1008::/home/user8:/bin/false
-
 ```
 
 
@@ -2252,7 +2251,7 @@ o- / ...........................................................................
   
   
 /> cd backstores/block 
-/backstores/block> create disk0 /dev/vgiscsi/iscsi_store		# 创建 iSCSI disk
+/backstores/block> create disk0 /dev/vgiscsi/iscsi_store		# 创建 iSCSI block disk
 Created block storage object disk0 using /dev/vgiscsi/iscsi_store.
 
 
@@ -2367,12 +2366,13 @@ Configuration saved to /etc/target/saveconfig.json
 
 [root@system2 ~]# vim /etc/iscsi/initiatorname.iscsi 
  InitiatorName=iqn.2014-08.com.example:system2		# 留意：结尾是 system2，不是 system1
+ 
  # 练习时写成 system1 导致 login 是报错、连不上：
  # [root@system2 iscsi]# iscsiadm -m node -l
-  # Logging in to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260] (multiple)
-  # iscsiadm: Could not login to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260].
-  # iscsiadm: initiator reported error (24 - iSCSI login failed due to authorization failure)
-  # iscsiadm: Could not log into all portals
+ # Logging in to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260] (multiple)
+ # iscsiadm: Could not login to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260].
+ # iscsiadm: initiator reported error (24 - iSCSI login failed due to authorization failure)
+ # iscsiadm: Could not log into all portals
 
  
 [root@system2 ~]# systemctl restart iscsi iscsid
@@ -2468,7 +2468,311 @@ Writing superblocks and filesystem accounting information: done
 [root@system2 iscsi]# vim /etc/fstab 
  UUID=c68799e9-92ca-44f3-bf9d-823c74cebc5b /mnt/data	ext4	defaults,_netdev	0 0
 [root@system2 iscsi]# mount -a
-[root@system2 iscsi]# df -hT	# 练习时 hang 住了
+[root@system2 iscsi]# df -hT	 # 练习时 hang 住了，重启时也 hang，又重启了一次才好
+Filesystem             Type      Size  Used Avail Use% Mounted on
+/dev/sda1              xfs       9.8G  3.1G  6.7G  32% /
+devtmpfs               devtmpfs  765M     0  765M   0% /dev
+tmpfs                  tmpfs     773M  140K  773M   1% /dev/shm
+tmpfs                  tmpfs     773M  8.9M  765M   2% /run
+tmpfs                  tmpfs     773M     0  773M   0% /sys/fs/cgroup
+//172.24.8.11/devops   cifs      9.8G  3.3G  6.5G  34% /mnt/dev
+172.24.8.11:/public    nfs4      9.8G  3.3G  6.5G  34% /mnt/nfsmount
+172.24.8.11:/protected nfs4      9.8G  3.3G  6.5G  34% /mnt/nfssecure
+/dev/sdb1              ext4      2.1G  6.5M  2.0G   1% /mnt/data
 
+```
+
+* iSCSI 配置问题导致无法启动的解决办法
+  * 在 grub 界面按 e 进入编辑状态，在 linux16 开头的那一行的末尾加上 rd.break 进到救援模式命令行：
+
+    ```sh
+    mount -o remount,rw /sysroot
+    chroot /sysroot
+    vim /etc/fstab		# 注释掉有问题的地方，保存退出 vim
+    exit
+    reboot
+    ```
+
+    
+
+    
+
+
+
+## 第21题
+
+###### 配置一个数据库
+
+在 system1 上创建一个名为 Contacts 的 MariaDB 数据库，要求：
+
+- 数据库包含来自其它数据库的内容，文件在 http://server.group8.example.com/pub/users.mdb 
+- 数据库只能被 localhost 访问
+
+- 除了 root 用户，此数据库只能被用户 Mary 查询，用户密码为 redhat
+
+- root 用户的数据库密码为 redhat ，同时不允许空密码登录
+
+
+
+```sh
+[root@system1 ~]# yum install -y mariadb*
+[root@system1 ~]# vim /etc/my.cnf
+ skip-networking=1		# 在 [mysqld] 下面添加此条目，使数据库只能被 localhost 访问
+ 
+[root@system1 ~]# systemctl restart mariadb
+[root@system1 ~]# systemctl enable mariadb
+
+[root@system1 ~]# wget http://server.group8.example.com/pub/users.mdb	# 待导入的数据库
+
+[root@system1 ~]# mysql_secure_installation 
+...
+Set root password? [Y/n] y		# 设置 root 密码为 redhat
+New password: 
+Re-enter new password: 
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+
+Remove anonymous users? [Y/n] y
+ ... Success!
+
+Disallow root login remotely? [Y/n] y
+ ... Success!
+
+Remove test database and access to it? [Y/n] y
+ - Dropping test database...
+ ... Success!
+ - Removing privileges on test database...
+ ... Success!
+
+Reload privilege tables now? [Y/n] y
+ ... Success!
+
+Cleaning up...
+
+All done! 
+
+
+[root@system1 ~]# mysql -uroot -predhat		# 以 root 用户登录
+
+MariaDB [(none)]> show databases;			# 查看当前数据库
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [(none)]> create database Contacts;	# 创建新数据库 Contacts
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> use Contacts;				# 打开数据库 Contacts
+Database changed
+MariaDB [Contacts]> show tables;			# 查看 Contacts 中的表
+Empty set (0.00 sec)
+
+MariaDB [Contacts]> source /root/users.mdb;	# 从 users.mdb 中导入数据
+MariaDB [Contacts]> show tables;
++--------------------+
+| Tables_in_Contacts |
++--------------------+
+| u_loc              |
+| u_name             |
+| u_passwd           |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [Contacts]> desc u_loc;				# 查看 u_loc 表
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| uid      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| location | varchar(50) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+MariaDB [Contacts]> desc u_name;			# 查看 u_name 表
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| userid    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| firstname | varchar(50) | NO   |     | NULL    |                |
+| lastname  | varchar(50) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+MariaDB [Contacts]> desc u_passwd;			# 查看 u_passwd 表
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| uid      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| password | varchar(50) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+# 给用户 Mary 授予查询权限：
+MariaDB [Contacts]> grant select on Contacts.* to Mary@localhost identified by 'redhat';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [Contacts]> exit
+```
+
+
+
+## 第22题
+
+###### 数据库查询
+
+在 system1 上使用相应的 SQL 查询数据库 Contacts ，并回答下列问题：
+
+- 密码是 fadora 的人的名字是什么？
+
+- 有多少人的姓名是 John ，同时居住在 Santa Clara ？
+
+
+
+```sh
+
+[root@system1 ~]# mysql -uroot -predhat
+
+MariaDB [(none)]> use Contacts;				# 打开数据库
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [Contacts]> show tables;			# 看看有哪些表
++--------------------+
+| Tables_in_Contacts |
++--------------------+
+| u_loc              |
+| u_name             |
+| u_passwd           |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [Contacts]> 
+MariaDB [Contacts]> 
+MariaDB [Contacts]> select * from u_loc;	# 查看表的内容
++-----+----------------+
+| uid | location       |
++-----+----------------+
+|   1 | Shenzhen       |
+|   2 | Guangzhou      |
+|   3 | Santa Clara    |
+|   4 | Santa Clara    |
+|   5 | San Francisco  |
+|   6 | Santa Calara   |
+|   7 | Santa Clare    |
+|   8 | Santa Clara    |
+|   9 | Florida        |
+|  10 | Santa Claraa   |
+|  11 | Florida        |
+|  12 | State of Texas |
+|  13 | State of Texas |
+|  14 | Santa Claraa   |
+|  15 | Santa Clara    |
+|  16 | Colorado?CO    |
+|  17 | Hawaii?HI      |
+|  18 | Santa Calara   |
+|  19 | Santa Clra     |
+|  20 | Santa Clara    |
+|  21 | Santa Clara    |
+|  22 | Minnesota      |
+|  23 | Vermont        |
+|  24 | Santa Clara    |
+|  25 | Minnesota      |
++-----+----------------+
+25 rows in set (0.00 sec)
+
+MariaDB [Contacts]> select * from u_name;
++--------+-----------+-------------+
+| userid | firstname | lastname    |
++--------+-----------+-------------+
+|      1 | san       | zhang       |
+|      2 | si        | li          |
+|      3 | wu        | wang        |
+|      4 | Barack    | Obama       |
+|      5 | George    | Walker Bush |
+|      6 | Bill      | Clinton     |
+|      7 | Hillary   | Clinton     |
+|      8 | John      | Clinton     |
+|      9 | George    | wang        |
+|     10 | John      | li          |
+|     11 | Bill      | wang        |
+|     12 | George    | Obama       |
+|     13 | George    | wang        |
+|     14 | Michael   | Jackson     |
+|     15 | John      | Clinton     |
+|     16 | Michael   | Walker Bush |
+|     17 | Michael   | Obama       |
+|     18 | Hillary   | Jackson     |
+|     19 | Georgexx  | Jackson     |
+|     20 | Barack    | Jackson     |
+|     21 | John      | Jackson     |
+|     22 | John      | Obama       |
+|     23 | John      | Clinton     |
+|     24 | John      | Walker Bush |
+|     25 | John      | wang        |
++--------+-----------+-------------+
+25 rows in set (0.00 sec)
+
+MariaDB [Contacts]> select * from u_passwd;
++-----+------------+
+| uid | password   |
++-----+------------+
+|   1 | redhat     |
+|   2 | fedora     |
+|   3 | centos     |
+|   4 | centes     |
+|   5 | redhrt     |
+|   6 | ridhat     |
+|   7 | redfat     |
+|   8 | fadora     |
+|   9 | cantos     |
+|  10 | redhap     |
+|  11 | contos     |
+|  12 | fcdora     |
+|  13 | cendora    |
+|  14 | tangene    |
+|  15 | tangrine   |
+|  16 | tangerone  |
+|  17 | tangeine   |
+|  18 | taangerine |
+|  19 | tangerine  |
+|  20 | tanggerine |
+|  21 | anggerine  |
+|  22 | aggerine   |
+|  23 | taggerine  |
+|  24 | tanerine   |
+|  25 | tannerine  |
++-----+------------+
+25 rows in set (0.00 sec)
+
+
+# 查询哪个人的密码是 fadora：
+
+MariaDB [Contacts]> select u_name.firstname from u_name,u_passwd where u_name.userid = u_passwd.uid and u_passwd.password = 'fadora';
++-----------+
+| firstname |
++-----------+
+| John      |		# 答案 John
++-----------+
+1 row in set (0.00 sec)
+
+
+# 查询住在 Santa Clara 名字叫做 John 有几个：
+
+MariaDB [Contacts]> select count(*) from u_loc,u_name where u_loc.uid = u_name.userid and u_name.firstname = 'John' and u_loc.location = 'Santa Clara';
++----------+
+| count(*) |
++----------+
+|        4 |		# 答案 4 个
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [Contacts]> exit
+Bye
 ```
 
