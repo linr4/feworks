@@ -1592,3 +1592,883 @@ touch: cannot touch ‘silene.txt’: Permission denied
 logout
 ```
 
+
+
+## 第10题
+
+###### 配置NFS服务
+
+在 system1 配置NFS服务，要求如下：
+
+- 以只读的方式共享目录 /public ，同时只能被 group8.example.com 域中的系统访问
+
+- 以读写的方式共享目录 /protected ，同时只能被 group8.example.com 域中的系统访问
+
+- 访问 /protected 需要通过Kerberos安全加密，您可以使用下面URL提供的密钥
+     http://server.group8.example.com/pub/keytabs/system1.keytab
+
+- 目录 /protected 应该包含名为 project 拥有人为 andres 的子目录
+
+- 用户 andres 能以读写方式访问 /protected/project
+
+
+
+```sh
+[root@system1 ~]# mkdir -p /public /protected/project
+[root@system1 ~]# chown andres /protected/project/
+
+[root@system1 ~]# ll -d /public /protected/project/
+drwxr-xr-x. 2 andres root 6 Oct 31 14:00 /protected/project/
+drwxr-xr-x. 2 root   root 6 Oct 31 14:00 /public
+
+[root@system1 ~]# chcon -R -t public_content_t /public
+[root@system1 ~]# chcon -R -t public_content_t /protected
+
+[root@system1 ~]# wget -O /etc/krb5.keytab http://server.group8.example.com/pub/keytabs/system1.keytab
+--2019-10-31 14:03:12--  http://server.group8.example.com/pub/keytabs/system1.keytab
+Resolving server.group8.example.com (server.group8.example.com)... 172.24.8.254
+Connecting to server.group8.example.com (server.group8.example.com)|172.24.8.254|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1466 (1.4K)
+Saving to: ‘/etc/krb5.keytab’
+
+100%[=========================================================================>] 1,466       --.-K/s   in 0s      
+
+2019-10-31 14:03:12 (322 MB/s) - ‘/etc/krb5.keytab’ saved [1466/1466]
+
+
+[root@system1 ~]# vim /etc/exports
+  #添加如下两条记录：
+  /public 172.24.8.0/24(sync,ro)
+  /protected 172.24.8.0/24(rw,sec=krb5p)
+
+
+[root@system1 ~]# vim /etc/sysconfig/nfs 
+  # 修改第13行，加上 “-V 4.2”
+13 RPCNFSDARGS="-V 4.2"
+
+[root@system1 ~]# firewall-cmd --permanent --add-service=nfs
+[root@system1 ~]# firewall-cmd --permanent --add-service=rpc-bind
+[root@system1 ~]# firewall-cmd --reload
+[root@system1 ~]# systemctl restart nfs-server nfs-secure-server
+[root@system1 ~]# systemctl enable nfs-server nfs-secure-server
+
+[root@system1 ~]# exportfs -r
+# exportfs - maintain table of exported NFS file systems
+# -r     Reexport all directories
+
+```
+
+
+
+
+
+## 第11题
+
+###### 挂载一个NFS共享
+
+在 system2 上挂载一个来自 system1.group8.example.com 的NFS共享，并符合下列要求：
+
+- `/public` 挂载在 `mnt/nfsmount` 目录下
+
+- `/protected` 挂载在 `/mnt/nfssecure` 目录下，并使用安全的方式，密钥如下：
+     http://server.group8.example.com/pub/keytabs/system2.keytab
+
+- 用户 andres 有权限在 `/mnt/nfssecure/project` 目录下创建文件
+
+- 这些文件系统在系统启动时能够自动挂载
+
+
+
+```sh
+[root@system2 ~]# showmount -e 172.24.8.11		# Show the NFS server's export list
+Export list for 172.24.8.11:
+/protected 172.24.8.0/24
+/public    172.24.8.0/24
+
+[root@system2 ~]# mkdir /mnt/nfsmount /mnt/nfssecure
+[root@system2 ~]# ls -ld /mnt/nfsmount/ /mnt/nfssecure/
+drwxr-xr-x. 2 root root 6 Oct 31 14:18 /mnt/nfsmount/
+drwxr-xr-x. 2 root root 6 Oct 31 14:18 /mnt/nfssecure/
+
+[root@system2 ~]# wget -O /etc/krb5.keytab http://server.group8.example.com/pub/keytabs/system2.keytab
+--2019-10-31 14:18:40--  http://server.group8.example.com/pub/keytabs/system2.keytab
+Resolving server.group8.example.com (server.group8.example.com)... 172.24.8.254
+Connecting to server.group8.example.com (server.group8.example.com)|172.24.8.254|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1266 (1.2K)
+Saving to: ‘/etc/krb5.keytab’
+
+100%[=========================================================================>] 1,266       --.-K/s   in 0s      
+
+2019-10-31 14:18:40 (191 MB/s) - ‘/etc/krb5.keytab’ saved [1266/1266]
+
+
+
+[root@system2 ~]# ll /etc/krb*
+-rw-r--r--. 1 root root  545 Jul 26  2016 /etc/krb5.conf
+-rw-r--r--. 1 root root 1266 Jul 23  2016 /etc/krb5.keytab
+
+[root@system2 ~]# vim /etc/fstab 
+  172.24.8.11:/public /mnt/nfsmount       nfs     defaults 0 0
+  172.24.8.11:/protected /mnt/nfssecure   nfs     defaults,sec=krb5p,v4.2 0 0
+
+[root@system2 ~]# systemctl restart nfs-secure
+[root@system2 ~]# systemctl enable nfs-secure
+
+[root@system2 ~]# mount -a
+[root@system2 ~]# df -h
+Filesystem              Size  Used Avail Use% Mounted on
+/dev/sda1               9.8G  3.1G  6.7G  32% /
+devtmpfs                765M     0  765M   0% /dev
+tmpfs                   773M  140K  773M   1% /dev/shm
+tmpfs                   773M  8.9M  765M   2% /run
+tmpfs                   773M     0  773M   0% /sys/fs/cgroup
+//172.24.8.11/devops    9.8G  3.2G  6.7G  33% /mnt/dev
+172.24.8.11:/public     9.8G  3.2G  6.7G  33% /mnt/nfsmount
+172.24.8.11:/protected  9.8G  3.2G  6.7G  33% /mnt/nfssecure
+
+# 验证结果
+[root@system2 ~]# id andres
+uid=2006(andres) gid=2006(andres) groups=2006(andres)
+
+[root@system2 ~]# su - andres
+-bash-4.2$ kinit
+Password for andres@GROUP8.EXAMPLE.COM:    `redhat`
+-bash-4.2$ cd /mnt/nfssecure/project/
+-bash-4.2$ touch andres.txt
+-bash-4.2$ ll -d
+drwxr-xr-x. 2 andres root 23 Oct 31 14:25 .
+-bash-4.2$ exit
+logout
+```
+
+
+
+##   第12题
+
+###### 实现一个 Web 服务器 
+
+在 system1 上配置一个站点 http://system1.group8.example.com/，然后执行下述步骤：
+
+- 从 http://server.group8.example.com/pub/system1.html 下载文件，并且将文件重名为 index.html 不要修改此文件的内容
+
+- 将文件 index.html 拷贝到您的 web 服务器的 DocumentRoot 目录下
+
+- 来自于 group8.example.com 域的客户端可以访问此 Web 服务
+
+- 来自于 my133t.org 域的客户端拒绝访问此 Web 服务
+
+
+
+```sh
+[root@system1 ~]# yum install -y httpd
+
+[root@system1 ~]# cd /etc/httpd/conf.d/
+[root@system1 conf.d]# cp /usr/share/doc/httpd-2.4.6/httpd-vhosts.conf ./	# 拷贝配置模板
+[root@system1 conf.d]# ll
+total 20
+-rw-r--r--. 1 root root 2926 Sep 17  2015 autoindex.conf
+-rw-r--r--. 1 root root 1511 Oct 31 15:09 httpd-vhosts.conf
+-rw-r--r--. 1 root root  366 Sep 17  2015 README
+-rw-r--r--. 1 root root 1252 Sep 17  2015 userdir.conf
+-rw-r--r--. 1 root root  516 Sep 17  2015 welcome.conf
+
+[root@system1 conf.d]# vi httpd-vhosts.conf 
+ # 在23行处添加如下3条，把原有的删除：
+ 23 <VirtualHost *:80>
+ 24      DocumentRoot "/var/www/html/"
+ 25      ServerName system1.group8.example.com
+ 26 </VirtualHost>
+
+
+[root@system1 ~]# systemctl restart httpd
+[root@system1 ~]# systemctl enable httpd
+
+[root@system1 ~]# cd /var/www/html/
+[root@system1 html]# wget -O index.html http://server.group8.example.com/pub/system1.html
+[root@system1 html]# ll
+total 4
+-rw-r--r--. 1 root root 32 Jul 24  2016 index.html
+[root@system1 html]# firewall-cmd --permanent --add-service=http
+[root@system1 html]# firewall-cmd --permanent --add-service=https
+[root@system1 html]# firewall-cmd --reload
+
+[root@system1 html]# firewall-config	
+# 在 GUI 中添加一条 Rich Rule 拒绝 172.13.8.0/24 访问 http 和 https
+
+[root@system1 html]# cat index.html 
+Site:system1.group8.example.com
+[root@system1 html]# curl http://system1.group8.example.com
+Site:system1.group8.example.com
+
+```
+
+
+
+## 第13题
+
+###### 配置安全web服务
+
+为站点 http://system1.group8.example.com 配置TLS加密：
+
+- 已签名证书从 http://server.group8.example.com/pub/tls/certs/system1.crt 获取
+
+- 证书的密钥从 http://server.group8.example.com/pub/tls/private/system1.key 获取
+
+- 证书的签名授权信息从 http://server.group8.example.com/pub/tls/certs/ssl-ca.crt 获取
+
+
+
+```sh
+[root@system1 ~]# yum install -y mod_ssl
+[root@system1 ~]# cd /var/www/html
+
+[root@system1 html]# wget http://server.group8.example.com/pub/tls/certs/system1.crt
+[root@system1 html]# wget http://server.group8.example.com/pub/tls/private/system1.key
+[root@system1 html]# wget http://server.group8.example.com/pub/tls/certs/ssl-ca.crt
+[root@system1 html]# ll
+total 16
+-rw-r--r--. 1 root root   32 Jul 24  2016 index.html
+-rw-r--r--. 1 root root 1350 Jul 24  2016 ssl-ca.crt
+-rw-r--r--. 1 root root 3756 Jul 24  2016 system1.crt
+-rw-r--r--. 1 root root  887 Jul 24  2016 system1.key
+
+[root@system1 html]# cd /etc/httpd/conf.d/
+[root@system1 conf.d]# ll
+total 32
+-rw-r--r--. 1 root root 2926 Sep 17  2015 autoindex.conf
+-rw-r--r--. 1 root root 1616 Oct 31 15:14 httpd-vhosts.conf
+-rw-r--r--. 1 root root  366 Sep 17  2015 README
+-rw-r--r--. 1 root root 9438 Sep 17  2015 ssl.conf
+-rw-r--r--. 1 root root 1252 Sep 17  2015 userdir.conf
+-rw-r--r--. 1 root root  516 Sep 17  2015 welcome.conf
+
+
+# 从 ssl.conf 模板文件中获取配置要用到的条目：
+
+[root@system1 conf.d]# grep '^SSL' ssl.conf |tail -5
+SSLEngine on
+SSLProtocol all -SSLv2
+SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA
+SSLCertificateFile /etc/pki/tls/certs/localhost.crt
+SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
+
+[root@system1 conf.d]# grep -e 'SSLCA' -e 'SSLH' ssl.conf
+#SSLHonorCipherOrder on 
+#SSLCACertificateFile /etc/pki/tls/certs/ca-bundle.crt
+
+
+# 参照刚刚获取的 SSL 模板信息，在 httpd-vhosts.conf 中新增一个 section：
+# 最好把无用的条目删除干净，实验中有一次 httpd 无法 restart，可能与无用的条目有关
+
+[root@system1 conf.d]# vim httpd-vhosts.conf 
+<VirtualHost *:443>									# 修改端口号为 443
+     DocumentRoot "/var/www/html/"					# 根目录 /var/www/html
+     ServerName system1.group8.example.com			# 服务器域名
+     SSLEngine on
+     SSLHonorCipherOrder on
+     SSLProtocol all -SSLv2
+     SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5			# 删除模板末尾的 :!SEED:!IDEA
+     SSLCertificateFile /var/www/html/system1.crt	# 修改签名证书到相应路径
+     SSLCertificateKeyFile /var/www/html/system1.key# 修改证书密钥到相应路径
+     SSLCACertificateFile /var/www/html/ssl-ca.crt	# 修改签名授权到相应路径
+</VirtualHost>
+
+
+# 修改 SELinux 策略中相关规则的布尔值，-P 永久生效
+
+[root@system1 conf.d]# setsebool -P httpd_read_user_content=on
+[root@system1 conf.d]# getsebool -a |grep httpd_read
+httpd_read_user_content --> on
+
+[root@system1 conf.d]# systemctl restart httpd
+
+# 用浏览器测试 https://system1.group8.example.com 可否访问到
+```
+
+
+
+## 第14题
+
+###### 配置虚拟主机
+
+在 system1 上扩展 Web 服务器，为 http://www8.group8.example.com 创建虚拟主机，然后执行下述步骤：
+
+- 设置 `DocumentRoot` 为 `/var/www/virtual`
+
+- 从 http://server.group8.example.com/pub/www8.html 下载文件重名为 `index.html` ，不要对文件 `index.html` 的内容做任何修改
+
+- 将文件 `index.html` 放到虚拟主机的 `DocumentRoot` 目录下
+
+- 确保 andy 用户能够在 `/var/www/virtual` 目录下创建文件
+
+注意：原站点 http://system1.group8.example.com 必须仍然能够访问，名称服务器 `server.group8.example.com` 已经提供对主机名 `www8.group8.example.com` 的域名解析
+
+
+
+```sh
+[root@system1 ~]# mkdir /var/www/virtual
+[root@system1 ~]# cd /var/www/virtual
+[root@system1 virtual]# wget -O index.html http://server.group8.example.com/pub/www8.html
+
+[root@system1 virtual]# setfacl -m u:andy:rwx /var/www/virtual/
+
+[root@system1 virtual]# vim /etc/httpd/conf.d/httpd-vhosts.conf 	# 新增一个 section
+ <VirtualHost *:80>
+      DocumentRoot "/var/www/virtual/"
+      ServerName www8.group8.example.com
+ </VirtualHost>
+
+[root@system1 virtual]# systemctl restart httpd
+
+# 再用浏览器测试 https://www8.group8.example.com 可否访问到
+```
+
+
+
+
+
+## 第15题
+
+###### 配置 web 内容的访问
+
+在 system1 的 Web 服务器 `DocumentRoot` 目录下，创建一个名为 `private` 的目录，要求如下：
+
+- 把 http://server.group8.example.com/pub/private.html 下载到此目录，重命名为 index.html
+
+- 不要对这个文件的内容做任何修改
+
+- 在 system1 上，任何人都可以浏览 private 的内容，但从其它系统不能访问这个目录的内容。
+
+
+
+```sh
+[root@system1 ~]# mkdir /var/www/html/private
+[root@system1 ~]# cd /var/www/html/private/
+[root@system1 private]# wget -O index.html http://server.group8.example.com/pub/private.html 
+
+[root@system1 private]# vim /etc/httpd/conf/httpd.conf 
+# 到102行复制配置模板，拷贝到 httpd-vhosts.conf 中
+102 <Directory />
+103     AllowOverride none
+104     Require all denied
+105 </Directory>
+
+[root@system1 private]# vim /etc/httpd/conf.d/httpd-vhosts.conf 
+# 把配置模板拷贝到这个文件中
+
+<Directory "/var/www/html/private">	# 需要加上 private 的路径
+    AllowOverride none
+    Require all denied
+    Require local					# 还需要加上这一句：Require local
+</Directory>
+
+[root@system1 private]# systemctl restart httpd
+
+# 再在浏览器中测试 http://system1.group8.example.com/private/ 可否访问
+```
+
+
+
+## 第16题
+
+###### 实现动态WEB内容
+
+在 system1 上配置动态 Web 内容，要求：
+
+- 动态内容由名为 wsgi.group8.example.com 的虚拟主机提供
+
+- 虚拟主机侦听在端口 8909
+
+- 从 http://server.group8.example.com/pub/webinfo.wsgi 下载一个脚本，然后放在适当的位置，不要修改此文件的内容
+
+- 客户端访问 http://wsgi.group8.example.com:8909/ 时，应该接收到动态生成的 Web 页面
+
+- 此地址 http://wsgi.group8.example.com:8909/ 必须能被 group8.example.com 域内的所有系统访问
+
+
+
+```sh
+[root@system1 ~]# yum install -y mod_wsgi
+[root@system1 ~]# cd /var/www/html
+[root@system1 html]# wget http://server.group8.example.com/pub/webinfo.wsgi
+
+[root@system1 html]# vim /etc/httpd/conf.d/httpd-vhosts.conf 
+# 新增如下条目：
+ listen 8909			# 监听端口8909
+ <VirtualHost *:8909>	# 设置虚拟主机
+      WSGIScriptAlias /  /var/www/html/webinfo.wsgi
+      ServerName wsgi.group8.example.com
+ </VirtualHost>
+
+[root@system1 html]# semanage port -a -t http_port_t -p tcp 8909	# SELinux 开放端口8909
+[root@system1 html]# firewall-cmd --permanent --add-port=8909/tcp	# 防火墙开放端口8909
+[root@system1 html]# firewall-cmd --reload
+[root@system1 html]# systemctl restart httpd
+
+# 在浏览器访问 http://wsgi.group8.example.com:8909/ 以测试设置是否成功
+```
+
+
+
+## 第17题
+
+## 创建一个脚本
+
+在system1上创建一个名为 /root/foo.sh 的脚本，让其提供下列特性：
+
+- 当运行 /root/foo.sh redhat，输出为 fedora
+
+- 当运行 /root/foo.sh fedora，输出为 redhat
+
+- 当没有任何参数或者参数不是 redhat 或者 fedora 时，其错误输出产生以下的信息：
+
+  `/root/foo.sh redhat | fedora`
+
+
+
+```sh
+[root@system1 html]# cd ~
+[root@system1 ~]# pwd
+/root
+[root@system1 ~]# vim script
+[root@system1 ~]# chmod a+x script 
+[root@system1 ~]# ./script 
+/root/script foo|bar
+[root@system1 ~]# ./script foo
+bar
+[root@system1 ~]# ./script bar
+foo
+
+[root@system1 ~]# cat ./script 
+#!/bin/bash
+case $1 in
+  redhat)
+    echo fedora
+    ;;
+  fedora)
+    echo redhat
+    ;;
+  *)
+    echo '/root/script redhat|fedora'
+    ;;
+esac
+[root@system1 ~]# 
+
+```
+
+
+
+## 第18题
+
+###### 创建一个添加用户的脚本
+
+在 system1 上创建一个名为 /root/batchusers 的脚本，实现在 system1 上创建本地用户，用户名来自一个文件，该文件包含了用户名列表，同时满足下列要求：
+
+- 该脚本要求提供一个参数，该参数是包含了用户名列表的的文件；
+
+- 若未提供参数，脚本给出以下提示信息 `Usage: /root/batchusers userfile` 之后退出，返回相应的值；
+
+- 提供一个不存在的文件名，此脚本应该给出下面的提示信息 Input file not found 然后退出并返回相应的值
+
+- 创建的用户登录shell为 /bin/false
+
+- 脚本不需要为用户设置密码
+
+- 可以从此地址获取用户名列表作为测试用： http://server.group8.example.com/pub/userlist
+
+
+
+```sh
+[root@system1 ~]# vim batchusers 
+[root@system1 ~]# cat batchusers 
+#!/bin/bash
+if [ $# -eq 0 ]; then						# 参数个数等于0，即没有输入参数
+  echo 'Usage: /root/batchusers userfile'
+  exit 1
+fi
+
+if [ ! -f $1 ]; then						# 参数1 不是一个文件或文件不存在
+  echo 'Input file not found'
+  exit 1
+fi
+
+while read LINE
+do
+  useradd -s /bin/false $LINE
+done < $1									# 从 参数1 所指向的文件中读取每一行
+
+[root@system1 ~]# chmod 755 batchusers 
+[root@system1 ~]# ll
+total 24
+...
+-rwxr-xr-x. 1 root root  144 Oct 31 20:16 foo.sh
+-rw-r--r--. 1 root root   48 Jul 25  2016 userlist
+...
+[root@system1 ~]# ./batchusers userlist 
+[root@system1 ~]# cat userlist 
+user1
+user2
+user3
+user4
+user5
+user6
+user7
+user8
+
+[root@system1 ~]# tail /etc/passwd
+user1:x:1001:1001::/home/user1:/bin/false
+user2:x:1002:1002::/home/user2:/bin/false
+user3:x:1003:1003::/home/user3:/bin/false
+user4:x:1004:1004::/home/user4:/bin/false
+user5:x:1005:1005::/home/user5:/bin/false
+user6:x:1006:1006::/home/user6:/bin/false
+user7:x:1007:1007::/home/user7:/bin/false
+user8:x:1008:1008::/home/user8:/bin/false
+
+```
+
+
+
+## 第19题
+
+###### 配置 ISCSI 服务端
+
+配置 system1 提供一个 iSCSI 服务盘，名为 iqn.2014-08.com.example.group8:system1 ，并符合下列要求：
+
+- 服务端口为 3260
+
+- 使用 iscsi_store 作其后端逻辑卷名称，其大小为 3G
+
+- 此服务只能被 system2.group8.example.com 访问
+
+
+
+```sh
+[root@system1 ~]# yum install -y target*
+[root@system1 ~]# systemctl restart target
+[root@system1 ~]# systemctl enable target
+
+[root@system1 ~]# firewall-config	# 通过 GUI 配置富规则只允许 172.24.8.12/24 TCP port 3260
+[root@system1 ~]# firewall-cmd --permanent --add-port=3260/tcp
+[root@system1 ~]# firewall-cmd --reload
+[root@system1 ~]# firewall-cmd --list-all
+...
+ports: 3260/tcp 8909/tcp
+...
+  rich rules: 
+	rule family="ipv4" source address="172.24.8.12/24" port port="3260" protocol="tcp" accept
+...	
+
+
+# 查看可用磁盘空间，通过 fdisk 创建一个 3GB 的 LVM 分区给 iSCSI 使用
+[root@system1 ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       9.8G  3.2G  6.6G  33% /
+devtmpfs        667M     0  667M   0% /dev
+tmpfs           675M  140K  675M   1% /dev/shm
+tmpfs           675M  8.9M  667M   2% /run
+tmpfs           675M     0  675M   0% /sys/fs/cgroup
+
+[root@system1 ~]# fdisk /dev/sda
+
+Command (m for help): p
+
+Disk /dev/sda: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000d9a10
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048    20482047    10240000   83  Linux
+/dev/sda2        20482048    26626047     3072000   82  Linux swap / Solaris
+
+Command (m for help): n
+Partition type:
+   p   primary (2 primary, 0 extended, 2 free)
+   e   extended
+Select (default p): p
+Partition number (3,4, default 3): 
+First sector (26626048-41943039, default 26626048): 
+Using default value 26626048
+Last sector, +sectors or +size{K,M,G} (26626048-41943039, default 41943039): +3G
+Partition 3 of type Linux and of size 3 GiB is set
+
+Command (m for help): t
+Partition number (1-3, default 3):   
+Hex code (type L to list all codes): 8e
+Changed type of partition 'Linux' to 'Linux LVM'
+
+Command (m for help): p
+
+Disk /dev/sda: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000d9a10
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048    20482047    10240000   83  Linux
+/dev/sda2        20482048    26626047     3072000   82  Linux swap / Solaris
+/dev/sda3        26626048    32917503     3145728   8e  Linux LVM
+
+Command (m for help): w
+The partition table has been altered!
+
+[root@system1 ~]# partprobe
+[root@system1 ~]# ll /dev/sda3
+brw-rw----. 1 root disk 8, 3 Oct 31 20:52 /dev/sda3
+
+# 创建 LV
+[root@system1 ~]# pvcreate /dev/sda3
+  Physical volume "/dev/sda3" successfully created
+
+[root@system1 ~]# vgcreate vgiscsi /dev/sda3
+  Volume group "vgiscsi" successfully created
+
+[root@system1 ~]# lvcreate -n iscsi_store -l 100%VG vgiscsi
+  Logical volume "iscsi_store" created
+# a percentage of the total space in the Volume Group with the suffix %VG
+
+
+# 通过 targetcli 创建 iSCSI 盘
+
+[root@system1 ~]# targetcli
+For help on commands, type 'help'.
+
+/> ls
+o- / ............................................................................ [...]
+  o- backstores ................................................................. [...]
+  | o- block ..................................................... [Storage Objects: 0]
+  | o- fileio .................................................... [Storage Objects: 0]
+  | o- pscsi ..................................................... [Storage Objects: 0]
+  | o- ramdisk ................................................... [Storage Objects: 0]
+  o- iscsi ............................................................... [Targets: 0]
+  o- loopback ............................................................ [Targets: 0]
+  
+  
+/> cd backstores/block 
+/backstores/block> create disk0 /dev/vgiscsi/iscsi_store		# 创建 iSCSI disk
+Created block storage object disk0 using /dev/vgiscsi/iscsi_store.
+
+
+/backstores/block> cd /iscsi 
+/iscsi> create iqn.2014-08.com.example.group8:system1			# 创建 iSCSI device
+Created target iqn.2014-08.com.example.group8:system1.
+Created TPG 1.
+Global pref auto_add_default_portal=true
+Created default portal listening on all IPs (0.0.0.0), port 3260.
+
+
+/iscsi> ls
+o- iscsi ................................................................. [Targets: 1]
+  o- iqn.2014-08.com.example.group8:system1 ................................. [TPGs: 1]
+    o- tpg1 .................................................... [no-gen-acls, no-auth]
+      o- acls ............................................................... [ACLs: 0]
+      o- luns ............................................................... [LUNs: 0]
+      o- portals ......................................................... [Portals: 1]
+        o- 0.0.0.0:3260 .......................................................... [OK]
+
+
+/iscsi> cd iqn.2014-08.com.example.group8:system1/tpg1/luns 
+/iscsi/iqn.20...em1/tpg1/luns> create /backstores/block/disk0 	# 创建 LUN
+Created LUN 0.
+
+/iscsi/iqn.20...em1/tpg1/luns> cd ../acls 
+/iscsi/iqn.20...em1/tpg1/acls> create iqn.2014-08.com.example.group8:system2  # 设置 ACL
+Created Node ACL for iqn.2014-08.com.example.group8:system2
+Created mapped LUN 0.
+
+/iscsi/iqn.20...em1/tpg1/acls> cd ../portals/
+/iscsi/iqn.20.../tpg1/portals> ls
+o- portals ............................................................... [Portals: 1]
+  o- 0.0.0.0:3260 ................................................................ [OK]
+/iscsi/iqn.20.../tpg1/portals> delete 0.0.0.0 3260		# 先删除现有的，否则新的加不上
+Deleted network portal 0.0.0.0:3260
+/iscsi/iqn.20.../tpg1/portals> create 172.24.8.11 3260  # 创建新的
+Using default IP port 3260
+Created network portal 172.24.8.11:3260.
+
+/iscsi/iqn.20.../tpg1/portals> ls
+o- portals ............................................................... [Portals: 1]
+  o- 172.24.8.11:3260 ............................................................ [OK]
+  
+/iscsi/iqn.20.../tpg1/portals> cd ..
+/iscsi/iqn.20...:system1/tpg1> set attribute authentication=0		# 设置两个属性
+Parameter authentication is now '0'.
+/iscsi/iqn.20...:system1/tpg1> set attribute generate_node_acls=0	# 设置两个属性
+Parameter generate_node_acls is now '0'.
+
+/iscsi/iqn.20...:system1/tpg1> ls
+o- tpg1 ........................................................ [no-gen-acls, no-auth]
+  o- acls ................................................................... [ACLs: 1]
+  | o- iqn.2014-08.com.example.group8:system2 ........................ [Mapped LUNs: 1]
+  |   o- mapped_lun0 .......................................... [lun0 block/disk0 (rw)]
+  o- luns ................................................................... [LUNs: 1]
+  | o- lun0 .................................. [block/disk0 (/dev/vgiscsi/iscsi_store)]
+  o- portals ............................................................. [Portals: 1]
+    o- 172.24.8.11:3260 .......................................................... [OK]
+    
+/iscsi/iqn.20...:system1/tpg1> cd
+
+/iscsi/iqn.20...:system1/tpg1> cd /
+/> saveconfig 
+Last 10 configs saved in /etc/target/backup.
+Configuration saved to /etc/target/saveconfig.json
+/> ls
+o- / ............................................................................ [...]
+  o- backstores ................................................................. [...]
+  | o- block ..................................................... [Storage Objects: 1]
+  | | o- disk0 ............... [/dev/vgiscsi/iscsi_store (3.0GiB) write-thru activated]
+  | o- fileio .................................................... [Storage Objects: 0]
+  | o- pscsi ..................................................... [Storage Objects: 0]
+  | o- ramdisk ................................................... [Storage Objects: 0]
+  o- iscsi ............................................................... [Targets: 1]
+  | o- iqn.2014-08.com.example.group8:system1 ............................... [TPGs: 1]
+  |   o- tpg1 .................................................. [no-gen-acls, no-auth]
+  |     o- acls ............................................................. [ACLs: 1]
+  |     | o- iqn.2014-08.com.example.group8:system2 .................. [Mapped LUNs: 1]
+  |     |   o- mapped_lun0 .................................... [lun0 block/disk0 (rw)]
+  |     o- luns ............................................................. [LUNs: 1]
+  |     | o- lun0 ............................ [block/disk0 (/dev/vgiscsi/iscsi_store)]
+  |     o- portals ....................................................... [Portals: 1]
+  |       o- 172.24.8.11:3260 .................................................... [OK]
+  o- loopback ............................................................ [Targets: 0]
+  
+/> exit
+Global pref auto_save_on_exit=true
+Last 10 configs saved in /etc/target/backup.
+Configuration saved to /etc/target/saveconfig.json
+
+```
+
+
+
+## 第20题
+
+###### 配置 iSCISI 的客户端
+
+配置 system2 使其能连接在 system1 上的 iqn.2014-08.com.example.group8:system1，并符合以下要求：
+
+- iSCSI 设备在系统启动的期间自动加载；
+
+- 块设备 iSCSI 上包含一个大小为 2100 MiB 的分区，并格式化为 ext4；
+
+- 此分区挂载在 /mnt/data 上，同时在系统启动的期间自动挂载。
+
+
+
+```sh
+[root@system2 ~]# yum install -y iscsi-*
+
+[root@system2 ~]# vim /etc/iscsi/initiatorname.iscsi 
+ InitiatorName=iqn.2014-08.com.example:system2		# 留意：结尾是 system2，不是 system1
+ # 练习时写成 system1 导致 login 是报错、连不上：
+ # [root@system2 iscsi]# iscsiadm -m node -l
+  # Logging in to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260] (multiple)
+  # iscsiadm: Could not login to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260].
+  # iscsiadm: initiator reported error (24 - iSCSI login failed due to authorization failure)
+  # iscsiadm: Could not log into all portals
+
+ 
+[root@system2 ~]# systemctl restart iscsi iscsid
+[root@system2 ~]# systemctl enable iscsi iscsid
+
+[root@system2 ~]# iscsiadm -m discovery -t st -p 172.24.8.11
+172.24.8.11:3260,1 iqn.2014-08.com.example:system1
+
+[root@system2 iscsi]# iscsiadm -m node -l	# 连接、登录到 iSCSI target on system1
+
+[root@system2 iscsi]# lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda      8:0    0   20G  0 disk 
+├─sda1   8:1    0  9.8G  0 part /
+└─sda2   8:2    0    2G  0 part [SWAP]
+sdb      8:16   0    3G  0 disk 		# 这个是 iSCSI 盘
+
+[root@system2 iscsi]# fdisk /dev/sdb	# 给 iSCSI 盘建分区
+
+Command (m for help): p
+
+Disk /dev/sdb: 3217 MB, 3217031168 bytes, 6283264 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 4194304 bytes
+Disk label type: dos
+Disk identifier: 0x69e2fc7d
+
+   Device Boot      Start         End      Blocks   Id  System
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1): 
+First sector (8192-6283263, default 8192): 
+Using default value 8192
+Last sector, +sectors or +size{K,M,G} (8192-6283263, default 6283263): +2100M	# 指定大小
+Partition 1 of type Linux and of size 2.1 GiB is set
+
+Command (m for help): p
+
+Disk /dev/sdb: 3217 MB, 3217031168 bytes, 6283264 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 4194304 bytes
+Disk label type: dos
+Disk identifier: 0x69e2fc7d
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1            8192     4308991     2150400   83  Linux
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+
+[root@system2 iscsi]# partprobe
+[root@system2 iscsi]# ll /dev/sdb1
+brw-rw----. 1 root disk 8, 17 Oct 31 22:14 /dev/sdb1
+
+
+[root@system2 iscsi]# mkfs.ext4 /dev/sdb1	# 格式化、建文件系统
+mke2fs 1.42.9 (28-Dec-2013)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=0 blocks, Stripe width=1024 blocks
+134640 inodes, 537600 blocks
+26880 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=551550976
+17 block groups
+32768 blocks per group, 32768 fragments per group
+7920 inodes per group
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (16384 blocks): done
+Writing superblocks and filesystem accounting information: done 
+
+
+[root@system2 iscsi]# mkdir /mnt/data
+[root@system2 iscsi]# blkid /dev/sdb1
+/dev/sdb1: UUID="c68799e9-92ca-44f3-bf9d-823c74cebc5b" TYPE="ext4" 
+
+[root@system2 iscsi]# vim /etc/fstab 
+ UUID=c68799e9-92ca-44f3-bf9d-823c74cebc5b /mnt/data	ext4	defaults,_netdev	0 0
+[root@system2 iscsi]# mount -a
+[root@system2 iscsi]# df -hT	# 练习时 hang 住了
+
+```
+
