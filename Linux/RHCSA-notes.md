@@ -2381,7 +2381,9 @@ Configuration saved to /etc/target/saveconfig.json
 [root@system2 ~]# iscsiadm -m discovery -t st -p 172.24.8.11
 172.24.8.11:3260,1 iqn.2014-08.com.example:system1
 
-[root@system2 iscsi]# iscsiadm -m node -l	# 连接、登录到 iSCSI target on system1
+[root@system2 ~]# iscsiadm -m node -l	# 连接、登录到 iSCSI target on system1
+Logging in to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260] (multiple)
+Login to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260] successful.
 
 [root@system2 iscsi]# lsblk
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
