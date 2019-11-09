@@ -1103,6 +1103,8 @@ DONE.
 ...
 ```
 
+* 写在 `/etc/bashrc` 中也可以；
+
 
 
 ## 第4题
@@ -1289,20 +1291,18 @@ PING 2003:ac18::30a(2003:ac18::30a) 56 data bytes
 [root@system1 Desktop]# vim /etc/postfix/main.cf		
 
 # 大概在100行处，添加两条记录
-101 local_transport = error:local			# 仅接受本地邮件
-102 myorigin = server.group8.example.com	# 邮件显示来自 server.group8.example.com
+100 local_transport = error:local			# 仅接受本地邮件
+101 myorigin = server.group8.example.com	# 邮件显示来自 server.group8.example.com
 
-# 大概在116行处，添加一条记录（注释掉原 inet_interfaces = localhost 那条）
+# 大概在118行处，添加一条记录（注释掉原 inet_interfaces = localhost 那条）
 118 inet_interfaces = loopback-only
 
-# 大概在315行处，添加一条记录
-316 relayhost = [mail.group8.example.com]	# 邮件自动路由到 mail.group8.example.com
+# 大概在320行处，添加一条记录
+320 relayhost = [mail.group8.example.com]	# 邮件自动路由到 mail.group8.example.com
 
 # 防火墙允许 SMTP 服务
 [root@system1 Desktop]# firewall-cmd --permanent --add-service=smtp
-success
-[root@system1 Desktop]# firewall-cmd --reload 
-success
+[root@system1 Desktop]# firewall-cmd --reload
 
 # 重启邮件服务，并设置自动启动
 [root@system1 Desktop]# systemctl restart postfix
@@ -1335,7 +1335,6 @@ From: root@server.group8.example.com (root)
 
 This is mail body
 
-[root@system1 Desktop]#
 ```
 
 
@@ -1361,7 +1360,21 @@ This is mail body
 ```sh
 [root@system1 ~]# yum install -y samba samba-client
 [root@system1 ~]# mkdir /common
-[root@system1 ~]# chcon -R -t samba_share_t /common
+[root@system1 ~]# chcon -R -t samba_share_t /common		# 设置适当的 selinux 类型上下文
+
+# 或
+
+[root@system1 ~]# semanage fcontext -a -t samba_share_t '/common(/.*)?'		
+# 确保 selinux 在重新标记后，修改的内容仍然存在
+
+[root@system1 ~]# restorecon -Rv /common	# 使得 semanage 设置立即生效
+
+# 注意：
+# 在测试中发现，chcon 会马上给目录加上类型上下文标签，而 semange 则需再运行 restorecon 才会生效
+# 但在《RHEL认证学习指南》一书中提到为了确保重启后仍生效，在运行了 chcon 之后仍要运行 semanage
+# 总结：
+# 可通过两种方法设置类型上下文，chcon + semanage 或 semanage + restorecon
+# ls -Z 可以看到文件的类型标签
 
 [root@system1 ~]# vim /etc/samba/smb.conf
 
@@ -1376,14 +1389,7 @@ This is mail body
 
 #####
 
-# 设置防火墙允许 SMB 相关服务
-[root@system1 ~]# firewall-cmd --permanent --add-service=samba
-[root@system1 ~]# firewall-cmd --permanent --add-service=mountd
-[root@system1 ~]# firewall-cmd --reload
-
-# 重启 SMB 相关服务，并设置自动启动
-[root@system1 ~]# systemctl restart smb nmb
-[root@system1 ~]# systemctl enable smb nmb
+[root@system1 ~]# testparm		# 检查 smb.conf 的语法是否有错
 
 # 添加 SMB 用户，设置密码 redhat
 [root@system1 ~]# smbpasswd -a andy
@@ -1391,9 +1397,20 @@ New SMB password:
 Retype new SMB password:
 Added user andy.
 
+# 设置防火墙允许 SMB 相关服务
+[root@system1 ~]# firewall-cmd --permanent --add-service=samba
+[root@system1 ~]# firewall-cmd --reload
+
+# 重启 SMB 相关服务，并设置自动启动
+[root@system1 ~]# systemctl restart smb nmb
+[root@system1 ~]# systemctl enable smb nmb
+
+
 ###################### system2 ######################
 
 [root@system2 ~]# yum install -y samba-client cifs-utils
+[root@system2 ~]# firewall-cmd --permanent --add-service=samba-client
+[root@system2 ~]# firewall-cmd --reload
 
 [root@system2 ~]# smbclient -L //172.24.8.11/ -U andy
 Enter andy's password: 
@@ -1441,11 +1458,11 @@ Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
 
 ```sh
 [root@system1 ~]# mkdir /devops
-[root@system1 ~]# chcon -R -t samba_share_t /devops		# 修改目录的 SELinux 上下文安全域
-[root@system1 ~]# chmod o+w /devops
-# 或者：
-[root@system1 ~]# setfacl -m u:akira:rwx /devops/
-# 如上两条命令之一均可使得 akira 获取该目录的 写 权限
+[root@system1 ~]# chcon -R -t samba_share_t /devops
+[root@system1 ~]# semanage fcontext -a -t samba_share_t '/devops()/.*?'	    # 使得重启仍有效
+
+[root@system1 ~]# setfacl -m u:akira:rwx /devops/		# 使得 akira 获取该目录的 rwx 权限
+# 有一次练习时只加了 rw，导致 akira 没有足够权限 ls 该目录，必须加上 rwx
 
 [root@system1 ~]# ll -d /devops
 drwxr-xrwx. 2 root root 6 Oct 30 16:23 /devops
@@ -1459,9 +1476,10 @@ drwxr-xrwx. 2 root root 6 Oct 30 16:23 /devops
         writable = no			# 以只读的方式访问此共享
         write list = akira		# arkira 可以读写该共享目录
 
+[root@system1 ~]# testparm		# 检查 smb.conf 语法是否有错
+
 # 设置防火墙，重启SMB相关服务
 [root@system1 ~]# firewall-cmd --permanent --add-service=samba		# 第8题已经设置
-[root@system1 ~]# firewall-cmd --permanent --add-service=mountd		# 第8题已经设置
 [root@system1 ~]# firewall-cmd --reload
 
 [root@system1 ~]# systemctl restart smb nmb
@@ -1481,9 +1499,11 @@ Added user akira.
 
 ###################### system2 ######################
 
-[root@system2 ~]# yum install -y samba-client cifs-utils		# 在第8题中已经安装
+[root@system2 ~]# yum install -y samba-client cifs-utils				# 在第8题中已安装
+[root@system2 ~]# firewall-cmd --permanent --add-service=samba-client	# 在第8题中已设置
+[root@system2 ~]# firewall-cmd --reload
 
-[root@system2 ~]# smbclient -L //172.24.8.11 -U silene			# 查看system1的共享目录
+[root@system2 ~]# smbclient -L //172.24.8.11 -U silene			# 查看 system1 的共享目录
 Enter silene's password: 
 
 Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
@@ -1536,7 +1556,7 @@ Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
 
 [root@system2 ~]# vim /etc/fstab		# 设置自动挂载
 # 在 fstab 中添加一条记录：
-//172.24.8.11/devops /mnt/dev cifs defaults,multiuser,username=silene,password=redhat,sec=ntlmssp  0 0
+//172.24.8.11/devops /mnt/dev cifs multiuser,username=silene,password=redhat,sec=ntlmssp  0 0
 
 [root@system2 ~]# mount -a
 [root@system2 ~]# df -h
@@ -1614,41 +1634,44 @@ logout
 
 
 ```sh
+[root@system1 ~]# yum install -y nfs-utils	# optional on practice systems
+
 [root@system1 ~]# mkdir -p /public /protected/project
 [root@system1 ~]# chown andres /protected/project/
+
+# 参考《RHCSA/RHCE 红帽 Linux 认证学习指南》 p619，除非 nfs_export_all_ro 与 nfs_export_all_rw 是 off，否则不必为 NFS 共享分配 fcontext；这俩布尔值默认为 on
+
+[root@system1 ~]# chcon -R -t public_content_t /public
+[root@system1 ~]# chcon -R -t public_content_rw_t /protected
+# and/or
+[root@system1 ~]# semanage fcontext -a -t public_content_t '/public(/.*)?'
+[root@system1 ~]# semanage fcontext -a -t public_content_rw_t '/protected(/.*)?'
+
+[root@system1 ~]# restorecon -Rv /public
+[root@system1 ~]# restorecon -Rv /protected
+
 
 [root@system1 ~]# ll -d /public /protected/project/
 drwxr-xr-x. 2 andres root 6 Oct 31 14:00 /protected/project/
 drwxr-xr-x. 2 root   root 6 Oct 31 14:00 /public
 
-[root@system1 ~]# chcon -R -t public_content_t /public
-[root@system1 ~]# chcon -R -t public_content_t /protected
 
 [root@system1 ~]# wget -O /etc/krb5.keytab http://server.group8.example.com/pub/keytabs/system1.keytab
---2019-10-31 14:03:12--  http://server.group8.example.com/pub/keytabs/system1.keytab
-Resolving server.group8.example.com (server.group8.example.com)... 172.24.8.254
-Connecting to server.group8.example.com (server.group8.example.com)|172.24.8.254|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 1466 (1.4K)
-Saving to: ‘/etc/krb5.keytab’
 
-100%[=========================================================================>] 1,466       --.-K/s   in 0s      
+[root@system1 ~]# vim /etc/exports				# 添加 NFS 资源导出的配置
+  /public 172.24.8.0/24(ro,sec=sys,sync)
+  /protected 172.24.8.0/24(rw,sec=krb5p,sync)
+# 或者
+  /public *.group8.example.com(ro,sec=sys,sync)
+  /protected *.group8.example.com(rw,sec=krb5p,sync)
+  
 
-2019-10-31 14:03:12 (322 MB/s) - ‘/etc/krb5.keytab’ saved [1466/1466]
-
-
-[root@system1 ~]# vim /etc/exports
-  #添加如下两条记录：
-  /public 172.24.8.0/24(sync,ro)
-  /protected 172.24.8.0/24(rw,sec=krb5p)
-
-
-[root@system1 ~]# vim /etc/sysconfig/nfs 
-  # 修改第13行，加上 “-V 4.2”
-13 RPCNFSDARGS="-V 4.2"
+[root@system1 ~]# vim /etc/sysconfig/nfs 		# 修改 NFS 启动参数，在第13行加上 “-V 4.2”
+13 RPCNFSDARGS="-V 4.2"			
 
 [root@system1 ~]# firewall-cmd --permanent --add-service=nfs
-[root@system1 ~]# firewall-cmd --permanent --add-service=rpc-bind
+[root@system1 ~]# firewall-cmd --permanent --add-service=rpc-bind	# v3 需要，v4 不用
+[root@system1 ~]# firewall-cmd --permanent --add-service=mountd		# v3 需要，v4 不用
 [root@system1 ~]# firewall-cmd --reload
 [root@system1 ~]# systemctl restart nfs-server nfs-secure-server
 [root@system1 ~]# systemctl enable nfs-server nfs-secure-server
@@ -1656,6 +1679,15 @@ Saving to: ‘/etc/krb5.keytab’
 [root@system1 ~]# exportfs -r
 # exportfs - maintain table of exported NFS file systems
 # -r     Reexport all directories
+
+[root@system1 ~]# exportfs
+/public         172.24.8.0/24
+/protected      172.24.8.0/24
+
+[root@system1 ~]# showmount -e system1
+Export list for system1:
+/protected 172.24.8.0/24
+/public    172.24.8.0/24
 
 ```
 
@@ -1692,29 +1724,17 @@ drwxr-xr-x. 2 root root 6 Oct 31 14:18 /mnt/nfsmount/
 drwxr-xr-x. 2 root root 6 Oct 31 14:18 /mnt/nfssecure/
 
 [root@system2 ~]# wget -O /etc/krb5.keytab http://server.group8.example.com/pub/keytabs/system2.keytab
---2019-10-31 14:18:40--  http://server.group8.example.com/pub/keytabs/system2.keytab
-Resolving server.group8.example.com (server.group8.example.com)... 172.24.8.254
-Connecting to server.group8.example.com (server.group8.example.com)|172.24.8.254|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 1266 (1.2K)
-Saving to: ‘/etc/krb5.keytab’
-
-100%[=========================================================================>] 1,266       --.-K/s   in 0s      
-
-2019-10-31 14:18:40 (191 MB/s) - ‘/etc/krb5.keytab’ saved [1266/1266]
-
-
 
 [root@system2 ~]# ll /etc/krb*
 -rw-r--r--. 1 root root  545 Jul 26  2016 /etc/krb5.conf
 -rw-r--r--. 1 root root 1266 Jul 23  2016 /etc/krb5.keytab
 
-[root@system2 ~]# vim /etc/fstab 
-  172.24.8.11:/public /mnt/nfsmount       nfs     defaults 0 0
-  172.24.8.11:/protected /mnt/nfssecure   nfs     defaults,sec=krb5p,v4.2 0 0
-
-[root@system2 ~]# systemctl restart nfs-secure
 [root@system2 ~]# systemctl enable nfs-secure
+[root@system2 ~]# systemctl restart nfs-secure
+
+[root@system2 ~]# vim /etc/fstab 
+  172.24.8.11:/public /mnt/nfsmount       nfs     defaults,sec=sys 0 0
+  172.24.8.11:/protected /mnt/nfssecure   nfs     defaults,sec=krb5p,v4.2 0 0
 
 [root@system2 ~]# mount -a
 [root@system2 ~]# df -h
@@ -1733,7 +1753,7 @@ tmpfs                   773M     0  773M   0% /sys/fs/cgroup
 uid=2006(andres) gid=2006(andres) groups=2006(andres)
 
 [root@system2 ~]# su - andres
--bash-4.2$ kinit
+-bash-4.2$ kinit  	   # obtain and cache Kerberos ticket-granting ticket
 Password for andres@GROUP8.EXAMPLE.COM:    `redhat`
 -bash-4.2$ cd /mnt/nfssecure/project/
 -bash-4.2$ touch andres.txt
