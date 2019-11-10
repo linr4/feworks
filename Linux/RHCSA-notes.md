@@ -1355,7 +1355,15 @@ This is mail body
 
 - 用户 andy 必须能够读取共享中的内容，如果需要的话，验证密码是 redhat
 
-
+>
+>
+>**chcon vs. semanage**
+>
+> chcon temporarily changes the context of files, it means after the execution of restorecon command the context will be reset. 
+>
+> The '**semanage fcontext**' command is use to change the SElinux context of a file or directory persistently. When using targeted policy, changes are written to the file located at **/etc/selinux/targeted/contexts/files/** directory.  Changes made by 'semanage fcontext' are persistent, even if the file system is relabeled. 
+>
+>
 
 ```sh
 [root@system1 ~]# yum install -y samba samba-client
@@ -1634,12 +1642,13 @@ logout
 
 
 ```sh
-[root@system1 ~]# yum install -y nfs-utils	# optional on practice systems
+[root@system1 ~]# yum install -y nfs-utils	# 实验环境不装，会导致 nfs-secure-server 无法启动
 
 [root@system1 ~]# mkdir -p /public /protected/project
 [root@system1 ~]# chown andres /protected/project/
 
 # 参考《RHCSA/RHCE 红帽 Linux 认证学习指南》 p619，除非 nfs_export_all_ro 与 nfs_export_all_rw 是 off，否则不必为 NFS 共享分配 fcontext；这俩布尔值默认为 on
+# 在实验环境中测试也发现没有设置 context 一样正常实现了功能。
 
 [root@system1 ~]# chcon -R -t public_content_t /public
 [root@system1 ~]# chcon -R -t public_content_rw_t /protected
@@ -1810,12 +1819,26 @@ total 20
 [root@system1 html]# ll
 total 4
 -rw-r--r--. 1 root root 32 Jul 24  2016 index.html
+
 [root@system1 html]# firewall-cmd --permanent --add-service=http
 [root@system1 html]# firewall-cmd --permanent --add-service=https
 [root@system1 html]# firewall-cmd --reload
 
 [root@system1 html]# firewall-config	
-# 在 GUI 中添加一条 Rich Rule 拒绝 172.13.8.0/24 访问 http 和 https
+# 在 GUI 中添加一条 Rich Rule 拒绝 172.13.8.0/24 访问 http 和 https，或用如下命令：
+# rufasoasnar // rule family, source address, service name, reject
+
+[root@system1 html]# firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="172.13.8.0/24" service name="http" reject'
+[root@system1 html]# firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="172.13.8.0/24" service name="https" reject'
+
+[root@system1 html]# firewall-cmd --reload
+[root@system1 html]# firewall-cmd --list-all
+# ...
+  rich rules:
+        rule family="ipv4" source address="172.13.8.0/24" service name="https" reject
+        rule family="ipv4" source address="172.13.8.0/24" service name="http" reject
+# ...
+
 
 [root@system1 html]# cat index.html 
 Site:system1.group8.example.com
@@ -1844,9 +1867,9 @@ Site:system1.group8.example.com
 [root@system1 ~]# yum install -y mod_ssl
 [root@system1 ~]# cd /var/www/html
 
+[root@system1 html]# wget http://server.group8.example.com/pub/tls/certs/ssl-ca.crt
 [root@system1 html]# wget http://server.group8.example.com/pub/tls/certs/system1.crt
 [root@system1 html]# wget http://server.group8.example.com/pub/tls/private/system1.key
-[root@system1 html]# wget http://server.group8.example.com/pub/tls/certs/ssl-ca.crt
 [root@system1 html]# ll
 total 16
 -rw-r--r--. 1 root root   32 Jul 24  2016 index.html
