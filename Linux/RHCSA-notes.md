@@ -1826,7 +1826,7 @@ total 4
 
 [root@system1 html]# firewall-config	
 # 在 GUI 中添加一条 Rich Rule 拒绝 172.13.8.0/24 访问 http 和 https，或用如下命令：
-# rufasoasnar // rule family, source address, service name, reject
+# rfsasnr // rule family, source address, service name, reject
 
 [root@system1 html]# firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="172.13.8.0/24" service name="http" reject'
 [root@system1 html]# firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="172.13.8.0/24" service name="https" reject'
@@ -1865,19 +1865,17 @@ Site:system1.group8.example.com
 
 ```sh
 [root@system1 ~]# yum install -y mod_ssl
-[root@system1 ~]# cd /var/www/html
+[root@system1 ~]# cd /etc/pki/tls/
 
-[root@system1 html]# wget http://server.group8.example.com/pub/tls/certs/ssl-ca.crt
-[root@system1 html]# wget http://server.group8.example.com/pub/tls/certs/system1.crt
-[root@system1 html]# wget http://server.group8.example.com/pub/tls/private/system1.key
-[root@system1 html]# ll
-total 16
--rw-r--r--. 1 root root   32 Jul 24  2016 index.html
+[root@system1 tls]# wget http://server.group8.example.com/pub/tls/certs/ssl-ca.crt
+[root@system1 tls]# wget http://server.group8.example.com/pub/tls/certs/system1.crt
+[root@system1 tls]# wget http://server.group8.example.com/pub/tls/private/system1.key
+[root@system1 tls]# ll
 -rw-r--r--. 1 root root 1350 Jul 24  2016 ssl-ca.crt
 -rw-r--r--. 1 root root 3756 Jul 24  2016 system1.crt
 -rw-r--r--. 1 root root  887 Jul 24  2016 system1.key
 
-[root@system1 html]# cd /etc/httpd/conf.d/
+[root@system1 tls]# cd /etc/httpd/conf.d/
 [root@system1 conf.d]# ll
 total 32
 -rw-r--r--. 1 root root 2926 Sep 17  2015 autoindex.conf
@@ -1913,9 +1911,9 @@ SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
      SSLHonorCipherOrder on
      SSLProtocol all -SSLv2
      SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5			# 删除模板末尾的 :!SEED:!IDEA
-     SSLCertificateFile /var/www/html/system1.crt	# 修改签名证书到相应路径
-     SSLCertificateKeyFile /var/www/html/system1.key# 修改证书密钥到相应路径
-     SSLCACertificateFile /var/www/html/ssl-ca.crt	# 修改签名授权到相应路径
+     SSLCertificateFile /etc/pki/tls/system1.crt	# 修改签名证书到相应路径
+     SSLCertificateKeyFile /etc/pki/tls/system1.key # 修改证书密钥到相应路径
+     SSLCACertificateFile /etc/pki/tls/ssl-ca.crt	# 修改签名授权到相应路径
 </VirtualHost>
 
 
@@ -2193,6 +2191,9 @@ user8:x:1008:1008::/home/user8:/bin/false
 [root@system1 ~]# systemctl enable target
 
 [root@system1 ~]# firewall-config	# 通过 GUI 配置富规则只允许 172.24.8.12/24 TCP port 3260
+# 或
+[root@system1 home]# firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="172.24.8.12/24" port port="3260" protocol="tcp" accept'
+
 [root@system1 ~]# firewall-cmd --permanent --add-port=3260/tcp
 [root@system1 ~]# firewall-cmd --reload
 [root@system1 ~]# firewall-cmd --list-all
@@ -2354,8 +2355,6 @@ o- tpg1 ........................................................ [no-gen-acls, n
   | o- lun0 .................................. [block/disk0 (/dev/vgiscsi/iscsi_store)]
   o- portals ............................................................. [Portals: 1]
     o- 172.24.8.11:3260 .......................................................... [OK]
-    
-/iscsi/iqn.20...:system1/tpg1> cd
 
 /iscsi/iqn.20...:system1/tpg1> cd /
 /> saveconfig 
@@ -2427,6 +2426,9 @@ Configuration saved to /etc/target/saveconfig.json
 [root@system2 ~]# iscsiadm -m node -l	# 连接、登录到 iSCSI target on system1
 Logging in to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260] (multiple)
 Login to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260] successful.
+# 或 
+[root@system2 ~]# iscsiadm -m node -T iqn.2014-08.com.example.system1 -p 172.24.8.11 --login
+
 
 [root@system2 iscsi]# lsblk
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
