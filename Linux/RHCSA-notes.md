@@ -1919,7 +1919,7 @@ SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
 
 # 修改 SELinux 策略中相关规则的布尔值，-P 永久生效
 
-[root@system1 conf.d]# setsebool -P httpd_read_user_content=on
+[root@system1 conf.d]# setsebool -P httpd_read_user_content on
 [root@system1 conf.d]# getsebool -a |grep httpd_read
 httpd_read_user_content --> on
 
