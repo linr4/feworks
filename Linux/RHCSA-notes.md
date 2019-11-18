@@ -1117,7 +1117,20 @@ DONE.
 
 * 此设置必须永久有效
 
-  
+
+```sh
+ firewall-cmd --permanent --add-rich-rule 
+	'rule family="ipv4" 
+	 source address="172.24.8.0/24" 
+	 forward-port port="5423" 
+	 protocol="tcp" 
+	 to-port="80" 
+	 to-addr="172.24.8.11"'
+	 
+ firewall-cmd --reload
+```
+
+*or add a rich rule by GUI :*
 
 ```sh
 [root@desktop ~]# firewall-config	# 启动防火墙配置工具
@@ -1560,7 +1573,7 @@ Domain=[STAFF] OS=[Windows 6.1] Server=[Samba 4.2.3]
 # 可通过用户 akira 来临时获取写的权限
 
 [root@system2 ~]# mkdir /mnt/dev		# 创建挂载点
-[root@system2 ~]# chmod o+w /mnt/dev	# 使得 akira 有写的权限
+[root@system2 ~]# chmod o+w /mnt/dev	# 使 akira 有写权限 (非必要，mount 起来之后，用 getfacl看到 akira 已经有 rwx 权限，应该是之前在 system1 用 setfacl 给 akira 设置了 /devops 的 rwx 权限)
 
 [root@system2 ~]# vim /etc/fstab		# 设置自动挂载
 # 在 fstab 中添加一条记录：

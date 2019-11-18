@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20191117 - Day 175
+
+- 算法练习 - 等差数列 (+2.5h = 381.5 of 600)
+
 ###### 20191024 - Day 174
 
 - 学习 Bootstrap - Huawei (+1h = 379 of 600)
