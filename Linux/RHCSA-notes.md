@@ -1808,38 +1808,25 @@ logout
 
 [root@system1 ~]# cd /etc/httpd/conf.d/
 [root@system1 conf.d]# cp /usr/share/doc/httpd-2.4.6/httpd-vhosts.conf ./	# 拷贝配置模板
-[root@system1 conf.d]# ll
-total 20
--rw-r--r--. 1 root root 2926 Sep 17  2015 autoindex.conf
--rw-r--r--. 1 root root 1511 Oct 31 15:09 httpd-vhosts.conf
--rw-r--r--. 1 root root  366 Sep 17  2015 README
--rw-r--r--. 1 root root 1252 Sep 17  2015 userdir.conf
--rw-r--r--. 1 root root  516 Sep 17  2015 welcome.conf
-
-[root@system1 conf.d]# vi httpd-vhosts.conf 
- # 在23行处添加如下3条，把原有的删除：
- 23 <VirtualHost *:80>
- 24      DocumentRoot "/var/www/html/"
- 25      ServerName system1.group8.example.com
- 26 </VirtualHost>
-
+[root@system1 conf.d]# vi httpd-vhosts.conf 	# 增删改原有内容为如下：
+<VirtualHost *:80>
+    DocumentRoot "/var/www/html"
+    ServerName system1.group8.example.com
+</VirtualHost>
 
 [root@system1 ~]# systemctl restart httpd
 [root@system1 ~]# systemctl enable httpd
 
 [root@system1 ~]# cd /var/www/html/
 [root@system1 html]# wget -O index.html http://server.group8.example.com/pub/system1.html
-[root@system1 html]# ll
-total 4
--rw-r--r--. 1 root root 32 Jul 24  2016 index.html
 
 [root@system1 html]# firewall-cmd --permanent --add-service=http
 [root@system1 html]# firewall-cmd --permanent --add-service=https
 [root@system1 html]# firewall-cmd --reload
 
 [root@system1 html]# firewall-config	
-# 在 GUI 中添加一条 Rich Rule 拒绝 172.13.8.0/24 访问 http 和 https，或用如下命令：
-# rfsasnr // rule family, source address, service name, reject
+# 在 GUI 中添加一条 Rich Rule 拒绝 172.13.8.0/24 访问 http 和 https，
+# 或用如下命令： # rfsasnr // rule family, source address, service name, reject
 
 [root@system1 html]# firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="172.13.8.0/24" service name="http" reject'
 [root@system1 html]# firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="172.13.8.0/24" service name="https" reject'
@@ -1847,11 +1834,10 @@ total 4
 [root@system1 html]# firewall-cmd --reload
 [root@system1 html]# firewall-cmd --list-all
 # ...
-  rich rules:
-        rule family="ipv4" source address="172.13.8.0/24" service name="https" reject
-        rule family="ipv4" source address="172.13.8.0/24" service name="http" reject
+#  rich rules:
+#        rule family="ipv4" source address="172.13.8.0/24" service name="https" reject
+#        rule family="ipv4" source address="172.13.8.0/24" service name="http" reject
 # ...
-
 
 [root@system1 html]# cat index.html 
 Site:system1.group8.example.com
@@ -1878,68 +1864,63 @@ Site:system1.group8.example.com
 
 ```sh
 [root@system1 ~]# yum install -y mod_ssl
-[root@system1 ~]# cd /etc/pki/tls/
-
-[root@system1 tls]# wget http://server.group8.example.com/pub/tls/certs/ssl-ca.crt
-[root@system1 tls]# wget http://server.group8.example.com/pub/tls/certs/system1.crt
-[root@system1 tls]# wget http://server.group8.example.com/pub/tls/private/system1.key
-[root@system1 tls]# ll
--rw-r--r--. 1 root root 1350 Jul 24  2016 ssl-ca.crt
--rw-r--r--. 1 root root 3756 Jul 24  2016 system1.crt
--rw-r--r--. 1 root root  887 Jul 24  2016 system1.key
+[root@system1 ~]# cd /etc/pki/tls/certs
+[root@system1 certs]# wget http://server.group8.example.com/pub/tls/certs/ssl-ca.crt
+[root@system1 certs]# wget http://server.group8.example.com/pub/tls/certs/system1.crt
+[root@system1 ~]# cd ../private
+[root@system1 private]# wget http://server.group8.example.com/pub/tls/private/system1.key
 
 [root@system1 tls]# cd /etc/httpd/conf.d/
-[root@system1 conf.d]# ll
-total 32
--rw-r--r--. 1 root root 2926 Sep 17  2015 autoindex.conf
--rw-r--r--. 1 root root 1616 Oct 31 15:14 httpd-vhosts.conf
--rw-r--r--. 1 root root  366 Sep 17  2015 README
--rw-r--r--. 1 root root 9438 Sep 17  2015 ssl.conf
--rw-r--r--. 1 root root 1252 Sep 17  2015 userdir.conf
--rw-r--r--. 1 root root  516 Sep 17  2015 welcome.conf
 
-
-# 从 ssl.conf 模板文件中获取配置要用到的条目：
-
-[root@system1 conf.d]# grep '^SSL' ssl.conf |tail -5
+# 参考 ssl.conf 模板文件：
+[root@system1 conf.d]# grep '^SSL' ssl.conf |tail -5, grep -e 'SSLCA' -e 'SSLH' ssl.conf
 SSLEngine on
 SSLProtocol all -SSLv2
 SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA
 SSLCertificateFile /etc/pki/tls/certs/localhost.crt
 SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
+SSLCACertificateFile /etc/pki/tls/certs/ca-bundle.crt
+SSLHonorCipherOrder on
 
-[root@system1 conf.d]# grep -e 'SSLCA' -e 'SSLH' ssl.conf
-#SSLHonorCipherOrder on 
-#SSLCACertificateFile /etc/pki/tls/certs/ca-bundle.crt
-
-
-# 参照刚刚获取的 SSL 模板信息，在 httpd-vhosts.conf 中新增一个 section：
-# 最好把无用的条目删除干净，实验中有一次 httpd 无法 restart，可能与无用的条目有关
-
+# 添加如下条目：
 [root@system1 conf.d]# vim httpd-vhosts.conf 
 <VirtualHost *:443>									# 修改端口号为 443
      DocumentRoot "/var/www/html/"					# 根目录 /var/www/html
      ServerName system1.group8.example.com			# 服务器域名
+
      SSLEngine on
      SSLHonorCipherOrder on
-     SSLProtocol all -SSLv2
-     SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5			# 删除模板末尾的 :!SEED:!IDEA
+     SSLProtocol all -SSLv2 -SSLv3					# 模板没有 v3，要手工加上
+     SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5
      SSLCertificateFile /etc/pki/tls/system1.crt	# 修改签名证书到相应路径
      SSLCertificateKeyFile /etc/pki/tls/system1.key # 修改证书密钥到相应路径
      SSLCACertificateFile /etc/pki/tls/ssl-ca.crt	# 修改签名授权到相应路径
 </VirtualHost>
 
-
-# 修改 SELinux 策略中相关规则的布尔值，-P 永久生效
-
+# 修改 SELinux 策略中相关规则的布尔值，-P 永久生效		 # 若无需访问 /home 则非必要
 [root@system1 conf.d]# setsebool -P httpd_read_user_content on
 [root@system1 conf.d]# getsebool -a |grep httpd_read
 httpd_read_user_content --> on
 
 [root@system1 conf.d]# systemctl restart httpd
 
-# 用浏览器测试 https://system1.group8.example.com 可否访问到
+[root@system1 conf.d]# curl -k https://system1.group8.example.com
+# 或者用浏览器测试 https://system1.group8.example.com 可否访问到
 ```
+
+
+
+As per [stackoverflow]( https://serverfault.com/questions/461504/what-is-the-difference-between-httpd-read-user-content-and-httpd-enable-homedirs )，如果 Web 服务无需访问 `/home` 目录，实际上不需要打开 `http_read_user_content`
+
+
+
+> `httpd_read_user_content` allows any confined web server to read files in user home directories in `/home`.
+>
+> `httpd_enable_homedirs` allows Apache to use its `UserDir` directive (i.e. URLs that look like `http://www.example.com/~username/`).
+>
+> If you are just mapping domain names to users' directories, it should be sufficient to enable the first one, `httpd_read_user_content`, but if you want to use Apache user directories, you should enable both.
+>
+>  All rules of the `http_read_user_content` are included in the `httpd_t -b httpd_enable_homedirs`. That is, the scope of the latter is wider than the former. 
 
 
 
@@ -1963,20 +1944,22 @@ httpd_read_user_content --> on
 
 ```sh
 [root@system1 ~]# mkdir /var/www/virtual
-[root@system1 ~]# cd /var/www/virtual
-[root@system1 virtual]# wget -O index.html http://server.group8.example.com/pub/www8.html
+[root@system1 ~]# wget -O /var/www/virtual/index.html http://server/pub/www8.html
+[root@system1 ~]# setfacl -m u:andy:rwx /var/www/virtual/
 
-[root@system1 virtual]# setfacl -m u:andy:rwx /var/www/virtual/
+[root@system1 ~]# semanage fcontext -a -t httpd_sys_content_t '/var/www/virtual(/.*)?'
+[root@system1 ~]# restorecon -Rv /var/www/virtual/
 
-[root@system1 virtual]# vim /etc/httpd/conf.d/httpd-vhosts.conf 	# 新增一个 section
+[root@system1 ~]# vim /etc/httpd/conf.d/httpd-vhosts.conf 	# 新增一个 section
  <VirtualHost *:80>
       DocumentRoot "/var/www/virtual/"
       ServerName www8.group8.example.com
  </VirtualHost>
 
-[root@system1 virtual]# systemctl restart httpd
+[root@system1 ~]# systemctl restart httpd
+[root@system1 ~]# curl http://www8.group8.example.com
 
-# 再用浏览器测试 https://www8.group8.example.com 可否访问到
+# 用浏览器测试 https://www8.group8.example.com 可否访问到
 ```
 
 
@@ -1999,26 +1982,37 @@ httpd_read_user_content --> on
 
 ```sh
 [root@system1 ~]# mkdir /var/www/html/private
-[root@system1 ~]# cd /var/www/html/private/
-[root@system1 private]# wget -O index.html http://server.group8.example.com/pub/private.html 
+[root@system1 ~]# mkdir /var/www/virtual/private
+[root@system1 ~]# wget -O /var/www/html/private/index.html http://server/pub/private.html 
+[root@system1 ~]# wget -O /var/www/virtual/private/index.html http://server/pub/private..
 
-[root@system1 private]# vim /etc/httpd/conf/httpd.conf 
-# 到102行复制配置模板，拷贝到 httpd-vhosts.conf 中
-102 <Directory />
-103     AllowOverride none
-104     Require all denied
-105 </Directory>
+# 参考 /etc/httpd/conf/httpd.conf 中的 <Direcotry>，
+# 分别在 /var/www/html 和 /var/www/virtual 两个地方添加 <Directory> 配置：
 
-[root@system1 private]# vim /etc/httpd/conf.d/httpd-vhosts.conf 
-# 把配置模板拷贝到这个文件中
+[root@system1 ~]# vim /etc/httpd/conf.d/httpd-vhosts.conf 
+<VirtualHost *:80>
+    DocumentRoot "/var/www/html"
+    ServerName system1.group8.example.com
+    
+    <Directory "/var/www/html/private">	# 需要加上 private 的路径
+        AllowOverride none
+        Require all denied
+        Require local					# 加上这一句：Require local
+    </Directory>  
+</VirtualHost>
 
-<Directory "/var/www/html/private">	# 需要加上 private 的路径
-    AllowOverride none
-    Require all denied
-    Require local					# 还需要加上这一句：Require local
-</Directory>
+<VirtualHost *:80>
+    DocumentRoot "/var/www/virtual"
+    ServerName www8.group8.example.com
 
-[root@system1 private]# systemctl restart httpd
+    <Directory "/var/www/virtual/private">
+        AllowOverride none
+        Require all denied
+        Require local
+    </Directory>
+</VirtualHost>
+
+[root@system1 ~]# systemctl restart httpd
 
 # 再在浏览器中测试 http://system1.group8.example.com/private/ 可否访问
 ```
@@ -2049,7 +2043,7 @@ httpd_read_user_content --> on
 [root@system1 html]# wget http://server.group8.example.com/pub/webinfo.wsgi
 
 [root@system1 html]# vim /etc/httpd/conf.d/httpd-vhosts.conf 
-# 新增如下条目：
+# 添如下条目：
  listen 8909			# 监听端口8909
  <VirtualHost *:8909>	# 设置虚拟主机
       WSGIScriptAlias /  /var/www/html/webinfo.wsgi
@@ -2058,10 +2052,13 @@ httpd_read_user_content --> on
 
 [root@system1 html]# semanage port -a -t http_port_t -p tcp 8909	# SELinux 开放端口8909
 [root@system1 html]# firewall-cmd --permanent --add-port=8909/tcp	# 防火墙开放端口8909
+# or
+[root@system1 html]# firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" port port="8909" protocol="tcp" accept'
 [root@system1 html]# firewall-cmd --reload
 [root@system1 html]# systemctl restart httpd
 
-# 在浏览器访问 http://wsgi.group8.example.com:8909/ 以测试设置是否成功
+# 访问 http://wsgi.group8.example.com:8909/ 以测试设置是否成功
+[root@system1 html]# curl http://wsgi.group8.example.com:8909
 ```
 
 
