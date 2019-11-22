@@ -1867,13 +1867,13 @@ Site:system1.group8.example.com
 [root@system1 ~]# cd /etc/pki/tls/certs
 [root@system1 certs]# wget http://server.group8.example.com/pub/tls/certs/ssl-ca.crt
 [root@system1 certs]# wget http://server.group8.example.com/pub/tls/certs/system1.crt
-[root@system1 ~]# cd ../private
-[root@system1 private]# wget http://server.group8.example.com/pub/tls/private/system1.key
+[root@system1 certs]# wget http://server.group8.example.com/pub/tls/private/system1.key
+[root@system1 certs]# mv system1.key ../private
 
 [root@system1 tls]# cd /etc/httpd/conf.d/
 
-# 参考 ssl.conf 模板文件：
-[root@system1 conf.d]# grep '^SSL' ssl.conf |tail -5, grep -e 'SSLCA' -e 'SSLH' ssl.conf
+# 参考 ssl.conf 文件中的相关条目来配置 httpd_vhosts.conf：
+[root@system1 conf.d]# grep '^SSL' ssl.conf |tail -5; grep -e 'SSLCA' -e 'SSLH' ssl.conf
 SSLEngine on
 SSLProtocol all -SSLv2
 SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA
@@ -1882,7 +1882,7 @@ SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
 SSLCACertificateFile /etc/pki/tls/certs/ca-bundle.crt
 SSLHonorCipherOrder on
 
-# 添加如下条目：
+# 在 httpd-vhosts.conf 中添加如下条目：
 [root@system1 conf.d]# vim httpd-vhosts.conf 
 <VirtualHost *:443>									# 修改端口号为 443
      DocumentRoot "/var/www/html/"					# 根目录 /var/www/html
@@ -1948,7 +1948,7 @@ As per [stackoverflow]( https://serverfault.com/questions/461504/what-is-the-dif
 [root@system1 ~]# setfacl -m u:andy:rwx /var/www/virtual/
 
 [root@system1 ~]# semanage fcontext -a -t httpd_sys_content_t '/var/www/virtual(/.*)?'
-[root@system1 ~]# restorecon -Rv /var/www/virtual/
+[root@system1 ~]# restorecon -Rv /var/www/virtual/		# 命令运行时并无输出，似乎这两条无必要
 
 [root@system1 ~]# vim /etc/httpd/conf.d/httpd-vhosts.conf 	# 新增一个 section
  <VirtualHost *:80>
@@ -1987,7 +1987,7 @@ As per [stackoverflow]( https://serverfault.com/questions/461504/what-is-the-dif
 [root@system1 ~]# wget -O /var/www/virtual/private/index.html http://server/pub/private..
 
 # 参考 /etc/httpd/conf/httpd.conf 中的 <Direcotry>，
-# 分别在 /var/www/html 和 /var/www/virtual 两个地方添加 <Directory> 配置：
+# 分别在 /var/www/html 和 /var/www/virtual 两个 vhost 中添加 <Directory> 配置：
 
 [root@system1 ~]# vim /etc/httpd/conf.d/httpd-vhosts.conf 
 <VirtualHost *:80>
@@ -2142,12 +2142,12 @@ fi
 
 if [ ! -f $1 ]; then						# 参数1 不是一个文件或文件不存在
   echo 'Input file not found'
-  exit 1
+  exit 2
 fi
 
-while read LINE
+while read username
 do
-  useradd -s /bin/false $LINE
+  useradd -s /bin/false $username &>/dev/null
 done < $1									# 从 参数1 所指向的文件中读取每一行
 
 [root@system1 ~]# chmod 755 batchusers 
@@ -2310,8 +2310,8 @@ Created block storage object disk0 using /dev/vgiscsi/iscsi_store.
 
 
 /backstores/block> cd /iscsi 
-/iscsi> create iqn.2014-08.com.example.group8:system1			# 创建 iSCSI device
-Created target iqn.2014-08.com.example.group8:system1.
+/iscsi> create iqn.2014-08.com.example:system1			# 创建 iSCSI device
+Created target iqn.2014-08.com.example:system1.
 Created TPG 1.
 Global pref auto_add_default_portal=true
 Created default portal listening on all IPs (0.0.0.0), port 3260.
@@ -2319,7 +2319,7 @@ Created default portal listening on all IPs (0.0.0.0), port 3260.
 
 /iscsi> ls
 o- iscsi ................................................................. [Targets: 1]
-  o- iqn.2014-08.com.example.group8:system1 ................................. [TPGs: 1]
+  o- iqn.2014-08.com.example:system1 ................................. [TPGs: 1]
     o- tpg1 .................................................... [no-gen-acls, no-auth]
       o- acls ............................................................... [ACLs: 0]
       o- luns ............................................................... [LUNs: 0]
@@ -2327,13 +2327,13 @@ o- iscsi ................................................................. [Targ
         o- 0.0.0.0:3260 .......................................................... [OK]
 
 
-/iscsi> cd iqn.2014-08.com.example.group8:system1/tpg1/luns 
+/iscsi> cd iqn.2014-08.com.example:system1/tpg1/luns 
 /iscsi/iqn.20...em1/tpg1/luns> create /backstores/block/disk0 	# 创建 LUN
 Created LUN 0.
 
 /iscsi/iqn.20...em1/tpg1/luns> cd ../acls 
-/iscsi/iqn.20...em1/tpg1/acls> create iqn.2014-08.com.example.group8:system2  # 设置 ACL
-Created Node ACL for iqn.2014-08.com.example.group8:system2
+/iscsi/iqn.20...em1/tpg1/acls> create iqn.2014-08.com.example:system2  # 设置 ACL
+Created Node ACL for iqn.2014-08.com.example:system2
 Created mapped LUN 0.
 
 /iscsi/iqn.20...em1/tpg1/acls> cd ../portals/
@@ -2359,7 +2359,7 @@ Parameter generate_node_acls is now '0'.
 /iscsi/iqn.20...:system1/tpg1> ls
 o- tpg1 ........................................................ [no-gen-acls, no-auth]
   o- acls ................................................................... [ACLs: 1]
-  | o- iqn.2014-08.com.example.group8:system2 ........................ [Mapped LUNs: 1]
+  | o- iqn.2014-08.com.example:system2 ............................... [Mapped LUNs: 1]
   |   o- mapped_lun0 .......................................... [lun0 block/disk0 (rw)]
   o- luns ................................................................... [LUNs: 1]
   | o- lun0 .................................. [block/disk0 (/dev/vgiscsi/iscsi_store)]
@@ -2379,10 +2379,10 @@ o- / ...........................................................................
   | o- pscsi ..................................................... [Storage Objects: 0]
   | o- ramdisk ................................................... [Storage Objects: 0]
   o- iscsi ............................................................... [Targets: 1]
-  | o- iqn.2014-08.com.example.group8:system1 ............................... [TPGs: 1]
+  | o- iqn.2014-08.com.example:system1 ...................................... [TPGs: 1]
   |   o- tpg1 .................................................. [no-gen-acls, no-auth]
   |     o- acls ............................................................. [ACLs: 1]
-  |     | o- iqn.2014-08.com.example.group8:system2 .................. [Mapped LUNs: 1]
+  |     | o- iqn.2014-08.com.example:system2 ......................... [Mapped LUNs: 1]
   |     |   o- mapped_lun0 .................................... [lun0 block/disk0 (rw)]
   |     o- luns ............................................................. [LUNs: 1]
   |     | o- lun0 ............................ [block/disk0 (/dev/vgiscsi/iscsi_store)]
