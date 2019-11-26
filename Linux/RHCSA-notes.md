@@ -1083,11 +1083,11 @@ DONE.
 * 此命令对系统中的所有用户有效。
 
 ```sh
-[root@system1 Desktop]# vi /etc/profile
-  # add an entry at the bottom, above "unset ..."
+[root@system1 Desktop]# vi /etc/bashrc
+  # add an entry at the bottom
   alias qstat='/bin/ps -Ao pid,tt,user,fname,rsz'
 
-[root@system1 Desktop]# source /etc/profile		# 重新执行 profile 中的命令而不用注销并重新登录
+[root@system1 Desktop]# source /etc/bashrc		# 重新执行 bashrc 中的命令而不用注销并重新登录
 
 [root@system1 Desktop]# qstat
    PID TT       USER     COMMAND    RSZ
@@ -1217,12 +1217,32 @@ DONE.
 * 重启网络服务，测试 IP 的连通性：
 
 ```sh
-[root@system1 Desktop]# systemctl restart network
+[root@system1 ~]# systemctl restart network
 
 [root@system1 Desktop]# ping 172.16.3.40
 PING 172.16.3.45 (172.16.3.45) 56(84) bytes of data.
 64 bytes from 172.16.3.45: icmp_seq=1 ttl=64 time=3.96 ms
 ...
+
+[root@system1 ~]# teamdctl team0 state
+setup:
+  runner: activebackup
+ports:
+  eth1
+    link watches:
+      link summary: up
+      instance[link_watch_0]:
+        name: ethtool
+        link: up
+  eth2
+    link watches:
+      link summary: up
+      instance[link_watch_0]:
+        name: ethtool
+        link: up
+runner:
+  active port: eth1
+
 ```
 
 
@@ -1276,6 +1296,22 @@ PING 2003:ac18::305(2003:ac18::305) 56 data bytes
 PING 2003:ac18::30a(2003:ac18::30a) 56 data bytes
 64 bytes from 2003:ac18::30a: icmp_seq=1 ttl=64 time=153 ms
 64 bytes from 2003:ac18::30a: icmp_seq=2 ttl=64 time=70.1 ms
+...
+```
+
+也可通过CLI进行设置：
+
+```sh
+[root@system1 ~]# nmcli connection modify eth0 ipv6.address "2003:ac18::305/64" ipv6.method manual connection.autoconnect yes
+
+[root@system1 ~]# nmcli connection reload
+[root@system1 ~]# nmcli connection down eth0 && nmcli connection up eth0
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/16)
+
+[root@system1 ~]# ping6 2003:ac18::30a
+PING 2003:ac18::30a(2003:ac18::30a) 56 data bytes
+64 bytes from 2003:ac18::30a: icmp_seq=1 ttl=64 time=1.02 ms
+64 bytes from 2003:ac18::30a: icmp_seq=2 ttl=64 time=0.904 ms
 ...
 ```
 
@@ -1349,6 +1385,18 @@ From: root@server.group8.example.com (root)
 This is mail body
 
 ```
+
+也可以通过 postconf 命令进行配置：
+
+```sh
+[root@system1 ~]# postconf ‐e inet_interfaces=loopback‐only
+[root@system1 ~]# postconf ‐e mydestindation=
+[root@system1 ~]# postconf ‐e local_transport=error:err
+[root@system1 ~]# postconf ‐e relayhost=[mail.group8.example.com]
+[root@system1 ~]# postconf ‐e myorigin=server.group8.example.com
+```
+
+
 
 
 
@@ -1661,13 +1709,14 @@ logout
 [root@system1 ~]# chown andres /protected/project/
 
 # 参考《RHCSA/RHCE 红帽 Linux 认证学习指南》 p619，除非 nfs_export_all_ro 与 nfs_export_all_rw 是 off，否则不必为 NFS 共享分配 fcontext；这俩布尔值默认为 on
-# 在实验环境中测试也发现没有设置 context 一样正常实现了功能。
+# 在实验环境中测试也发现没有设置 context 一样正常实现了功能。(待验证是否关系到能否写入文件到共享目录)
 
 [root@system1 ~]# chcon -R -t public_content_t /public
-[root@system1 ~]# chcon -R -t public_content_rw_t /protected
+[root@system1 ~]# chcon -R -t public_content_t /protected	
 # and/or
 [root@system1 ~]# semanage fcontext -a -t public_content_t '/public(/.*)?'
-[root@system1 ~]# semanage fcontext -a -t public_content_rw_t '/protected(/.*)?'
+[root@system1 ~]# semanage fcontext -a -t public_content_t '/protected(/.*)?'
+# 不能是 public_content_rw_t 否则评分程序会报错
 
 [root@system1 ~]# restorecon -Rv /public
 [root@system1 ~]# restorecon -Rv /protected
@@ -2185,7 +2234,7 @@ user8:x:1008:1008::/home/user8:/bin/false
 
 ###### 配置 ISCSI 服务端
 
-配置 system1 提供一个 iSCSI 服务盘，名为 iqn.2014-08.com.example.group8:system1 ，并符合下列要求：
+配置 system1 提供一个 iSCSI 服务盘，名为 iqn.2014-08.com.example:system1 ，并符合下列要求：
 
 - 服务端口为 3260
 
@@ -2333,7 +2382,7 @@ Created LUN 0.
 
 /iscsi/iqn.20...em1/tpg1/luns> cd ../acls 
 /iscsi/iqn.20...em1/tpg1/acls> create iqn.2014-08.com.example:system2  # 设置 ACL
-Created Node ACL for iqn.2014-08.com.example:system2
+Created Node ACL for iqn.2014-08.com.example:system2				   # 留意是 system2
 Created mapped LUN 0.
 
 /iscsi/iqn.20...em1/tpg1/acls> cd ../portals/
@@ -2403,7 +2452,7 @@ Configuration saved to /etc/target/saveconfig.json
 
 ###### 配置 iSCISI 的客户端
 
-配置 system2 使其能连接在 system1 上的 iqn.2014-08.com.example.group8:system1，并符合以下要求：
+配置 system2 使其能连接在 system1 上的 iqn.2014-08.com.example:system1，并符合以下要求：
 
 - iSCSI 设备在系统启动的期间自动加载；
 
@@ -2418,14 +2467,7 @@ Configuration saved to /etc/target/saveconfig.json
 
 [root@system2 ~]# vim /etc/iscsi/initiatorname.iscsi 
  InitiatorName=iqn.2014-08.com.example:system2		# 留意：结尾是 system2，不是 system1
- 
- # 练习时写成 system1 导致 login 是报错、连不上：
- # [root@system2 iscsi]# iscsiadm -m node -l
- # Logging in to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260] (multiple)
- # iscsiadm: Could not login to [iface: default, target: iqn.2014-08.com.example:system1, portal: 172.24.8.11,3260].
- # iscsiadm: initiator reported error (24 - iSCSI login failed due to authorization failure)
- # iscsiadm: Could not log into all portals
-
+ # 练习时写成 system1 导致 login 是报错、连不上
  
 [root@system2 ~]# systemctl restart iscsi iscsid
 [root@system2 ~]# systemctl enable iscsi iscsid
@@ -2522,8 +2564,9 @@ Writing superblocks and filesystem accounting information: done
 [root@system2 iscsi]# blkid /dev/sdb1
 /dev/sdb1: UUID="c68799e9-92ca-44f3-bf9d-823c74cebc5b" TYPE="ext4" 
 
-[root@system2 iscsi]# vim /etc/fstab 
+[root@system2 iscsi]# vim /etc/fstab 	# 在实验环境中使用 UUID 的话 grade 会报错，需用设备名；
  UUID=c68799e9-92ca-44f3-bf9d-823c74cebc5b /mnt/data	ext4	defaults,_netdev	0 0
+ 
 [root@system2 iscsi]# mount -a
 [root@system2 iscsi]# df -hT	 # 练习时 hang 住了，重启时也 hang，又重启了一次才好
 Filesystem             Type      Size  Used Avail Use% Mounted on
