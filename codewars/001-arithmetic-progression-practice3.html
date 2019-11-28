@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Arithmetic Progression</title>
+</head>
+<body>
+    <pre>
+        数列项求和
+        = 平均值 * 项数
+        = (末项+首项)/2 * (末项-首项+1)
+    </pre>
+    <script>
+    
+        const getSum = (a, b) => {
+            let ft = Math.min(a, b);
+            let lt = Math.max(a, b);
+            return (lt+ft)/2 * (lt-ft+1);
+        }
+    </script>
+</body>
+</html>
