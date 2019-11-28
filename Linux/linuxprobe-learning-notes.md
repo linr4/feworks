@@ -673,7 +673,7 @@ yum groupinfo	pkggroup	# 查看软件包组的信息
   
   * 判断用户参数 - 条件测试语句
   
-    * 格式：`[ condition expression ]` 中括号与`条件表达式`之间有<font color=red>空格</font>！条件成立则返回0，否则非0
+    * 格式：`[ condition expression ]` 中括号与`条件表达式`之间有<font color=red>空格</font>！条件成立则返回0 (`true`)，不成立则返回非 0 (`false`)
   
     * 文件测试语句：判断文件是否存在、权限是否满足等
   
@@ -693,25 +693,23 @@ yum groupinfo	pkggroup	# 查看软件包组的信息
       [linr4@station /]$ [ -f /etc/fstab ]	# 判断 /etc/fstab 是否为一般文件
       [linr4@station /]$ echo $?
       0										# 返回 0 代表条件成立，true
-      
-      
       ```
-  
-    * 逻辑测试语句；
+      
+    * 逻辑测试语句；（比较运算的等号前后需有空格）
   
       ```sh
       # 逻辑“与”运算符 &&，前面的条件测试语句成立，才会执行后面的语句
       [ -e /dev/cdrom ] && echo "cdrom exist"	# && 与运算符，
       cdrom exist
-      
+    
       # 逻辑“或”运算符 ||，前面的条件测试语句不成立，才会执行后面的语句
       [linr4@station /]$ [ $USER = root ] || echo $USER
       linr4									# 当前用户非 root，因此执行 echo
-      
+    
       [linr4@station /]$ su -
       [root@station ~]# [ $USER = root ] || echo $USER
       										# 当前用于为 root，不执行 echo
-      
+    
       # 逻辑“非”运算符 !，结果取反，后面要有空格
       [root@station ~]# [ ! $USER=root ] || echo "admin"
       admin
@@ -722,9 +720,9 @@ yum groupinfo	pkggroup	# 查看软件包组的信息
       
   
       留意比较运算符 " = " 前后要有空格！否则如下例运算结果不对：
-  
+    
       ```sh
-      [root@station ~]# [ ! $USER=root ] && echo "user" || echo "root"
+    [root@station ~]# [ ! $USER=root ] && echo "user" || echo "root"
       root
       [root@station ~]# exit
       logout
@@ -744,6 +742,309 @@ yum groupinfo	pkggroup	# 查看软件包组的信息
       
   
     * 整数值比较语句；
+    
+      * 仅用于整数操作，不能将整数、字符串、文件等混在一起操作；
+    * 不能使用 `>` `<` `=` 符号来做判断，因在数字操作中，等号用于赋值、大于小于号用于重定向；
+    
+    | 运算符 | 作用                           |
+    | ------ | ------------------------------ |
+    | `-eq`  | equal // 等于                  |
+    | `-ne`  | not equal // 不等于            |
+    | `-gt`  | greater than // 大于           |
+    | `-lt`  | less than // 小于              |
+    | `-le`  | less or equal // 小于或等于    |
+    | `-ge`  | greater or equal // 大于或等于 |
+    
+    ```sh
+    $ [ 10 -gt 11 ]; echo $?
+    1
+    $ [ 10 -lt 11 ]; echo $?
+    0
+    $ [ 10 -le 11 ]; echo $?
+    0
+    $ [ 10 -eq 11 ]; echo $?
+    1
+    $ [ 10 -eq 10 ]; echo $?
+    0
+    ```
+    
+    ```sh
+    $ free -m
+                 total       used       free     shared    buffers     cached
+    Mem:          1826        880        946          9          0        258
+    -/+ buffers/cache:        620       1206
+    Swap:         2047          0       2047
+    
+    $ FREEMEM=`free -m |grep "Mem:" | awk '{print $4}'`
+    $ echo $FREEMEM
+    946
+    
+    $ [ $FREEMEM -lt 1024 ] && echo "free memory $FREEMEM MB, insufficient."
+    free memory 946 MB, insufficient.
+    
+    ```
+    
+    
+    
+    * 字符串比较语句：判断字符串是否为空，或两个字符串是否相同
+    
+      | 运算符 | 作用           |
+      | ------ | -------------- |
+      | `=`    | 字符串是否相同 |
+      | `!=`   | 字符串是否不同 |
+      | `-z`   | 字符串是否为空 |
+    
+      ```sh
+      $ [ -z $string ]; echo $?	# 判断字符串是否为空，已确定变量是否已经定义；
+      0
+      
+      $ echo $LANG
+      en_US.UTF-8
+      $ [ $LANG != "en_US.UTF-8" ] && echo "Not en_US"
+      $ [ $LANG != "zh_CN.UTF-8" ] && echo "Not zh_CN"
+      Not zh_CN
+      
+      ```
+    
+      
+    
+  * 流程控制语句：`if` 、`for`、 `while`、 `case`
   
-    * 字符串比较语句；
+    * `if`：
+  
+      ```sh
+      if 条件测试1
+        then 命令序列1
+      elif 条件测试2
+        vithen 命令序列2
+      else 命令序列3
+      fi
+      ```
+  
+      创建 cdrom 目录的例子：
+  
+      ```sh
+      #!/bin/bash
+      DIR="/media/cdrom"
+      if [ ! -e $DIR ]
+      then
+          mkdir -p $DIR
+      else
+          echo "$DIR exists"
+      fi
+      ```
+  
+      检查主机在线状态的例子：
+  
+      ```sh
+      #!/bin/bash
+      # -c count, -i interval, -W time to wait a response
+      ping -c 3 -i 0.2 -W 3 $1 &> /dev/null
+      if [ $? -eq 0 ]; then
+        echo "Host $1 is online."
+      else
+        echo "Host $1 has no response."
+      fi
+      ```
+  
+      检查分数、分出等级的例子：
+  
+      ```sh
+      #!/bin/bash
+      read -p "Enter your score (0-100): " SCORE
+      if [ $SCORE -ge 85 ] && [ $SCORE -le 100 ]; then
+        echo "Your score is $SCORE, excellent!"
+      elif [ $SCORE -ge 70 ] && [ $SCORE -le 84 ]; then
+        echo "Your score is $SCORE, great!"
+      elif [ $SCORE -lt 70 ] && [ $SCORE -ge 0 ]; then
+        echo "Your score is $SCORE, you failed :("
+      else
+        echo "Please enter a score at between 0 and 100."
+      fi
+      ```
+  
+    * `for`
+  
+      ```sh
+      for 变量名 in 取值列表
+      do
+        命令序列
+      done
+      ```
+  
+      批量创建用户的例子：
+  
+      ```sh
+      #!/bin/bash
+      read -p "Enter password: " PASSWD
+      for USERNAME in `cat users.txt`; do
+        id $USERNAME &> /dev/null
+        if [ $? -eq 0 ]; then
+          echo "Username $USERNAME exists"
+        else
+          useradd $USERNAME
+          echo "$PASSWD" | passwd --stdin $USERNAME
+          if [ $? -eq 0 ]; then
+            echo "User $USERNAME created."
+          else
+            echo "Failed to create User $USERNAME."
+          fi
+        fi
+      done
+      ```
+  
+      批量 ping IP 的例子：
+  
+      ```sh
+      #!/bin/bash
+      HOSTLIST=$(cat IPs.txt)
+      echo $HOSTLIST
+      for IP in $HOSTLIST; do
+        ping -c 3 -i 0.2 -W 3 $IP &> /dev/null
+        if [ $? -eq 0 ] ; then
+          echo "$IP is online."
+        else
+          echo "$IP has no response."
+        fi
+      done
+      ```
+  
+    * `while`
+  
+      ```sh
+      while 条件测试
+      do 
+        命令序列
+      done
+      ```
+  
+      猜测价格的例子：
+      
+      ```sh
+      #!/bin/bash
+      clear
+      echo "商品价格在0-1000之间，猜猜看是多少？"
+      PRICE=$(expr $RANDOM % 1000)
+      TIMES=0
+      while true; do
+        read -p "请输入您猜测的价格：" INT
+        let TIMES++
+        if [ $INT -eq $PRICE ]; then
+          echo "恭喜你答对了，价格是：$PRICE"
+          echo "您一共猜了 $TIMES 次"
+          exit 0
+        elif [ $INT -gt $PRICE ]; then
+          echo "太高了，再猜一次"
+        else
+          echo "太低了，再猜一次"
+        fi
+      done
+      ```
+      
+    * `case`
+    
+      ```sh
+      case 变量值 in
+        模式1)
+          命令序列1
+          ;;
+        模式2)
+          命令序列2
+          ;;
+          .....
+        *)
+          默认命令序列
+      esac
+      
+      ######################
+      
+      case 输入的字符 in
+      [a-z][A-Z])
+        提示为字母
+        ;;
+      [0-9])
+        提示为数字
+        ;;
+        ......
+      *)
+        提示为特殊字符
+      esac
+      ```
+    
+      判断输入字符类型的例子：
+    
+      ```sh
+      #!/bin/bash
+      while true; do
+        read -p "please enter a key: " KEY
+        case "$KEY" in
+          [a-z]|[A-Z])
+            echo "alphabet"
+            ;;
+          [0-9])
+            echo "numberic"
+            ;;
+          *)
+            echo "other character"
+        esac
+      done
+      ```
+    
+      
 
+* 计划任务
+
+  * `at` 一次性计划任务
+
+    ```sh
+    at 23:30	# 交互式设置在某个时间点执行计划任务
+    > systemctl restart httpd
+    > ctrl-D
+    
+    at -l	# 列出计划任务
+    1       Mon Oct 28 23:30:00 2019 a root
+    
+    atrm 1	# 删除任务序号1
+    
+    echo "systemctrl restart httpd" | at 23:30	# 非交互式设置计划任务
+    ```
+
+  * `crontab` 周期性计划任务
+
+    ```sh
+    crontab -e 	# 编辑计划任务
+    crontab -l	# 查看任务
+    crontab -r	# 删除任务
+    crontab -u	# 编辑指定用户的计划任务，root only
+    
+    [root@station ~]# crontab -e
+    no crontab for root - using an empty one
+    crontab: installing new crontab
+    
+    [root@station ~]# crontab -l
+    25 3 * * 1,3,5 /usr/bin/tar -czvf backup.tgz /home/wwwroot
+    # 分 时 日 月 星期 命令
+    # 每周一、三、五的凌晨 3:25 执行备份
+    
+    0 1 * * 1-5 /usr/bin/rm /tmp/*
+    # 周一至周五凌晨 1:00 删除 /tmp 目录下的内容
+    ```
+
+    * 格式：
+
+      ​	`分 时 日 月 星 命令`
+
+      ​	`minute hour day month week command`
+
+      | 字段 | 说明                                                         |
+      | ---- | ------------------------------------------------------------ |
+      | 分   | 取值 0~59 整数，必须有数值，不能为空或 `*`                   |
+      | 时   | 取值 0~23 整数                                               |
+      | 日   | 取值 1~31 整数，不能和星期同时使用，否则冲突                 |
+      | 月   | 取值 1~12 整数                                               |
+      | 星期 | 取值 0~7 整数，0 与 7 均表示星期日；不能和日期同时使用，否则冲突 |
+      | 命令 | 要执行的命令或脚本，应加上绝对路径，如 `/usr/bin/rm` ，可用 `whereis` 查询 |
+
+      * `(,)` 逗号表示枚举多个时间点，如上例星期字段的 `1,3,5` 表示周一、三、五；
+      * `(-)` 减号表示连续的时间段，如日期字段取值 "12-15" 表示从12至15日；
+      * `(/)` 除号表示执行任务的间隔时间，如分钟字段 "*/2" 表示两分钟执行一次任务；
