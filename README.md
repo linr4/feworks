@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20191208 - Day 176
+
+- 学习 git 的使用 (+1.5h = 383 of 600)
+
 ###### 20191117 - Day 175
 
 - 算法练习 - 等差数列 (+2.5h = 381.5 of 600)
