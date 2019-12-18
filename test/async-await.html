@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        console.log('Person1: shows ticket');
+        console.log('Person2: shows ticket');
+        const promiseShowTickets = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('ticket');
+            },3000)
+        });
+
+        promiseShowTickets.then((t) => {
+            console.log(`person3: shows ${t}`);
+        });
+
+        console.log('Person4: shows ticket');
+        console.log('Person5: shows ticket');
+
+    </script>
+</body>
+</html>
