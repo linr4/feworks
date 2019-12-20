@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Disemvowel</title>
+</head>
+<body>
+    
+    <script>
+        // ES5
+        function Disemvowel(str) {
+            return (str || "").replace(/[aeiou]/gi, '');
+        }
+
+        // ES6
+        // const disemvowel = (str) => {return (str || "").replace(/[aeiou]/gi, '');}
+        const disemvowel = str => (str || "").replace(/[aeiou]/gi, '');
+
+        let str1 = "positioned than Technologies to help our customers and partners with their Digital Transformation";
+        document.write(str1 + ' <br>');
+        document.write(disemvowel(str1));
+    </script>
+</body>
+</html>
