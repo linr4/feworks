@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sidebar</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            font-family: Lato, sans-serif;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .nav {
+            transition: all .1s ease;
+            position: absolute;
+            width: 260px;
+            height: 100%;
+            left: -260px;
+            background-color: #27292f;
+            z-index: 999;
+        }
+        .open {
+            left: 0;
+        }
+        .menu {
+            list-style-type: none;
+        }
+        .menu__item {
+            font-size: 1.4rem;
+            padding: 1.2rem;
+            color: #eee;
+            border-bottom: 1px solid #333;
+            text-transform: uppercase;
+            transition: all .1s ease;
+            user-select: none;
+        }
+        .menu__item:hover {
+            background-color: #111;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            position: absolute;
+            top: 10px;
+            right: -50px;
+        }
+        .hamburger:hover {
+            cursor: pointer;
+        }
+        .hamburger span {
+            display: block;
+            background-color: #222;
+            margin: 6px 0;
+            height: 6px;
+            width: 36px;
+            border-radius: 2px;
+            position: relative;
+        }
+        .change.bar1 {
+            top: 11px;
+            transform: rotate(45deg);
+        }
+        .change.bar2 {
+            opacity: 0;
+        }
+        .change.bar3 {
+            bottom: 13px;
+            transform: rotate(-45deg);
+        }
+
+        .content {
+            padding: 2rem;
+            transition: .3s all ease;
+        }
+        .shift {
+            margin-left: 260px;
+        }
+        .content__heading {
+            text-align: center;
+            padding: 2rem;
+        }
+        .content__details {
+            padding: 2rem;
+            letter-spacing: 1px;
+        }
+        .content__image {
+            padding: 1rem;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul class="menu">
+            <li class="menu__item">Home</li>
+            <li class="menu__item">About</li>
+            <li class="menu__item">Services</li>
+            <li class="menu__item">Contact</li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar bar1"></span>
+            <span class="bar bar2"></span>
+            <span class="bar bar3"></span>
+        </div>
+    </nav>
+    
+    <main class="content">
+        <div class="container">
+            <h1 class="content__heading">Learning to build an off canvas menu</h1>
+            <p class="content__details">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum impedit inventore, dignissimos eum possimus culpa officia ipsam perferendis sequi laudantium nam, eligendi laboriosam quo, quos ad a saepe fuga pariatur!</p>
+            <img src="off-canvas.jpg" alt="" class="content__image">
+        </div>
+    </main>
+
+    <script>
+        const hamburgerEl = document.querySelector('.hamburger');
+        const navEl = document.querySelector('.nav');
+        const contentEl = document.querySelector('.content');
+        const barsEl = document.querySelectorAll('.bar');
+
+        hamburgerEl.addEventListener('click', () => {
+            navEl.classList.toggle('open');
+            contentEl.classList.toggle('shift');
+            for (let item of barsEl) {
+                item.classList.toggle('change');
+            }
+        })
+    </script>
+</body>
+</html>
