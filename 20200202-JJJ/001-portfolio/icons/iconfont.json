@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "400806",
+      "name": "github2",
+      "font_class": "github2",
+      "unicode": "e742",
+      "unicode_decimal": 59202
+    },
+    {
+      "icon_id": "474981",
+      "name": "server",
+      "font_class": "server",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "586300",
+      "name": "五角星",
+      "font_class": "star",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "929992",
+      "name": "youtube",
+      "font_class": "youtube",
+      "unicode": "e8a7",
+      "unicode_decimal": 59559
+    },
+    {
+      "icon_id": "6242363",
+      "name": "computer",
+      "font_class": "computer",
+      "unicode": "e7bb",
+      "unicode_decimal": 59323
+    }
+  ]
+}

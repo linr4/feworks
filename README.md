@@ -12,6 +12,10 @@ Web development learning notes and case study
 
 ---
 
+###### 20200202 - Day 177
+
+- 练习写静态页面 (+2.5h = 384.5 of 600)
+
 ###### 20191208 - Day 176
 
 - 学习 git 的使用 (+1.5h = 383 of 600)

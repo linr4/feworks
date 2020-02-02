@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JJJS - Portfolio</title>
+    <link rel="stylesheet" href="icons/iconfont.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            text-align: center !important;
+
+        }
+        .clearfix::before, .clearfix::after {
+            display: block;
+            content: '';
+            visibility: hidden;
+            height: 0;
+            clear: both;
+        }
+        a:link, a:visited {
+            color: rgb(204, 75, 55);
+        }
+        
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+        .wrapper {
+            width: 100%;
+            height: 100%;
+        }
+        .headline {
+            width: 100%;
+            height: 5px;
+            background-color: rgb(243, 63, 18);
+        }
+        
+        .header-up {
+            width: 100%;
+            height: 160px;
+            background-color: rgb(227, 227, 227);
+
+        }
+        .header-lo {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        .avatar {
+            width: 100%;
+            margin-top: -120px;
+            margin-bottom: 105px;
+        }
+        .avatar>img {
+            width: 240px;
+            border-radius: 50%;
+        }
+        .line1 {
+            font-family: sans-serif;
+            font-size: 48px;
+            font-weight: bolder;
+            color: #646464;
+            margin-bottom: 40px;
+        }
+        .line2 {
+            font-size: 42px;
+            margin-bottom: 48px;
+            color: white;
+            background-color: rgb(200, 65, 43);
+        }
+        .line3 {
+            margin-top: 60px;
+            margin-bottom: 28px;            
+        }
+        .btn {
+            display: inline-block;
+            width: 180px;
+            height: 48px;
+            line-height: 48px;
+            border: 2px solid rgb(255, 117, 85);
+            border-radius: 30px;
+            color: rgb(204, 75, 145);
+            font-weight: bolder;
+            font-family: sans-serif;
+            transition: all .5s ease;
+        }
+        .btn:hover {
+            color: white;
+            background-color: rgb(255, 117, 85);
+            width: 200px;
+            box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 14px 1px rgba(0, 0, 0, 0.15);
+        }
+        .icons {
+            color: #777;
+            margin-bottom: 20px;
+        }
+        .icons>i {
+            display: inline-block;
+            width: 30px;
+        }
+
+        .main {
+            width: 100%;
+            height: 680px;
+            text-align: center;
+            color: white;
+            background-color: rgb(76, 109, 134);
+            border: 1px solid rgb(76, 109, 134);
+        }
+        .main>h2 {
+            display: block;
+            font-size: 48px;
+            margin-top: 100px;
+            margin-bottom: 20px;
+        }
+        .main>.slogan {
+            display: inline-block;
+            font-size: 24px;
+            line-height: 50px;
+            margin-bottom: 50px;
+        }
+        .datalist {
+            width: 1024px;
+            margin: 0 auto;
+        }
+        .datalist>dl {
+            float: left;
+            width: 33.33%;
+        }
+        .datalist .iconfont {
+            font-size: 48px;
+            font-weight: bolder;
+            color: rgb(255, 138, 89);
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        .datalist h2 {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .datalist dt {
+            margin-bottom: 16px;
+        }
+        .datalist dd {
+            font-family: sans-serif;
+            font-size: 14px;
+            color: rgb(187, 210, 247);
+            line-height: 22px;            
+        }
+        .work {
+            width: 100%;
+            height: 1000px;
+            padding-top: 80px;
+            font-family: sans-serif;
+        }
+        .work>.title {
+            text-align: center;
+        }
+        .work h2 {
+            color: orangered;
+            font-size: 48px;
+            line-height: 96px;
+        }
+        .work h3 {
+            color: #888;
+            font-weight: normal;
+        }
+        .work>.section {
+            width: 1024px;
+            margin: 80px auto 80px;
+        }
+        .work>.section>div {
+            float: left;
+            width: 49.8%;
+        }
+        .work>.section>div img {
+            height: 300px;
+        }
+        .work>.section>div span {
+            display: block;
+        }
+        .work>.section>div>.title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #888;
+        }
+        .work .section .web {
+            color: orangered;
+            font-size: 12px;
+            margin: 25px 0 5px 0;
+        }
+        .work .section .iconfont {
+            color: orangered;
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .work .section .desc {
+            display: block;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 32px;
+            color: #888;
+        }
+        .work .right {
+            float: right;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="header">
+                <div class="headline"></div>
+                <div class="header-up"></div>
+                <div class="header-lo">
+                    <div class="avatar">
+                        <img src="images/adhoc-profile-pic.png">
+                    </div>
+                    <h2 class="line1">Hi, I'm Tenzin. I...</h2>
+                    <div>
+                        <span class="line2">solve problems.</span>
+                        <span style="font-size: 42px;">|</span>
+                    </div>
+                    <a href="" class="line3 btn">GET IN TOUCH</a>
+                    <div class="icons">
+                        <i class="iconfont icon-github2"></i>
+                        <i class="iconfont icon-youtube"></i>
+                    </div>
+                </div>                
+            </div>
+            <div class="main">
+                <h2>My Experience</h2>
+                <span class="slogan">Specialist in need. Generalist at heart</span>
+                <div class="datalist">
+                    <dl class="fe">
+                        <i class="iconfont icon-computer"></i>
+                        <dt><h2>Front-End</h2></dt>
+                        <dd>html(5)</dd>
+                        <dd>css(3)</dd>
+                        <dd>Javascript</dd>
+                        <dd>React</dd>
+                        <dd>Angular</dd>
+                        <dd>Bootstrap</dd>
+                        <dd>Bulma</dd>
+                        <dd>Api | Ajax</dd>
+                    </dl>
+                    <dl class="be">
+                        <i class="iconfont icon-server"></i>
+                        <dt><h2>Back-End</h2></dt>
+                        <dd>NodeJS</dd>
+                        <dd>NPM</dd>
+                        <dd>Express</dd>
+                        <dd>SQL</dd>
+                        <dd>MongoDB</dd>
+                        <dd>Authentication</dd>
+                        <dd>Restful Web Services</dd>
+                        <dd>Flusk | Python</dd>
+                    </dl>
+                    <dl class="tools">
+                        <i class="iconfont icon-star"></i>
+                        <dt><h2>Tools</h2></dt>
+                        <dd>Vim</dd>
+                        <dd>Bower</dd>
+                        <dd>Atom || Webstorm</dd>
+                        <dd>Github & Bitbucket</dd>
+                        <dd>SSH</dd>
+                        <dd>Webpack</dd>
+                        <dd>Gulp</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="work">
+                <div class="title">
+                    <h2>Work</h2>
+                    <h3>Here are few of my former clients.</h3> 
+                </div>
+                <div class="section clearfix">
+                    <div class="left">
+                        <span class="title">KOLE</span>
+                        <span class="web">WEB</span>
+                        <i class="iconfont icon-computer"></i>
+                        <i class="iconfont icon-github2"></i>
+                        <i class="iconfont icon-youtube"></i>
+                        <span class="desc">An internationally recognized Scientist and Artist
+                            <span>and Artist</span>
+                        </span>
+                        <a href="" class="btn">
+                            <span>VISIT WEBSITE</span>
+                        </a>
+                    </div>
+                    <div class="right">
+                        <img src="images/kole.png" alt="">
+                    </div>
+                </div>
+                <div class="section clearfix">
+                    <div class="right ">
+                        <img src="images/fresh.png" alt="">
+                    </div>
+                    <div class="left" style="width: 35%; padding-left: 50px;">
+                        <span class="title">FRESHIES</span>
+                        <span class="web">WEB</span>
+                        <i class="iconfont icon-computer"></i>
+                        <i class="iconfont icon-github2"></i>
+                        <i class="iconfont icon-youtube"></i>
+                        <span class="desc">A house maid service company.</span>
+                        
+                        <a href="" class="btn">
+                            <span>VISIT WEBSITE</span>
+                        </a>
+                    </div>
+                    
+                </div>
+                <div class="section clearfix">
+                    <div class="left">
+                        <span class="title">SENORA</span>
+                        <span class="web">WEB</span>
+                        <i class="iconfont icon-computer"></i>
+                        <i class="iconfont icon-github2"></i>
+                        <i class="iconfont icon-youtube"></i>
+                        <span class="desc">A European kitchens and cabinets
+                            <span> manufacturer.</span>
+                        </span>
+                        <a href="" class="btn">
+                            <span>VISIT WEBSITE</span>
+                        </a>
+                    </div>
+                    <div class="right">
+                        <img src="images/senoka.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
