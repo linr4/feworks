@@ -12,9 +12,13 @@ Web development learning notes and case study
 
 ---
 
+###### 20200203 - Day 178
+
+- 学习 JJJ 的课程 - Module 1 & 2 (+2h = 387.5 of 600)
+
 ###### 20200202 - Day 177
 
-- 练习写静态页面 (+2.5h = 384.5 of 600)
+- 练习写静态页面 (+2.5h = 385.5 of 600)
 
 ###### 20191208 - Day 176
 
