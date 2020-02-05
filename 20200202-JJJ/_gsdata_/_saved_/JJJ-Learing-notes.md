@@ -111,9 +111,3 @@
 - In <script> tag in a html file
 - linked external JS file
 - In Node.js etc.
-
-
-
-### Primitive Data Types
-
-- String, Number, Boolean, Object, Null, Undefined, Symbol
