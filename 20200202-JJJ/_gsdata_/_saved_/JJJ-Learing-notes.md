@@ -111,3 +111,33 @@
 - In <script> tag in a html file
 - linked external JS file
 - In Node.js etc.
+
+
+
+### Primitive Data Types
+
+- String, Number, Boolean, Object, Null, Undefined, Symbol
+
+
+
+### Variables
+
+* To avoid repetitions
+* camel naming
+* make it descriptive
+
+
+
+### If Statements
+
+```js
+var num = 0;
+if (num > 0) {
+  console.log('Positive');
+} else if (num = 0) {
+  console.log('Naegative');
+} else
+```
+
+
+
