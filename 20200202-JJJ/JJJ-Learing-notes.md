@@ -143,3 +143,22 @@ if (num > 0) {
 
 
 
+### Comparison and Logical Operators
+
+- 比较运算符（>、>=、==、===、<、<= ）
+- 逻辑运算符（ &&、||、! ）
+
+
+
+### For Loops
+
+```js
+for (statement 1; statement 2; statement 3) {
+    code block to be executed
+}
+
+for (start point; condition; increment/decrement) {
+    code block to be executed;
+}
+```
+

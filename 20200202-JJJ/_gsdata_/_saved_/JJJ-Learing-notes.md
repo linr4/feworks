@@ -134,10 +134,16 @@
 var num = 0;
 if (num > 0) {
   console.log('Positive');
-} else if (num = 0) {
+} else if (num < 0) {
   console.log('Naegative');
-} else
+} else {
+    console.log('Zero');
+}
 ```
 
 
 
+### Comparison and Logical Operators
+
+- 比较运算符（>、>=、==、===、<、<= ）
+- 逻辑运算符（ &&、||、! ）
