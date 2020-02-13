@@ -147,3 +147,138 @@ if (num > 0) {
 
 - 比较运算符（>、>=、==、===、<、<= ）
 - 逻辑运算符（ &&、||、! ）
+
+
+
+### For Loops
+
+```js
+for (statement 1; statement 2; statement 3) {
+    code block to be executed
+}
+
+for (start point; condition; increment/decrement) {
+    code block to be executed;
+}
+```
+
+
+
+### While Loops
+
+```js
+var i = 0;
+var total = 0;
+while (i < 100) {
+  console.log("Hello " + i);
+  total += i;
+  i+=1;
+}
+console.log(total);
+
+```
+
+
+
+> for loop 用于确定次数的循环；
+>
+> while loop 常用于不确定次数的循环，实时做条件监测；
+
+
+
+### Functions
+
+> Variables store data;
+>
+> Functions store actions.
+
+```js
+function sum (a, b) {
+    return a + b;
+}
+
+function signChecker (num) {
+    var result = null;
+    if (num > 0) {
+        result = "Positive";
+    } else if (num < 0) {
+        result = "Negative";
+    } else {
+        result = "ZERO";
+    }
+    return result;
+}
+
+console.log(sum(1, 2));	// 3
+console.log(signCheck(-1)); // Negative
+```
+
+
+
+### Scope - Global, Local, and Block
+
+```js
+// Global variable
+var fullName = 'John Doe';
+console.log(fullName);
+
+// Local variable: a variable defined inside a function
+function f () {
+    var num = 88;
+    console.log(num);  
+};
+f();	// 88
+
+console.log(num);  // referneceError: num is not defined
+
+// Block scope: defined by let or const, and quoted by curly brackets
+let result = 'good';
+const myName = 'John Doe';
+```
+
+
+
+> Whenever you have chance to use `const`, use `const`,
+>
+> whenever you can't, use `let`
+
+
+
+### Objects
+
+```js
+const person = {
+    eyes: 2,
+    legs: 2,
+    language: "English",
+    speak: function () {	// a function in an object is called a method
+        return "Hi"
+    }
+}
+
+// How to access an object?
+// dot notation:
+person.eyes;
+person.legs;
+person.speak();	// Hi
+
+// OR, bracket notation:
+person["eyes"];
+person["legs"];
+person["language"];
+
+
+```
+
+
+
+### Arrays
+
+```js
+let fruits = ["mango", "cherry", "apple", true, false, 33, 3.14, [1,2,3], {a: "apple", b: "ball"}];
+console.log(fruits[0]);	// mango
+```
+
+* Differences between Arrays and Objects:
+  * An array is accessed by index, an object by its key / property;
+  * Order matters in an array, but not in an object;
