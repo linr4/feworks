@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Count Vowels</title>
+</head>
+<body>
+    <pre>
+
+ - Return the number (count) of vowels in the given string.
+ - We will consider a, e, i, o, u as vowels for this Kata.
+ - The input string will only consist of lower case letters and/or spaces.
+    </pre>
+
+    <script>
+    
+    let randomString = "The People's Republic of China";
+    console.log(countVowels(randomString));
+    console.log(cv(randomString));
+    console.log(cv2(randomString));
+    console.log(cv3(randomString));
+
+    function countVowels(str) {
+        let vowels = ['a', 'e', 'i', 'o', 'u'];
+        let arr = str.split('');
+        let res = '';
+
+        arr.forEach(element => {
+            if (vowels.indexOf(element) > -1) {
+                res += element;
+            }    
+        });
+
+        return res;
+    }
+
+    function cv(str) {
+        const vowels = 'aeiou';
+        let res = '';
+        
+        for (let i = 0; i < str.length; i++) {
+            if (vowels.includes(str[i])) {
+                res += str[i];
+            }
+        }
+        return res;
+    }
+
+    function cv2(str) {
+        const v = 'aeiou';
+        let res = '';
+        for (let e of str) {
+            if (v.includes(e)) {
+                res += e;
+            }
+        }
+        return res;
+    }
+
+    function cv3(str) {
+        return str.replace(/[^aeiou]/gi, '');
+    }
+    
+    </script>
+</body>
+</html>

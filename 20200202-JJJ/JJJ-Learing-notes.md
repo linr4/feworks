@@ -282,3 +282,89 @@ console.log(fruits[0]);	// mango
 * Differences between Arrays and Objects:
   * An array is accessed by index, an object by its key / property;
   * Order matters in an array, but not in an object;
+
+
+
+
+
+## Module 2 - Algorithmic Challenges
+
+
+
+### Intro to Algorithmic Challenges Module
+
+- People always stuck here and skip over and take a shortcut
+- You will understand tutorials and projects better if go over basic algorithm problem solving skillset, click a lot faster and register
+- Prepare you go into any situation and understand it better, faster
+- gonna be tough, lonely, mentally draining, isolation, but you have to go through that, just give you boost, try to solve different problems on code challenge website.
+- painful moments gonna click, register; lonely journey you have to go through
+
+
+
+### Built-in Methods and Properties
+
+- http://htmlcheatsheet.com/js/
+
+
+
+### Count Vowels
+
+> Return the number (count) of vowels in the given string.
+>
+> We will consider a, e, i, o, u as vowels for this Kata.
+>
+> The input string will only consist of lower case letters and/or spaces.
+
+
+
+```js
+let randomString = "The People's Republic of China";
+    console.log(countVowels(randomString));
+    console.log(cv(randomString));
+    console.log(cv2(randomString));
+    console.log(cv3(randomString));
+
+    function countVowels(str) {
+        let vowels = ['a', 'e', 'i', 'o', 'u'];
+        let arr = str.split('');
+        let res = '';
+
+        arr.forEach(element => {
+            if (vowels.indexOf(element) > -1) {
+                res += element;
+            }    
+        });
+
+        return res;
+    }
+
+    function cv(str) {
+        const vowels = 'aeiou';
+        let res = '';
+        
+        for (let i = 0; i < str.length; i++) {
+            if (vowels.includes(str[i])) {
+                res += str[i];
+            }
+        }
+        return res;
+    }
+
+    function cv2(str) {
+        const v = 'aeiou';
+        let res = '';
+        for (let e of str) {
+            if (v.includes(e)) {
+                res += e;
+            }
+        }
+        return res;
+    }
+
+    function cv3(str) {
+        return str.replace(/[^aeiou]/gi, '');
+        // 非元音字母替换为空字符；
+    }
+    
+```
+
