@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opposite Number</title>
+    <style> 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 200px;
+            height: 100px;
+            line-height: 100px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            text-align: center;
+        }
+        #textbox {
+            width: 50px;
+            height: 20px;
+        }
+        #negnum {
+            display: inline-block;
+            width: 50px;
+            height: 20px;
+            border: 1px solid #000;
+            background: turquoise;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="textbox">
+        <span id="negnum"></span>
+    </div>
+    <script>
+        window.onload = function () {
+            const textboxEl = document.querySelector('#textbox');
+            const negnumEl = document.querySelector('#negnum');
+            
+            const num = -10;
+
+            function oppnum (n) {
+                return n == 0 ? 0 : -n;
+            }
+
+            console.log(oppnum(num));
+        }
+
+    </script>
+</body>
+</html>
