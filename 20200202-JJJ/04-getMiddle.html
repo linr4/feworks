@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Get Middle</title>
+</head>
+
+<body>
+    <script>
+
+        // 获取字符串的中间值
+        // 字符长度为偶数时，返回居中的两个字符
+        // 字符长度为奇数时，返回居中的一个字符
+
+        // 完整的写法
+        function getMiddle1(str) {
+            var len = str.length;
+            if (0 === len) {
+                return '';
+            } else
+                if (0 === len % 2) {
+                    return str.slice(len / 2 - 1, len / 2 + 1);
+                }
+                else {
+                    return str.slice((len - 1) / 2, (len - 1) / 2 + 1);
+                }
+        }
+
+        // 简洁的写法
+        function getMiddle2(str) {
+            var len = str.length;
+            if (0 === len) return '';
+            if (0 === len % 2) return str.slice(len / 2 - 1, len / 2 + 1);
+            return str.charAt(Math.floor(len / 2));
+        }
+
+        // 更简洁的写法：ES6 箭头函数 + 三目运算符
+        const getMiddle3 = str => {
+            const len = str.length;
+            return (0 === len) ? '' :   // return 之后不能马上换行，需要跟语句，否则等于 return undefined
+                0 === len % 2 ? str.slice(len / 2 - 1, len / 2 + 1) : str[(len - 1) / 2]
+        }
+
+        console.log(getMiddle1("1234567890"));
+        console.log(getMiddle2("1234567890"));
+        console.log(getMiddle3("1234567890"));
+
+    </script>
+</body>
+
+</html>

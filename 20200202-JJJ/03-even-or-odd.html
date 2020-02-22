@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Even or Odd</title>
+</head>
+<body>
+    <script>
+        function evenOrOdd(num) {
+            if ( 0 === num) {
+                return "Zero";
+            } else if (0 === num % 2) {
+                return "Even";
+            } else {
+                return "Odd";
+            }
+        }
+
+        const EoO = num => {
+            return 0 === num ? "zero" : 
+                   0 === num % 2 ? "even" : "odd";
+        }
+
+        console.log(evenOrOdd(7));
+        console.log("checkEvenOrOdd:", EoO(7));
+
+    </script>
+</body>
+</html>
