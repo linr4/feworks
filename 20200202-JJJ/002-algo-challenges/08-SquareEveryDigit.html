@@ -4,30 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Square Every Digit</title>
+    <style>
+        body {
+            background-color: #222;
+            color: aqua;
+            font-family: consolas;
+            font-size: 36px;
+            padding-left: 300px;
+        }
+    </style>
 </head>
 <body>
     <pre>
-        To squre every digit of a number.
-        For example, if we run 9119 through the function, 811181 will come out, because 9*9 = 81 and 1*1 = 1
+To squre every digit of a number.
+For example, if we run 9119 through the function, 
+811181 will come out, because 9*9 = 81 and 1*1 = 1
     </pre>
     <script>
         function squreDigits(num) {
             // may the code be with you
-            let tmpArr = (num + '').split('');
-            let resArr = [];
-            let resStr = '';
+            // let tmpArr = (num + '').split('');
+            let tmpArr = num.toString().split('');
+            let res = '';
 
             // resArr = tmpArr.map( x => x * x ); 
             for (let i = 0; i < tmpArr.length; i++) {
-                resArr[i] = tmpArr[i] * tmpArr[i];
+                res += Math.pow(tmpArr[i], 2);
             }
 
-            resStr = resArr.join('');
-            document.writeln(resArr, '----------->', resStr);
+            document.write('Input ------------> ', num, '<br>');
+            document.write('Output -----------> ', res);
 
         }
 
-        squreDigits(9119);
+        let num = 9119;
+        squreDigits(num);
 
     </script>
 </body>
