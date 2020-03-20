@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        Check to see if a string has the same amount of 'x's and 'o's. 
+        The method must return a boolean and be case insensitive.
+        The string can contain any char.
+
+        Examples input/output:
+
+        XO('ooxx') => true
+        XO('xooxx') => false
+        XO('ooxXm') => true
+        XO('zpzpzpp') => true // when no 'x' and no 'o' are present should return true
+        XO('zzoo') => false
+    </pre>
+
+    <script>
+        const XO = str => {
+          let Xs = Os = 0; // counters for 'X' and 'O'
+          str.toUpperCase().split('').forEach(chr => chr === 'X' ? Xs++ : chr === 'O' ? Os++ : chr);
+          /*
+            1. 先转为大写
+            2. 再转为数组，用 forEach 遍历每个字符
+            3. 如果字符为'X'或'O'，各自的计数器 +1
+          */
+          return Xs === Os ? true : false;
+          /*
+            4. 比较计数器结果：
+                a. 两个计数器的值相等，返回 true
+                b. 两个计数器的值不同，返回 false
+          */
+        }
+
+        document.write(XO('ooxx'), '<br>') // => true
+        document.write(XO('xooxx'), '<br>') // => false
+        document.write(XO('ooxXm'), '<br>') // => true
+        document.write(XO('zpzpzpp'), '<br>') // => true // when no 'x' and no 'o' are present should return true
+        document.write(XO('zzoo'), '<br>') // => false
+        
+    </script>
+</body>
+</html>

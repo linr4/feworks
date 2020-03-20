@@ -149,6 +149,11 @@ git init	# 初始化版本库
 git config --user.name "your name"
 git config --user.email "your email"
 git config --list
+
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+cat ./.ssh/id_rsa.pub
+
+# Add the SSH key to your GitHub account.
 ```
 
 ###### 二、开发阶段（按需执行）
