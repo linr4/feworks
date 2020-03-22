@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro to JS Event</title>
+    <style>
+        div {
+            width: 500px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            text-align: center;
+            line-height: 150px;
+        }
+        button, input {
+            font-size: 24px;
+        }
+        p {
+            display: block;
+            font-size: 35px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div>
+        <button>click me</button>
+        <input type="email" name="" id="email">
+        <p>remove event</p>
+    </div>
+
+    <script>
+        window.onload = function () {
+            const btnEl = document.querySelector("button");
+            const inpEl = document.querySelector("input");
+            const parEl = document.querySelector("p");
+            function showAlert() {
+                alert("Helloween");
+            }
+
+            btnEl.addEventListener('click', showAlert);
+            parEl.addEventListener('click', removeEvent)
+
+            function removeEvent() {
+                btnEl.removeEventListener('click', showAlert);
+            }
+        }
+    </script>
+
+</body>
+</html>

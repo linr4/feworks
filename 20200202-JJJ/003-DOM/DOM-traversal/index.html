@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Traversal</title>
+    <style>
+        body {
+            font-size: 3rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        .todo {
+            list-style-type: none;
+        }
+        .todo__item {
+            border: 1px solid #ddd;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <ul class="todo">
+        <li class="todo__item">cooking</li>
+        <li class="todo__item">
+            <span>IMPORTANT</span> <a href="#">things</a>
+        </li>
+        <li class="todo__item">shopping</li>
+    </ul>
+
+    <script>
+        const todoEl = document.querySelector(".todo");
+        const todoItems = document.getElementsByClassName("todo__item");
+
+        console.log(todoEl, todoItems);
+        console.log(todoEl.parentNode); // body
+        console.log(todoEl.parentNode.parentNode); // html
+        console.log(todoEl.parentNode.parentNode.parentNode); // #document
+
+        console.log(todoItems[0].parentNode);   // always use parentNode rather than parentElement
+        console.log(todoItems[0].parentElement);
+
+        console.log(todoEl.childNodes); // 7 nodes, 3 li nodes + 4 text nodes
+        console.log(todoEl.children);   // 3 li elements
+
+        console.log(todoEl.firstChild); // first #text node
+        console.log(todoEl.firstElementChild)   // first <li>
+        console.log(todoEl.lastChild); // last #text node
+        console.log(todoEl.lastElementChild)   // last <li>
+
+        console.log(todoItems[1].previousSibling);  // first node   #text
+        console.log(todoItems[1].previousElementSibling);   // first li element
+        console.log(todoItems[1].nextSibling);
+        console.log(todoItems[1].nextElementSibling);
+    
+    </script>
+</body>
+</html>
