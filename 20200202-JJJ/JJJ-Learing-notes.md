@@ -287,7 +287,7 @@ console.log(fruits[0]);	// mango
 
 
 
-## Module 2 - Algorithmic Challenges
+## Module 3 - Algorithmic Challenges
 
 
 
@@ -367,4 +367,12 @@ let randomString = "The People's Republic of China";
     }
     
 ```
+
+
+
+## Module 4 - Real World Components
+
+
+
+### Build an Off Canvas Sidebar Menu
 
