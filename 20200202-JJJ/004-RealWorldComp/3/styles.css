@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav {
+    width: 260px;
+    background-color: #25272f;
+    height: 100%;
+    position: absolute;
+    left: -260px;
+    transition: .3s all ease;
+
+}
+.open {
+    left: 0;
+}
+.menu {
+    list-style-type: none;
+}
+.menu__item {
+    padding: 1rem;
+    font-size: 2rem;
+    color: white;
+    text-transform: uppercase;
+    transition: .3s all ease;
+}
+.menu__item:hover {
+    cursor: pointer;
+    background-color: #333;
+}
+
+.xbtn {
+    position: absolute;
+    top: 10px;
+    right: -50px;
+}
+.xbtn:hover {
+    cursor: pointer;
+}
+.xbtn span {
+    display: block;
+    width: 26px;
+    height: 5px;
+    margin: 5px;
+    position: relative;
+    border-radius: 3px;
+    background-color: #252525;
+    transition: .3s all ease;
+}
+.change.bar1 {
+    top: 10px;
+    transform: rotate(45deg);
+}
+.change.bar2 {
+    opacity: 0;
+}
+.change.bar3 {
+    bottom: 10px;
+    transform: rotate(-45deg);
+}
+
+.shift {
+    margin-left: 260px;
+}
+.content {
+    padding: 3rem;
+    /* transition: .3s all ease; */
+
+}
+.content__heading {
+    font-size: 3rem;
+    text-align: center;
+    padding: 3rem;
+}
+.content__detail {
+    letter-spacing: 2px;
+    font-size: 1.4rem;
+    padding: 1.4rem;
+}
+.content__image {
+    width: 100%;
+    height: auto;
+}
