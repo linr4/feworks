@@ -2,86 +2,84 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1rem !important;
 }
-html {
-    filter: sepia(100%);
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .nav {
     width: 260px;
-    background-color: #25272f;
     height: 100%;
+    background-color: #252729;
     position: absolute;
     left: -260px;
     transition: .3s all ease;
 
 }
-.open {
-    left: 0;
-}
 .menu {
     list-style-type: none;
+    
 }
 .menu__item {
-    padding: 1rem;
-    font-size: 2rem;
-    color: white;
     text-transform: uppercase;
-    transition: .3s all ease;
+    font-size: 2rem;
+    padding: 1rem;
+    color: white;
 }
 .menu__item:hover {
     cursor: pointer;
     background-color: #333;
 }
-
-.xbtn {
+.open {
+    left: 0;
+}
+.close {
     position: absolute;
     top: 10px;
-    right: -50px;
-}
-.xbtn:hover {
-    cursor: pointer;
-}
-.xbtn span {
-    display: block;
-    width: 26px;
-    height: 5px;
-    margin: 5px;
-    position: relative;
-    border-radius: 3px;
-    background-color: #252525;
+    right: -25px;
     transition: .3s all ease;
 }
+.close span {
+    position: relative;
+    display: block;
+    width: 20px;
+    background-color: black;
+    height: 5px;
+    margin: 3px;
+}
 .change.bar1 {
-    top: 10px;
+    top: 11px;
     transform: rotate(45deg);
 }
 .change.bar2 {
     opacity: 0;
 }
 .change.bar3 {
-    bottom: 10px;
+    bottom: 5px;
     transform: rotate(-45deg);
 }
 
+.content {
+    padding: 2rem;
+    transition: .3s all ease;
+
+    /* position: absolute; */
+    /* left: 260px; */
+}
 .shift {
     margin-left: 260px;
 }
-.content {
-    padding: 3rem;
-    /* transition: .3s all ease; */
-
+.container {
+    max-width: 960px;
+    margin: 0 auto;
 }
 .content__heading {
-    font-size: 3rem;
     text-align: center;
-    padding: 3rem;
+    padding: 2rem;
+    font-size: 2rem;
 }
 .content__detail {
-    letter-spacing: 2px;
     font-size: 1.4rem;
-    padding: 1.4rem;
+    padding: 1rem;
 }
 .content__image {
     width: 100%;
