@@ -1,0 +1,95 @@
+html, body, nav, main, div, span, ul, li, h1, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+nav {
+    width: 260px;
+    height: 100%;
+    position: absolute;
+    left: -260px;
+    background-color: rgb(39, 41, 47);
+    transition: .1s all ease;
+}
+
+.menu__item {
+    padding: 1rem;
+    font-size: 1.6rem;
+    color: #eee;
+    border-bottom: 1px solid #333;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s all ease;
+}
+.menu__item:hover {
+    background-color: #111111;
+}
+
+.open {
+    left: 0;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: -40px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.close span {
+    display: block;
+    width: 20px;
+    height: 5px;
+    background-color: #111;
+    border-radius: 2px;
+    margin: 4px;
+    position: relative;
+    z-index: -1;
+    transition: .1s all ease;
+}
+
+.x.bar1 {
+    top: 8px;
+    transform: rotate(45deg);
+}
+.x.bar2 {
+    visibility: hidden;
+}
+.x.bar3 {
+    bottom: 10px;
+    transform: rotate(-45deg);
+}
+
+.shift {
+    margin-left: 280px;
+}
+
+.content {
+    padding: 1.4rem;
+    transition: .1s all ease;
+}
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.cont__title {
+    text-align: center;
+    padding: 2rem;
+}
+.cont__details {
+    padding: 2rem;
+    letter-spacing: 1px;
+}
+.cont__image {
+    width: 90%;
+    height: auto;
+    margin: 2rem;
+}
