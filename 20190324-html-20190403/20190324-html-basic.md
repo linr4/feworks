@@ -237,11 +237,11 @@
 
 #### 表格标签
 
-- 作用：给数据添加表格语义；清晰展现大量数据；
+- 作用：1) 给数据添加表格语义，2) 清晰展现大量数据；
 
-- 表格的组成：
+- 表格的组成元素：
 
-  - 表格存储的数据较复杂，对其组成元素做分类，以利于管理和细化语义；
+  - 表格存储的数据较为复杂，需对其组成元素做分类，以利于管理和细化语义；
     - 标题 caption
     - 表头 thead
     - 表体 tbody
@@ -251,18 +251,18 @@
 
   ```html
   <table border="1">
-      <caption> table caption </caption> <!-- 可无 -->
-      <thead> <!-- 可省略，浏览器自动加 -->
+      <caption> table caption </caption> <!-- 可省略 -->
+      <thead> <!-- 可省略，浏览器自动添加 -->
           <tr>
-              <th> cell header </th> <!-- 可无 -->
+              <th> cell header </th> <!-- 可省略 -->
           </tr>
       </thead>
-      <tbody> <!-- 可省略，浏览器自动加 -->
-      	<tr>	<!-- row / 行 -->
-          	<td> data / 列 </td>
+      <tbody> <!-- 可省略，浏览器自动添加 -->
+      	<tr>	<!-- table row -->
+          	<td> table data | column </td>
       	</tr>
       </tbody>
-  	<tfoot> <!-- 可无 -->
+  	<tfoot> <!-- 可省略 -->
           <tr>
               <td> data </td>
           </tr>
@@ -279,7 +279,7 @@
   - 对齐：
     - 水平对齐 align： table / tr / td 均可使用；优先级 td > tr > table；
     - 垂直对齐 valign ： 仅 tr / td 使用；
-  - 边距（内/外）：
+  - 边距（内 / 外）：
     - 仅 table 使用；
     - 外边距 cellspacing：默认 =2px，单元格之间的距离；
     - 内边距 cellpadding：默认 =1px，文字与单元格的距离；
@@ -338,7 +338,7 @@
 
     ```html
     <form action="">
-        <input type="button" value="这是按钮" onclick="altert(1)">	// 普通按钮
+        <input type="button" value="这是按钮" onclick="alert(1)">	// 普通按钮
         <input type="image" src="btn.jpg">	// 图片形式的按钮
         <input type="reset">	// 清空表单数据，有默认标题 “重置”，或通过 value 自定义标题
         <input type="sbumit">	// 提交表单数据，有默认标题 “提交”，或通过 value 自定义标题
@@ -454,7 +454,7 @@
   
   <!-- 
   意义：适配不同浏览器所支持的不同视频格式；
-  条件：浏览器需支持HTML5；老浏览器可通过 html5media 框架实现对该标签的支持
+  条件：浏览器需支持 HTML5；老浏览器可通过 html5media 框架实现对该标签的支持
   -->
   ```
 
@@ -462,7 +462,7 @@
 
 #### `<audio>` 标签
 
-* 与 `<video>` 几乎一样，除了没有 width/height/poster 三个属性；
+* 与 `<video>` 几乎一样，除了没有 width / height / poster 三个属性；
 
 
 
