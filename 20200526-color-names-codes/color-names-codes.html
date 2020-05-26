@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Names and Codes</title>
+    <style>
+        body {
+            font-family: consolas;
+        }
+        table,th,tr,td {
+            margin: 0;
+            padding: 0;
+        }
+        table {
+            margin: 0 auto;
+            border-spacing: 0;
+        }
+        table, td {
+            border: gray solid 1px;
+        }
+
+        td {
+            padding: 3px;
+        }
+        .table-header {
+            text-transform: uppercase;
+            font-weight: bolder;
+        }
+
+        .container {
+            margin: 0 auto;
+        }
+        .color-category {
+            font-weight: bolder;
+            text-transform: capitalize;
+            text-indent: 2rem;
+        }
+    </style>
+    
+</head>
+
+<body>
+
+    <div class="container">
+
+    </div>
+
+    <script>
+        window.onload = function () {
+
+            const templateHeader = 
+                `<table> 
+                    <th> 
+                      <tr class="table-header">
+                        <td> # </td>
+                        <td>Color Name</td>
+                        <td>Hex Code</td>
+                        <td>RGB Code</td>
+                      </tr>
+                    </th>`;
+            const templateFooter = `</table>`;
+
+            const containerEl = document.querySelector(".container");
+             containerEl.innerHTML = templateHeader + renderTable() + templateFooter;
+            
+            ;
+
+            function renderTable() {
+                const oColors = colors();
+                let template = '';
+                let counter = 0;
+                
+                for (let colorCategory in oColors) {
+                    console.log();
+                    template += `<tr class="color-category"><td colspan=4>${colorCategory.slice(0, colorCategory.length - 6)} colors </td></tr>`;
+                    for (let colorSet of oColors[colorCategory]) {
+                        counter++;
+                        template += `<tr>
+                                    <td>${counter}</td>
+                                    <td style="background: ${colorSet.colorName}">${colorSet.colorName}</td>
+                                    <td>${colorSet.hexCode}</td>
+                                    <td> rgb(${colorSet.rgbCode.r}, ${colorSet.rgbCode.g}, ${colorSet.rgbCode.b}) </td>
+                                </tr>`;
+                    }
+                }
+                return template;
+
+            };
+            
+        
+
+            function colors() {
+                return {
+                    redColors: [
+                        { colorName: "lightsalmon", hexCode: "#FFA07A", rgbCode: { r: 255, g: 160, b: 122 } },
+                        { colorName: "salmon", hexCode: "#FA8072", rgbCode: { r: 250, g: 128, b: 114 } },
+                        { colorName: "lightcoral", hexCode: "#F08080", rgbCode: { r: 240, g: 128, b: 128 } },
+                        { colorName: "indianred", hexCode: "#CD5C5C", rgbCode: { r: 205, g: 92, b: 92 } },
+                        { colorName: "crimson", hexCode: "#DC143C", rgbCode: { r: 220, g: 20, b: 60 } },
+                        { colorName: "firebrick", hexCode: "#B22222", rgbCode: { r: 178, g: 34, b: 34 } },
+                        { colorName: "red", hexCode: "#FF0000", rgbCode: { r: 255, g: 0, b: 0 } },
+                        { colorName: "darkred", hexCode: "#8B0000", rgbCode: { r: 139, g: 0, b: 0 } },
+                    ],
+                    orangeColors: [
+                        { colorName: "coral", hexCode: "#FF7F50", rgbCode: { r: 255, g: 127, b: 80 } },
+                        { colorName: "tomato", hexCode: "#FF6347", rgbCode: { r: 255, g: 99, b: 71 } },
+                        { colorName: "orangered", hexCode: "#FF4500", rgbCode: { r: 255, g: 69, b: 0 } },
+                        { colorName: "gold", hexCode: "#FFD700", rgbCode: { r: 255, g: 215, b: 0 } },
+                        { colorName: "orange", hexCode: "#FFA500", rgbCode: { r: 255, g: 165, b: 0 } },
+                        { colorName: "darkorange", hexCode: "#FF8C00", rgbCode: { r: 255, g: 140, b: 0 } }
+                    ],
+                    yellowColors: [
+                        { colorName: "lightyellow", hexCode: "#FFFFE0", rgbCode: { r: 255, g: 255, b: 224 } },
+                        { colorName: "lemonchiffon", hexCode: "#FFFACD", rgbCode: { r: 255, g: 250, b: 205 } },
+                        { colorName: "lightgoldenrodyellow", hexCode: "#FAFAD2", rgbCode: { r: 250, g: 250, b: 210 } },
+                        { colorName: "papayawhip", hexCode: "#FFEFD5", rgbCode: { r: 255, g: 239, b: 213 } },
+                        { colorName: "moccasin", hexCode: "#FFE4B5", rgbCode: { r: 255, g: 228, b: 181 } },
+                        { colorName: "peachpuff", hexCode: "#FFDAB9", rgbCode: { r: 255, g: 218, b: 185 } },
+                        { colorName: "palegoldenrod", hexCode: "#EEE8AA", rgbCode: { r: 238, g: 232, b: 170 } },
+                        { colorName: "khaki", hexCode: "#F0E68C", rgbCode: { r: 240, g: 230, b: 140 } },
+                        { colorName: "darkkhaki", hexCode: "#BDB76B", rgbCode: { r: 189, g: 183, b: 107 } },
+                        { colorName: "yellow", hexCode: "#FFFF00", rgbCode: { r: 255, g: 255, b: 0 } }
+                    ],
+                    greenColors: [
+                        { colorName: "lawngreen", hexCode: "#7CFC00", rgbCode: { r: 124, g: 252, b: 0 } },
+                        { colorName: "chartreuse", hexCode: "#7FFF00", rgbCode: { r: 127, g: 255, b: 0 } },
+                        { colorName: "limegreen", hexCode: "#32CD32", rgbCode: { r: 50, g: 205, b: 50 } },
+                        { colorName: "lime", hexCode: "#00FF00", rgbCode: { r: 0, g: 255, b: 0 } },
+                        { colorName: "forestgreen", hexCode: "#228B22", rgbCode: { r: 34, g: 139, b: 34 } },
+                        { colorName: "green", hexCode: "#008000", rgbCode: { r: 0, g: 128, b: 0 } },
+                        { colorName: "darkgreen", hexCode: "#006400", rgbCode: { r: 0, g: 100, b: 0 } },
+                        { colorName: "greenyellow", hexCode: "#ADFF2F", rgbCode: { r: 173, g: 255, b: 47 } },
+                        { colorName: "yellowgreen", hexCode: "#9ACD32", rgbCode: { r: 154, g: 205, b: 50 } },
+                        { colorName: "springgreen", hexCode: "#00FF7F", rgbCode: { r: 0, g: 255, b: 127 } },
+                        { colorName: "mediumspringgreen", hexCode: "#00FA9A", rgbCode: { r: 0, g: 250, b: 154 } },
+                        { colorName: "lightgreen", hexCode: "#90EE90", rgbCode: { r: 144, g: 238, b: 144 } },
+                        { colorName: "palegreen", hexCode: "#98FB98", rgbCode: { r: 152, g: 251, b: 152 } },
+                        { colorName: "darkseagreen", hexCode: "#8FBC8F", rgbCode: { r: 143, g: 188, b: 143 } },
+                        { colorName: "mediumseagreen", hexCode: "#3CB371", rgbCode: { r: 60, g: 179, b: 113 } },
+                        { colorName: "seagreen", hexCode: "#2E8B57", rgbCode: { r: 46, g: 139, b: 87 } },
+                        { colorName: "olive", hexCode: "#808000", rgbCode: { r: 128, g: 128, b: 0 } },
+                        { colorName: "darkolivegreen", hexCode: "#556B2F", rgbCode: { r: 85, g: 107, b: 47 } },
+                        { colorName: "olivedrab", hexCode: "#6B8E23", rgbCode: { r: 107, g: 142, b: 35 } }
+                    ],
+                    cyanColors: [
+                        { colorName: "lightcyan", hexCode: "#E0FFFF", rgbCode: { r: 224, g: 255, b: 255 } },
+                        { colorName: "cyan", hexCode: "#00FFFF", rgbCode: { r: 0, g: 255, b: 255 } },
+                        { colorName: "aqua", hexCode: "#00FFFF", rgbCode: { r: 0, g: 255, b: 255 } },
+                        { colorName: "aquamarine", hexCode: "#7FFFD4", rgbCode: { r: 127, g: 255, b: 212 } },
+                        { colorName: "mediumaquamarine", hexCode: "#66CDAA", rgbCode: { r: 102, g: 205, b: 170 } },
+                        { colorName: "paleturquoise", hexCode: "#AFEEEE", rgbCode: { r: 175, g: 238, b: 238 } },
+                        { colorName: "turquoise", hexCode: "#40E0D0", rgbCode: { r: 64, g: 224, b: 208 } },
+                        { colorName: "mediumturquoise", hexCode: "#48D1CC", rgbCode: { r: 72, g: 209, b: 204 } },
+                        { colorName: "darkturquoise", hexCode: "#00CED1", rgbCode: { r: 0, g: 206, b: 209 } },
+                        { colorName: "lightseagreen", hexCode: "#20B2AA", rgbCode: { r: 32, g: 178, b: 170 } },
+                        { colorName: "cadetblue", hexCode: "#5F9EA0", rgbCode: { r: 95, g: 158, b: 160 } },
+                        { colorName: "darkcyan", hexCode: "#008B8B", rgbCode: { r: 0, g: 139, b: 139 } },
+                        { colorName: "teal", hexCode: "#008080", rgbCode: { r: 0, g: 128, b: 128 } }
+                    ],
+                    blueColors: [
+                        { colorName: "powderblue", hexCode: "#B0E0E6", rgbCode: { r: 176, g: 224, b: 230 } },
+                        { colorName: "lightblue", hexCode: "#ADD8E6", rgbCode: { r: 173, g: 216, b: 230 } },
+                        { colorName: "lightskyblue", hexCode: "#87CEFA", rgbCode: { r: 135, g: 206, b: 250 } },
+                        { colorName: "skyblue", hexCode: "#87CEEB", rgbCode: { r: 135, g: 206, b: 235 } },
+                        { colorName: "deepskyblue", hexCode: "#00BFFF", rgbCode: { r: 0, g: 191, b: 255 } },
+                        { colorName: "lightsteelblue", hexCode: "#B0C4DE", rgbCode: { r: 176, g: 196, b: 222 } },
+                        { colorName: "dodgerblue", hexCode: "#1E90FF", rgbCode: { r: 30, g: 144, b: 255 } },
+                        { colorName: "cornflowerblue", hexCode: "#6495ED", rgbCode: { r: 100, g: 149, b: 237 } },
+                        { colorName: "steelblue", hexCode: "#4682B4", rgbCode: { r: 70, g: 130, b: 180 } },
+                        { colorName: "royalblue", hexCode: "#4169E1", rgbCode: { r: 65, g: 105, b: 225 } },
+                        { colorName: "blue", hexCode: "#0000FF", rgbCode: { r: 0, g: 0, b: 255 } },
+                        { colorName: "mediumblue", hexCode: "#0000CD", rgbCode: { r: 0, g: 0, b: 205 } },
+                        { colorName: "darkblue", hexCode: "#00008B", rgbCode: { r: 0, g: 0, b: 139 } },
+                        { colorName: "navy", hexCode: "#000080", rgbCode: { r: 0, g: 0, b: 128 } },
+                        { colorName: "midnightblue", hexCode: "#191970", rgbCode: { r: 25, g: 25, b: 112 } },
+                        { colorName: "mediumslateblue", hexCode: "#7B68EE", rgbCode: { r: 123, g: 104, b: 238 } },
+                        { colorName: "slateblue", hexCode: "#6A5ACD", rgbCode: { r: 106, g: 90, b: 205 } },
+                        { colorName: "darkslateblue", hexCode: "#483D8B", rgbCode: { r: 72, g: 61, b: 139 } }
+                    ],
+                    purpleColors: [
+                        { colorName: "lavender", hexCode: "#E6E6FA", rgbCode: { r: 230, g: 230, b: 250 } },
+                        { colorName: "thistle", hexCode: "#D8BFD8", rgbCode: { r: 216, g: 191, b: 216 } },
+                        { colorName: "plum", hexCode: "#DDA0DD", rgbCode: { r: 221, g: 160, b: 221 } },
+                        { colorName: "violet", hexCode: "#EE82EE", rgbCode: { r: 238, g: 130, b: 238 } },
+                        { colorName: "orchid", hexCode: "#DA70D6", rgbCode: { r: 218, g: 112, b: 214 } },
+                        { colorName: "fuchsia", hexCode: "#FF00FF", rgbCode: { r: 255, g: 0, b: 255 } },
+                        { colorName: "magenta", hexCode: "#FF00FF", rgbCode: { r: 255, g: 0, b: 255 } },
+                        { colorName: "mediumorchid", hexCode: "#BA55D3", rgbCode: { r: 186, g: 85, b: 211 } },
+                        { colorName: "mediumpurple", hexCode: "#9370DB", rgbCode: { r: 147, g: 112, b: 219 } },
+                        { colorName: "blueviolet", hexCode: "#8A2BE2", rgbCode: { r: 138, g: 43, b: 226 } },
+                        { colorName: "darkviolet", hexCode: "#9400D3", rgbCode: { r: 148, g: 0, b: 211 } },
+                        { colorName: "darkorchid", hexCode: "#9932CC", rgbCode: { r: 153, g: 50, b: 204 } },
+                        { colorName: "darkmagenta", hexCode: "#8B008B", rgbCode: { r: 139, g: 0, b: 139 } },
+                        { colorName: "purple", hexCode: "#800080", rgbCode: { r: 128, g: 0, b: 128 } },
+                        { colorName: "indigo", hexCode: "#4B0082", rgbCode: { r: 75, g: 0, b: 130 } }
+                    ],
+                    pinkColors: [
+                        { colorName: "pink", hexCode: "#FFC0CB", rgbCode: { r: 255, g: 192, b: 203 } },
+                        { colorName: "lightpink", hexCode: "#FFB6C1", rgbCode: { r: 255, g: 182, b: 193 } },
+                        { colorName: "hotpink", hexCode: "#FF69B4", rgbCode: { r: 255, g: 105, b: 180 } },
+                        { colorName: "deeppink", hexCode: "#FF1493", rgbCode: { r: 255, g: 20, b: 147 } },
+                        { colorName: "palevioletred", hexCode: "#DB7093", rgbCode: { r: 219, g: 112, b: 147 } },
+                        { colorName: "mediumvioletred", hexCode: "#C71585", rgbCode: { r: 199, g: 21, b: 133 } }
+                    ],
+                    whiteColors: [
+                        { colorName: "white", hexCode: "#FFFFFF", rgbCode: { r: 255, g: 255, b: 255 } },
+                        { colorName: "snow", hexCode: "#FFFAFA", rgbCode: { r: 255, g: 250, b: 250 } },
+                        { colorName: "honeydew", hexCode: "#F0FFF0", rgbCode: { r: 240, g: 255, b: 240 } },
+                        { colorName: "mintcream", hexCode: "#F5FFFA", rgbCode: { r: 245, g: 255, b: 250 } },
+                        { colorName: "azure", hexCode: "#F0FFFF", rgbCode: { r: 240, g: 255, b: 255 } },
+                        { colorName: "aliceblue", hexCode: "#F0F8FF", rgbCode: { r: 240, g: 248, b: 255 } },
+                        { colorName: "ghostwhite", hexCode: "#F8F8FF", rgbCode: { r: 248, g: 248, b: 255 } },
+                        { colorName: "whitesmoke", hexCode: "#F5F5F5", rgbCode: { r: 245, g: 245, b: 245 } },
+                        { colorName: "seashell", hexCode: "#FFF5EE", rgbCode: { r: 255, g: 245, b: 238 } },
+                        { colorName: "beige", hexCode: "#F5F5DC", rgbCode: { r: 245, g: 245, b: 220 } },
+                        { colorName: "oldlace", hexCode: "#FDF5E6", rgbCode: { r: 253, g: 245, b: 230 } },
+                        { colorName: "floralwhite", hexCode: "#FFFAF0", rgbCode: { r: 255, g: 250, b: 240 } },
+                        { colorName: "ivory", hexCode: "#FFFFF0", rgbCode: { r: 255, g: 255, b: 240 } },
+                        { colorName: "antiquewhite", hexCode: "#FAEBD7", rgbCode: { r: 250, g: 235, b: 215 } },
+                        { colorName: "linen", hexCode: "#FAF0E6", rgbCode: { r: 250, g: 240, b: 230 } },
+                        { colorName: "lavenderblush", hexCode: "#FFF0F5", rgbCode: { r: 255, g: 240, b: 245 } },
+                        { colorName: "mistyrose", hexCode: "#FFE4E1", rgbCode: { r: 255, g: 228, b: 225 } }
+                    ],
+                    grayColors: [
+                        { colorName: "gainsboro", hexCode: "#DCDCDC", rgbCode: { r: 220, g: 220, b: 220 } },
+                        { colorName: "lightgray", hexCode: "#D3D3D3", rgbCode: { r: 211, g: 211, b: 211 } },
+                        { colorName: "silver", hexCode: "#C0C0C0", rgbCode: { r: 192, g: 192, b: 192 } },
+                        { colorName: "darkgray", hexCode: "#A9A9A9", rgbCode: { r: 169, g: 169, b: 169 } },
+                        { colorName: "gray", hexCode: "#808080", rgbCode: { r: 128, g: 128, b: 128 } },
+                        { colorName: "dimgray", hexCode: "#696969", rgbCode: { r: 105, g: 105, b: 105 } },
+                        { colorName: "lightslategray", hexCode: "#778899", rgbCode: { r: 119, g: 136, b: 153 } },
+                        { colorName: "slategray", hexCode: "#708090", rgbCode: { r: 112, g: 128, b: 144 } },
+                        { colorName: "darkslategray", hexCode: "#2F4F4F", rgbCode: { r: 47, g: 79, b: 79 } },
+                        { colorName: "black", hexCode: "#000000", rgbCode: { r: 0, g: 0, b: 0 } }
+                    ],
+                    brownColors: [
+                        { colorName: "cornsilk", hexCode: "#FFF8DC", rgbCode: { r: 255, g: 248, b: 220 } },
+                        { colorName: "blanchedalmond", hexCode: "#FFEBCD", rgbCode: { r: 255, g: 235, b: 205 } },
+                        { colorName: "bisque", hexCode: "#FFE4C4", rgbCode: { r: 255, g: 228, b: 196 } },
+                        { colorName: "navajowhite", hexCode: "#FFDEAD", rgbCode: { r: 255, g: 222, b: 173 } },
+                        { colorName: "wheat", hexCode: "#F5DEB3", rgbCode: { r: 245, g: 222, b: 179 } },
+                        { colorName: "burlywood", hexCode: "#DEB887", rgbCode: { r: 222, g: 184, b: 135 } },
+                        { colorName: "tan", hexCode: "#D2B48C", rgbCode: { r: 210, g: 180, b: 140 } },
+                        { colorName: "rosybrown", hexCode: "#BC8F8F", rgbCode: { r: 188, g: 143, b: 143 } },
+                        { colorName: "sandybrown", hexCode: "#F4A460", rgbCode: { r: 244, g: 164, b: 96 } },
+                        { colorName: "goldenrod", hexCode: "#DAA520", rgbCode: { r: 218, g: 165, b: 32 } },
+                        { colorName: "peru", hexCode: "#CD853F", rgbCode: { r: 205, g: 133, b: 63 } },
+                        { colorName: "chocolate", hexCode: "#D2691E", rgbCode: { r: 210, g: 105, b: 30 } },
+                        { colorName: "saddlebrown", hexCode: "#8B4513", rgbCode: { r: 139, g: 69, b: 19 } },
+                        { colorName: "sienna", hexCode: "#A0522D", rgbCode: { r: 160, g: 82, b: 45 } },
+                        { colorName: "brown", hexCode: "#A52A2A", rgbCode: { r: 165, g: 42, b: 42 } },
+                        { colorName: "maroon", hexCode: "#800000", rgbCode: { r: 128, g: 0, b: 0 } }
+                    ]
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
