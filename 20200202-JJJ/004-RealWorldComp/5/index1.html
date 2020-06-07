@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body, div, btn, span, input, label {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: steelblue;
+        }
+        .loginBox {
+            width: 260px;
+            height: 260px;
+            margin: 200px auto;
+            border: 1px solid deepskyblue;
+            background-color: rgb(9, 21, 129);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .loginBox .item {
+            margin: 20px;
+            padding-top: 28px;
+            height: 60px;
+            width: 84%;
+            font-size: 20px;
+            position: relative;
+        }
+        .loginBox .item label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: white;
+            transition: all .2s ease;
+        }        
+        .loginBox .item input {
+            height: 30px;
+            outline: none;;
+        }
+        .loginBox .item input:focus+label, .loginBox .item input:valid+label {
+            font-size: 14px;
+        }
+        .loginBox button {
+            font-size: 20px;
+            outline: none;
+        }
+        .loginBox button:hover {
+            background-color: turquoise;
+            color: white;
+            box-shadow: 5px 5px 5px deepskyblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="loginBox">
+        <form action="">
+            <div class="item"><input type="text" required><label for="">Username</label></div>
+            <div class="item"><input type="password" required><label for="">Password</label></div>
+            <button class="submit">submit
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </form>
+    </div>
+</body>
+</html>
