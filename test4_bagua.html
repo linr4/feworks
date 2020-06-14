@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ba Gua</title>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            width: 99%;
+            height: 98%;
+        }
+        div, span {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: auto;
+            height: 100%;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #999;
+            border-radius: 5px;
+        }
+
+        .taiji {
+            width: 310px;
+            height: 310px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .yangyao {
+            display: block;
+            width: 40px;
+            height: 10px;
+            margin: 3px 0 3px 0;
+            background-color: black;
+        }
+        .yinyao {
+            width: 40px;
+            height: 10px;
+            margin: 3px 0 3px 0;
+            position: relative;
+        }
+        .yinyao1, .yinyao2 {
+            display: inline-block;
+            width: 18px;
+            height: 10px;
+            background-color: black;
+            position: absolute;
+        }
+        .yinyao1 {
+            top: 0;
+            left: 0;
+        }
+        .yinyao2 {
+            top: 0;
+            right: 0;
+        }
+
+        .gua {
+            display: inline-block;
+            margin: 12px;
+            text-align: center;
+            position: absolute;
+        }
+
+        .gua.qian {
+            top: -16%;
+            left: 50%;
+            transform: translate(-70%, -50%);
+        }
+        .gua.kun {
+            bottom: -26%;
+            left: 40%;
+            transform: rotateZ(180deg);
+        }
+        .gua.li {
+            left: -23%;
+            top: 35%;
+            transform: rotateZ(-90deg);
+        }
+        .gua.kan {
+            right: -23%;
+            top: 35%;
+            transform: rotateZ(90deg);
+        }
+        .gua.xun {
+            top: -10%;
+            right: -5%;
+            transform: rotateZ(45deg);
+        }
+        .gua.zhen {
+            bottom: -10%;
+            left: -5%;
+            transform: rotateZ(-135deg);
+        }
+        .gua.gen {
+            right: -5%;
+            bottom: -10%;
+            transform: rotateZ(135deg);
+        }
+        .gua.dui {
+            top: -10%;
+            left: -5%;
+            transform: rotateZ(-45deg);
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="taiji"></div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            const yangyao = `<span class="yangyao"></span>`;
+            const yinyao = `<div class="yinyao"><span class="yinyao1"></span><span class="yinyao2"></span></div>`;
+
+            const qian = yangyao + yangyao + yangyao;
+            const kun = yinyao + yinyao + yinyao;
+            const li = yangyao + yinyao + yangyao;
+            const kan = yinyao + yangyao + yinyao;
+            const zhen = yinyao + yinyao + yangyao;
+            const gen = yangyao + yinyao +yinyao;
+            const dui = yinyao + yangyao + yangyao;
+            const xun = yangyao + yangyao + yinyao;
+
+            const qianEl = document.createElement('div');
+            const kunEl = document.createElement('div');
+            const liEl = document.createElement('div');
+            const kanEl = document.createElement('div');
+            const zhenEl = document.createElement('div');
+            const genEl = document.createElement('div');
+            const duiEl = document.createElement('div');
+            const xunEl = document.createElement('div');
+
+            qianEl.innerHTML = qian + `乾`;
+            kunEl.innerHTML = kun + `坤`;
+            liEl.innerHTML = li + `离`;
+            kanEl.innerHTML = kan + `坎`;
+            zhenEl.innerHTML = zhen + `震`;
+            genEl.innerHTML = gen + `艮`;
+            duiEl.innerHTML = dui + `兑`;
+            xunEl.innerHTML = xun + `巽`;
+
+            qianEl.className = "gua qian";
+            kunEl.className = "gua kun";
+            zhenEl.className = "gua zhen";
+            genEl.className = "gua gen";
+            liEl.className = "gua li";
+            kanEl.className = "gua kan";
+            duiEl.className = "gua dui";
+            xunEl.className = "gua xun";
+
+
+            const taijiEl = document.querySelector('.taiji');
+            
+            taijiEl.appendChild(qianEl);
+            taijiEl.appendChild(kunEl);
+            taijiEl.appendChild(liEl);
+            taijiEl.appendChild(kanEl);
+            taijiEl.appendChild(zhenEl);
+            taijiEl.appendChild(genEl);
+            taijiEl.appendChild(duiEl);
+            taijiEl.appendChild(xunEl);
+
+        }
+    </script>
+</body>
+</html>

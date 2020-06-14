@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiji</title>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            width: 99%;
+            height: 98%;
+        }
+        div {
+            border: none;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            border: 1px solid red;            
+            position: relative;
+        }
+        .wuji {
+            width: 310px;
+            height: 310px;
+            border: 1px solid black;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+        }
+        .wuji:hover {
+            transform: translate(-50%, -50%) rotateZ(360deg);
+            transition: all ease 10s;
+        }
+        .yin, .yang {
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+        }
+        .yang {
+            left: 0;
+        }
+        .yin {
+            right: 0;
+        }        
+        .fish {
+            width: 50%;
+            height: 50%;
+            border-radius: 50%;
+            position: absolute;
+            left: 25%;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .whitefish {
+            top: 0;
+        }
+        .blackfish {
+            top: 50%;
+        }
+        .eye {
+            width: 31%;
+            height: 31%;
+            border-radius: 50%;
+        }
+        .black {
+            background-color: black;
+        }
+        .white {
+            background-color: white;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wuji">
+            <div class="yang white"></div>
+            <div class="whitefish fish white">
+                <div class="blackeye eye black"></div>
+            </div>
+            <div class="yin black"></div>
+            <div class="blackfish fish black">
+                <div class="whiteeye eye white"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
