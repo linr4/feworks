@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手机号五行属性</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+        .container {
+            min-width: 300px;
+            width: 320px;
+            height: auto;
+            margin: 50px auto;
+            border: 1px solid #aaa;
+            padding: 25px 0 25px 25px;
+            border-radius: 15px;
+        }
+        .num {
+            width: 260px;
+            height: 40px;
+            vertical-align: top;
+            padding: 10px;
+        }
+        .btn {
+            vertical-align: top;
+            width: 80px;
+            height: 40px;
+        }
+        .wx {
+            margin: 10px 0;
+            position: relative;
+        }
+        .wx > span {
+            display: inline-block;
+            font-weight: bold;
+            margin: 10px 0 10px 0;
+        }
+        .wx > .wuxing {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            border-radius: 18px;
+            color: white;
+            font-size: 30px;
+            vertical-align: top;
+            margin: 8px 8px;
+            background-color: orangered;
+        }
+        .wx > span:nth-of-type(3n) {
+            position: absolute;
+            display: inline-block;
+            margin-top: 65px;;
+            left: 100px;
+            color: #666;
+        }
+        .wx .wx__zi {
+            background-color: #000;
+            display: inline-block;
+            width: 86px;
+            height: 86px;
+            line-height: 86px;
+            text-align: center;
+            border-radius: 17px;
+            vertical-align: middle;
+            font-size: 56px;
+        }
+        .banner {
+            /* text-align: center; */
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+        .bar {
+            display: inline-block;
+            width: 0;
+            height: 10px;
+            background-color: orangered;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="banner">电话号码的五行属性统计</p>
+        <input type="number" id="num" class="num" placeholder="输入电话号码，完后按回车">
+        <div class="wx" id="wx">
+            <span class="wx__zi" style="color: gold;">金</span><span class="wuxing jin" id="jin">0</span><b class="bar"></b><span>  ( 酉 4，申 9 )</span><br>
+            <span class="wx__zi" style="color:yellowgreen;">木</span><span class="wuxing mu" id="mu">0</span><b class="bar"></b><span> ( 寅 3，卯 8 )</span><br>
+            <span class="wx__zi" style="color: skyblue;">水</span><span class="wuxing shui" id="shui">0</span><b class="bar"></b><span> ( 子 1，亥 6 )</span><br>
+            <span class="wx__zi" style="color: orangered;">火</span><span class="wuxing huo" id="huo">0</span><b class="bar"></b><span> ( 巳 2，午 7 )</span><br>
+            <span class="wx__zi" style="color: orange;">土</span><span class="wuxing tu" id="tu">0</span><b class="bar"></b><span> ( 辰戌 5，丑未 0 )</span><br>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            const spanEls = document.querySelectorAll('.wx > span.wuxing');
+            const barEls = document.querySelectorAll('.bar');
+            num.onchange = function () {
+                let wuxingCount = [0,0,0,0,0];  // [水,火,木,金,土]
+                let numArr = (num.value).split('');
+                numArr.forEach(element => wuxingCount[element % 5] ++);
+                jin.innerText = wuxingCount[4];
+                mu.innerText = wuxingCount[3];
+                shui.innerText = wuxingCount[1];
+                huo.innerText = wuxingCount[2];
+                tu.innerText = wuxingCount[0];
+                barEls[0].style.width = 20 * wuxingCount[4] + 'px';
+                barEls[1].style.width = 20 * wuxingCount[3] + 'px';
+                barEls[2].style.width = 20 * wuxingCount[1] + 'px';
+                barEls[3].style.width = 20 * wuxingCount[2] + 'px';
+                barEls[4].style.width = 20 * wuxingCount[0] + 'px';
+            }
+        }
+    </script>
+</body>
+</html>
